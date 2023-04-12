@@ -1,0 +1,185 @@
+[gd_scene load_steps=18 format=3 uid="uid://cdhye7ndiak02"]
+
+[ext_resource type="Texture2D" uid="uid://b7ny54ocom6f5" path="res://assets/sprites/battle/hud/buttons/fight/0.png" id="1_4uvyy"]
+[ext_resource type="Script" path="res://scripts/battle/hud_manager.gd" id="1_r0upk"]
+[ext_resource type="Texture2D" uid="uid://ci6jiouof0oif" path="res://assets/sprites/battle/hud/buttons/fight/1.png" id="2_q6t0t"]
+[ext_resource type="FontFile" uid="uid://1tmrx86kyjfv" path="res://assets/fonts/health.ttf" id="2_t0dks"]
+[ext_resource type="Texture2D" uid="uid://dsikgyt414x2p" path="res://assets/sprites/battle/hud/buttons/act/0.png" id="3_0gbsa"]
+[ext_resource type="FontFile" uid="uid://ch4lp3qjrxfou" path="res://assets/fonts/ut-hp-font.otf" id="3_li0ie"]
+[ext_resource type="Texture2D" uid="uid://b4yqkljk01m1o" path="res://assets/sprites/battle/hud/buttons/act/1.png" id="4_6cwlm"]
+[ext_resource type="Texture2D" uid="uid://ccqx1bgwif064" path="res://assets/sprites/battle/hud/buttons/item/0.png" id="5_6jhwn"]
+[ext_resource type="Texture2D" uid="uid://dsx65q8ooo1nd" path="res://assets/sprites/battle/hud/buttons/item/1.png" id="6_r08ut"]
+[ext_resource type="Texture2D" uid="uid://giolyh7g56fi" path="res://assets/sprites/battle/hud/buttons/mercy/0.png" id="7_27jo0"]
+[ext_resource type="Texture2D" uid="uid://c8yr4lt58ogs1" path="res://assets/sprites/battle/hud/buttons/mercy/1.png" id="8_fchnv"]
+[ext_resource type="Texture2D" uid="uid://cp6r6hdfhhbwv" path="res://assets/sprites/reference_images/ut sample.PNG" id="9_sldfy"]
+[ext_resource type="Texture2D" uid="uid://bxea0bdqk6yq0" path="res://assets/sprites/reference_images/utfightref.PNG" id="12_nusto"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0rflg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4uvyy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_q6t0t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m1fy0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0gbsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6cwlm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hl06y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_6jhwn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_r08ut")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ujgel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_27jo0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fchnv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="hud_manager" type="Node2D"]
+script = ExtResource("1_r0upk")
+
+[node name="UtSample" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.172549)
+position = Vector2(320, 226.5)
+texture = ExtResource("9_sldfy")
+
+[node name="Utfightref" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.454902)
+position = Vector2(318.516, 228.509)
+texture = ExtResource("12_nusto")
+
+[node name="display" type="Node2D" parent="."]
+
+[node name="name" type="RichTextLabel" parent="display"]
+clip_contents = false
+offset_left = 30.0
+offset_top = 400.0
+offset_right = 114.0
+offset_bottom = 418.0
+theme_override_fonts/normal_font = ExtResource("2_t0dks")
+theme_override_font_sizes/normal_font_size = 24
+text = "ROSE"
+scroll_active = false
+autowrap_mode = 0
+visible_characters_behavior = 1
+
+[node name="lv" type="RichTextLabel" parent="display"]
+clip_contents = false
+offset_left = 117.39
+offset_top = 399.864
+offset_right = 201.39
+offset_bottom = 421.864
+theme_override_fonts/normal_font = ExtResource("2_t0dks")
+theme_override_font_sizes/normal_font_size = 24
+text = "LV 19"
+scroll_active = false
+autowrap_mode = 0
+visible_characters_behavior = 1
+
+[node name="hp" type="RichTextLabel" parent="display"]
+clip_contents = false
+offset_left = 224.0
+offset_top = 405.0
+offset_right = 248.0
+offset_bottom = 415.0
+theme_override_fonts/normal_font = ExtResource("3_li0ie")
+theme_override_font_sizes/normal_font_size = 10
+text = "HP"
+scroll_active = false
+autowrap_mode = 0
+visible_characters_behavior = 1
+
+[node name="kr" type="RichTextLabel" parent="display"]
+clip_contents = false
+offset_left = 374.516
+offset_top = 405.475
+offset_right = 398.516
+offset_bottom = 415.475
+theme_override_fonts/normal_font = ExtResource("3_li0ie")
+theme_override_font_sizes/normal_font_size = 10
+text = "KR"
+scroll_active = false
+autowrap_mode = 0
+visible_characters_behavior = 1
+
+[node name="health" type="RichTextLabel" parent="display"]
+clip_contents = false
+offset_left = 415.0
+offset_top = 400.0
+offset_right = 512.0
+offset_bottom = 422.0
+theme_override_fonts/normal_font = ExtResource("2_t0dks")
+theme_override_font_sizes/normal_font_size = 24
+text = "92 / 92"
+scroll_active = false
+autowrap_mode = 0
+visible_characters_behavior = 1
+
+[node name="hp_bar_max" type="ColorRect" parent="display"]
+offset_left = 255.0
+offset_top = 400.0
+offset_right = 366.0
+offset_bottom = 421.0
+color = Color(0.752941, 0, 0, 1)
+
+[node name="hp_bar_current" type="ColorRect" parent="display"]
+offset_left = 255.0
+offset_top = 400.0
+offset_right = 366.0
+offset_bottom = 421.0
+color = Color(1, 1, 0, 1)
+
+[node name="buttons" type="Node2D" parent="."]
+
+[node name="fight" type="AnimatedSprite2D" parent="buttons"]
+position = Vector2(87.0204, 453.018)
+sprite_frames = SubResource("SpriteFrames_0rflg")
+
+[node name="act" type="AnimatedSprite2D" parent="buttons"]
+position = Vector2(240, 453)
+sprite_frames = SubResource("SpriteFrames_m1fy0")
+
+[node name="item" type="AnimatedSprite2D" parent="buttons"]
+position = Vector2(400, 452.5)
+sprite_frames = SubResource("SpriteFrames_hl06y")
+
+[node name="mercy" type="AnimatedSprite2D" parent="buttons"]
+position = Vector2(555.005, 452.998)
+sprite_frames = SubResource("SpriteFrames_ujgel")
