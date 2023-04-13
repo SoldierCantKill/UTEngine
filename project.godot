@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="UTEngine"
-run/main_scene="res://scenes/battle.tscn"
+run/main_scene="res://scenes/battle_example.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 
 [autoload]

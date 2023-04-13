@@ -1,27 +1,29 @@
-[gd_scene load_steps=18 format=3 uid="uid://cdhye7ndiak02"]
+[gd_scene load_steps=20 format=3 uid="uid://cdhye7ndiak02"]
 
-[ext_resource type="Texture2D" uid="uid://b7ny54ocom6f5" path="res://assets/sprites/battle/hud/buttons/fight/0.png" id="1_4uvyy"]
-[ext_resource type="Script" path="res://scripts/battle/hud_manager.gd" id="1_r0upk"]
-[ext_resource type="Texture2D" uid="uid://ci6jiouof0oif" path="res://assets/sprites/battle/hud/buttons/fight/1.png" id="2_q6t0t"]
-[ext_resource type="FontFile" uid="uid://1tmrx86kyjfv" path="res://assets/fonts/health.ttf" id="2_t0dks"]
-[ext_resource type="Texture2D" uid="uid://dsikgyt414x2p" path="res://assets/sprites/battle/hud/buttons/act/0.png" id="3_0gbsa"]
-[ext_resource type="FontFile" uid="uid://ch4lp3qjrxfou" path="res://assets/fonts/ut-hp-font.otf" id="3_li0ie"]
-[ext_resource type="Texture2D" uid="uid://b4yqkljk01m1o" path="res://assets/sprites/battle/hud/buttons/act/1.png" id="4_6cwlm"]
-[ext_resource type="Texture2D" uid="uid://ccqx1bgwif064" path="res://assets/sprites/battle/hud/buttons/item/0.png" id="5_6jhwn"]
-[ext_resource type="Texture2D" uid="uid://dsx65q8ooo1nd" path="res://assets/sprites/battle/hud/buttons/item/1.png" id="6_r08ut"]
-[ext_resource type="Texture2D" uid="uid://giolyh7g56fi" path="res://assets/sprites/battle/hud/buttons/mercy/0.png" id="7_27jo0"]
-[ext_resource type="Texture2D" uid="uid://c8yr4lt58ogs1" path="res://assets/sprites/battle/hud/buttons/mercy/1.png" id="8_fchnv"]
-[ext_resource type="Texture2D" uid="uid://cp6r6hdfhhbwv" path="res://assets/sprites/reference_images/ut sample.PNG" id="9_sldfy"]
-[ext_resource type="Texture2D" uid="uid://bxea0bdqk6yq0" path="res://assets/sprites/reference_images/utfightref.PNG" id="12_nusto"]
+[ext_resource type="Script" path="res://scripts/battle/hud_manager.gd" id="1_68nxi"]
+[ext_resource type="Texture2D" uid="uid://cp6r6hdfhhbwv" path="res://assets/sprites/reference_images/ut sample.PNG" id="2_2bxkh"]
+[ext_resource type="Texture2D" uid="uid://bxea0bdqk6yq0" path="res://assets/sprites/reference_images/utfightref.PNG" id="3_t0o2f"]
+[ext_resource type="Texture2D" uid="uid://dd5eift28hgpm" path="res://assets/sprites/reference_images/image-5.png" id="4_8ibeo"]
+[ext_resource type="Texture2D" uid="uid://d1xl4wcuruu5y" path="res://assets/sprites/reference_images/lput0378.png" id="5_0tkdo"]
+[ext_resource type="FontFile" uid="uid://1tmrx86kyjfv" path="res://assets/fonts/health.ttf" id="6_1ye0q"]
+[ext_resource type="FontFile" uid="uid://ch4lp3qjrxfou" path="res://assets/fonts/ut-hp-font.otf" id="7_cm6b2"]
+[ext_resource type="Texture2D" uid="uid://b7ny54ocom6f5" path="res://assets/sprites/battle/hud/buttons/fight/0.png" id="8_7kvfb"]
+[ext_resource type="Texture2D" uid="uid://ci6jiouof0oif" path="res://assets/sprites/battle/hud/buttons/fight/1.png" id="9_lkvsr"]
+[ext_resource type="Texture2D" uid="uid://dsikgyt414x2p" path="res://assets/sprites/battle/hud/buttons/act/0.png" id="10_ywt7e"]
+[ext_resource type="Texture2D" uid="uid://b4yqkljk01m1o" path="res://assets/sprites/battle/hud/buttons/act/1.png" id="11_hnwro"]
+[ext_resource type="Texture2D" uid="uid://ccqx1bgwif064" path="res://assets/sprites/battle/hud/buttons/item/0.png" id="12_s500d"]
+[ext_resource type="Texture2D" uid="uid://dsx65q8ooo1nd" path="res://assets/sprites/battle/hud/buttons/item/1.png" id="13_fjl78"]
+[ext_resource type="Texture2D" uid="uid://giolyh7g56fi" path="res://assets/sprites/battle/hud/buttons/mercy/0.png" id="14_bws02"]
+[ext_resource type="Texture2D" uid="uid://c8yr4lt58ogs1" path="res://assets/sprites/battle/hud/buttons/mercy/1.png" id="15_gqxil"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0rflg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_4uvyy")
+"texture": ExtResource("8_7kvfb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_q6t0t")
+"texture": ExtResource("9_lkvsr")
 }],
 "loop": true,
 "name": &"default",
@@ -32,10 +34,10 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_0gbsa")
+"texture": ExtResource("10_ywt7e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_6cwlm")
+"texture": ExtResource("11_hnwro")
 }],
 "loop": true,
 "name": &"default",
@@ -46,10 +48,10 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_6jhwn")
+"texture": ExtResource("12_s500d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_r08ut")
+"texture": ExtResource("13_fjl78")
 }],
 "loop": true,
 "name": &"default",
@@ -60,10 +62,10 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_27jo0")
+"texture": ExtResource("14_bws02")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_fchnv")
+"texture": ExtResource("15_gqxil")
 }],
 "loop": true,
 "name": &"default",
@@ -71,19 +73,31 @@ animations = [{
 }]
 
 [node name="hud_manager" type="Node2D"]
-script = ExtResource("1_r0upk")
+script = ExtResource("1_68nxi")
 
 [node name="UtSample" type="Sprite2D" parent="."]
 visible = false
 self_modulate = Color(1, 1, 1, 0.172549)
 position = Vector2(320, 226.5)
-texture = ExtResource("9_sldfy")
+texture = ExtResource("2_2bxkh")
 
 [node name="Utfightref" type="Sprite2D" parent="."]
 visible = false
 self_modulate = Color(1, 1, 1, 0.454902)
 position = Vector2(318.516, 228.509)
-texture = ExtResource("12_nusto")
+texture = ExtResource("3_t0o2f")
+
+[node name="Image-5" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.572549)
+position = Vector2(319.981, 240.055)
+texture = ExtResource("4_8ibeo")
+
+[node name="Lput0378" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.545098)
+position = Vector2(320.102, 240.025)
+texture = ExtResource("5_0tkdo")
 
 [node name="display" type="Node2D" parent="."]
 
@@ -93,20 +107,20 @@ offset_left = 30.0
 offset_top = 400.0
 offset_right = 114.0
 offset_bottom = 418.0
-theme_override_fonts/normal_font = ExtResource("2_t0dks")
+theme_override_fonts/normal_font = ExtResource("6_1ye0q")
 theme_override_font_sizes/normal_font_size = 24
-text = "ROSE"
+text = "Rose"
 scroll_active = false
 autowrap_mode = 0
 visible_characters_behavior = 1
 
 [node name="lv" type="RichTextLabel" parent="display"]
 clip_contents = false
-offset_left = 117.39
-offset_top = 399.864
-offset_right = 201.39
-offset_bottom = 421.864
-theme_override_fonts/normal_font = ExtResource("2_t0dks")
+offset_left = 117.0
+offset_top = 400.0
+offset_right = 201.0
+offset_bottom = 422.0
+theme_override_fonts/normal_font = ExtResource("6_1ye0q")
 theme_override_font_sizes/normal_font_size = 24
 text = "LV 19"
 scroll_active = false
@@ -119,7 +133,7 @@ offset_left = 224.0
 offset_top = 405.0
 offset_right = 248.0
 offset_bottom = 415.0
-theme_override_fonts/normal_font = ExtResource("3_li0ie")
+theme_override_fonts/normal_font = ExtResource("7_cm6b2")
 theme_override_font_sizes/normal_font_size = 10
 text = "HP"
 scroll_active = false
@@ -128,11 +142,11 @@ visible_characters_behavior = 1
 
 [node name="kr" type="RichTextLabel" parent="display"]
 clip_contents = false
-offset_left = 374.516
-offset_top = 405.475
-offset_right = 398.516
-offset_bottom = 415.475
-theme_override_fonts/normal_font = ExtResource("3_li0ie")
+offset_left = 375.0
+offset_top = 405.0
+offset_right = 399.0
+offset_bottom = 415.0
+theme_override_fonts/normal_font = ExtResource("7_cm6b2")
 theme_override_font_sizes/normal_font_size = 10
 text = "KR"
 scroll_active = false
@@ -145,7 +159,7 @@ offset_left = 415.0
 offset_top = 400.0
 offset_right = 512.0
 offset_bottom = 422.0
-theme_override_fonts/normal_font = ExtResource("2_t0dks")
+theme_override_fonts/normal_font = ExtResource("6_1ye0q")
 theme_override_font_sizes/normal_font_size = 24
 text = "92 / 92"
 scroll_active = false

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://sdhn8wqebd6r"]
+
+[ext_resource type="Script" path="res://scripts/battle/heart.gd" id="1_3r17a"]
+[ext_resource type="Texture2D" uid="uid://b5j3kxbhl6cb" path="res://assets/sprites/battle/heart/heart_0.png" id="1_kquxx"]
+
+[node name="heart" type="CharacterBody2D"]
+script = ExtResource("1_3r17a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+texture = ExtResource("1_kquxx")
