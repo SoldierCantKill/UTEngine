@@ -10,7 +10,6 @@ script/source = "extends BattleRoom
 script = SubResource("GDScript_60in0")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-visible = false
 offset_left = 251.0
 offset_top = 266.0
 offset_right = 721.0
