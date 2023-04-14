@@ -8,8 +8,16 @@ var player = {
 	max_hp = 92,
 	}
 
-var inventory = {
-	}
+var inventory : Array = [ #Don't erase indexes from this Array!!!!
+	"butterscotch_pie",
+	"snowman_piece",
+	"butterscotch_pie",
+	"snowman_piece",
+	"snowman_piece",
+	"butterscotch_pie",
+	"snowman_piece",
+	"butterscotch_pie",
+	]
 
 var data = {
 	

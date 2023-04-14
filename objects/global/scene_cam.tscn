@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bg4ihv7tms8d"]
+
+[node name="scene_cam" type="Camera2D"]
+ignore_rotation = false

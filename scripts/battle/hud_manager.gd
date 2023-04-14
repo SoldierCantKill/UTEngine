@@ -5,10 +5,12 @@ var mode : int = 0
 var button_index : int = 0
 var enemy_index : int = 0
 var item_index : int = 0
+var item_page : int = 1
 
 var show_kr_text : bool = true
+var serious_mode : bool = true
 
-@onready var display = {
+@onready var display : Dictionary = {
 	name_text = $display/name,
 	lv_text = $display/lv,
 	hp = $display/hp,
@@ -44,19 +46,17 @@ func setup_hud():
 			var location : Vector2 = Vector2(102 if col < 1 else 342, 274 + row * 31)
 			var text : RichTextLabel = create_text.call(location)
 			display.item_texts.append(text)
-			text.text = "* Pie"
+#			text.text = "* Pie"
 	display.page_text = create_text.call(Vector2(391,338))
 	
-	
 	display_update()
+	
 	if(settings.player_save.player.max_hp < 92): #Display hud is formatted a little different when in sans battle.
 		display.name_text.position = Vector2(30,400)
 		display.lv_text.position = display.name_text.position + Vector2(display.name_text.get_parsed_text().length() * 22.5,0)
 		display.hp.position = display.lv_text.position + Vector2(124,5)
 		display.max_health_bar.position = display.hp.position + Vector2(31, -5)
-		display.max_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
 		display.current_health_bar.position = display.hp.position + Vector2(31, -5)
-		display.current_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
 		if(show_kr_text):
 			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x + 9,5)
 			display.kr.visible = true
@@ -69,9 +69,7 @@ func setup_hud():
 		display.lv_text.position = display.name_text.position + Vector2(display.name_text.get_parsed_text().length() * 21.75,0)
 		display.hp.position = display.lv_text.position + Vector2(107,5)
 		display.max_health_bar.position = display.hp.position + Vector2(31, -5)
-		display.max_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
 		display.current_health_bar.position = display.hp.position + Vector2(31, -5)
-		display.current_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
 		if(show_kr_text):
 			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x + 9,5)
 			display.kr.visible = true
@@ -88,12 +86,12 @@ func _process(delta):
 	heart_update()
 
 func display_update():
-	
-	
 	display.name_text.text = settings.player_save.player.name
 	display.lv_text.text = "LV " + str(settings.player_save.player.lv)
 	display.health_text.text = str(settings.player_save.player.current_hp) + " / " + str(settings.player_save.player.max_hp)
-
+	display.max_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
+	display.current_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
+	
 func hud_mode_update():
 	match(mode):
 		0:
@@ -102,6 +100,12 @@ func hud_mode_update():
 					display.buttons[i].frame = 0
 				else:
 					display.buttons[i].frame = 1
+		2:
+			for i in display.item_texts:
+				i.text = ""
+			for i in range(4):
+				var item = ut_items.items[settings.player_save.inventory[i * item_page]]
+				display.item_texts[i].text = "* " + item.names[1] if !serious_mode else "* " + item.names[2]
 
 func heart_update() -> void:
 	match(mode):
@@ -123,7 +127,8 @@ func inputs():
 			if (Input.is_action_just_pressed("left")):
 				button_index = wrapi(button_index - 1, 0, display.buttons.size())
 			if (Input.is_action_just_pressed("confirm")):
-				mode = 1
+				mode = 1 if(button_index == 0 || button_index == 1) else 2
+				print(mode)
 
 func reset():
 	mode = 0
