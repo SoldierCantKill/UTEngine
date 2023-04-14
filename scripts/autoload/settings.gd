@@ -2,9 +2,6 @@ extends Node
 
 var player_save : PlayerSave = null
 
-var display = null
-var scene = null
-
 func _ready():
 	start()
 	reset_game()

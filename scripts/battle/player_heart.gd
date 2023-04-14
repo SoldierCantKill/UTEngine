@@ -1,2 +1,2 @@
 extends CharacterBody2D
-class_name Heart
+class_name PlayerHeart

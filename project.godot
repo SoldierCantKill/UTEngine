@@ -18,7 +18,8 @@ config/features=PackedStringArray("4.0", "GL Compatibility")
 
 audio="*res://scripts/autoload/audio.gd"
 settings="*res://scripts/autoload/settings.gd"
-ut_items="*res://scripts/global/ut_items.gd"
+ut_items="*res://scripts/autoload/ut_items.gd"
+vars="*res://scripts/autoload/vars.gd"
 
 [display]
 

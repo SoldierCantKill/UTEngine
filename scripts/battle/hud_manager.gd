@@ -7,7 +7,7 @@ var enemy_index : int = 0
 var item_index : int = 0
 var item_page : int = 1
 
-var show_kr_text : bool = true
+var show_kr_text : bool = true #only 
 var serious_mode : bool = true
 
 @onready var display : Dictionary = {
@@ -27,7 +27,7 @@ func _ready():
 	setup_hud()
 
 func setup_hud():
-	var create_text = func(position : Vector2):
+	var create_text : Callable = func(position : Vector2):
 		var textblock = RichTextLabel.new()
 		textblock.add_theme_font_override("normal_font", load("res://assets/fonts/main_mono.ttf"))
 		textblock.add_theme_font_size_override("normal_font_size", 31)
@@ -77,7 +77,6 @@ func setup_hud():
 			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x - 26,5)
 			display.kr.visible = false
 		display.health_text.position = display.kr.position + Vector2(40, -5)
-	
 
 func _process(delta):
 	inputs()
@@ -104,20 +103,25 @@ func hud_mode_update():
 			for i in display.item_texts:
 				i.text = ""
 			for i in range(4):
-				var item = ut_items.items[settings.player_save.inventory[i * item_page]]
+				var item = ut_items.items[settings.player_save.inventory[i + (item_page - 1) * 4]]
 				display.item_texts[i].text = "* " + item.names[1] if !serious_mode else "* " + item.names[2]
+			if(settings.player_save.inventory[4] != ""):
+				display.page_text.visible = true
+				display.page_text.text = "PAGE " + str(item_page)
+			else:
+				display.page_text.visible = false
 
 func heart_update() -> void:
 	match(mode):
 		0:
-			settings.scene.heart.global_position = display.buttons[button_index].global_position + Vector2(-39, 0)
+			vars.player_heart.global_position = display.buttons[button_index].global_position + Vector2(-39, 0)
 		1:
-			settings.scene.heart.global_position = display.item_texts[enemy_index * 2].global_position + Vector2(-28, 17)
+			vars.player_heart.global_position = display.item_texts[enemy_index * 2].global_position + Vector2(-28, 17)
 		2:
 			if(button_index != 3):
-				settings.scene.heart.global_position = display.item_texts[item_index].global_position + Vector2(-28, 17)
+				vars.player_heart.global_position = display.item_texts[item_index].global_position + Vector2(-28, 17)
 			else:
-				settings.scene.heart.global_position = display.item_texts[item_index * 2].global_position + Vector2(-28, 17)
+				vars.player_heart.global_position = display.item_texts[item_index * 2].global_position + Vector2(-28, 17)
 
 func inputs():
 	match(mode):
@@ -128,7 +132,42 @@ func inputs():
 				button_index = wrapi(button_index - 1, 0, display.buttons.size())
 			if (Input.is_action_just_pressed("confirm")):
 				mode = 1 if(button_index == 0 || button_index == 1) else 2
-				print(mode)
+		2:
+			var new_x : int = 0
+			if(Input.is_action_just_pressed("right")):
+				if((item_index + 1) % 2 != 0):
+					item_index += 1
+				else:
+					if(settings.player_save.inventory[4] != "" && item_page == 1):
+						item_index -= 1
+						item_page = 2
+					else:
+						item_index -= 1
+			if(Input.is_action_just_pressed("left")):
+				if((item_index + 1) % 2 == 0):
+					item_index -= 1
+				else:
+					if(settings.player_save.inventory[4] != "" && item_page == 2):
+						item_index += 1
+						item_page = 1
+					else:
+						item_index += 1
+			
+			var last_string_index = func() -> int:
+				for i in range(display.item_texts.size()):
+					if(display.item_texts[i].text == ""):
+						return i
+				return display.item_texts.size() - 1
+			
+			if(Input.is_action_just_pressed("up")):
+				if(item_index - 2 < 0):
+					item_index = last_string_index.call() + 1 - (item_index + 1) % 2
+				item_index -= 2
+			
+			if(Input.is_action_just_pressed("down")):
+				if(item_index + 2 >= last_string_index.call()):
+					item_index = -1 - (item_index + 1) % 2
+				item_index += 2
 
 func reset():
 	mode = 0

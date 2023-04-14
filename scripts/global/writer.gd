@@ -58,7 +58,7 @@ func _init()  -> void:
 func _ready()  -> void:
 	text_index_finished.connect(SpriteIdle)
 	var tremble_resource = RichTextEffect.new()
-	tremble_resource.set_script(load("res://Scripts/Resources/tremble.gd"))
+	tremble_resource.set_script(load("res://assets/effects/tremble.gd"))
 	custom_effects.append(tremble_resource)
 
 func SetOptions(continue_enabled : bool, skip_enabled : bool, dialouge_mode : bool)  -> void:
