@@ -4,12 +4,12 @@ class_name BattleRoom
 var enemies : Node2D
 
 func _ready():
-	var add_object : Callable = func(object : Node2D, object_position : Vector2 = Vector2.ZERO) -> Node:
+	var add_object : Callable = func(object, object_position : Vector2 = Vector2.ZERO) -> Node:
 		object.position = object_position
 		add_child(object)
 		return object
 	vars.scene = self
-	vars.hud_manager = add_object.call(load("uid://cdhye7ndiak02").instantiate())
+	vars.hud_manager = add_object.call(load("res://objects/battle/hud_manager.tscn").instantiate())
 	vars.battle_box = add_object.call(load("res://objects/battle/battle_box.tscn").instantiate())
 	vars.battle_box.name = "battle_box"
 	var writer : RichTextLabel = RichTextLabel.new()

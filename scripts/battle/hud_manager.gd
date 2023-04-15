@@ -1,5 +1,5 @@
 extends Node
-class_name HudManager
+#class_name HudManager
 
 var mode : int = 0
 var button_index : int = 0
