@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://djya08uami74k"]
+
+[ext_resource type="Shader" path="res://Shaders/battle_box.gdshader" id="1_34tvg"]
+[ext_resource type="Texture2D" uid="uid://c0pijlyibwwdh" path="res://assets/sprites/battle/border.png" id="2_wvotm"]
+[ext_resource type="Script" path="res://scripts/battle/battle_box.gd" id="3_sfwfk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c4838"]
+render_priority = 0
+shader = ExtResource("1_34tvg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3hwg6"]
+size = Vector2(575, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7k45"]
+size = Vector2(575, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2wsw"]
+size = Vector2(4.975, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feo3c"]
+size = Vector2(5, 140)
+
+[node name="battle_box" type="NinePatchRect"]
+material = SubResource("ShaderMaterial_c4838")
+offset_left = 34.0
+offset_top = 254.0
+offset_right = 609.0
+offset_bottom = 394.0
+texture = ExtResource("2_wvotm")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("3_sfwfk")
+
+[node name="collisions" type="StaticBody2D" parent="."]
+
+[node name="up" type="CollisionShape2D" parent="collisions"]
+position = Vector2(287.5, 2.5)
+shape = SubResource("RectangleShape2D_3hwg6")
+
+[node name="down" type="CollisionShape2D" parent="collisions"]
+position = Vector2(287.5, 137.5)
+shape = SubResource("RectangleShape2D_x7k45")
+
+[node name="left" type="CollisionShape2D" parent="collisions"]
+position = Vector2(2.5, 70)
+shape = SubResource("RectangleShape2D_f2wsw")
+
+[node name="right" type="CollisionShape2D" parent="collisions"]
+position = Vector2(572.5, 70)
+shape = SubResource("RectangleShape2D_feo3c")
+
+[node name="corner_top" type="Marker2D" parent="."]
+position = Vector2(5, 5)
+
+[node name="corner_bottom" type="Marker2D" parent="."]
+position = Vector2(570, 135)

@@ -10,9 +10,17 @@ func _ready():
 		return object
 	vars.scene = self
 	vars.hud_manager = add_object.call(load("uid://cdhye7ndiak02").instantiate())
-	vars.player_heart = add_object.call(load("res://objects/battle/player_heart.tscn").instantiate())
-	vars.scene_cam = add_object.call(load("res://objects/global/scene_cam.tscn").instantiate())
-	vars.scene_cam.global_position = Vector2(320,240)
+	vars.battle_box = add_object.call(load("res://objects/battle/battle_box.tscn").instantiate())
+	vars.battle_box.name = "battle_box"
+	var writer : RichTextLabel = RichTextLabel.new()
+	add_child(writer)
+	writer.set_script(load("res://scripts/global/writer.gd"))
+	writer.scroll_active = false
+	writer.autowrap_mode = TextServer.AUTOWRAP_OFF
+	writer.visible_characters_behavior = TextServer.VC_CHARS_AFTER_SHAPING
+	writer.clip_contents = false
+	writer.name = "battle_writer"
 	enemies = add_object.call(Node2D.new(), Vector2(0,0))
-
-	
+	enemies.name = "enemies"
+	vars.player_heart = add_object.call(load("res://objects/battle/player_heart.tscn").instantiate())
+	vars.scene_cam = add_object.call(load("res://objects/global/scene_cam.tscn").instantiate(), Vector2(320,240))

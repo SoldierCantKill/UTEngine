@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://tkcsf1ljdqnn"]
-
-[ext_resource type="Script" path="res://scripts/global/writer.gd" id="1_hm5fd"]
+[gd_scene load_steps=2 format=3 uid="uid://tkcsf1ljdqnn"]
 
 [sub_resource type="GDScript" id="GDScript_60in0"]
 script/source = "extends BattleRoom
@@ -8,13 +6,3 @@ script/source = "extends BattleRoom
 
 [node name="battle_example" type="Node2D"]
 script = SubResource("GDScript_60in0")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-visible = false
-offset_left = 251.0
-offset_top = 266.0
-offset_right = 721.0
-offset_bottom = 483.0
-bbcode_enabled = true
-text = "dwadwadwadwa"
-script = ExtResource("1_hm5fd")
