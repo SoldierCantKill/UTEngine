@@ -1,12 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://djya08uami74k"]
+[gd_scene load_steps=7 format=3 uid="uid://djya08uami74k"]
 
-[ext_resource type="Shader" path="res://Shaders/battle_box.gdshader" id="1_34tvg"]
 [ext_resource type="Texture2D" uid="uid://c0pijlyibwwdh" path="res://assets/sprites/battle/border.png" id="2_wvotm"]
 [ext_resource type="Script" path="res://scripts/battle/battle_box.gd" id="3_sfwfk"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c4838"]
-render_priority = 0
-shader = ExtResource("1_34tvg")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hwg6"]
 size = Vector2(575, 5)
@@ -21,7 +16,6 @@ size = Vector2(4.975, 140)
 size = Vector2(5, 140)
 
 [node name="battle_box" type="NinePatchRect"]
-material = SubResource("ShaderMaterial_c4838")
 offset_left = 34.0
 offset_top = 254.0
 offset_right = 609.0
