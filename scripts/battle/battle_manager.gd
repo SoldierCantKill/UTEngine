@@ -10,7 +10,7 @@ func _ready():
 		return object
 	vars.scene = self
 	vars.hud_manager = add_object.call(load("res://objects/battle/hud_manager.tscn").instantiate())
-	vars.battle_box = add_object.call(load("res://objects/battle/battle_box.tscn").instantiate())
+	vars.battle_box = add_object.call(load("res://objects/battle/battle_box.tscn").instantiate(),Vector2(34,254))
 	vars.battle_box.name = "battle_box"
 	var writer : RichTextLabel = RichTextLabel.new()
 	add_child(writer)
