@@ -9,3 +9,4 @@ var scene_cam
 var hud_manager : HudManager = null
 var player_heart : PlayerHeart = null
 var battle_box : BattleBox = null
+var main_writer : Writer = null

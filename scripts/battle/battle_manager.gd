@@ -13,13 +13,17 @@ func _ready():
 	vars.battle_box = add_object.call(load("res://objects/battle/battle_box.tscn").instantiate(),Vector2(34,254))
 	vars.battle_box.name = "battle_box"
 	var writer : RichTextLabel = RichTextLabel.new()
-	add_child(writer)
 	writer.set_script(load("res://scripts/global/writer.gd"))
+	add_child(writer)
+	writer.global_position = Vector2(52,270)
+	writer.size = Vector2(549, 114)
+	
 	writer.scroll_active = false
 	writer.autowrap_mode = TextServer.AUTOWRAP_OFF
 	writer.visible_characters_behavior = TextServer.VC_CHARS_AFTER_SHAPING
 	writer.clip_contents = false
 	writer.name = "battle_writer"
+	vars.main_writer = writer
 	enemies = add_object.call(Node2D.new(), Vector2(0,0))
 	enemies.name = "enemies"
 	vars.player_heart = add_object.call(load("res://objects/battle/player_heart.tscn").instantiate())

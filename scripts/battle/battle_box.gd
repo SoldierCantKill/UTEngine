@@ -1,13 +1,13 @@
 extends NinePatchRect
 class_name BattleBox
 
-var target = [offset_left, offset_top, offset_right, offset_bottom]
-var margin
-var resize_spd = 600
+@onready var target : Array = [offset_left, offset_top, offset_right, offset_bottom]
+var margin : Array 
+var resize_spd : float = 600
 var emit_resize = false
 
 signal resize_finished
-@onready var collisions = [$collisions/left, $collisions/up, $collisions/right, $collisions/down]
+@onready var collisions : Array = [$collisions/left, $collisions/up, $collisions/right, $collisions/down]
 
 func _process(delta : float) -> void:
 	margin = [offset_left, offset_top, offset_right, offset_bottom]
@@ -43,17 +43,17 @@ func _process(delta : float) -> void:
 	collisions[2].position = Vector2(size.x + collisions[2].shape.extents.x - 5, collisions[2].shape.extents.y - 480)
 	collisions[3].position = Vector2(size.x / 2.0, size.y + collisions[1].shape.extents.y - 5)
 
-func SetSize(target : Array, resize_spd : float = 550) -> void:
+func set_box_size(target : Array, resize_spd : float = 550) -> void:
 	self.resize_spd = resize_spd
 	self.target = target
 	emit_resize = false
 
-func ResetSize(resize_spd = 300) -> void:
+func reset_box_size(resize_spd = 300) -> void:
 	self.resize_spd = resize_spd
 	target = [34, 254, 609, 395]
 	emit_resize = false
 
-func InstaSet(target : Array) -> void:
+func insta_box_size(target : Array) -> void:
 	self.target = target
 	offset_left = target[0]
 	offset_top = target[1]

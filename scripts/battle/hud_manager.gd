@@ -25,6 +25,7 @@ var serious_mode : bool = true
 
 func _ready():
 	setup_hud()
+	#reset()
 
 func setup_hud():
 	var create_text : Callable = func(position : Vector2):
@@ -92,6 +93,9 @@ func display_update():
 	display.current_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
 	
 func hud_mode_update():
+	for i in display.item_texts:
+		i.text = ""
+	display.page_text.text = ""
 	match(mode):
 		0:
 			for i in range(display.buttons.size()):
@@ -100,11 +104,10 @@ func hud_mode_update():
 				else:
 					display.buttons[i].frame = 1
 		2:
-			for i in display.item_texts:
-				i.text = ""
 			for i in range(4):
-				var item = ut_items.items[settings.player_save.inventory[i + (item_page - 1) * 4]]
-				display.item_texts[i].text = "* " + item.names[1] if !serious_mode else "* " + item.names[2]
+				if(settings.player_save.inventory[i + (item_page - 1) * 4] != ""):
+					var item = ut_items.items[settings.player_save.inventory[i + (item_page - 1) * 4]]
+					display.item_texts[i].text = "* " + item.names[1] if !serious_mode else "* " + item.names[2]
 			if(settings.player_save.inventory[4] != ""):
 				display.page_text.visible = true
 				display.page_text.text = "PAGE " + str(item_page)
@@ -132,6 +135,7 @@ func inputs():
 				button_index = wrapi(button_index - 1, 0, display.buttons.size())
 			if (Input.is_action_just_pressed("confirm")):
 				mode = 1 if(button_index == 0 || button_index == 1) else 2
+				item_page = 1
 		2:
 			var new_x : int = 0
 			if(Input.is_action_just_pressed("right")):
@@ -141,6 +145,8 @@ func inputs():
 					if(settings.player_save.inventory[4] != "" && item_page == 1):
 						item_index -= 1
 						item_page = 2
+						if(settings.player_save.inventory[6] == "" && item_index == 2):
+							item_index = 0
 					else:
 						item_index -= 1
 			if(Input.is_action_just_pressed("left")):
@@ -168,7 +174,36 @@ func inputs():
 				if(item_index + 2 >= last_string_index.call()):
 					item_index = -1 - (item_index + 1) % 2
 				item_index += 2
+			if(Input.is_action_just_pressed("confirm")):
+				eat()
 
 func reset():
+	vars.player_heart.heart_mode = 0
+	vars.player_heart.sprite.rotation = 0
 	mode = 0
 	item_index = 0
+	vars.battle_box.reset_box_size
+	vars.player_heart.visible = true
+	vars.player_heart.global_position = display.buttons[button_index].global_position + Vector2(-39, 0)
+	vars.player_heart.input_enabled = false
+	if vars.battle_box.margin != vars.battle_box.target:
+		await vars.battle_box.resize_finished
+	vars.main_writer.set_options(false,true,false)
+	#owner.get_node("attack_manager").SetTurnText()
+
+func disable():
+	mode = -1
+	item_index = 0
+	vars.player_heart.visible = false
+	vars.player_heart.global_position = display.buttons[button_index].global_position + Vector2(-39, 0)
+	vars.player_heart.input_enabled = false
+
+
+# ACTIONS WHEN PRESSING CONFIRM
+# ... So you can override them.
+
+func eat():
+	var item = ut_items.items[settings.player_save.inventory[item_index + (item_page - 1) * 4]]
+	item.use(item_index + (item_page - 1) * 4)
+	await item.done
+	reset()

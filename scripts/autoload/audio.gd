@@ -1,6 +1,6 @@
 extends Node
 
-var AUDIO_PATH: String = "res://Audio/" #CANNOT USE UIDS FOR THIS!!!!
+var AUDIO_PATH: String = "res://assets/audio/" #CANNOT USE UIDS FOR THIS!!!!
 
 var references = {}
 var global_volume = .05
@@ -10,7 +10,7 @@ var music : Node = null
 var current_sounds = []
 
 func _enter_tree() -> void:
-	var dir: DirAccess = DirAccess.open("res://Audio")
+	var dir: DirAccess = DirAccess.open(AUDIO_PATH)
 	if dir:
 		dir.list_dir_begin()
 		var dir_name: String = dir.get_next()
@@ -20,7 +20,7 @@ func _enter_tree() -> void:
 			group.name = dir_name
 			add_child(group)
 			
-			import_audio(str("res://Audio/" + dir_name), group)
+			import_audio(str(AUDIO_PATH + dir_name), group)
 			#print(dir_name)
 			dir_name = dir.get_next()
 

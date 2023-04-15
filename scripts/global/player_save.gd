@@ -6,6 +6,8 @@ var player = {
 	lv = 19,
 	current_hp = 92,
 	max_hp = 92,
+	weapon = "",
+	armor = "",
 	}
 
 var inventory : Array = [ #Don't erase indexes from this Array!!!!
