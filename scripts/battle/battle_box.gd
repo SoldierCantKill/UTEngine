@@ -2,6 +2,7 @@ extends NinePatchRect
 class_name BattleBox
 
 @onready var target : Array = [offset_left, offset_top, offset_right, offset_bottom]
+@onready var outline : ColorRect = $outline
 var margin : Array 
 var resize_spd : float = 600
 var emit_resize = false
@@ -10,6 +11,7 @@ signal resize_finished
 @onready var collisions : Array = [$collisions/left, $collisions/up, $collisions/right, $collisions/down]
 
 func _process(delta : float) -> void:
+	outline.size = size + Vector2(8,8)
 	margin = [offset_left, offset_top, offset_right, offset_bottom]
 	var spd = resize_spd * delta
 

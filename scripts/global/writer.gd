@@ -59,7 +59,7 @@ func set_options(continue_enabled : bool, skip_enabled : bool, dialouge_mode : b
 	self.dialouge_mode = dialouge_mode #Dusttrust animation cutscene #5559
 
 #You'll need to make it unskippable and uncontinuable using SetOptions().
-func message_text(text : Array, sound : String = "Mono1", font : String = "Mono", font_size : int = 31, speed : float = 0.033333)  -> void:
+func message_text(text : Array, sound : String = "Mono2", font : String = "Mono", font_size : int = 31, speed : float = 0.033333)  -> void:
 	self.text = ""
 	text_array = text
 	self.speed = speed

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b81jhym282o05"]
+
+[sub_resource type="GDScript" id="GDScript_hipys"]
+script/source = "extends AttackManager
+"
+
+[node name="attack_manager" type="Node2D"]
+script = SubResource("GDScript_hipys")

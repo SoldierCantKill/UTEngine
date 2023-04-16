@@ -6,6 +6,7 @@ var player = {
 	lv = 19,
 	current_hp = 92,
 	max_hp = 92,
+	def = 10,
 	weapon = "",
 	armor = "",
 	}

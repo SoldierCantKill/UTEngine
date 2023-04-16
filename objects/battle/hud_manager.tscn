@@ -1,6 +1,5 @@
 [gd_scene load_steps=20 format=3 uid="uid://cdhye7ndiak02"]
 
-[ext_resource type="Script" path="res://scripts/battle/hud_manager.gd" id="1_68nxi"]
 [ext_resource type="Texture2D" uid="uid://cp6r6hdfhhbwv" path="res://assets/sprites/reference_images/ut sample.PNG" id="2_2bxkh"]
 [ext_resource type="Texture2D" uid="uid://bxea0bdqk6yq0" path="res://assets/sprites/reference_images/utfightref.PNG" id="3_t0o2f"]
 [ext_resource type="Texture2D" uid="uid://dd5eift28hgpm" path="res://assets/sprites/reference_images/image-5.png" id="4_8ibeo"]
@@ -15,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://dsx65q8ooo1nd" path="res://assets/sprites/battle/hud/buttons/item/1.png" id="13_fjl78"]
 [ext_resource type="Texture2D" uid="uid://giolyh7g56fi" path="res://assets/sprites/battle/hud/buttons/mercy/0.png" id="14_bws02"]
 [ext_resource type="Texture2D" uid="uid://c8yr4lt58ogs1" path="res://assets/sprites/battle/hud/buttons/mercy/1.png" id="15_gqxil"]
+
+[sub_resource type="GDScript" id="GDScript_b3mfk"]
+script/source = "extends HudManager
+"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0rflg"]
 animations = [{
@@ -73,7 +76,7 @@ animations = [{
 }]
 
 [node name="hud_manager" type="Node2D"]
-script = ExtResource("1_68nxi")
+script = SubResource("GDScript_b3mfk")
 
 [node name="UtSample" type="Sprite2D" parent="."]
 visible = false
@@ -107,6 +110,8 @@ offset_left = 30.0
 offset_top = 400.0
 offset_right = 114.0
 offset_bottom = 418.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
 theme_override_fonts/normal_font = ExtResource("6_1ye0q")
 theme_override_font_sizes/normal_font_size = 24
 text = "Rose"
@@ -120,6 +125,8 @@ offset_left = 117.0
 offset_top = 400.0
 offset_right = 201.0
 offset_bottom = 422.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
 theme_override_fonts/normal_font = ExtResource("6_1ye0q")
 theme_override_font_sizes/normal_font_size = 24
 text = "LV 19"
@@ -133,6 +140,8 @@ offset_left = 224.0
 offset_top = 405.0
 offset_right = 248.0
 offset_bottom = 415.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
 theme_override_fonts/normal_font = ExtResource("7_cm6b2")
 theme_override_font_sizes/normal_font_size = 10
 text = "HP"
@@ -146,6 +155,8 @@ offset_left = 375.0
 offset_top = 405.0
 offset_right = 399.0
 offset_bottom = 415.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
 theme_override_fonts/normal_font = ExtResource("7_cm6b2")
 theme_override_font_sizes/normal_font_size = 10
 text = "KR"
@@ -159,12 +170,21 @@ offset_left = 415.0
 offset_top = 400.0
 offset_right = 512.0
 offset_bottom = 422.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
 theme_override_fonts/normal_font = ExtResource("6_1ye0q")
 theme_override_font_sizes/normal_font_size = 24
 text = "92 / 92"
 scroll_active = false
 autowrap_mode = 0
 visible_characters_behavior = 1
+
+[node name="hp_bar_outline" type="ColorRect" parent="display"]
+offset_left = 253.0
+offset_top = 398.0
+offset_right = 368.0
+offset_bottom = 423.0
+color = Color(0, 0, 0, 1)
 
 [node name="hp_bar_max" type="ColorRect" parent="display"]
 offset_left = 255.0

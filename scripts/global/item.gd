@@ -39,8 +39,6 @@ func get_throw_away_text() -> Array:
 
 func use(inventory_slot : int):
 	if(vars.scene is BattleRoom):
-		vars.hud_manager.disable()
-		
 		vars.main_writer.set_options(true,false,false)
 		vars.main_writer.message_text(use_text[1] if !vars.hud_manager.serious_mode else use_text[2], "Mono2")
 		

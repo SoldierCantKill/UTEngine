@@ -18,20 +18,24 @@ var serious_mode : bool = true
 	health_text = $display/health,
 	max_health_bar = $display/hp_bar_max,
 	current_health_bar = $display/hp_bar_current,
+	outline_health_bar = $display/hp_bar_outline,
 	buttons = $buttons.get_children(),
 	item_texts = [],
 	page_text = null,
-} 
+	} 
 
 func _ready():
 	setup_hud()
-	#reset()
 
 func setup_hud():
 	var create_text : Callable = func(position : Vector2):
 		var textblock = RichTextLabel.new()
 		textblock.add_theme_font_override("normal_font", load("res://assets/fonts/main_mono.ttf"))
 		textblock.add_theme_font_size_override("normal_font_size", 31)
+		textblock.set("theme_override_colors/font_shadow_color", Color(0.11,0.11,.39,1))
+		textblock.set("theme_override_constants/shadow_offset_x", 1)
+		textblock.set("theme_override_constants/shadow_offset_y", 1)
+		textblock.set("theme_override_constants/shadow_outline_size", 5)
 		textblock.position = position
 		textblock.size = Vector2(100,100)
 		textblock.z_index = 1
@@ -91,11 +95,14 @@ func display_update():
 	display.health_text.text = str(settings.player_save.player.current_hp) + " / " + str(settings.player_save.player.max_hp)
 	display.max_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
 	display.current_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
+	display.outline_health_bar.position = display.max_health_bar.position - Vector2(2,2)
+	display.outline_health_bar.size = display.max_health_bar.size + Vector2(4,4)
 	
 func hud_mode_update():
 	for i in display.item_texts:
 		i.text = ""
 	display.page_text.text = ""
+	display.page_text.visible = false
 	match(mode):
 		0:
 			for i in range(display.buttons.size()):
@@ -103,16 +110,21 @@ func hud_mode_update():
 					display.buttons[i].frame = 0
 				else:
 					display.buttons[i].frame = 1
+		1:
+			for i in range(vars.enemies.get_children().size()):
+				display.item_texts[i * 2].text = "* " + vars.enemies.get_child(i).enemy_name
 		2:
-			for i in range(4):
-				if(settings.player_save.inventory[i + (item_page - 1) * 4] != ""):
-					var item = ut_items.items[settings.player_save.inventory[i + (item_page - 1) * 4]]
-					display.item_texts[i].text = "* " + item.names[1] if !serious_mode else "* " + item.names[2]
-			if(settings.player_save.inventory[4] != ""):
-				display.page_text.visible = true
-				display.page_text.text = "PAGE " + str(item_page)
-			else:
-				display.page_text.visible = false
+			match(button_index):
+				2:
+					for i in range(4):
+						if(settings.player_save.inventory[i + (item_page - 1) * 4] != ""):
+							var item = ut_items.items[settings.player_save.inventory[i + (item_page - 1) * 4]]
+							display.item_texts[i].text = "* " + item.names[1] if !serious_mode else "* " + item.names[2]
+					if(settings.player_save.inventory[4] != ""):
+						display.page_text.visible = true
+						display.page_text.text = "PAGE " + str(item_page)
+					else:
+						display.page_text.visible = false
 
 func heart_update() -> void:
 	match(mode):
@@ -128,17 +140,57 @@ func heart_update() -> void:
 
 func inputs():
 	match(mode):
+		-1:
+			return
 		0:
 			if(Input.is_action_just_pressed("right")):
+				audio.play("menu/menu_move")
 				button_index = wrapi(button_index + 1, 0, display.buttons.size())
 			if (Input.is_action_just_pressed("left")):
+				audio.play("menu/menu_move")
 				button_index = wrapi(button_index - 1, 0, display.buttons.size())
 			if (Input.is_action_just_pressed("confirm")):
-				mode = 1 if(button_index == 0 || button_index == 1) else 2
+				audio.play("menu/menu_select")
+				if(button_index != 2):
+					vars.main_writer.clear_text()
+					mode = 1 if(button_index == 0 || button_index == 1) else 2
+				else:
+					if(settings.player_save.inventory[0] != ""):
+						vars.main_writer.clear_text()
+						mode = 1 if(button_index == 0 || button_index == 1) else 2
+				item_index = 0
 				item_page = 1
+			return
+				
+	match(button_index):
+		0:
+			if(Input.is_action_just_pressed("exit")):
+						reset()
+		1:
+			match(mode):
+				1:
+					var enemy_array : Array = vars.enemies.get_children()
+					var last_string_index : Callable = func() -> int:
+						for i in range(3):
+							if(display.item_texts[i*2].text == ""):
+								return i
+						return display.item_texts.size() - 1
+					if(Input.is_action_just_pressed("up")):
+						audio.play("menu/menu_move")
+						enemy_index = wrapi(enemy_index + 2,0,enemy_array.size())
+					
+					if(Input.is_action_just_pressed("down")):
+						audio.play("menu/menu_move")
+						enemy_index = wrapi(enemy_index - 2,0,enemy_array.size())
+					if(Input.is_action_just_pressed("confirm")):
+						reset()
+					if(Input.is_action_just_pressed("exit")):
+						reset()
+					print(enemy_index)
 		2:
 			var new_x : int = 0
 			if(Input.is_action_just_pressed("right")):
+				audio.play("menu/menu_move")
 				if((item_index + 1) % 2 != 0):
 					item_index += 1
 				else:
@@ -150,6 +202,7 @@ func inputs():
 					else:
 						item_index -= 1
 			if(Input.is_action_just_pressed("left")):
+				audio.play("menu/menu_move")
 				if((item_index + 1) % 2 == 0):
 					item_index -= 1
 				else:
@@ -166,16 +219,24 @@ func inputs():
 				return display.item_texts.size() - 1
 			
 			if(Input.is_action_just_pressed("up")):
+				audio.play("menu/menu_move")
 				if(item_index - 2 < 0):
 					item_index = last_string_index.call() + 1 - (item_index + 1) % 2
 				item_index -= 2
 			
 			if(Input.is_action_just_pressed("down")):
+				audio.play("menu/menu_move")
 				if(item_index + 2 >= last_string_index.call()):
 					item_index = -1 - (item_index + 1) % 2
 				item_index += 2
 			if(Input.is_action_just_pressed("confirm")):
+				audio.play("menu/menu_select")
 				eat()
+			if(Input.is_action_just_pressed("exit")):
+				reset()
+		3:
+			if(Input.is_action_just_pressed("exit")):
+				reset()
 
 func reset():
 	vars.player_heart.heart_mode = 0
@@ -188,8 +249,7 @@ func reset():
 	vars.player_heart.input_enabled = false
 	if vars.battle_box.margin != vars.battle_box.target:
 		await vars.battle_box.resize_finished
-	vars.main_writer.set_options(false,true,false)
-	#owner.get_node("attack_manager").SetTurnText()
+	vars.attack_manager.set_writer_text()
 
 func disable():
 	mode = -1
@@ -198,11 +258,11 @@ func disable():
 	vars.player_heart.global_position = display.buttons[button_index].global_position + Vector2(-39, 0)
 	vars.player_heart.input_enabled = false
 
-
 # ACTIONS WHEN PRESSING CONFIRM
 # ... So you can override them.
 
 func eat():
+	disable()
 	var item = ut_items.items[settings.player_save.inventory[item_index + (item_page - 1) * 4]]
 	item.use(item_index + (item_page - 1) * 4)
 	await item.done

@@ -1,7 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://djya08uami74k"]
 
 [ext_resource type="Texture2D" uid="uid://c0pijlyibwwdh" path="res://assets/sprites/battle/border.png" id="2_wvotm"]
-[ext_resource type="Script" path="res://scripts/battle/battle_box.gd" id="3_sfwfk"]
+
+[sub_resource type="GDScript" id="GDScript_3vp8p"]
+script/source = "extends BattleBox
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hwg6"]
 size = Vector2(575, 5)
@@ -25,7 +28,16 @@ patch_margin_left = 5
 patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
-script = ExtResource("3_sfwfk")
+script = SubResource("GDScript_3vp8p")
+
+[node name="outline" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 579.0
+offset_bottom = 144.0
+color = Color(0, 0, 0, 1)
 
 [node name="collisions" type="StaticBody2D" parent="."]
 
