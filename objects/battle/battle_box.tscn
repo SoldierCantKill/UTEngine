@@ -31,7 +31,7 @@ patch_margin_bottom = 5
 script = SubResource("GDScript_3vp8p")
 
 [node name="outline" type="ColorRect" parent="."]
-z_index = -1
+show_behind_parent = true
 layout_mode = 0
 offset_left = -4.0
 offset_top = -4.0

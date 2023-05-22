@@ -17,7 +17,7 @@ var serious_mode : bool = true
 	kr = $display/kr,
 	health_text = $display/health,
 	max_health_bar = $display/hp_bar_max,
-	current_health_bar = $display/hp_bar_current,
+	current_health_bar = $display/hp_bar_max/hp_bar_current,
 	outline_health_bar = $display/hp_bar_outline,
 	buttons = $buttons.get_children(),
 	item_texts = [],
@@ -61,7 +61,7 @@ func setup_hud():
 		display.lv_text.position = display.name_text.position + Vector2(display.name_text.get_parsed_text().length() * 22.5,0)
 		display.hp.position = display.lv_text.position + Vector2(124,5)
 		display.max_health_bar.position = display.hp.position + Vector2(31, -5)
-		display.current_health_bar.position = display.hp.position + Vector2(31, -5)
+		#display.current_health_bar.position = display.hp.position + Vector2(31, -5)
 		if(show_kr_text):
 			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x + 9,5)
 			display.kr.visible = true
@@ -74,7 +74,7 @@ func setup_hud():
 		display.lv_text.position = display.name_text.position + Vector2(display.name_text.get_parsed_text().length() * 21.75,0)
 		display.hp.position = display.lv_text.position + Vector2(107,5)
 		display.max_health_bar.position = display.hp.position + Vector2(31, -5)
-		display.current_health_bar.position = display.hp.position + Vector2(31, -5)
+		#display.current_health_bar.position = display.hp.position + Vector2(31, -5)
 		if(show_kr_text):
 			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x + 9,5)
 			display.kr.visible = true
@@ -94,7 +94,7 @@ func display_update():
 	display.lv_text.text = "LV " + str(settings.player_save.player.lv)
 	display.health_text.text = str(settings.player_save.player.current_hp) + " / " + str(settings.player_save.player.max_hp)
 	display.max_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
-	display.current_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
+	display.current_health_bar.size = Vector2(settings.player_save.player.current_hp * 1.2,21)
 	display.outline_health_bar.position = display.max_health_bar.position - Vector2(2,2)
 	display.outline_health_bar.size = display.max_health_bar.size + Vector2(4,4)
 	
@@ -115,6 +115,9 @@ func hud_mode_update():
 				display.item_texts[i * 2].text = "* " + vars.enemies.get_child(i).enemy_name
 		2:
 			match(button_index):
+				1:
+					for i in range(6):
+						pass
 				2:
 					for i in range(4):
 						if(settings.player_save.inventory[i + (item_page - 1) * 4] != ""):
@@ -152,11 +155,11 @@ func inputs():
 			if (Input.is_action_just_pressed("confirm")):
 				audio.play("menu/menu_select")
 				if(button_index != 2):
-					vars.main_writer.clear_text()
+					vars.main_writer.writer_text = ""
 					mode = 1 if(button_index == 0 || button_index == 1) else 2
 				else:
 					if(settings.player_save.inventory[0] != ""):
-						vars.main_writer.clear_text()
+						vars.main_writer.writer_text = ""
 						mode = 1 if(button_index == 0 || button_index == 1) else 2
 				item_index = 0
 				item_page = 1
@@ -165,7 +168,7 @@ func inputs():
 	match(button_index):
 		0:
 			if(Input.is_action_just_pressed("exit")):
-						reset()
+				reset()
 		1:
 			match(mode):
 				1:
@@ -189,10 +192,16 @@ func inputs():
 					print(enemy_index)
 		2:
 			var new_x : int = 0
+			var last_string_index = func() -> int:
+				for i in range(display.item_texts.size()):
+					if(display.item_texts[i].text == ""):
+						return i
+				return display.item_texts.size() - 1
 			if(Input.is_action_just_pressed("right")):
 				audio.play("menu/menu_move")
 				if((item_index + 1) % 2 != 0):
-					item_index += 1
+					if(item_index + 1 < last_string_index.call()):
+						item_index += 1
 				else:
 					if(settings.player_save.inventory[4] != "" && item_page == 1):
 						item_index -= 1
@@ -204,20 +213,14 @@ func inputs():
 			if(Input.is_action_just_pressed("left")):
 				audio.play("menu/menu_move")
 				if((item_index + 1) % 2 == 0):
-					item_index -= 1
+					if(item_index + 1 < last_string_index.call()):
+						item_index -= 1
 				else:
 					if(settings.player_save.inventory[4] != "" && item_page == 2):
 						item_index += 1
 						item_page = 1
 					else:
 						item_index += 1
-			
-			var last_string_index = func() -> int:
-				for i in range(display.item_texts.size()):
-					if(display.item_texts[i].text == ""):
-						return i
-				return display.item_texts.size() - 1
-			
 			if(Input.is_action_just_pressed("up")):
 				audio.play("menu/menu_move")
 				if(item_index - 2 < 0):
@@ -249,6 +252,7 @@ func reset():
 	vars.player_heart.input_enabled = false
 	if vars.battle_box.margin != vars.battle_box.target:
 		await vars.battle_box.resize_finished
+	await get_tree().process_frame
 	vars.attack_manager.set_writer_text()
 
 func disable():

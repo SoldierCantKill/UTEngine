@@ -20,6 +20,7 @@ audio="*res://scripts/autoload/audio.gd"
 settings="*res://scripts/autoload/settings.gd"
 ut_items="*res://scripts/autoload/ut_items.gd"
 vars="*res://scripts/autoload/vars.gd"
+functions="*res://scripts/autoload/functions.gd"
 
 [display]
 
@@ -68,7 +69,7 @@ exit={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
 textures/canvas_textures/default_texture_filter=0
 textures/canvas_textures/default_texture_repeat=1
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

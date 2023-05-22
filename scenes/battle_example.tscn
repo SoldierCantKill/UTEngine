@@ -1,9 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://tkcsf1ljdqnn"]
+[gd_scene load_steps=20 format=3 uid="uid://tkcsf1ljdqnn"]
 
 [ext_resource type="PackedScene" uid="uid://b81jhym282o05" path="res://objects/battle/attack_manager.tscn" id="1_0gsqa"]
 [ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="1_iongd"]
 [ext_resource type="PackedScene" uid="uid://cdhye7ndiak02" path="res://objects/battle/hud_manager.tscn" id="1_kwwbe"]
+[ext_resource type="Texture2D" uid="uid://b7ny54ocom6f5" path="res://assets/sprites/battle/hud/buttons/fight/0.png" id="2_3u0jt"]
 [ext_resource type="PackedScene" uid="uid://djya08uami74k" path="res://objects/battle/battle_box.tscn" id="2_h0l6h"]
+[ext_resource type="Texture2D" uid="uid://dsikgyt414x2p" path="res://assets/sprites/battle/hud/buttons/act/0.png" id="3_jbmw4"]
+[ext_resource type="Texture2D" uid="uid://giolyh7g56fi" path="res://assets/sprites/battle/hud/buttons/mercy/0.png" id="4_g3dmt"]
 [ext_resource type="Script" path="res://scripts/global/writer.gd" id="4_simoc"]
 [ext_resource type="PackedScene" uid="uid://frb40ffyat0v" path="res://objects/battle/player_heart.tscn" id="5_57p7q"]
 
@@ -19,11 +22,22 @@ gradient = SubResource("Gradient_tuxiy")
 fill_from = Vector2(0.478632, 1)
 fill_to = Vector2(0.508547, 0.0299145)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_a4c2p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3u0jt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="GDScript" id="GDScript_ohi4s"]
 script/source = "extends Enemy
 
 func _init():
-	super._init(\"Sans A\",1,1)
+	super._init(\"Fight\",1,1)
 	act_options = {
 		\"Check\" : check,
 		}
@@ -31,12 +45,23 @@ func _init():
 func check():
 	print(\"Checked\")
 "
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dwfiv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jbmw4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="GDScript" id="GDScript_1bdfs"]
 script/source = "extends Enemy
 
 func _init():
-	super._init(\"Sans B\",1,1)
+	super._init(\"Act\",1,1)
 	act_options = {
 		\"Check\" : check,
 		}
@@ -44,12 +69,23 @@ func _init():
 func check():
 	print(\"Checked\")
 "
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7v7gl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_g3dmt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="GDScript" id="GDScript_t7y3h"]
 script/source = "extends Enemy
 
 func _init():
-	super._init(\"Sans C\",1,1)
+	super._init(\"Mercy\",1,1)
 	act_options = {
 		\"Check\" : check,
 		}
@@ -58,11 +94,12 @@ func check():
 	print(\"Checked\")
 "
 
+[sub_resource type="QuadMesh" id="QuadMesh_k7u6r"]
+
 [node name="battle_example" type="Node2D"]
 script = SubResource("GDScript_60in0")
 
 [node name="gradient" type="TextureRect" parent="."]
-z_index = -5
 offset_left = -1.0
 offset_top = 328.0
 offset_right = 643.0
@@ -74,14 +111,20 @@ texture = SubResource("GradientTexture2D_fkand")
 [node name="enemies" type="Node2D" parent="."]
 
 [node name="sans1" type="AnimatedSprite2D" parent="enemies"]
+position = Vector2(136, 147)
+sprite_frames = SubResource("SpriteFrames_a4c2p")
 script = SubResource("GDScript_ohi4s")
 
 [node name="sans2" type="AnimatedSprite2D" parent="enemies"]
+position = Vector2(311, 147)
 scale = Vector2(1.0191, 1.0142)
+sprite_frames = SubResource("SpriteFrames_dwfiv")
 script = SubResource("GDScript_1bdfs")
 
 [node name="sans3" type="AnimatedSprite2D" parent="enemies"]
+position = Vector2(487, 148)
 scale = Vector2(1.0191, 1.0142)
+sprite_frames = SubResource("SpriteFrames_7v7gl")
 script = SubResource("GDScript_t7y3h")
 
 [node name="hud_manager" parent="." instance=ExtResource("1_kwwbe")]
@@ -100,10 +143,15 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/normal_font = ExtResource("1_iongd")
 theme_override_font_sizes/normal_font_size = 31
-text = "* Test"
+bbcode_enabled = true
 scroll_active = false
 autowrap_mode = 0
 visible_characters_behavior = 1
 script = ExtResource("4_simoc")
 
 [node name="player_heart" parent="." instance=ExtResource("5_57p7q")]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(60, 10)
+scale = Vector2(28.5, 24.5)
+mesh = SubResource("QuadMesh_k7u6r")

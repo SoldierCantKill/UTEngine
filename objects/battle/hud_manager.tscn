@@ -193,11 +193,10 @@ offset_right = 366.0
 offset_bottom = 421.0
 color = Color(0.752941, 0, 0, 1)
 
-[node name="hp_bar_current" type="ColorRect" parent="display"]
-offset_left = 255.0
-offset_top = 400.0
-offset_right = 366.0
-offset_bottom = 421.0
+[node name="hp_bar_current" type="ColorRect" parent="display/hp_bar_max"]
+layout_mode = 0
+offset_right = 111.0
+offset_bottom = 21.0
 color = Color(1, 1, 0, 1)
 
 [node name="buttons" type="Node2D" parent="."]
