@@ -117,7 +117,7 @@ func hud_mode_update():
 			match(button_index):
 				1:
 					for i in range(6):
-						pass
+						display.item_texts[i].text = "* " + "Test"
 				2:
 					for i in range(4):
 						if(settings.player_save.inventory[i + (item_page - 1) * 4] != ""):
@@ -186,10 +186,43 @@ func inputs():
 						audio.play("menu/menu_move")
 						enemy_index = wrapi(enemy_index - 2,0,enemy_array.size())
 					if(Input.is_action_just_pressed("confirm")):
-						reset()
+						mode = 2
 					if(Input.is_action_just_pressed("exit")):
 						reset()
-					print(enemy_index)
+				2:
+					var last_string_index = func() -> int:
+						for i in range(display.item_texts.size()):
+							if(display.item_texts[i].text == ""):
+								return i
+						return display.item_texts.size()
+					if(Input.is_action_just_pressed("right")):
+						audio.play("menu/menu_move")
+						if((item_index + 1) % 2 != 0):
+							if(item_index + 1 < last_string_index.call()):
+								item_index += 1
+						else:
+							item_index -= 1
+					if(Input.is_action_just_pressed("left")):
+						audio.play("menu/menu_move")
+						if((item_index + 1) % 2 == 0):
+							if(item_index - 1 < last_string_index.call()):
+								item_index -= 1
+						elif(item_index + 1 < last_string_index.call()):
+							item_index += 1
+					if(Input.is_action_just_pressed("up")):
+						audio.play("menu/menu_move")
+						if(item_index - 2 < 0):
+							if(5 - (item_index + 1) % 2 < last_string_index.call()):
+								item_index = 5 - (item_index + 1) % 2
+						else:
+							item_index -= 2
+					if(Input.is_action_just_pressed("down")):
+						audio.play("menu/menu_move")
+						if(item_index + 2 >= last_string_index.call()):
+							item_index = -1 - (item_index + 1) % 2
+						item_index += 2
+					if(Input.is_action_just_pressed("exit")):
+						mode = 1
 		2:
 			var new_x : int = 0
 			var last_string_index = func() -> int:
@@ -213,25 +246,29 @@ func inputs():
 			if(Input.is_action_just_pressed("left")):
 				audio.play("menu/menu_move")
 				if((item_index + 1) % 2 == 0):
-					if(item_index + 1 < last_string_index.call()):
+					if(item_index - 1 < last_string_index.call()):
 						item_index -= 1
 				else:
 					if(settings.player_save.inventory[4] != "" && item_page == 2):
 						item_index += 1
 						item_page = 1
 					else:
-						item_index += 1
+						if(item_index + 1 < last_string_index.call()):
+							item_index += 1
+							
 			if(Input.is_action_just_pressed("up")):
 				audio.play("menu/menu_move")
 				if(item_index - 2 < 0):
-					item_index = last_string_index.call() + 1 - (item_index + 1) % 2
-				item_index -= 2
-			
+					if(3 - (item_index + 1) % 2 < last_string_index.call()):
+						item_index = 3 - (item_index + 1) % 2
+				else:
+					item_index -= 2
 			if(Input.is_action_just_pressed("down")):
 				audio.play("menu/menu_move")
 				if(item_index + 2 >= last_string_index.call()):
 					item_index = -1 - (item_index + 1) % 2
 				item_index += 2
+					
 			if(Input.is_action_just_pressed("confirm")):
 				audio.play("menu/menu_select")
 				eat()
