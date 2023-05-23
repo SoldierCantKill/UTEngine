@@ -50,7 +50,7 @@ func set_box_size(target : Array, resize_spd : float = 550) -> void:
 	self.target = target
 	emit_resize = false
 
-func reset_box_size(resize_spd = 300) -> void:
+func reset_box_size(resize_spd = 500) -> void:
 	self.resize_spd = resize_spd
 	target = [34, 254, 609, 395]
 	emit_resize = false
