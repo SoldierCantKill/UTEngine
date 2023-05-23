@@ -1,14 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://tkcsf1ljdqnn"]
+[gd_scene load_steps=19 format=3 uid="uid://tkcsf1ljdqnn"]
 
-[ext_resource type="PackedScene" uid="uid://b81jhym282o05" path="res://objects/battle/attack_manager.tscn" id="1_0gsqa"]
-[ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="1_iongd"]
-[ext_resource type="PackedScene" uid="uid://cdhye7ndiak02" path="res://objects/battle/hud_manager.tscn" id="1_kwwbe"]
-[ext_resource type="Texture2D" uid="uid://b7ny54ocom6f5" path="res://assets/sprites/battle/hud/buttons/fight/0.png" id="2_3u0jt"]
-[ext_resource type="PackedScene" uid="uid://djya08uami74k" path="res://objects/battle/battle_box.tscn" id="2_h0l6h"]
-[ext_resource type="Texture2D" uid="uid://dsikgyt414x2p" path="res://assets/sprites/battle/hud/buttons/act/0.png" id="3_jbmw4"]
-[ext_resource type="Texture2D" uid="uid://giolyh7g56fi" path="res://assets/sprites/battle/hud/buttons/mercy/0.png" id="4_g3dmt"]
-[ext_resource type="Script" path="res://scripts/global/writer.gd" id="4_simoc"]
-[ext_resource type="PackedScene" uid="uid://frb40ffyat0v" path="res://objects/battle/player_heart.tscn" id="5_57p7q"]
+[ext_resource type="PackedScene" uid="uid://b81jhym282o05" path="res://objects/battle/attack_manager.tscn" id="1_bhplx"]
+[ext_resource type="Texture2D" uid="uid://b7ny54ocom6f5" path="res://assets/sprites/battle/hud/buttons/fight/0.png" id="2_6uupp"]
+[ext_resource type="Texture2D" uid="uid://dsikgyt414x2p" path="res://assets/sprites/battle/hud/buttons/act/0.png" id="3_5j3ve"]
+[ext_resource type="Texture2D" uid="uid://giolyh7g56fi" path="res://assets/sprites/battle/hud/buttons/mercy/0.png" id="4_gwqs5"]
+[ext_resource type="PackedScene" uid="uid://cdhye7ndiak02" path="res://objects/battle/hud_manager.tscn" id="5_dhngk"]
+[ext_resource type="PackedScene" uid="uid://djya08uami74k" path="res://objects/battle/battle_box.tscn" id="6_3ovv7"]
+[ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="7_ohydi"]
+[ext_resource type="Script" path="res://scripts/global/writer.gd" id="8_6whjn"]
+[ext_resource type="PackedScene" uid="uid://frb40ffyat0v" path="res://objects/battle/player_heart.tscn" id="9_82i08"]
 
 [sub_resource type="GDScript" id="GDScript_60in0"]
 script/source = "extends BattleRoom
@@ -26,7 +26,7 @@ fill_to = Vector2(0.508547, 0.0299145)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_3u0jt")
+"texture": ExtResource("2_6uupp")
 }],
 "loop": true,
 "name": &"default",
@@ -39,18 +39,23 @@ script/source = "extends Enemy
 func _init():
 	super._init(\"Fight\",1,1)
 	act_options = {
-		\"Check\" : check,
+		\"Check1\" : check,
 		}
 
 func check():
-	print(\"Checked\")
+	vars.hud_manager.mode = -1
+	vars.player_heart.visible = false
+	vars.main_writer.writer_text = \"(enable:z)(sound:mono2)* FIGHT 1 ATK 1 DEF\\n  idk(pc)\"
+	await vars.main_writer.done
+	vars.hud_manager.reset()
+	
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dwfiv"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_jbmw4")
+"texture": ExtResource("3_5j3ve")
 }],
 "loop": true,
 "name": &"default",
@@ -63,18 +68,18 @@ script/source = "extends Enemy
 func _init():
 	super._init(\"Act\",1,1)
 	act_options = {
-		\"Check\" : check,
+		\"Check2\" : check,
 		}
 
 func check():
-	print(\"Checked\")
+	print(\"Checked2\")
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7v7gl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_g3dmt")
+"texture": ExtResource("4_gwqs5")
 }],
 "loop": true,
 "name": &"default",
@@ -87,14 +92,12 @@ script/source = "extends Enemy
 func _init():
 	super._init(\"Mercy\",1,1)
 	act_options = {
-		\"Check\" : check,
+		\"Check3\" : check,
 		}
 
 func check():
-	print(\"Checked\")
+	print(\"Checked3\")
 "
-
-[sub_resource type="QuadMesh" id="QuadMesh_k7u6r"]
 
 [node name="battle_example" type="Node2D"]
 script = SubResource("GDScript_60in0")
@@ -106,7 +109,7 @@ offset_right = 643.0
 offset_bottom = 481.0
 texture = SubResource("GradientTexture2D_fkand")
 
-[node name="attack_manager" parent="." instance=ExtResource("1_0gsqa")]
+[node name="attack_manager" parent="." instance=ExtResource("1_bhplx")]
 
 [node name="enemies" type="Node2D" parent="."]
 
@@ -127,9 +130,10 @@ scale = Vector2(1.0191, 1.0142)
 sprite_frames = SubResource("SpriteFrames_7v7gl")
 script = SubResource("GDScript_t7y3h")
 
-[node name="hud_manager" parent="." instance=ExtResource("1_kwwbe")]
+[node name="hud_manager" parent="." instance=ExtResource("5_dhngk")]
 
-[node name="battle_box" parent="." instance=ExtResource("2_h0l6h")]
+[node name="battle_box" parent="." instance=ExtResource("6_3ovv7")]
+anchors_preset = -1
 
 [node name="battle_writer" type="RichTextLabel" parent="."]
 clip_contents = false
@@ -141,17 +145,12 @@ theme_override_colors/font_shadow_color = Color(0.11, 0.11, 0.39, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 5
-theme_override_fonts/normal_font = ExtResource("1_iongd")
+theme_override_fonts/normal_font = ExtResource("7_ohydi")
 theme_override_font_sizes/normal_font_size = 31
 bbcode_enabled = true
 scroll_active = false
 autowrap_mode = 0
 visible_characters_behavior = 1
-script = ExtResource("4_simoc")
+script = ExtResource("8_6whjn")
 
-[node name="player_heart" parent="." instance=ExtResource("5_57p7q")]
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-position = Vector2(60, 10)
-scale = Vector2(28.5, 24.5)
-mesh = SubResource("QuadMesh_k7u6r")
+[node name="player_heart" parent="." instance=ExtResource("9_82i08")]

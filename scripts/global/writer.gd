@@ -22,6 +22,8 @@ var writing = false
 var timeout := 0.0
 var can_write := true
 
+var current_sound := "mono1"
+var sound_index := 0
 var speed = 0.03333333
 var paused = false
 signal unpaused
@@ -30,11 +32,17 @@ var z_enabled = true
 var x_enabled = true
 
 #Just here so Devs can know the options they have
-const choice_properties = ["delay:time", "speed:time", "font:name", "size:num", "func_funcname:[param param param]", "enable:z or x", "disable:z or x"]
+const choice_properties = ["delay:time", "speed:time", "font:name", "size:num","sound:name", "func_funcname:[param param param]", "enable:z or x", "disable:z or x"]
 const callable_properties = ["pause", "clear", "pc", "func_funcname"]
 
 var fonts = {
 	"sans" : "res://assets/fonts/sans.ttf"
+	}
+var sounds = {
+	"mono1" : ["characters/SND_TXT1"],
+	"mono2" : ["characters/SND_TXT2"],
+	"papyrus" : ["characters/papyrus"],
+	"sans" : ["characters/sans"],
 	}
 #--------- PROPERTIES ----------
 func parse():
@@ -52,7 +60,7 @@ func parse():
 			var value = temp[1]
 			if property in ["delay", "speed"]: value = float(value)
 			elif property in ["face"]: value = value.split("/"); value[1] = int(value[1])
-			elif property in ["enable", "disable"]: value = String(value)
+			elif property in ["enable", "disable","sound"]: value = String(value)
 			elif property in ["func"]: value = StringName(value)
 			elif property in ["font","size"]:
 				var start_index = i.get_start() - 1 - removed_chars + added_bb_code
@@ -88,9 +96,12 @@ func write():
 	if(text.is_empty() && order.is_empty()):
 		done.emit()
 		return
+	await writer_event(clampi(visible_characters - 1, 0, 9999999))
 	if(visible_characters < len(text)):
 		visible_characters += 1
-	await writer_event(clampi(visible_characters - 1, 0, 9999999))
+		sound_index = wrapi(sound_index,0,sounds[current_sound].size())
+		audio.play(sounds[current_sound][sound_index])
+		sound_index = wrapi(sound_index+1,0,sounds[current_sound].size())
 	can_write = true
 
 func writer_event(index):
@@ -107,6 +118,8 @@ func writer_event(index):
 			elif(i[0] == "pause"):
 				paused = true
 				await unpaused
+			elif(i[0] == "sound"):
+				current_sound = i[1].to_lower()
 			elif(i[0] == "clear"):
 				writer_text = text.right(-(index + 1))
 				visible_characters = 0

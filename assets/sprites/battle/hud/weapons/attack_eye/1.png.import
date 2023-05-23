@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2bqejflg2qfv"
-path="res://.godot/imported/77983.png-5881fd19116ce3fa7eb5b22572d5c4e4.ctex"
+uid="uid://cldjlvu68haxi"
+path="res://.godot/imported/1.png-87b125e03a88e517599eccd5a2ee154c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/battle/hud/weapons/77983.png"
-dest_files=["res://.godot/imported/77983.png-5881fd19116ce3fa7eb5b22572d5c4e4.ctex"]
+source_file="res://assets/sprites/battle/hud/weapons/attack_eye/1.png"
+dest_files=["res://.godot/imported/1.png-87b125e03a88e517599eccd5a2ee154c.ctex"]
 
 [params]
 

@@ -7,7 +7,7 @@ var player = {
 	current_hp = 92,
 	max_hp = 92,
 	def = 10,
-	weapon = "",
+	weapon = "real_knife",
 	armor = "",
 	}
 

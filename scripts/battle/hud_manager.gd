@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name HudManager
 
 var mode : int = 0
@@ -97,7 +97,7 @@ func display_update():
 	display.current_health_bar.size = Vector2(settings.player_save.player.current_hp * 1.2,21)
 	display.outline_health_bar.position = display.max_health_bar.position - Vector2(2,2)
 	display.outline_health_bar.size = display.max_health_bar.size + Vector2(4,4)
-	
+
 func hud_mode_update():
 	for i in display.item_texts:
 		i.text = ""
@@ -116,8 +116,8 @@ func hud_mode_update():
 		2:
 			match(button_index):
 				1:
-					for i in range(6):
-						display.item_texts[i].text = "* " + "Test"
+					for i in range(vars.enemies.get_child(enemy_index).act_options.keys().size()):
+						display.item_texts[i].text = "* " + vars.enemies.get_child(enemy_index).act_options.keys()[i]
 				2:
 					for i in range(4):
 						if(settings.player_save.inventory[i + (item_page - 1) * 4] != ""):
@@ -167,6 +167,13 @@ func inputs():
 				
 	match(button_index):
 		0:
+			if(Input.is_action_just_pressed("confirm")):
+				audio.play("menu/menu_select")
+				mode = -1
+				vars.player_heart.visible = false
+				var eye = ut_items.weapons[settings.player_save.player.weapon].attack_eye.instantiate()
+				eye.enemy = vars.enemies.get_child(enemy_index)
+				add_child(eye)
 			if(Input.is_action_just_pressed("exit")):
 				reset()
 		1:
@@ -186,6 +193,7 @@ func inputs():
 						audio.play("menu/menu_move")
 						enemy_index = wrapi(enemy_index - 2,0,enemy_array.size())
 					if(Input.is_action_just_pressed("confirm")):
+						audio.play("menu/menu_select")
 						mode = 2
 					if(Input.is_action_just_pressed("exit")):
 						reset()
@@ -221,6 +229,8 @@ func inputs():
 						if(item_index + 2 >= last_string_index.call()):
 							item_index = -1 - (item_index + 1) % 2
 						item_index += 2
+					if(Input.is_action_just_pressed("confirm")):
+						vars.enemies.get_child(enemy_index).act_options.values()[item_index].call()
 					if(Input.is_action_just_pressed("exit")):
 						mode = 1
 		2:

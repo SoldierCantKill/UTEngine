@@ -11,19 +11,11 @@ enum e_type {
 
 var names : Array
 var description : String
-var heals : Array
 var type : e_type
 var use_text : Array
 var throw_away_text : String = "" : get = get_throw_away_text
-#Not set in constructor. Use function setup_items() in item_list autoload.
-#You need 3 values in each array EXCXEPT Description, [OVERWORLD, BATTLE, SERIOUS MODE] (use_text will use a 2D array)
+#You need 3 values in some arrays (See default items)
 #(No, this engine doesn't have OW by default)
-func _init(names : Array, description : String, heals : Array, type : e_type, use_text : Array):
-	self.names = names
-	self.description = description
-	self.heals = heals
-	self.type = type
-	self.use_text = use_text
 
 func get_throw_away_text() -> String:
 	if(throw_away_text.is_empty()):
@@ -61,3 +53,8 @@ func use(inventory_slot : int):
 		ut_items.sort_inventory()
 		await vars.main_writer.done
 		done.emit()
+
+func hp_message(amount_gained : int) -> String:
+	if(settings.player_save.player.current_hp >= settings.player_save.player.max_hp): 
+		return "* Your HP was maxed out."
+	return "* You recovered " + str(amount_gained) + " HP!"

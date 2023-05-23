@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="UTEngine"
-run/main_scene="res://scenes/battle_example.tscn"
+run/main_scene="res://scripts/battle/battles/battle_example.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 
 [autoload]
@@ -27,6 +27,7 @@ functions="*res://scripts/autoload/functions.gd"
 window/size/viewport_width=640
 window/size/viewport_height=480
 window/size/resizable=false
+window/vsync/vsync_mode=0
 
 [input]
 
