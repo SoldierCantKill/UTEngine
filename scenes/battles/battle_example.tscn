@@ -36,7 +36,7 @@ animations = [{
 script/source = "extends Enemy
 
 func _init():
-	super._init(\"Fight\",1000,1)
+	super._init(\"Fight\",300,1)
 	
 func _ready():
 	sprite = self

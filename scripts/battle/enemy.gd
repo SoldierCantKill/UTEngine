@@ -65,14 +65,13 @@ func attack(damage : float):
 	await get_tree().create_timer(.3).timeout
 	done_being_attacked.emit()
 	var hide_bars = func():
-		await get_tree().create_timer(.5).timeout
 		bar_max.queue_free()
 		bar.queue_free()
-	if(current_hp <= 0):
-		death()
-		hide_bars.call()
-	else:
 		damage_text.queue_free()
+	if(current_hp <= 0):
+		hide_bars.call()
+		death()
+	else:
 		vars.attack_manager.pre_attack()
 		vars.dialouge_manager.start()
 		hide_bars.call()
@@ -81,12 +80,12 @@ func attack(damage : float):
 	
 
 func death():
-	sprite.visible = false
 	var dust_enemy = load("res://objects/battle/dusted_enemy.tscn").instantiate()
 	dust_enemy.set_texture(sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame()))
 	vars.scene.add_child(dust_enemy)
 	dust_enemy.global_position = sprite.global_position
 	dust_enemy.Start()
+	queue_free()
 
 func create_text(text : String):
 	var textblock = RichTextLabel.new()

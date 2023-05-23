@@ -45,12 +45,12 @@ func _process(delta : float) -> void:
 	collisions[2].position = Vector2(size.x + collisions[2].shape.extents.x - 5, collisions[2].shape.extents.y - 480)
 	collisions[3].position = Vector2(size.x / 2.0, size.y + collisions[1].shape.extents.y - 5)
 
-func set_box_size(target : Array, resize_spd : float = 550) -> void:
+func set_box_size(target : Array, resize_spd : float = 600) -> void:
 	self.resize_spd = resize_spd
 	self.target = target
 	emit_resize = false
 
-func reset_box_size(resize_spd = 500) -> void:
+func reset_box_size(resize_spd = 600) -> void:
 	self.resize_spd = resize_spd
 	target = [34, 254, 609, 395]
 	emit_resize = false

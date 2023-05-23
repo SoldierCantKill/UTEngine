@@ -10,12 +10,12 @@ func pre_attack():
 	vars.battle_box.set_box_size([244,254,399,394],500)
 	vars.player_heart.visible = true
 	vars.player_heart.global_position = Vector2(321, 324)
-	vars.attack_manager.bullet(load("res://objects/battle/bullets/test_bullet.tscn"), Vector2(321, 374))
 
 func start_attack():
-	print("HEART CAN MOVE")
 	vars.player_heart.input_enabled = true
 	attack_started = true
+	var bullet = vars.attack_manager.bullet(load("res://objects/battle/bullets/test_bullet.tscn"), Vector2(321, 374))
+	bullet.event_hit.connect(end_attack)
 
 func end_attack():
 	vars.hud_manager.reset()

@@ -50,11 +50,10 @@ func setup_hud():
 	for row in range(3):
 		for col in range(2):
 			var i = row * 2 + col
-			var location : Vector2 = Vector2(102 if col < 1 else 342, 274 + row * 31)
+			var location : Vector2 = Vector2(100 if col < 1 else 340, 271 + row * 31)
 			var text : RichTextLabel = create_text.call(location)
 			display.item_texts.append(text)
-#			text.text = "* Pie"
-	display.page_text = create_text.call(Vector2(391,338))
+	display.page_text = create_text.call(Vector2(388,334))
 	
 	display_update()
 	
