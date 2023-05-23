@@ -11,7 +11,6 @@ signal resize_finished
 @onready var collisions : Array = [$collisions/left, $collisions/up, $collisions/right, $collisions/down]
 
 func _process(delta : float) -> void:
-	outline.size = size + Vector2(8,8)
 	margin = [offset_left, offset_top, offset_right, offset_bottom]
 	var spd = resize_spd * delta
 
