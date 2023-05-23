@@ -1,0 +1,124 @@
+[gd_scene load_steps=16 format=3 uid="uid://tkcsf1ljdqnn"]
+
+[ext_resource type="Texture2D" uid="uid://b7ny54ocom6f5" path="res://assets/sprites/battle/hud/buttons/fight/0.png" id="2_6f77y"]
+[ext_resource type="Texture2D" uid="uid://c0fk22bwsicj2" path="res://assets/sprites/speech_bubble.png" id="2_gywuk"]
+[ext_resource type="PackedScene" uid="uid://cdhye7ndiak02" path="res://objects/battle/hud_manager.tscn" id="3_5e3ix"]
+[ext_resource type="PackedScene" uid="uid://djya08uami74k" path="res://objects/battle/battle_box.tscn" id="4_4yajr"]
+[ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="5_wlkg8"]
+[ext_resource type="Script" path="res://scripts/global/writer.gd" id="6_jkaxn"]
+[ext_resource type="PackedScene" uid="uid://frb40ffyat0v" path="res://objects/battle/player_heart.tscn" id="7_1vkjp"]
+[ext_resource type="PackedScene" uid="uid://5l7ptgwyrkli" path="res://objects/battle/attack_manager.tscn" id="7_2tvut"]
+
+[sub_resource type="GDScript" id="GDScript_60in0"]
+script/source = "extends BattleRoom
+"
+
+[sub_resource type="Gradient" id="Gradient_tuxiy"]
+colors = PackedColorArray(0.615686, 0.490196, 0.741176, 1, 0.0627451, 0.0313726, 0.0901961, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fkand"]
+gradient = SubResource("Gradient_tuxiy")
+fill_from = Vector2(0.478632, 1)
+fill_to = Vector2(0.508547, 0.0299145)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a4c2p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6f77y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_ohi4s"]
+script/source = "extends Enemy
+
+func _init():
+	super._init(\"Fight\",1000,1)
+	
+func _ready():
+	sprite = self
+	damage_anchor = self
+"
+
+[sub_resource type="GDScript" id="GDScript_uiy3g"]
+script/source = "extends Writer
+"
+
+[sub_resource type="GDScript" id="GDScript_vt12r"]
+script/source = "extends DialougeManager
+"
+
+[node name="battle_example" type="Node2D"]
+script = SubResource("GDScript_60in0")
+
+[node name="camera" type="Camera2D" parent="."]
+offset = Vector2(320, 240)
+ignore_rotation = false
+
+[node name="gradient" type="TextureRect" parent="."]
+offset_left = -1.0
+offset_top = 328.0
+offset_right = 643.0
+offset_bottom = 481.0
+texture = SubResource("GradientTexture2D_fkand")
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="example_enemy" type="AnimatedSprite2D" parent="enemies"]
+position = Vector2(318, 173)
+sprite_frames = SubResource("SpriteFrames_a4c2p")
+script = SubResource("GDScript_ohi4s")
+
+[node name="speech_bubble" type="NinePatchRect" parent="enemies/example_enemy"]
+visible = false
+offset_left = 59.0
+offset_top = -35.0
+offset_right = 223.0
+offset_bottom = 56.0
+texture = ExtResource("2_gywuk")
+patch_margin_left = 31
+patch_margin_top = 44
+patch_margin_right = 22
+
+[node name="speech_writer" type="RichTextLabel" parent="enemies/example_enemy/speech_bubble"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 3.0
+offset_right = 158.0
+offset_bottom = 85.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+visible_characters_behavior = 1
+script = SubResource("GDScript_uiy3g")
+
+[node name="hud_manager" parent="." instance=ExtResource("3_5e3ix")]
+
+[node name="battle_box" parent="." instance=ExtResource("4_4yajr")]
+
+[node name="battle_writer" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = 52.0
+offset_top = 270.0
+offset_right = 601.0
+offset_bottom = 384.0
+theme_override_colors/font_shadow_color = Color(0.11, 0.11, 0.39, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/normal_font = ExtResource("5_wlkg8")
+theme_override_font_sizes/normal_font_size = 31
+bbcode_enabled = true
+scroll_active = false
+autowrap_mode = 0
+visible_characters_behavior = 1
+script = ExtResource("6_jkaxn")
+
+[node name="player_heart" parent="." instance=ExtResource("7_1vkjp")]
+
+[node name="attack_manager" parent="." instance=ExtResource("7_2tvut")]
+
+[node name="dialouge_manager" type="Node2D" parent="."]
+script = SubResource("GDScript_vt12r")

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjqw8qs0jicql"]
+
+[ext_resource type="Shader" path="res://assets/effects/dissapear.gdshader" id="1_0v718"]
+[ext_resource type="Script" path="res://scripts/battle/dusted_enemy.gd" id="2_wemb4"]
+[ext_resource type="Shader" path="res://assets/effects/dust.gdshader" id="3_o4dxf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m3r5m"]
+shader = ExtResource("1_0v718")
+shader_parameter/sensitivity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_csedp"]
+shader = ExtResource("3_o4dxf")
+shader_parameter/direction = Vector3(0, -0.5, 0)
+shader_parameter/spread = 30.0
+shader_parameter/initial_linear_velocity_min = 35.0
+shader_parameter/initial_linear_velocity_max = 45.0
+shader_parameter/initial_angle_min = null
+shader_parameter/initial_angle_max = 100.0
+shader_parameter/angular_velocity_min = 25.0
+shader_parameter/angular_velocity_max = 60.0
+shader_parameter/linear_accel_min = null
+shader_parameter/linear_accel_max = null
+shader_parameter/radial_accel_min = 10.0
+shader_parameter/radial_accel_max = 20.0
+shader_parameter/tangent_accel_min = null
+shader_parameter/tangent_accel_max = null
+shader_parameter/scale_min = 1.0
+shader_parameter/scale_max = 2.0
+shader_parameter/lifetime_randomness = null
+shader_parameter/emission_box_extents = Vector3(27, 0, 1)
+shader_parameter/scrolly = null
+
+[node name="dusted_enemy" type="Sprite2D"]
+material = SubResource("ShaderMaterial_m3r5m")
+script = ExtResource("2_wemb4")
+metadata/_edit_use_anchors_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 3000
+process_material = SubResource("ShaderMaterial_csedp")

@@ -1,8 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://b81jhym282o05"]
+[gd_scene load_steps=6 format=3 uid="uid://5l7ptgwyrkli"]
 
-[sub_resource type="GDScript" id="GDScript_hipys"]
+[ext_resource type="Script" path="res://scripts/battle/buffer.gd" id="1_1hsqs"]
+[ext_resource type="Shader" path="res://assets/effects/mask.gdshader" id="1_8casw"]
+[ext_resource type="Texture2D" uid="uid://cn080tr3k362p" path="res://assets/sprites/battle/border_mask.png" id="2_eofwa"]
+
+[sub_resource type="GDScript" id="GDScript_q37hg"]
 script/source = "extends AttackManager
 "
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7b04"]
+shader = ExtResource("1_8casw")
+
 [node name="attack_manager" type="Node2D"]
-script = SubResource("GDScript_hipys")
+script = SubResource("GDScript_q37hg")
+
+[node name="buffer" type="BackBufferCopy" parent="."]
+copy_mode = 2
+script = ExtResource("1_1hsqs")
+
+[node name="masks" type="Node2D" parent="buffer"]
+material = SubResource("ShaderMaterial_y7b04")
+
+[node name="top_left" type="Sprite2D" parent="buffer/masks"]
+use_parent_material = true
+position = Vector2(-3330, -1791)
+scale = Vector2(250, 250)
+texture = ExtResource("2_eofwa")
+
+[node name="bottom_right" type="Sprite2D" parent="buffer/masks"]
+use_parent_material = true
+position = Vector2(-3330, -1791)
+scale = Vector2(250, 250)
+texture = ExtResource("2_eofwa")
+flip_h = true
+flip_v = true

@@ -10,6 +10,8 @@ var item_page : int = 1
 var show_kr_text : bool = true #only 
 var serious_mode : bool = true
 
+var eye = null #Attack eye
+
 @onready var display : Dictionary = {
 	name_text = $display/name,
 	lv_text = $display/lv,
@@ -167,11 +169,19 @@ func inputs():
 				
 	match(button_index):
 		0:
+			var enemy_array : Array = vars.enemies.get_children()
+			if(Input.is_action_just_pressed("up")):
+				audio.play("menu/menu_move")
+				enemy_index = wrapi(enemy_index + 2,0,enemy_array.size())
+			
+			if(Input.is_action_just_pressed("down")):
+				audio.play("menu/menu_move")
+				enemy_index = wrapi(enemy_index - 2,0,enemy_array.size())
 			if(Input.is_action_just_pressed("confirm")):
 				audio.play("menu/menu_select")
 				mode = -1
 				vars.player_heart.visible = false
-				var eye = ut_items.weapons[settings.player_save.player.weapon].attack_eye.instantiate()
+				eye = ut_items.weapons[settings.player_save.player.weapon].attack_eye.instantiate()
 				eye.enemy = vars.enemies.get_child(enemy_index)
 				add_child(eye)
 			if(Input.is_action_just_pressed("exit")):
@@ -180,11 +190,6 @@ func inputs():
 			match(mode):
 				1:
 					var enemy_array : Array = vars.enemies.get_children()
-					var last_string_index : Callable = func() -> int:
-						for i in range(3):
-							if(display.item_texts[i*2].text == ""):
-								return i
-						return display.item_texts.size() - 1
 					if(Input.is_action_just_pressed("up")):
 						audio.play("menu/menu_move")
 						enemy_index = wrapi(enemy_index + 2,0,enemy_array.size())
@@ -290,16 +295,18 @@ func inputs():
 
 func reset():
 	vars.player_heart.heart_mode = 0
+	vars.player_heart.visible = false
 	vars.player_heart.sprite.rotation = 0
-	mode = 0
+	mode = -1
 	item_index = 0
-	vars.battle_box.reset_box_size
-	vars.player_heart.visible = true
+	vars.battle_box.reset_box_size()
 	vars.player_heart.global_position = display.buttons[button_index].global_position + Vector2(-39, 0)
 	vars.player_heart.input_enabled = false
 	if vars.battle_box.margin != vars.battle_box.target:
 		await vars.battle_box.resize_finished
 	await get_tree().process_frame
+	mode = 0
+	vars.player_heart.visible = true
 	vars.attack_manager.set_writer_text()
 
 func disable():

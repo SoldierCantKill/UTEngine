@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7ngbkga3p0wo"]
+
+[sub_resource type="GDScript" id="GDScript_hnosq"]
+script/source = "extends Bullet
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvs25"]
+size = Vector2(40, 40)
+
+[node name="test_bullet" type="Node2D"]
+script = SubResource("GDScript_hnosq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_cvs25")

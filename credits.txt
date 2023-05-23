@@ -1,0 +1,2 @@
+Oplexitie - Lots of help with shaders, notably the dusting shader when an enemy dies
+Scarm - Helped a bit with the writer, wouldn't have had a parsed writer without his help.

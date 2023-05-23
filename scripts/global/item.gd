@@ -30,29 +30,7 @@ func get_throw_away_text() -> String:
 		return throw_away_text
 
 func use(inventory_slot : int):
-	if(vars.scene is BattleRoom):
-		var string = "(enable:z)(disable:x)" + (use_text[1] if !vars.hud_manager.serious_mode else use_text[2]) + "(pc)"
-		print(string)
-		vars.main_writer.writer_text = string
-		print(vars.main_writer.writer_text)
-		
-		match(type):
-			e_type.heal:
-				audio.play("menu/heal")
-				settings.player_save.inventory[inventory_slot] = ""
-			e_type.weapon:
-				audio.play("menu/item")
-				var temp = settings.player_save.weapon
-				settings.player_save.weapon = settings.player_save.inventory[inventory_slot]
-				settings.player_save.inventory[inventory_slot] = temp
-			e_type.armor:
-				audio.play("menu/item")
-				var temp = settings.player_save.armor
-				settings.player_save.armor = settings.player_save.inventory[inventory_slot]
-				settings.player_save.inventory[inventory_slot] = temp
-		ut_items.sort_inventory()
-		await vars.main_writer.done
-		done.emit()
+	pass
 
 func hp_message(amount_gained : int) -> String:
 	if(settings.player_save.player.current_hp >= settings.player_save.player.max_hp): 

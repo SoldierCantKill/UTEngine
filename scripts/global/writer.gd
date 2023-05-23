@@ -10,9 +10,8 @@ var writer_text = "" :
 		visible_characters = 0
 		parse()
 		
-		if(!writing):
-			write()
-			writing = true
+		if(!can_write):
+			can_write = true
 
 var caller = functions #Incase you want to call any functions from the writer.
 var optional_references = [] #Incase you need to reference objects in the writer.
@@ -20,9 +19,10 @@ var optional_references = [] #Incase you need to reference objects in the writer
 var writing = false
 
 var timeout := 0.0
-var can_write := true
+var can_write := false
 
 var current_sound := "mono1"
+var order_changed := false
 var sound_index := 0
 var speed = 0.03333333
 var paused = false
@@ -34,9 +34,11 @@ var x_enabled = true
 #Just here so Devs can know the options they have, you can use either : or =
 const choice_properties = ["delay:time", "speed:time", "font:name", "size:num","sound:name", "bb:bbcode", "func_funcname:[array of params]", "enable:z or x", "disable:z or x"]
 const callable_properties = ["pause", "clear", "pc", "func_funcname"]
+const silent_chars  = [' ']
 
 var fonts = {
-	"sans" : "res://assets/fonts/sans.ttf"
+	"mono" : "res://assets/fonts/main_mono.ttf",
+	"sans" : "res://assets/fonts/sans.ttf",
 	}
 var sounds = {
 	"mono1" : ["characters/SND_TXT1"],
@@ -48,11 +50,12 @@ var sounds = {
 func parse():
 	var removed_chars = 0
 	var added_bb_code = 0
+	order_changed = true
 	order.clear()
 	var property_regex = RegEx.create_from_string("\\(([^\\)]*)(?:(?:\\:|=)([^\\)]*))?\\)")
 	if(property_regex.search_all(text).size() >= 1):
 		for i in property_regex.search_all(text):
-			var temp = i.get_string(1)
+			var temp = [i.get_string(1)]
 			if(i.get_string(1).find(":") != -1):
 				temp = i.get_string(1).split(":")
 			elif(i.get_string(1).find("=") != -1):
@@ -103,6 +106,7 @@ func parse():
 			order[str(start_index - added_bb_code)].append([property, value])
 			if(property in ["clear", "pc"]):
 				break
+	order_changed = false
 
 func write():
 	can_write = false
@@ -111,10 +115,11 @@ func write():
 		return
 	await writer_event(clampi(visible_characters - 1, 0, 9999999))
 	if(visible_characters < len(get_parsed_text())):
-		visible_characters += 1
 		sound_index = wrapi(sound_index,0,sounds[current_sound].size())
-		audio.play(sounds[current_sound][sound_index])
+		if(get_parsed_text()[visible_characters] not in silent_chars):
+			audio.play(sounds[current_sound][sound_index])
 		sound_index = wrapi(sound_index+1,0,sounds[current_sound].size())
+		visible_characters += 1
 	can_write = true
 
 func writer_event(index):
@@ -122,6 +127,10 @@ func writer_event(index):
 	var wait_for_speed := true
 	if(order.has(str(index))):
 		for i in order[str(index)]:
+			if(!str(index) in order):
+				break
+			if(!order[str(index)].has(i)):
+				break
 			remove.append(i)
 			if(i[0] == "delay"):
 				wait_for_speed = false
@@ -134,12 +143,12 @@ func writer_event(index):
 			elif(i[0] == "sound"):
 				current_sound = i[1].to_lower()
 			elif(i[0] == "clear"):
-				writer_text = text.right(-(index + 1))
+				writer_text = text.substr(text.find("clear"))
 				visible_characters = 0
 			elif(i[0] == "pc"):
 				paused = true
 				await unpaused
-				writer_text = text.right(-(index + 1))
+				writer_text = text.substr(text.find("pc"))
 				visible_characters = 0
 			elif(i[0] == "enable"):
 				set(i[1].to_lower() + "_enabled", true)
@@ -165,7 +174,7 @@ func _process(delta):
 				var found = false
 				for i in order:
 					for j in order[i]:
-						if(j[0] == "pause"):
+						if(j[0] in ["pause", "pc"]):
 							found = true
 							visible_characters = int(i) + 1
 							writer_event(visible_characters - 1)

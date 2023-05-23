@@ -1,9 +1,15 @@
-extends Node
+extends Node2D
 class_name Enemy
 
 enum e_dodge {
 	none,
 }
+
+
+@onready var sprite = null
+@onready var damage_anchor : Node = null
+@onready var speech_bubble = $speech_bubble
+@onready var speech_writer = $speech_bubble/speech_writer
 
 var enemy_name : String
 var current_hp : int
@@ -13,11 +19,12 @@ var dodge : e_dodge
 var border_stick : bool = true
 var offset : int = 0 #Offset for border stick
 
-var show_health_bar : bool
+var show_health_bar : bool = true
 
 signal done_being_attacked
 
 var act_options = {
+	"Check" : check,
 	}
 
 func _init(enemy_name : String, hp : int, df : float):
@@ -27,7 +34,81 @@ func _init(enemy_name : String, hp : int, df : float):
 	self.def = def
 
 func attack(damage : float):
-	print("I WAS DAMAGED FOR ", damage)
-	await get_tree().create_timer(1).timeout
+	await vars.hud_manager.eye.knife.animation_finished
+	audio.play("battle/hit")
+	var bar_max : ColorRect = ColorRect.new()
+	var bar : ColorRect = ColorRect.new()
+	var texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
+	bar_max.color = Color(.5,.5,.5,1)
+	bar_max.size = Vector2(texture.get_size().x * scale.x, 15)
+	bar.color = Color(.1,1,.1,1)
+	bar.size = Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15)
+	bar_max.z_index = 5
+	bar.z_index = 5
+	bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
+	bar_max.add_child(bar)
+	vars.scene.add_child(bar_max)
+	bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
+	current_hp = clampf(current_hp - damage,0,max_hp)
+	get_tree().create_tween().tween_property(bar, "size", Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15), .25)
+	bar_max.visible = show_health_bar
+	var damage_text : RichTextLabel = create_text("[center]"+ str(int(damage)))
+	damage_text.self_modulate = Color(1, 0, 0, 1)
+	damage_text.global_position = bar_max.global_position + bar_max.size / 2 - Vector2(0,60)
+	var pos : Vector2 = position
+	var shake_intensity = 15
+	for i in range(shake_intensity):
+		position.x = pos.x + shake_intensity
+		shake_intensity = shake_intensity * -0.8
+		await get_tree().create_timer(.05).timeout
+	position = pos
+	await get_tree().create_timer(.3).timeout
 	done_being_attacked.emit()
-	vars.attack_manager.start_attack()
+	var hide_bars = func():
+		await get_tree().create_timer(.5).timeout
+		bar_max.queue_free()
+		bar.queue_free()
+	if(current_hp <= 0):
+		death()
+		hide_bars.call()
+	else:
+		damage_text.queue_free()
+		vars.attack_manager.pre_attack()
+		vars.dialouge_manager.start()
+		hide_bars.call()
+		await vars.dialouge_manager.done
+		vars.attack_manager.current_attack.start_attack()
+	
+
+func death():
+	sprite.visible = false
+	var dust_enemy = load("res://objects/battle/dusted_enemy.tscn").instantiate()
+	dust_enemy.set_texture(sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame()))
+	vars.scene.add_child(dust_enemy)
+	dust_enemy.global_position = sprite.global_position
+	dust_enemy.Start()
+
+func create_text(text : String):
+	var textblock = RichTextLabel.new()
+	textblock.bbcode_enabled = true
+	var texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
+	textblock.size = Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15)
+	textblock.add_theme_font_override("normal_font", load("res://assets/fonts/damage.ttf"))
+	textblock.add_theme_font_size_override("normal_font_size", 28)
+	textblock.set("theme_override_colors/font_outline_color", Color(0,0,0,1))
+	textblock.set("theme_override_constants/outline_size", 10)
+	
+	textblock.z_index = 1
+	textblock.clip_contents = false
+	textblock.scroll_active = false
+	textblock.autowrap_mode = TextServer.AUTOWRAP_OFF
+	owner.add_child(textblock)
+	textblock.text = text
+	return textblock
+
+func check():
+	vars.hud_manager.mode = -1
+	vars.player_heart.visible = false
+	vars.main_writer.writer_text = "(enable:z)(sound:mono2)* Enemy 1 ATK 1 DEF\n  Example Text.(pc)"
+	await vars.main_writer.done
+	vars.hud_manager.reset()

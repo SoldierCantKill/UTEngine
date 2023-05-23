@@ -21,7 +21,6 @@ func _enter_tree() -> void:
 			add_child(group)
 			
 			import_audio(str(AUDIO_PATH + dir_name), group)
-			#print(dir_name)
 			dir_name = dir.get_next()
 
 func import_audio(dir_name: String, group: Node):
