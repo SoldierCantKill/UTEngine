@@ -31,8 +31,8 @@ signal done
 var z_enabled = true
 var x_enabled = true
 
-#Just here so Devs can know the options they have
-const choice_properties = ["delay:time", "speed:time", "font:name", "size:num","sound:name", "func_funcname:[param param param]", "enable:z or x", "disable:z or x"]
+#Just here so Devs can know the options they have, you can use either : or =
+const choice_properties = ["delay:time", "speed:time", "font:name", "size:num","sound:name", "bb:bbcode", "func_funcname:[array of params]", "enable:z or x", "disable:z or x"]
 const callable_properties = ["pause", "clear", "pc", "func_funcname"]
 
 var fonts = {
@@ -49,45 +49,58 @@ func parse():
 	var removed_chars = 0
 	var added_bb_code = 0
 	order.clear()
-	var property_regex = RegEx.create_from_string("\\(([^\\)]*)\\)")
+	var property_regex = RegEx.create_from_string("\\(([^\\)]*)(?:(?:\\:|=)([^\\)]*))?\\)")
 	if(property_regex.search_all(text).size() >= 1):
 		for i in property_regex.search_all(text):
-			var temp = i.get_string(1).split(":")
+			var temp = i.get_string(1)
+			if(i.get_string(1).find(":") != -1):
+				temp = i.get_string(1).split(":")
+			elif(i.get_string(1).find("=") != -1):
+				temp = i.get_string(1).split("=")
+				
 			while(temp.size() < 2):
 				temp.append("")
-				
 			var property = temp[0]
 			var value = temp[1]
-			if property in ["delay", "speed"]: value = float(value)
-			elif property in ["face"]: value = value.split("/"); value[1] = int(value[1])
-			elif property in ["enable", "disable","sound"]: value = String(value)
-			elif property in ["func"]: value = StringName(value)
-			elif property in ["font","size"]:
+			if(property in ["delay", "speed"]): value = float(value)
+			elif(property in ["face"]): value = value.split("/"); value[1] = int(value[1])
+			elif(property in ["enable", "disable","sound"]): value = String(value)
+			elif(property in ["func"]): value = StringName(value)
+			elif(property in ["font","size","color"]):
 				var start_index = i.get_start() - 1 - removed_chars + added_bb_code
 				var bb_code_add = ""
-				
 				var temp_string = text.substr(start_index + 3 + len(i.get_string(1)),len(text))
 				match(property):
 					"font":
 						bb_code_add = "[font=" + str(fonts[String(value)]) + "]"
 					"size":
 						bb_code_add = "[font_size=" + str(value) + "]"
+					"color":
+						bb_code_add = "[color=" + str(value) + "]"
 				removed_chars += len(i.get_string(0))
 				added_bb_code += len(bb_code_add)
 				text = text.substr(0,start_index + 1) + bb_code_add + temp_string
 				start_index = clampi(start_index, 0, 9999999)
 				continue
-			
+			elif(property in ["bb"]):
+				var start_index = i.get_start() - 1 - removed_chars + added_bb_code
+				var bb_code_add = ""
+				var temp_string = text.substr(start_index + 3 + len(i.get_string(1)),len(text))
+				bb_code_add = value
+				removed_chars += len(i.get_string(0))
+				added_bb_code += len(bb_code_add)
+				text = text.substr(0,start_index + 1) + bb_code_add + temp_string
+				start_index = clampi(start_index, 0, 9999999)
+				continue
+				
+				
 			var start_index = i.get_start() - 1 - removed_chars + added_bb_code
 			removed_chars += len(i.get_string(0))
-			
 			text = text.substr(0,start_index + 1) + text.substr(start_index + 3 + len(i.get_string(1)),len(text))
-			
 			start_index = clampi(start_index, 0, 9999999)
 			if(!order.has(str(start_index - added_bb_code))):
 				order[str(start_index - added_bb_code)] = []
 			order[str(start_index - added_bb_code)].append([property, value])
-			
 			if(property in ["clear", "pc"]):
 				break
 
@@ -97,7 +110,7 @@ func write():
 		done.emit()
 		return
 	await writer_event(clampi(visible_characters - 1, 0, 9999999))
-	if(visible_characters < len(text)):
+	if(visible_characters < len(get_parsed_text())):
 		visible_characters += 1
 		sound_index = wrapi(sound_index,0,sounds[current_sound].size())
 		audio.play(sounds[current_sound][sound_index])

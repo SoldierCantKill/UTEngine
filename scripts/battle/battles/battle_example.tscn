@@ -133,7 +133,6 @@ script = SubResource("GDScript_t7y3h")
 [node name="hud_manager" parent="." instance=ExtResource("5_dhngk")]
 
 [node name="battle_box" parent="." instance=ExtResource("6_3ovv7")]
-anchors_preset = -1
 
 [node name="battle_writer" type="RichTextLabel" parent="."]
 clip_contents = false
