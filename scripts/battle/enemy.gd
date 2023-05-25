@@ -3,6 +3,7 @@ class_name Enemy
 
 enum e_dodge {
 	none,
+	dodge,
 }
 
 
@@ -35,38 +36,78 @@ func _init(enemy_name : String, hp : int, df : float):
 
 func attack(damage : float):
 	if(damage > 0):
-		await vars.hud_manager.eye.knife.animation_finished
-		audio.play("battle/hit")
-		var bar_max : ColorRect = ColorRect.new()
-		var bar : ColorRect = ColorRect.new()
-		var texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
-		bar_max.color = Color(.5,.5,.5,1)
-		bar_max.size = Vector2(texture.get_size().x * scale.x, 15)
-		bar.color = Color(.1,1,.1,1)
-		bar.size = Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15)
-		bar_max.z_index = 5
-		bar.z_index = 5
-		bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
-		bar_max.add_child(bar)
-		vars.scene.add_child(bar_max)
-		bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
-		current_hp = clampf(current_hp - damage,0,max_hp)
-		get_tree().create_tween().tween_property(bar, "size", Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15), .25)
-		bar_max.visible = show_health_bar
-		var damage_text : RichTextLabel = create_text("[center]"+ str(int(damage)))
-		damage_text.self_modulate = Color(1, 0, 0, 1)
-		damage_text.global_position = bar_max.global_position - Vector2(0,60)
-		var pos : Vector2 = position
-		var shake_intensity = 15
-		for i in range(shake_intensity):
-			position.x = pos.x + shake_intensity
-			shake_intensity = shake_intensity * -0.8
-			await get_tree().create_timer(.05).timeout
-		position = pos
-		bar_max.queue_free()
-		bar.queue_free()
-		damage_text.queue_free()
-		post_attack()
+		match(dodge):
+			e_dodge.none:
+				await vars.hud_manager.eye.knife.animation_finished
+				audio.play("battle/hit")
+				var bar_max : ColorRect = ColorRect.new()
+				var bar : ColorRect = ColorRect.new()
+				var texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
+				bar_max.color = Color(.5,.5,.5,1)
+				bar_max.size = Vector2(texture.get_size().x * scale.x, 15)
+				bar.color = Color(.1,1,.1,1)
+				bar.size = Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15)
+				bar_max.z_index = 5
+				bar.z_index = 5
+				bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
+				bar_max.add_child(bar)
+				vars.scene.add_child(bar_max)
+				bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
+				current_hp = clampf(current_hp - damage,0,max_hp)
+				get_tree().create_tween().tween_property(bar, "size", Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15), .25)
+				bar_max.visible = show_health_bar
+				var damage_text : RichTextLabel = create_text("[center]"+ str(int(damage)))
+				damage_text.self_modulate = Color(1, 0, 0, 1)
+				damage_text.global_position = bar_max.global_position - Vector2(0,60)
+				var damage_move = get_tree().create_tween()
+				damage_move.tween_property(damage_text, "global_position", damage_text.global_position - Vector2(0,30),.45).set_trans(Tween.TRANS_LINEAR)
+				damage_move.tween_property(damage_text, "global_position", damage_text.global_position,.45).set_trans(Tween.TRANS_LINEAR)
+				var pos : Vector2 = position
+				var shake_intensity = 15
+				for i in range(shake_intensity):
+					position.x = pos.x + shake_intensity
+					shake_intensity = shake_intensity * -0.8
+					await get_tree().create_timer(.05).timeout
+				position = pos
+				bar_max.queue_free()
+				bar.queue_free()
+				damage_text.queue_free()
+				post_attack()
+			e_dodge.dodge:
+				var bar_max : ColorRect = ColorRect.new()
+				var bar : ColorRect = ColorRect.new()
+				var texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
+				bar_max.color = Color(.5,.5,.5,1)
+				bar_max.size = Vector2(texture.get_size().x * scale.x, 15)
+				bar.color = Color(.1,1,.1,1)
+				bar.size = Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15)
+				bar_max.z_index = 5
+				bar.z_index = 5
+				bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
+				bar_max.add_child(bar)
+				vars.scene.add_child(bar_max)
+				bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
+				var damage_text : RichTextLabel = create_text("[center]MISS")
+				damage_text.self_modulate = Color(.7, .7, .7, 1)
+				damage_text.global_position = bar_max.global_position - Vector2(0,60)
+				bar_max.visible = false
+				damage_text.visible = false
+				var tween = get_tree().create_tween()
+				tween.tween_property(self,"global_position",global_position - Vector2(100,0), .3).set_trans(Tween.TRANS_LINEAR)
+				await vars.hud_manager.eye.knife.animation_finished
+				bar_max.visible = show_health_bar
+				damage_text.visible = true
+				var damage_move = get_tree().create_tween()
+				damage_move.tween_property(damage_text, "global_position", damage_text.global_position - Vector2(0,30),.45).set_trans(Tween.TRANS_LINEAR)
+				damage_move.tween_property(damage_text, "global_position", damage_text.global_position,.45).set_trans(Tween.TRANS_LINEAR)
+				await get_tree().create_timer(.9).timeout
+				tween = get_tree().create_tween()
+				tween.tween_property(self,"global_position",global_position + Vector2(100,0), .3).set_trans(Tween.TRANS_LINEAR)
+				await tween.finished
+				bar_max.queue_free()
+				bar.queue_free()
+				damage_text.queue_free()
+				post_attack()
 	else:
 		var bar_max : ColorRect = ColorRect.new()
 		var bar : ColorRect = ColorRect.new()

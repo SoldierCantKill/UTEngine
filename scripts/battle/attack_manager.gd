@@ -1,6 +1,9 @@
 extends Node
 class_name AttackManager
 
+var turn_num = 0
+var attacks = [load("res://scripts/attacks/attack_example.gd")]
+
 var current_attack : Attack = null
 signal attack_done
 @onready var masks = get_node("buffer/masks")
@@ -14,6 +17,9 @@ func pre_attack():
 	add_child(current_attack)
 	current_attack.pre_attack()
 	current_attack.attack_finished.connect(func(): attack_done.emit())
+
+func heal_attack():
+	pass
 
 func bullet(bullet_path : Variant, position : Vector2, masked = true) -> Bullet:
 	var bullet = bullet_path.instantiate()

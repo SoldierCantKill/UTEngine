@@ -101,19 +101,20 @@ func parse():
 			removed_chars += len(i.get_string(0))
 			text = text.substr(0,start_index + 1) + text.substr(start_index + 3 + len(i.get_string(1)),len(text))
 			start_index = clampi(start_index, 0, 9999999)
-			if(!order.has(str(start_index - added_bb_code))):
-				order[str(start_index - added_bb_code)] = []
-			order[str(start_index - added_bb_code)].append([property, value])
+			if(!order.has(str(max(start_index - added_bb_code,0)))):
+				order[str(max(start_index - added_bb_code,0))] = []
+			order[str(max(start_index - added_bb_code,0))].append([property, value])
 			if(property in ["clear", "pc"]):
 				break
 	order_changed = false
+	print(order)
 
 func write():
 	can_write = false
 	if(text.is_empty() && order.is_empty()):
 		done.emit()
 		return
-	await writer_event(clampi(visible_characters - 1, 0, 9999999))
+	await writer_event(max(visible_characters - 1,0))
 	if(visible_characters < len(get_parsed_text())):
 		sound_index = wrapi(sound_index,0,sounds[current_sound].size())
 		if(get_parsed_text()[visible_characters] not in silent_chars):
@@ -141,6 +142,7 @@ func writer_event(index):
 				paused = true
 				await unpaused
 			elif(i[0] == "sound"):
+				print("Changed sound")
 				current_sound = i[1].to_lower()
 			elif(i[0] == "clear"):
 				writer_text = text.substr(text.find("clear"))
@@ -177,7 +179,7 @@ func _process(delta):
 						if(j[0] in ["pause", "pc"]):
 							found = true
 							visible_characters = int(i) + 1
-							writer_event(visible_characters - 1)
+							writer_event(max(visible_characters - 1,0))
 							break
 				if(!found):
 					visible_characters = len(text)
