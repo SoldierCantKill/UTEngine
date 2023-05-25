@@ -15,6 +15,7 @@ func start_attack():
 	vars.player_heart.input_enabled = true
 	attack_started = true
 	var bullet = vars.attack_manager.bullet(load("res://objects/battle/bullets/test_bullet.tscn"), Vector2(321, 374))
+	var bullet_kr = vars.attack_manager.bullet(load("res://objects/battle/bullets/test_bullet_kr.tscn"), Vector2(270, 374))
 	bullet.event_hit.connect(end_attack)
 
 func end_attack():

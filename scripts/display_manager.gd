@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var game : SubViewport = $game/sub_viewport
-var starting_scene = ("res://scenes/battles/battle_example.tscn")
+var starting_scene = load("res://scenes/battles/battle_example.tscn")
 var camera_intensity : float = 0
 var camera_shake_t : float = 0
 signal fade_done
@@ -10,13 +10,14 @@ func _ready() -> void:
 	vars.display = self
 	change_scene(starting_scene, false)
 
-func change_scene(path : String, black_screen = true) -> void:
+func change_scene(path : Variant, fadeout = true) -> void:
 	for i in game.get_children():
 		i.queue_free()
-	var scene = load(path).instantiate()
+	var scene = path.instantiate()
 	game.add_child(scene)
 	vars.scene = scene
-	fade_out(.3)
+	if(fadeout):
+		fade_out(.3)
 
 func fade_out(time : float):
 	$fade_overlay.color = Color(0,0,0,1)

@@ -1,14 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7ngbkga3p0wo"]
+[gd_scene load_steps=3 format=3 uid="uid://c5au0nxujpkff"]
 
 [sub_resource type="GDScript" id="GDScript_hnosq"]
 script/source = "extends Bullet
 
+func _init():
+	curse = e_curse.karma
+	modulate = Color.PURPLE
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvs25"]
 size = Vector2(40, 40)
 
-[node name="test_bullet" type="Node2D"]
+[node name="test_bullet_kr" type="Node2D"]
 script = SubResource("GDScript_hnosq")
 
 [node name="ColorRect" type="ColorRect" parent="."]

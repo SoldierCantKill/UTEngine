@@ -14,16 +14,15 @@ var heart_mode : heart_mode_type = heart_mode_type.red
 @onready var animation_player = $animation_player
 @onready var hitbox = $hitbox
 
-
 var speed : float = 2
 
 var i_frames : int = 60 #Invincibility frames
-var i_timer : float = 60
+var i_timer : float = 0
 
 var karma_i_frames : float = 2
-var karma_i_timer : float = karma_i_frames
+var karma_i_timer : float = 0
 
-var karma_tick_timer : float = 0
+var karma_tick_timer : float = 0 #Ticks karma away depending on how much karma you have.
 
 var move_input : Vector2 = Vector2.ZERO
 var jump_direction : Vector2 = Vector2.ZERO
@@ -38,22 +37,61 @@ var angle : int = 0
 
 var auto_color : bool = true
 
-
-func hurt(damage):
+func hurt(damage : float):
 	animation_player.play("hurt")
 	audio.play("battle/hurt")
 	settings.player_save.player.current_hp = max(settings.player_save.player.current_hp - damage, 0)
 	i_timer = i_frames
 	vars.display.screen_shake(3)
-	
-func _process(delta):
+
+func hurt_kr(damage):
+	audio.play("battle/hurt")
+	karma_i_timer = karma_i_frames
+	if settings.player_save.player.current_hp > 1:
+		if settings.player_save.player.current_kr <= 40:
+			settings.player_save.player.current_kr = clampi(settings.player_save.player.current_kr + damage, 0, 9999)
+			settings.player_save.player.current_hp = clampi(settings.player_save.player.current_hp - (damage + 1), 1, 9999)
+		else:
+			settings.player_save.player.current_hp = clampi(settings.player_save.player.current_hp - 1, 0, 9999)
+	else:
+		if settings.player_save.player.current_kr > 0:
+			settings.player_save.player.current_kr = clampi(settings.player_save.player.current_kr - 1, 0, 9999)
+		else:
+			settings.player_save.player.current_hp = 0
+
+func _process(delta : float):
+	check_hit()
+	check_death()
+	tick(delta)
+
+func tick(delta):
 	i_timer -= delta * 60
 	if(i_timer <= 0):
 		animation_player.stop()
 		modulate.a = 1
-	check_hit()
-	check_death()
-	
+	karma_i_timer -= delta * 60
+	karma_tick_timer += delta * 60
+	if karma_tick_timer > 1:
+		if settings.player_save.player.current_kr == 40:
+			settings.player_save.player.current_kr -= 1
+			karma_tick_timer = 0
+	if karma_tick_timer > 2:
+		if settings.player_save.player.current_kr >= 30 && settings.player_save.player.current_kr <= 39:
+			settings.player_save.player.current_kr -= 1
+			karma_tick_timer = 0
+	if karma_tick_timer > 5:
+		if settings.player_save.player.current_kr >= 20 && settings.player_save.player.current_kr <= 29:
+			settings.player_save.player.current_kr -= 1
+			karma_tick_timer = 0
+	if karma_tick_timer > 15:
+		if settings.player_save.player.current_kr >= 10 && settings.player_save.player.current_kr <= 19:
+			settings.player_save.player.current_kr -= 1
+			karma_tick_timer = 0
+	if karma_tick_timer > 30:	
+		if settings.player_save.player.current_kr>= 1 && settings.player_save.player.current_kr <= 9:
+			settings.player_save.player.current_kr -= 1
+			karma_tick_timer = 0
+
 func check_hit():
 	for i in $hitbox.get_overlapping_areas():
 		if(i.owner is Bullet):

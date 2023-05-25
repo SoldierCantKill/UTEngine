@@ -24,3 +24,7 @@ func load_game():
 
 func save_game():
 	ResourceSaver.save(player_save, "user://saved.tres")
+
+func _process(delta):
+	if(Input.is_action_just_pressed("restart")):
+		vars.display.change_scene(vars.display.starting_scene)

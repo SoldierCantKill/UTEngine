@@ -30,17 +30,20 @@ func _process(delta):
 		if(bar.position.x > 280):
 			attack(0)
 		elif(Input.is_action_just_pressed(\"confirm\")):
-			attack(100)
+			var rng = RandomNumberGenerator.new()
+			var amount = roundi((settings.player_save.get_weapon().attack * + settings.player_save.player.atk - enemy.def + rng.randf_range(0,1)) * (2.2 if bar.position.distance_to(eye.position) <= 5 else 2 - (bar.position.distance_to(eye.position) / 546 * 2)))
+			attack(amount)
 
 func attack(amount : float):
 	bar_moving = false
 	enemy.attack(amount)
-	bar.play()
-	knife.global_position = enemy.global_position
-	knife.visible = true
-	knife.play()
-	audio.play(\"weapons/strike\")
-	knife.animation_finished.connect(func(): knife.visible = false)
+	if(amount > 0):
+		bar.play()
+		knife.global_position = enemy.global_position
+		knife.visible = true
+		knife.play()
+		audio.play(\"weapons/strike\")
+		knife.animation_finished.connect(func(): knife.visible = false)
 	eye_hit.emit()
 	await enemy.done_being_attacked
 	bar.visible = false
@@ -99,7 +102,7 @@ script = SubResource("GDScript_0627q")
 texture = ExtResource("1_n5wai")
 
 [node name="bar" type="AnimatedSprite2D" parent="."]
-position = Vector2(-280, 0)
+position = Vector2(-310, 0)
 sprite_frames = SubResource("SpriteFrames_3w4x8")
 
 [node name="knife" type="AnimatedSprite2D" parent="."]

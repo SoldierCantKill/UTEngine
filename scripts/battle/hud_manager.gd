@@ -20,6 +20,7 @@ var eye = null #Attack eye
 	health_text = $display/health,
 	max_health_bar = $display/hp_bar_max,
 	current_health_bar = $display/hp_bar_max/hp_bar_current,
+	karma_health_bar = $display/hp_bar_max/hp_bar_karma,
 	outline_health_bar = $display/hp_bar_outline,
 	buttons = $buttons.get_children(),
 	item_texts = [],
@@ -59,30 +60,30 @@ func setup_hud():
 	
 	if(settings.player_save.player.max_hp < 92): #Display hud is formatted a little different when in sans battle.
 		display.name_text.position = Vector2(30,400)
-		display.lv_text.position = display.name_text.position + Vector2(display.name_text.get_parsed_text().length() * 22.5,0)
+		display.lv_text.position = display.name_text.position + Vector2(len(display.name_text.get_parsed_text()) * 22.5,0)
 		display.hp.position = display.lv_text.position + Vector2(124,5)
 		display.max_health_bar.position = display.hp.position + Vector2(31, -5)
 		#display.current_health_bar.position = display.hp.position + Vector2(31, -5)
 		if(show_kr_text):
-			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x + 9,5)
+			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x - 26,5) + Vector2(len(display.kr.get_parsed_text()) * 17.5,0)
 			display.kr.visible = true
 		else:
 			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x - 26,5)
 			display.kr.visible = false
-		display.health_text.position = display.kr.position + Vector2(40, -5)
+		display.health_text.position = display.kr.position + Vector2(len(display.kr.get_parsed_text()) * 20, -5)
 	else:
 		display.name_text.position = Vector2(30,400)
-		display.lv_text.position = display.name_text.position + Vector2(display.name_text.get_parsed_text().length() * 21.75,0)
+		display.lv_text.position = display.name_text.position + Vector2(len(display.name_text.get_parsed_text()) * 21.75,0)
 		display.hp.position = display.lv_text.position + Vector2(107,5)
 		display.max_health_bar.position = display.hp.position + Vector2(31, -5)
 		#display.current_health_bar.position = display.hp.position + Vector2(31, -5)
 		if(show_kr_text):
-			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x + 9,5)
+			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x - 26,5) + Vector2(len(display.kr.get_parsed_text()) * 17.5,0)
 			display.kr.visible = true
 		else:
 			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x - 26,5)
 			display.kr.visible = false
-		display.health_text.position = display.kr.position + Vector2(40, -5)
+		display.health_text.position = display.kr.position + Vector2(len(display.kr.get_parsed_text()) * 20, -5)
 
 func _process(delta):
 	inputs()
@@ -93,9 +94,11 @@ func _process(delta):
 func display_update():
 	display.name_text.text = settings.player_save.player.name
 	display.lv_text.text = "LV " + str(settings.player_save.player.lv)
-	display.health_text.text = str(settings.player_save.player.current_hp) + " / " + str(settings.player_save.player.max_hp)
+	display.health_text.text = str(settings.player_save.player.current_hp + settings.player_save.player.current_kr) + " / " + str(settings.player_save.player.max_hp)
+	display.health_text.self_modulate = Color(1,.14,1,1) if(settings.player_save.player.current_kr > 0) else Color.WHITE
 	display.max_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
 	display.current_health_bar.size = Vector2(settings.player_save.player.current_hp * 1.2,21)
+	display.karma_health_bar.size = Vector2((settings.player_save.player.current_hp + settings.player_save.player.current_kr) * 1.2,21)
 	display.outline_health_bar.position = display.max_health_bar.position - Vector2(2,2)
 	display.outline_health_bar.size = display.max_health_bar.size + Vector2(4,4)
 
@@ -129,6 +132,9 @@ func hud_mode_update():
 						display.page_text.text = "PAGE " + str(item_page)
 					else:
 						display.page_text.visible = false
+				3:
+					display.item_texts[0].text = "* Spare"
+					display.item_texts[2].text = "* Flee"
 
 func heart_update() -> void:
 	match(mode):
@@ -137,10 +143,7 @@ func heart_update() -> void:
 		1:
 			vars.player_heart.global_position = display.item_texts[enemy_index * 2].global_position + Vector2(-28, 17)
 		2:
-			if(button_index != 3):
-				vars.player_heart.global_position = display.item_texts[item_index].global_position + Vector2(-28, 17)
-			else:
-				vars.player_heart.global_position = display.item_texts[item_index * 2].global_position + Vector2(-28, 17)
+			vars.player_heart.global_position = display.item_texts[item_index].global_position + Vector2(-28, 17)
 
 func inputs():
 	match(mode):
@@ -157,10 +160,12 @@ func inputs():
 				audio.play("menu/menu_select")
 				if(button_index != 2):
 					vars.main_writer.writer_text = ""
+					enemy_index = 0
 					mode = 1 if(button_index == 0 || button_index == 1) else 2
 				else:
 					if(settings.player_save.inventory[0] != ""):
 						vars.main_writer.writer_text = ""
+						enemy_index = 0
 						mode = 1 if(button_index == 0 || button_index == 1) else 2
 				item_index = 0
 				item_page = 1
@@ -177,12 +182,7 @@ func inputs():
 				audio.play("menu/menu_move")
 				enemy_index = wrapi(enemy_index - 2,0,enemy_array.size())
 			if(Input.is_action_just_pressed("confirm")):
-				audio.play("menu/menu_select")
-				mode = -1
-				vars.player_heart.visible = false
-				eye = ut_items.weapons[settings.player_save.player.weapon].attack_eye.instantiate()
-				eye.enemy = vars.enemies.get_child(enemy_index)
-				add_child(eye)
+				fight()
 			if(Input.is_action_just_pressed("exit")):
 				reset()
 		1:
@@ -234,7 +234,7 @@ func inputs():
 							item_index = -1 - (item_index + 1) % 2
 						item_index += 2
 					if(Input.is_action_just_pressed("confirm")):
-						vars.enemies.get_child(enemy_index).act_options.values()[item_index].call()
+						check()
 					if(Input.is_action_just_pressed("exit")):
 						mode = 1
 		2:
@@ -284,11 +284,21 @@ func inputs():
 				item_index += 2
 					
 			if(Input.is_action_just_pressed("confirm")):
-				audio.play("menu/menu_select")
-				eat()
+				use()
 			if(Input.is_action_just_pressed("exit")):
 				reset()
 		3:
+			if(Input.is_action_just_pressed("up")):
+				audio.play("menu/menu_move")
+				item_index = wrapi(item_index + 2,0,4)
+			
+			if(Input.is_action_just_pressed("down")):
+				audio.play("menu/menu_move")
+				item_index = wrapi(item_index - 2,0,4)
+				
+			if(Input.is_action_just_pressed("confirm")):
+				mercy()
+				
 			if(Input.is_action_just_pressed("exit")):
 				reset()
 
@@ -318,9 +328,24 @@ func disable():
 # ACTIONS WHEN PRESSING CONFIRM
 # ... So you can override them.
 
-func eat():
+func fight():
+	audio.play("menu/menu_select")
+	disable()
+	eye = ut_items.weapons[settings.player_save.player.weapon].attack_eye.instantiate()
+	eye.enemy = vars.enemies.get_child(enemy_index)
+	add_child(eye)
+
+func check():
+	audio.play("menu/menu_select")
+	vars.enemies.get_child(enemy_index).act_options.values()[item_index].call()
+
+func use():
+	audio.play("menu/menu_select")
 	disable()
 	var item = ut_items.items[settings.player_save.inventory[item_index + (item_page - 1) * 4]]
 	item.use(item_index + (item_page - 1) * 4)
 	await item.done
 	reset()
+
+func mercy():
+	audio.play("menu/menu_select")

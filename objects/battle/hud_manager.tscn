@@ -165,6 +165,11 @@ offset_right = 366.0
 offset_bottom = 421.0
 color = Color(0.752941, 0, 0, 1)
 
+[node name="hp_bar_karma" type="ColorRect" parent="display/hp_bar_max"]
+layout_mode = 0
+offset_bottom = 21.0
+color = Color(1, 0.141176, 1, 1)
+
 [node name="hp_bar_current" type="ColorRect" parent="display/hp_bar_max"]
 layout_mode = 0
 offset_right = 111.0
