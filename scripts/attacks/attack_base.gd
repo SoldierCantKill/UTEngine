@@ -7,7 +7,7 @@ var frames := 120.0
 signal attack_finished
 
 func pre_attack():
-	vars.player_heart.heart_mode = PlayerHeart.e_heart_mode.blue
+	vars.player_heart.heart_mode = PlayerHeart.e_heart_mode.red
 	vars.battle_box.set_box_size([244,254,399,394],500)
 	vars.player_heart.visible = true
 	vars.player_heart.global_position = Vector2(321, 324)
