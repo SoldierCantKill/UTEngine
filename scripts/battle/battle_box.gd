@@ -1,3 +1,5 @@
+#WARNING!!!!!!!!!! Change the battlebox color with the shader material. NOT THE MODULATE!!!
+
 extends NinePatchRect
 class_name BattleBox
 
@@ -6,7 +8,6 @@ class_name BattleBox
 var margin : Array 
 var resize_spd : float = 600
 var emit_resize = false
-
 signal resize_finished
 @onready var collisions : Array = [$collisions/left, $collisions/up, $collisions/right, $collisions/down]
 

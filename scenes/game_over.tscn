@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv7lano8il5ix"]
+
+[ext_resource type="Script" path="res://scripts/battle/game_over.gd" id="1_7a2xn"]
+[ext_resource type="Texture2D" uid="uid://b5j3kxbhl6cb" path="res://assets/sprites/battle/heart/heart_0.png" id="2_nwdmv"]
+[ext_resource type="Texture2D" uid="uid://ctn35e0d21yea" path="res://assets/sprites/battle/heart/heart_break.png" id="3_wyr42"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qonci"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nwdmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wyr42")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="game_over" type="Node2D"]
+script = ExtResource("1_7a2xn")
+
+[node name="heart" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+sprite_frames = SubResource("SpriteFrames_qonci")

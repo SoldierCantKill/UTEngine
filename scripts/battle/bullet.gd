@@ -2,34 +2,46 @@ extends Node2D
 class_name Bullet
 
 signal event_hit
-
 enum e_type {
 	none,
 	blue,
 	orange,
 	}
-
 enum e_curse {
 	none,
 	karma,
 	}
-
 @onready var area2d : Area2D = $Area2D
 var damage : float = 5
 var karma : float = 1
-var type : e_type = 0
+var type : e_type = 0 :
+	set(value):
+		type = value
+		change_color()
 var curse : e_curse = 0
 var was_colliding
-
 var x : float = 0
 var y : float = 0
 var speed : float = 0
 var rotation_speed : float = 0
+var masked : bool = true : 
+	set(value):
+		masked = value
+		show_behind_parent = value
 
 func _ready():
 	vars.attack_manager.attack_done.connect(func(): queue_free())
 	area2d.area_exited.connect(func(): if(vars.player_heart not in area2d.get_overlapping_bodies()): was_colliding = false)
-	var was_colliding
+
+func change_color():
+	audio.play("battle/bell")
+	match(type):
+		0:
+			modulate = Color.WHITE
+		1:
+			modulate = Color(.26,.89,1,modulate.a)
+		2:
+			modulate = Color(1,.63,.25,modulate.a)
 
 func hit():
 	match(curse):

@@ -15,13 +15,10 @@ var writer_text = "" :
 
 var caller = functions #Incase you want to call any functions from the writer.
 var optional_references = [] #Incase you need to reference objects in the writer.
-
 var writing = false
-
 var timeout := 0.0
 var can_write := false
-
-var current_sound := "mono1"
+var current_sound := "none"
 var order_changed := false
 var sound_index := 0
 var speed = 0.03333333
@@ -32,7 +29,7 @@ var z_enabled = true
 var x_enabled = true
 
 #Just here so Devs can know the options they have, you can use either : or =
-const choice_properties = ["delay:time", "speed:time", "font:name", "size:num","sound:name", "bb:bbcode", "func_funcname:[array of params]", "enable:z or x", "disable:z or x"]
+const choice_properties = ["delay:time", "speed:time", "font:name", "audio:audio_to_play","music:music_to_play", "size:num","sound:name", "bb:bbcode", "func_funcname:[array of params]", "enable:z or x", "disable:z or x"]
 const callable_properties = ["pause", "clear", "pc", "func_funcname"]
 const silent_chars  = [' ']
 
@@ -45,6 +42,7 @@ var sounds = {
 	"mono2" : ["characters/SND_TXT2"],
 	"papyrus" : ["characters/papyrus"],
 	"sans" : ["characters/sans"],
+	"none" : [],
 	}
 #--------- PROPERTIES ----------
 func parse():
@@ -67,7 +65,7 @@ func parse():
 			var value = temp[1]
 			if(property in ["delay", "speed"]): value = float(value)
 			elif(property in ["face"]): value = value.split("/"); value[1] = int(value[1])
-			elif(property in ["enable", "disable","sound"]): value = String(value)
+			elif(property in ["enable", "disable","sound","audio","music"]): value = String(value)
 			elif(property in ["func"]): value = StringName(value)
 			elif(property in ["font","size","color"]):
 				var start_index = i.get_start() - 1 - removed_chars + added_bb_code
@@ -107,7 +105,6 @@ func parse():
 			if(property in ["clear", "pc"]):
 				break
 	order_changed = false
-	print(order)
 
 func write():
 	can_write = false
@@ -118,7 +115,8 @@ func write():
 	if(visible_characters < len(get_parsed_text())):
 		sound_index = wrapi(sound_index,0,sounds[current_sound].size())
 		if(get_parsed_text()[visible_characters] not in silent_chars):
-			audio.play(sounds[current_sound][sound_index])
+			if(current_sound != "none"):
+				audio.play(sounds[current_sound][sound_index])
 		sound_index = wrapi(sound_index+1,0,sounds[current_sound].size())
 		visible_characters += 1
 	can_write = true
@@ -142,7 +140,6 @@ func writer_event(index):
 				paused = true
 				await unpaused
 			elif(i[0] == "sound"):
-				print("Changed sound")
 				current_sound = i[1].to_lower()
 			elif(i[0] == "clear"):
 				writer_text = text.substr(text.find("clear"))
@@ -152,6 +149,10 @@ func writer_event(index):
 				await unpaused
 				writer_text = text.substr(text.find("pc"))
 				visible_characters = 0
+			elif(i[0] == "audio"):
+				audio.play(i[1])
+			elif(i[0] == "music"):
+				audio.play_music(i[1])
 			elif(i[0] == "enable"):
 				set(i[1].to_lower() + "_enabled", true)
 			elif(i[0] == "disable"):
@@ -188,6 +189,10 @@ func _process(delta):
 	if(timeout >= speed && !paused && can_write):
 		write()
 		timeout = 0
+
+func clear_text():
+	writer_text = ""
+	visible_characters = 0
 
 func _ready():
 	done.connect(func(): writing = false)

@@ -108,6 +108,9 @@ func hud_mode_update():
 	display.page_text.text = ""
 	display.page_text.visible = false
 	match(mode):
+		-1:
+			for i in display.buttons:
+				i.frame = 0
 		0:
 			for i in range(display.buttons.size()):
 				if i != button_index:

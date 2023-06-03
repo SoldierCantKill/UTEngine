@@ -1,6 +1,7 @@
 extends Node
 
 var player_save : PlayerSave = null
+var death_position : Vector2 = Vector2.ZERO
 
 func _ready():
 	start()

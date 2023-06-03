@@ -1,0 +1,102 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqw7k6lubirle"]
+
+[ext_resource type="Texture2D" uid="uid://crpb05ousrgxu" path="res://assets/sprites/battle/square.png" id="1_d5ybn"]
+[ext_resource type="Texture2D" uid="uid://dnc08xx2i78ug" path="res://assets/sprites/battle/bullet/bone_sans.png" id="2_1m1xy"]
+
+[sub_resource type="GDScript" id="GDScript_ycixx"]
+script/source = "extends Bullet
+
+@onready var pivot_offset = $pivot_offset
+@onready var bones = $pivot_offset/bones
+@onready var warning = $pivot_offset/warning
+
+var bone_height : float = 50
+var length : float = 72
+var wait_time : float = 30
+var up_time : float = 60
+var state := 0
+var t : float = 0
+var bone_rotation : float:
+	set(value):
+		bone_rotation = value
+		pivot_offset.rotation_degrees = value
+
+func _init():
+	curse = e_curse.karma
+	damage = 5
+	karma = 1
+
+func _ready():
+	area2d = $pivot_offset/area
+	audio.play(\"battle/warning\")
+	warning.size.x = ceil(length) - ceil(fmod(length,12))
+	warning.offset_top = -bone_height
+	bones.size.x = ceil(length) - ceil(fmod(length,12))
+	for i in range(ceil(length / 12) - ceil(fmod(length,12))):
+		var collision = CollisionShape2D.new()
+		area2d.add_child(collision)
+		collision.shape = RectangleShape2D.new()
+		collision.position.y = bones.size.y / 2
+		collision.shape.size = Vector2(6,bones.size.y)
+		collision.position.x = 6 + i * 12
+		print(collision.position.x)
+
+func _process(delta: float) -> void:
+	pivot_offset.pivot_offset = warning.size / 2
+	for i in area2d.get_children():
+		i.position.y = (bones.offset_bottom + bones.offset_top) / 2
+		i.shape.size.y = bones.size.y
+		
+	if(state == 0):
+		t += 60 * delta
+		if(t >= wait_time):
+			t = 0
+			state = 1
+			warning.visible = false
+			var tween = get_tree().create_tween()
+			audio.play(\"battle/bonestab\")
+			var distance = bones.global_position.distance_to(bones.global_position - Vector2(0,bone_height)) / 150
+			tween.tween_property(bones,\"position:y\",-bone_height,distance).set_trans(Tween.TRANS_SINE)
+			tween.finished.connect(func(): state = 2)
+	elif(state == 2):
+		t += 60 * delta
+		if(t >= up_time):
+			state = 3
+			var tween = get_tree().create_tween()
+			var distance = bones.global_position.distance_to(bones.global_position + Vector2(0,bone_height)) / 150
+			tween.tween_property(bones,\"position:y\",2,distance).set_trans(Tween.TRANS_SINE)
+			tween.finished.connect(func(): queue_free())
+"
+
+[node name="bone_stab" type="Node2D"]
+script = SubResource("GDScript_ycixx")
+
+[node name="pivot_offset" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(0, 20)
+
+[node name="bones" type="NinePatchRect" parent="pivot_offset"]
+layout_mode = 1
+anchors_preset = -1
+offset_top = 2.0
+offset_right = 2.0
+offset_bottom = 55.0
+texture = ExtResource("2_1m1xy")
+patch_margin_top = 6
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+
+[node name="warning" type="NinePatchRect" parent="pivot_offset"]
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("1_d5ybn")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="area" type="Area2D" parent="pivot_offset"]
