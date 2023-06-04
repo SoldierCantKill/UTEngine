@@ -11,7 +11,10 @@ enum e_curse {
 	none,
 	karma,
 	}
-@onready var area2d : Area2D = $Area2D
+@onready var area2d : Area2D :
+	set(value):
+		area2d = value
+		area2d.area_exited.connect(func(): if(vars.player_heart not in area2d.get_overlapping_bodies()): was_colliding = false)
 var damage : float = 5
 var karma : float = 1
 var type : e_type = 0 :
@@ -31,7 +34,7 @@ var masked : bool = true :
 
 func _ready():
 	vars.attack_manager.attack_done.connect(func(): queue_free())
-	area2d.area_exited.connect(func(): if(vars.player_heart not in area2d.get_overlapping_bodies()): was_colliding = false)
+	vars.attack_manager.delete_bullets.connect(func(): queue_free())
 
 func change_color():
 	audio.play("battle/bell")

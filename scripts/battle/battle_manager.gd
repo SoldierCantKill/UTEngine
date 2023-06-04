@@ -11,4 +11,4 @@ func _ready():
 	vars.main_writer = $battle_writer
 	vars.player_heart = $player_heart
 	vars.scene_cam = $camera
-	vars.hud_manager.reset()
+	vars.black_screen = $black_screen

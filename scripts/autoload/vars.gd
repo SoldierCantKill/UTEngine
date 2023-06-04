@@ -13,3 +13,4 @@ var battle_box : BattleBox = null
 var main_writer : Writer = null
 var attack_manager : AttackManager = null
 var enemies : Node2D = null
+var black_screen : ColorRect = null

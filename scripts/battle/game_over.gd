@@ -13,11 +13,11 @@ func _ready() -> void:
 	await get_tree().create_timer(0.666667).timeout
 	
 	$heart.frame = 1
-	audio.play("Battle/break")
+	audio.play("battle/break")
 	await get_tree().create_timer(1.33333).timeout
 	
 	$heart.visible = false
-	audio.play("Battle/break2")
+	audio.play("battle/break2")
 	
 	for i in 5:
 		var obj: Sprite2D = Sprite2D.new()
@@ -34,6 +34,7 @@ func _ready() -> void:
 	
 	await get_tree().create_timer(4).timeout
 	# Add returning code here. For now it just sends you back to the starting scene.
+	settings.load_game()
 	vars.display.change_scene(vars.display.starting_scene, true)
 
 
