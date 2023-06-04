@@ -2,7 +2,7 @@ extends Node
 class_name AttackManager
 
 var turn_num = 0
-var attacks = [load("res://scripts/attacks/attack_example.gd")]
+var attacks = [load("res://scripts/attacks/attack_base.gd")]
 
 var current_attack : Attack = null
 signal attack_done
