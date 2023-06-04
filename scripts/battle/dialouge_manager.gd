@@ -3,6 +3,9 @@ class_name DialougeManager
 
 signal done
 
+func _ready():
+	pass
+
 func start():
 	var enemy = vars.enemies.get_child(0)
 	enemy.speech_bubble.visible = true

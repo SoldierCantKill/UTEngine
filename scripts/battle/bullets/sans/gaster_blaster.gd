@@ -79,7 +79,6 @@ func _process(delta: float) -> void:
 		if blast_timer > 5 + blast_time:
 			blast_size *= pow(0.8, delta * 30)
 			if blast_size <= 2:
-				print("DONE")
 				done.emit()
 				queue_free()
 				

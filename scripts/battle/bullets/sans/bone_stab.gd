@@ -1,4 +1,5 @@
 extends Bullet
+class_name BoneStab
 
 @onready var pivot_offset = $pivot_offset
 @onready var bones = $pivot_offset/bones

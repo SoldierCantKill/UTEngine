@@ -31,9 +31,9 @@ var masked : bool = true :
 	set(value):
 		masked = value
 		show_behind_parent = value
+var duration = -1
 
 func _ready():
-	vars.attack_manager.attack_done.connect(func(): queue_free())
 	vars.attack_manager.delete_bullets.connect(func(): queue_free())
 
 func change_color():

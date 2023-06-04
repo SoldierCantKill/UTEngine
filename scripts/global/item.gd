@@ -17,6 +17,9 @@ var throw_away_text : String = "" : get = get_throw_away_text
 #You need 3 values in some arrays (See default items)
 #(No, this engine doesn't have OW by default)
 
+func _ready():
+	pass
+
 func get_throw_away_text() -> String:
 	if(throw_away_text.is_empty()):
 		var rng : RandomNumberGenerator = RandomNumberGenerator.new()

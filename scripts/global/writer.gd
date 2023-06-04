@@ -45,6 +45,9 @@ var sounds = {
 	"none" : [],
 	}
 #--------- PROPERTIES ----------
+func _ready():
+	done.connect(func(): writing = false)
+
 func parse():
 	var removed_chars = 0
 	var added_bb_code = 0
@@ -194,5 +197,3 @@ func clear_text():
 	writer_text = ""
 	visible_characters = 0
 
-func _ready():
-	done.connect(func(): writing = false)

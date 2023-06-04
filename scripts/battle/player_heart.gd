@@ -142,8 +142,8 @@ func inputs(delta):
 			if is_on_floor() or (is_on_ceiling() and fall_speed <= 0.0):
 				if thrown:
 					thrown = false
-					vars.display.ScreenShake(floor(abs(fall_speed / 30.0 / 3.0)))
-					audio.play("Battle/impact")
+					vars.display.screen_shake(floor(abs(fall_speed / 30.0 / 3.0)))
+					audio.play("battle/impact")
 				
 				fall_speed = 0
 				if is_on_floor() and jump_input:

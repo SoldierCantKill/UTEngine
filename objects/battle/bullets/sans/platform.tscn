@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://038qlp4mcxjs"]
+
+[ext_resource type="Script" path="res://scripts/battle/bullets/sans/platform.gd" id="1_5iinn"]
+[ext_resource type="Texture2D" uid="uid://crpb05ousrgxu" path="res://assets/sprites/battle/square.png" id="1_yer4o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mdsua"]
+size = Vector2(80, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7y20"]
+size = Vector2(80, 9)
+
+[node name="platform" type="Node2D"]
+script = ExtResource("1_5iinn")
+
+[node name="platform" type="NinePatchRect" parent="."]
+anchors_preset = -1
+offset_right = 80.0
+offset_bottom = 9.0
+texture = ExtResource("1_yer4o")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="color" type="NinePatchRect" parent="platform"]
+self_modulate = Color(0, 0.501961, 0, 1)
+offset_top = -5.0
+offset_right = 80.0
+offset_bottom = 3.0
+texture = ExtResource("1_yer4o")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="stick" type="CharacterBody2D" parent="platform"]
+
+[node name="collision" type="CollisionShape2D" parent="platform/stick"]
+position = Vector2(40, 4.5)
+shape = SubResource("RectangleShape2D_mdsua")
+
+[node name="slide" type="StaticBody2D" parent="platform"]
+
+[node name="collision" type="CollisionShape2D" parent="platform/slide"]
+position = Vector2(40, 4.5)
+shape = SubResource("RectangleShape2D_a7y20")

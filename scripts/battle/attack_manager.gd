@@ -9,18 +9,22 @@ signal delete_bullets
 signal attack_done
 @onready var masks = get_node("buffer/masks")
 
+func _ready():
+	attack_done.connect(func(): delete_bullets.emit())
+
 func set_writer_text():
 	pass
 
-func pre_attack():
-	pass
+func pre_attack() -> Attack:
+	return null
 
-func heal_attack():
-	pass
+func heal_attack() -> Attack:
+	return null
 
-func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, speed : float, rotation_speed : float, masked = true) -> Bullet:
+func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, speed : float, rotation_speed : float, masked = true, duration : float = -1) -> Bullet:
 	var bullet = bullet_path.instantiate()
 	bullet.masked = masked
+	bullet.duration = duration
 	bullet.x = x
 	bullet.y = y
 	bullet.speed = speed
@@ -29,9 +33,10 @@ func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, spe
 	bullet.global_position = position
 	return bullet
 
-func bone(position : Vector2, x : float, y : float, speed : float, offset_top: float, offset_bottom : float, rotation_speed : float, masked = true) -> Bullet:
+func bone(position : Vector2, x : float, y : float, speed : float, offset_top: float, offset_bottom : float, rotation_speed : float, masked = true, duration : float = -1) -> Bullet:
 	var bone = preload("res://objects/battle/bullets/sans/bone.tscn").instantiate()
 	bone.masked = masked
+	bone.duration = duration
 	bone.x = x
 	bone.y = y
 	bone.speed = speed
@@ -41,6 +46,18 @@ func bone(position : Vector2, x : float, y : float, speed : float, offset_top: f
 	bone.offset_bottom = offset_bottom
 	bone.global_position = position
 	return bone
+
+func platform(position : Vector2, x : float, y : float, speed : float, platform_type = Platform.e_platform_type.stick, masked = false, duration : float = -1) -> Bullet:
+	var platform = preload("res://objects/battle/bullets/sans/platform.tscn").instantiate()
+	platform.masked = masked
+	platform.duration = duration
+	platform.x = x
+	platform.y = y
+	platform.speed = speed
+	masks.add_child(platform)
+	platform.platform_type = platform_type
+	platform.global_position = position
+	return platform
 
 func gaster_blaster(start_position : Vector2, end_position : Vector2, end_rotation : float, scale : Vector2, masked = false) -> Bullet:
 	var gaster_blaster = preload("res://objects/battle/bullets/sans/gaster_blaster.tscn").instantiate()
@@ -74,9 +91,12 @@ func throw(direction : float = 0, fall_speed : float = 500) -> void:
 func black_screen(time : float) -> void:
 	vars.black_screen.visible = true
 	audio.play("battle/noise")
-	var volume = audio.music.volume_db
-	audio.music.volume_db = linear_to_db(0.00001)
+	var volume = audio.global_volume
+	if(is_instance_valid(audio.music)):
+		volume = audio.music.volume_db
+		audio.music.volume_db = linear_to_db(0.00001)
 	await get_tree().create_timer(time).timeout
 	vars.black_screen.visible = false
 	audio.play("battle/noise")
-	audio.music.volume_db = volume
+	if(is_instance_valid(audio.music)):
+		audio.music.volume_db = volume

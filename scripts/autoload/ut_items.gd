@@ -1,5 +1,4 @@
 #PUT ALL EXISTING ITEMS IN YOUR GAME HERE
-
 extends Node
 
 @onready var items : Dictionary = {

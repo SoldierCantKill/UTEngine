@@ -1,4 +1,5 @@
 extends Bullet
+class_name Bone
 
 @onready var sprite = $bone
 @onready var offset_left = sprite.offset_left :

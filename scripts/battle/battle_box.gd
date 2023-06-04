@@ -11,6 +11,9 @@ var emit_resize = false
 signal resize_finished
 @onready var collisions : Array = [$collisions/left, $collisions/up, $collisions/right, $collisions/down]
 
+func _ready():
+	pass
+
 func _process(delta : float) -> void:
 	margin = [offset_left, offset_top, offset_right, offset_bottom]
 	var spd = resize_spd * delta

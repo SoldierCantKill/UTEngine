@@ -12,10 +12,11 @@ func set_writer_text():
 
 func pre_attack():
 	current_attack = Attack.new()
-	current_attack.set_script(preload(\"res://scripts/attacks/attack_base.gd\"))
+	current_attack.set_script(preload(\"res://scripts/battle/attacks/test_attack.gd\"))
 	add_child(current_attack)
 	current_attack.pre_attack()
 	current_attack.attack_finished.connect(func(): attack_done.emit())
+	return current_attack
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y7b04"]
