@@ -4,6 +4,7 @@
 
 [sub_resource type="GDScript" id="GDScript_qxqqm"]
 script/source = "extends PlayerHeart
+
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_muyji"]
@@ -82,5 +83,3 @@ libraries = {
 [node name="collision" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_2x2a2")
-
-[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

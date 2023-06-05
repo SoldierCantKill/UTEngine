@@ -14,6 +14,7 @@ var heart_mode : e_heart_mode = e_heart_mode.red :
 @onready var animation_player = $animation_player
 @onready var hitbox = $hitbox
 var speed : float = 2
+const static_speed : float = 60.0 #Used to multiply with speed
 var i_frames : int = 60 #Invincibility frames
 var i_timer : float = 0
 var karma_i_frames : float = 2
@@ -113,7 +114,7 @@ func inputs(delta):
 	match(heart_mode):
 		e_heart_mode.red:
 			sprite.rotation = deg_to_rad(0)
-			velocity = Vector2(move_x, move_y) * (temp_speed * 75)
+			velocity = Vector2(move_x, move_y) * temp_speed * static_speed
 			move_and_slide()
 			move_input = velocity
 		e_heart_mode.blue:
@@ -129,13 +130,13 @@ func inputs(delta):
 			if angle == 0 or angle == 180:
 				if(input_enabled):
 					jump_input = Input.is_action_pressed("up") if angle == 0 else Input.is_action_pressed("down")
-				move_input = Vector2(move_x * (temp_speed * 75), fall_speed * (-1 if angle == 180 else 1))
+				move_input = Vector2(move_x * temp_speed * static_speed, fall_speed * (-1 if angle == 180 else 1))
 				jump_direction = Vector2.UP if angle == 0 else Vector2.DOWN
 
 			if angle == 90 or angle == 270:
 				if(input_enabled):
 					jump_input = Input.is_action_pressed("left") if angle == 270 else Input.is_action_pressed("right")
-				move_input = Vector2(fall_speed * (-1 if angle == 90 else 1), move_y * (temp_speed * 75))
+				move_input = Vector2(fall_speed * (-1 if angle == 90 else 1), move_y * (temp_speed * static_speed))
 				jump_direction = Vector2.LEFT if angle == 270 else Vector2.RIGHT
 								
 			if !is_on_floor(): floor_snap = false

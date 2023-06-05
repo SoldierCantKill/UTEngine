@@ -29,7 +29,6 @@ func _ready():
 	warning.offset_top = -bone_height
 	bones.size.x = ceil(length) - ceil(fmod(length,12))
 	bones.offset_bottom = bone_height + 12
-	print(" | || | | || | |  ",bones.offset_bottom)
 	for i in range(ceil(length / 12) - ceil(fmod(length,12))):
 		var collision = CollisionShape2D.new()
 		area2d.add_child(collision)

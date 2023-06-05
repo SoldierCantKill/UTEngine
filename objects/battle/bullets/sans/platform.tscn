@@ -13,7 +13,6 @@ size = Vector2(80, 9)
 script = ExtResource("1_5iinn")
 
 [node name="platform" type="NinePatchRect" parent="."]
-anchors_preset = -1
 offset_right = 80.0
 offset_bottom = 9.0
 texture = ExtResource("1_yer4o")
@@ -24,6 +23,7 @@ patch_margin_bottom = 1
 
 [node name="color" type="NinePatchRect" parent="platform"]
 self_modulate = Color(0, 0.501961, 0, 1)
+layout_mode = 0
 offset_top = -5.0
 offset_right = 80.0
 offset_bottom = 3.0

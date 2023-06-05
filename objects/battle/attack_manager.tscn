@@ -17,6 +17,8 @@ func pre_attack():
 	current_attack.pre_attack()
 	current_attack.attack_finished.connect(func(): attack_done.emit())
 	return current_attack
+
+
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y7b04"]
@@ -45,5 +47,3 @@ scale = Vector2(250, 250)
 texture = ExtResource("2_eofwa")
 flip_h = true
 flip_v = true
-
-[node name="bullets" type="Node2D" parent="buffer/masks"]

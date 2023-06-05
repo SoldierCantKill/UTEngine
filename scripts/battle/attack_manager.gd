@@ -2,7 +2,7 @@ extends Node
 class_name AttackManager
 
 var turn_num = 0
-var attacks = [load("res://scripts/attacks/attack_base.gd")]
+var attacks = [load("res://scripts/battle/attacks/attack_base.gd")]
 
 var current_attack : Attack = null
 signal delete_bullets
@@ -18,9 +18,6 @@ func set_writer_text():
 func pre_attack() -> Attack:
 	return null
 
-func heal_attack() -> Attack:
-	return null
-
 func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, speed : float, rotation_speed : float, masked = true, duration : float = -1) -> Bullet:
 	var bullet = bullet_path.instantiate()
 	bullet.masked = masked
@@ -29,8 +26,8 @@ func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, spe
 	bullet.y = y
 	bullet.speed = speed
 	bullet.rotation_speed = speed
-	masks.add_child(bullet)
 	bullet.global_position = position
+	masks.add_child(bullet)
 	return bullet
 
 func bone(position : Vector2, x : float, y : float, speed : float, offset_top: float, offset_bottom : float, rotation_speed : float, masked = true, duration : float = -1) -> Bullet:
@@ -41,10 +38,10 @@ func bone(position : Vector2, x : float, y : float, speed : float, offset_top: f
 	bone.y = y
 	bone.speed = speed
 	bone.rotation_speed = rotation_speed
+	bone.global_position = position
 	masks.add_child(bone)
 	bone.offset_top = offset_top
 	bone.offset_bottom = offset_bottom
-	bone.global_position = position
 	return bone
 
 func platform(position : Vector2, x : float, y : float, speed : float, platform_type = Platform.e_platform_type.stick, masked = false, duration : float = -1) -> Bullet:
@@ -54,9 +51,9 @@ func platform(position : Vector2, x : float, y : float, speed : float, platform_
 	platform.x = x
 	platform.y = y
 	platform.speed = speed
+	platform.global_position = position
 	masks.add_child(platform)
 	platform.platform_type = platform_type
-	platform.global_position = position
 	return platform
 
 func gaster_blaster(start_position : Vector2, end_position : Vector2, end_rotation : float, scale : Vector2, masked = false) -> Bullet:
@@ -65,20 +62,23 @@ func gaster_blaster(start_position : Vector2, end_position : Vector2, end_rotati
 	gaster_blaster.scale = scale
 	gaster_blaster.end_position = end_position
 	gaster_blaster.end_rotation = end_rotation
-	masks.add_child(gaster_blaster)
 	gaster_blaster.global_position = start_position
+	masks.add_child(gaster_blaster)
 	return gaster_blaster
 
 func bone_stab(position : Vector2, length : float, height : float, wait_time : float, up_time : float, bone_rotation : float, masked = true) -> Bullet:
 	var bone_stab = preload("res://objects/battle/bullets/sans/bone_stab.tscn").instantiate()
+	bone_stab.visible = false
 	bone_stab.length = length
 	bone_stab.bone_height = height
 	bone_stab.wait_time = wait_time
 	bone_stab.up_time = up_time
 	bone_stab.masked = masked
+	bone_stab.global_position = position
 	masks.add_child(bone_stab)
 	bone_stab.bone_rotation = bone_rotation
-	bone_stab.global_position = position
+	await get_tree().process_frame
+	bone_stab.visible = true
 	return bone_stab
 
 func throw(direction : float = 0, fall_speed : float = 500) -> void:

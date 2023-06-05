@@ -14,7 +14,7 @@ enum e_curse {
 @onready var area2d : Area2D :
 	set(value):
 		area2d = value
-		area2d.area_exited.connect(func(): if(vars.player_heart not in area2d.get_overlapping_bodies()): was_colliding = false)
+		area2d.area_exited.connect(func(area): if(vars.player_heart not in area2d.get_overlapping_bodies()): was_colliding = false)
 var damage : float = 5
 var karma : float = 1
 var type : e_type = 0 :
