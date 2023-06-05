@@ -38,13 +38,13 @@ func attack(damage : float):
 	if(damage > 0):
 		match(dodge):
 			e_dodge.none:
-				attack_normal()
+				attack_normal(damage)
 			e_dodge.dodge:
-				attack_dodge()
+				attack_dodge(damage)
 	else:
-		attack_no_damage()
+		attack_no_damage(damage)
 
-func attack_normal():
+func attack_normal(damage : float):
 	await vars.hud_manager.eye.knife.animation_finished
 	audio.play("battle/hit")
 	var bar_max : ColorRect = ColorRect.new()
@@ -81,7 +81,7 @@ func attack_normal():
 	damage_text.queue_free()
 	post_attack()
 
-func attack_dodge():
+func attack_dodge(damage : float):
 	var bar_max : ColorRect = ColorRect.new()
 	var bar : ColorRect = ColorRect.new()
 	var texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
@@ -117,7 +117,7 @@ func attack_dodge():
 	damage_text.queue_free()
 	post_attack()
 
-func attack_no_damage():
+func attack_no_damage(damage : float):
 	var bar_max : ColorRect = ColorRect.new()
 	var bar : ColorRect = ColorRect.new()
 	var texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
