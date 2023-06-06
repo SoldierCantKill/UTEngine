@@ -1,7 +1,9 @@
 extends Bullet
 class_name Bone
 
-@onready var sprite = $bone
+@onready var sprite := $bone
+@onready var collision := $bone/area/collision
+
 @onready var offset_left = sprite.offset_left :
 	set(value):
 		sprite.offset_left = value
@@ -25,10 +27,9 @@ func _ready():
 	area2d = $bone/area
 
 func _process(delta):
-	if(is_instance_valid(sprite)):
-		$bone/area/collision.position = Vector2(sprite.size.x / 2, sprite.size.y / 2)
-		$bone/area/collision.shape.size = Vector2(sprite.size.x * .83333, sprite.size.y)
-		sprite.pivot_offset = sprite.size / 2
+	sprite.pivot_offset = sprite.size / 2
+	collision.position = Vector2(sprite.size.x / 2, sprite.size.y / 2)
+	collision.shape.size = Vector2(sprite.size.x * .83333, sprite.size.y)
 
 func _physics_process(delta):
 	global_position += Vector2(x,y) * speed * delta

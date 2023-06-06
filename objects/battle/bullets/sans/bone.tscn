@@ -1,9 +1,10 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://b6gac0lxvnf53"]
 
 [ext_resource type="Texture2D" uid="uid://dnc08xx2i78ug" path="res://assets/sprites/battle/bullet/bone_sans.png" id="1_20xj2"]
 [ext_resource type="Script" path="res://scripts/battle/bullets/sans/bone.gd" id="1_ajae2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvkgu"]
+resource_local_to_scene = true
 size = Vector2(12, 12)
 
 [node name="bone" type="Node2D"]
