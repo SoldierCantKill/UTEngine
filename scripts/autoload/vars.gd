@@ -4,6 +4,7 @@ extends Node
 var display = null
 var scene = null
 var scene_cam = null
+var debug : Node2D = null
 
 #BATTLE
 var hud_manager : HudManager = null
