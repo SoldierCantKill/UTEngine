@@ -163,3 +163,28 @@ func check_death():
 	if(settings.player_save.player.current_hp <= 0):
 		settings.death_position = global_position
 		vars.display.change_scene(preload("res://scenes/game_over.tscn"))
+
+func is_moving():
+	match(heart_mode):
+		e_heart_mode.red:
+			var move_x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
+			var move_y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
+			if move_y != 0 || move_x != 0:
+				return true
+		e_heart_mode.blue:
+			var move_x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
+			var angle = round(rad_to_deg(sprite.rotation))
+			if fall_speed < 240.0 and fall_speed > 15.0: fall_gravity = 540.0
+			if fall_speed <= 15.0 and fall_speed > -30.0: fall_gravity = 180.0
+			if fall_speed <= -30.0 and fall_speed > -120: fall_gravity = 450.0
+			if fall_speed <= -120.0: fall_gravity = 180.0
+	
+			if angle == 0 or angle == 180:
+				jump_input = Input.is_action_pressed("up") if angle == 0 else Input.is_action_pressed("down")
+			if angle == 90 or angle == 270:
+				jump_input = Input.is_action_pressed("left") if angle == 270 else Input.is_action_pressed("right")
+				
+			if jump_input != false || move_x != 0 || fall_speed > 1:
+				return true
+			return false
+	return false

@@ -47,6 +47,7 @@ var sounds = {
 #--------- PROPERTIES ----------
 func _ready():
 	done.connect(func(): writing = false)
+	custom_effects.append(load("res://assets/effects/tremble.tres"))
 
 func parse():
 	var removed_chars = 0
