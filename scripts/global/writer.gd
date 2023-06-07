@@ -15,9 +15,12 @@ var writer_text = "" :
 
 var caller = functions #Incase you want to call any functions from the writer.
 var optional_references = [] #Incase you need to reference objects in the writer.
+
 var writing = false
+
 var timeout := 0.0
 var can_write := false
+
 var current_sound := "none"
 var order_changed := false
 var sound_index := 0
@@ -123,7 +126,12 @@ func write():
 				audio.play(sounds[current_sound][sound_index])
 		sound_index = wrapi(sound_index+1,0,sounds[current_sound].size())
 		visible_characters += 1
-	can_write = true
+	if(order.has(str(visible_characters))):
+		if(order[str(visible_characters)] not in ["pause", "pc"]):
+			print("PAUSED")
+			can_write = true
+	else:
+		can_write = true
 
 func writer_event(index):
 	var remove = []
@@ -137,7 +145,10 @@ func writer_event(index):
 			remove.append(i)
 			if(i[0] == "delay"):
 				wait_for_speed = false
+				var temp = x_enabled
+				x_enabled = false
 				await get_tree().create_timer(i[1]).timeout
+				x_enabled = temp
 			elif(i[0] == "speed"):
 				speed = i[1]
 			elif(i[0] == "pause"):
@@ -146,12 +157,20 @@ func writer_event(index):
 			elif(i[0] == "sound"):
 				current_sound = i[1].to_lower()
 			elif(i[0] == "clear"):
-				writer_text = text.substr(text.find("clear"))
+				if(text.find("(clear)") != -1):
+					var str = text.substr(index + 1,text.find("(pc)"))
+					writer_text = str
+				else:
+					writer_text = ""
 				visible_characters = 0
 			elif(i[0] == "pc"):
 				paused = true
 				await unpaused
-				writer_text = text.substr(text.find("pc"))
+				if(text.find("(pc)") != -1):
+					var str = text.substr(index + 1,text.find("(pc)"))
+					writer_text = str
+				else:
+					writer_text = ""
 				visible_characters = 0
 			elif(i[0] == "audio"):
 				audio.play(i[1])
@@ -183,11 +202,12 @@ func _process(delta):
 					for j in order[i]:
 						if(j[0] in ["pause", "pc"]):
 							found = true
-							visible_characters = int(i) + 1
-							writer_event(max(visible_characters - 1,0))
+							visible_characters = int(i)
+							#writer_event(max(visible_characters - 1,0))
 							break
 				if(!found):
 					visible_characters = len(text)
+					#writer_event(max(len(text) - 1,0))
 	
 	timeout += delta
 	if(timeout >= speed && !paused && can_write):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5ohgm67lvip5"]
+[gd_scene load_steps=4 format=3 uid="uid://b5ohgm67lvip5"]
 
 [ext_resource type="Script" path="res://scripts/display_manager.gd" id="1_hd0aj"]
 [ext_resource type="Script" path="res://scripts/debug.gd" id="2_hsb8s"]
+[ext_resource type="FontFile" uid="uid://1tmrx86kyjfv" path="res://assets/fonts/health.ttf" id="3_gofok"]
 
 [node name="display_manager" type="Node2D"]
 script = ExtResource("1_hd0aj")
@@ -25,8 +26,12 @@ color = Color(0, 0, 0, 0)
 script = ExtResource("2_hsb8s")
 
 [node name="text" type="RichTextLabel" parent="debug"]
-offset_right = 40.0
-offset_bottom = 40.0
+clip_contents = false
+offset_right = 198.0
+offset_bottom = 162.0
+theme_override_fonts/normal_font = ExtResource("3_gofok")
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[rainbow]Debug
 "
+scroll_active = false

@@ -1,5 +1,6 @@
+res://scenes/display_manager.tscn
+res://scripts/global/writer.gd
 res://scenes/battles/battle_example.tscn
+res://scripts/battle/enemy.gd
 res://objects/battle/bullets/sans/bone.tscn
 res://objects/battle/player_heart.tscn
-res://scenes/display_manager.tscn
-res://scripts/autoload/vars.gd

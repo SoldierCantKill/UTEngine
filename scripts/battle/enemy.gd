@@ -101,16 +101,16 @@ func attack_dodge(damage : float):
 	bar_max.visible = false
 	damage_text.visible = false
 	var tween = get_tree().create_tween()
-	tween.tween_property(self,"global_position",global_position - Vector2(100,0), .3).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(self,"global_position",global_position - Vector2(100,0), .4).set_trans(Tween.TRANS_SINE)
 	await vars.hud_manager.eye.knife.animation_finished
 	bar_max.visible = show_health_bar
 	damage_text.visible = true
 	var damage_move = get_tree().create_tween()
-	damage_move.tween_property(damage_text, "global_position", damage_text.global_position - Vector2(0,30),.45).set_trans(Tween.TRANS_LINEAR)
-	damage_move.tween_property(damage_text, "global_position", damage_text.global_position,.45).set_trans(Tween.TRANS_LINEAR)
+	damage_move.tween_property(damage_text, "global_position", damage_text.global_position - Vector2(0,30),.45).set_trans(Tween.TRANS_SINE)
+	damage_move.tween_property(damage_text, "global_position", damage_text.global_position,.45).set_trans(Tween.TRANS_SINE)
 	await get_tree().create_timer(.9).timeout
 	tween = get_tree().create_tween()
-	tween.tween_property(self,"global_position",global_position + Vector2(100,0), .3).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(self,"global_position",global_position + Vector2(100,0), .4).set_trans(Tween.TRANS_SINE)
 	await tween.finished
 	bar_max.queue_free()
 	bar.queue_free()

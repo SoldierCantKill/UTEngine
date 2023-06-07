@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://5l7ptgwyrkli"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/battle/buffer.gd" id="1_1hsqs"]
 [ext_resource type="Shader" path="res://assets/effects/mask.gdshader" id="1_8casw"]

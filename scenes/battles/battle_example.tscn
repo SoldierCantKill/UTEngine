@@ -3,10 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://b7ny54ocom6f5" path="res://assets/sprites/battle/hud/buttons/fight/0.png" id="2_6f77y"]
 [ext_resource type="Texture2D" uid="uid://c0fk22bwsicj2" path="res://assets/sprites/speech_bubble.png" id="2_gywuk"]
 [ext_resource type="PackedScene" uid="uid://cdhye7ndiak02" path="res://objects/battle/hud_manager.tscn" id="3_5e3ix"]
-[ext_resource type="PackedScene" uid="uid://djya08uami74k" path="res://objects/battle/battle_box.tscn" id="4_4yajr"]
+[ext_resource type="PackedScene" path="res://objects/battle/battle_box.tscn" id="4_4yajr"]
 [ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="5_wlkg8"]
 [ext_resource type="PackedScene" uid="uid://frb40ffyat0v" path="res://objects/battle/player_heart.tscn" id="7_1vkjp"]
-[ext_resource type="PackedScene" uid="uid://5l7ptgwyrkli" path="res://objects/battle/attack_manager.tscn" id="7_2tvut"]
+[ext_resource type="PackedScene" path="res://objects/battle/attack_manager.tscn" id="7_2tvut"]
 
 [sub_resource type="GDScript" id="GDScript_60in0"]
 script/source = "extends BattleRoom
@@ -35,6 +35,17 @@ func _process(delta):
 	texture.gradient.offsets[1] = max(sin(t) / 2 + .3, 0)
 "
 
+[sub_resource type="GDScript" id="GDScript_ohi4s"]
+script/source = "extends Enemy
+
+func _init():
+	super._init(\"Fight\",5000,1)
+	
+func _ready():
+	sprite = $sprite
+	damage_anchor = self
+"
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_a4c2p"]
 animations = [{
 "frames": [{
@@ -45,17 +56,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="GDScript" id="GDScript_ohi4s"]
-script/source = "extends Enemy
-
-func _init():
-	super._init(\"Fight\",5000,1)
-	
-func _ready():
-	sprite = self
-	damage_anchor = self
-"
 
 [sub_resource type="GDScript" id="GDScript_uiy3g"]
 script/source = "extends Writer
@@ -86,10 +86,12 @@ script = SubResource("GDScript_wftwh")
 
 [node name="enemies" type="Node2D" parent="."]
 
-[node name="example_enemy" type="AnimatedSprite2D" parent="enemies"]
+[node name="example_enemy" type="Node2D" parent="enemies"]
 position = Vector2(318, 173)
-sprite_frames = SubResource("SpriteFrames_a4c2p")
 script = SubResource("GDScript_ohi4s")
+
+[node name="sprite" type="AnimatedSprite2D" parent="enemies/example_enemy"]
+sprite_frames = SubResource("SpriteFrames_a4c2p")
 
 [node name="speech_bubble" type="NinePatchRect" parent="enemies/example_enemy"]
 visible = false
