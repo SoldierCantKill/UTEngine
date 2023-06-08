@@ -51,9 +51,9 @@ func attack_normal(damage : float):
 	var bar : ColorRect = ColorRect.new()
 	var texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
 	bar_max.color = Color(.5,.5,.5,1)
-	bar_max.size = Vector2(texture.get_size().x * scale.x, 15)
+	bar_max.size = Vector2(texture.get_size().x * sprite.scale.x, 15)
 	bar.color = Color(.1,1,.1,1)
-	bar.size = Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15)
+	bar.size = Vector2((float(current_hp) / max_hp) * texture.get_size().x * sprite.scale.x, 15)
 	bar_max.z_index = 5
 	bar.z_index = 5
 	bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
@@ -61,7 +61,7 @@ func attack_normal(damage : float):
 	vars.scene.add_child(bar_max)
 	bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
 	current_hp = clampf(current_hp - damage,0,max_hp)
-	get_tree().create_tween().tween_property(bar, "size", Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15), .25)
+	get_tree().create_tween().tween_property(bar, "size", Vector2((float(current_hp) / max_hp) * texture.get_size().x * sprite.scale.x, 15), .25)
 	bar_max.visible = show_health_bar
 	var damage_text : RichTextLabel = create_text("[center]"+ str(int(damage)))
 	damage_text.self_modulate = Color(1, 0, 0, 1)
@@ -86,9 +86,9 @@ func attack_dodge(damage : float):
 	var bar : ColorRect = ColorRect.new()
 	var texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
 	bar_max.color = Color(.5,.5,.5,1)
-	bar_max.size = Vector2(texture.get_size().x * scale.x, 15)
+	bar_max.size = Vector2(texture.get_size().x * sprite.scale.x, 15)
 	bar.color = Color(.1,1,.1,1)
-	bar.size = Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15)
+	bar.size = Vector2((float(current_hp) / max_hp) * texture.get_size().x * sprite.scale.x, 15)
 	bar_max.z_index = 5
 	bar.z_index = 5
 	bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
@@ -122,9 +122,9 @@ func attack_no_damage(damage : float):
 	var bar : ColorRect = ColorRect.new()
 	var texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
 	bar_max.color = Color(.5,.5,.5,1)
-	bar_max.size = Vector2(texture.get_size().x * scale.x, 15)
+	bar_max.size = Vector2(texture.get_size().x * sprite.scale.x, 15)
 	bar.color = Color(.1,1,.1,1)
-	bar.size = Vector2((float(current_hp) / max_hp) * texture.get_size().x * scale.x, 15)
+	bar.size = Vector2((float(current_hp) / max_hp) * texture.get_size().x * sprite.scale.x, 15)
 	bar_max.z_index = 5
 	bar.z_index = 5
 	bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
@@ -163,7 +163,7 @@ func create_text(text : String):
 	var textblock = RichTextLabel.new()
 	textblock.bbcode_enabled = true
 	var texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
-	textblock.size = Vector2(texture.get_size().x * scale.x, 15)
+	textblock.size = Vector2(texture.get_size().x * sprite.scale.x, 15)
 	textblock.add_theme_font_override("normal_font", load("res://assets/fonts/damage.ttf"))
 	textblock.add_theme_font_size_override("normal_font_size", 28)
 	textblock.set("theme_override_colors/font_outline_color", Color(0,0,0,1))

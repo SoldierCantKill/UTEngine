@@ -1,2 +1,2 @@
 res://scenes/battles/battle_example.tscn
-res://scripts/global/writer.gd
+res://scripts/battle/enemy.gd

@@ -1,5 +1,5 @@
 2a60927148abd1d33b818b535e306557
-::res://::1686194153
+::res://::1686220833
 credits.txt::TextFile::-1::1685797316::0::1::::<><>::
 ::res://assets/::1686121916
 ::res://assets/audio/::1684805278
@@ -146,8 +146,8 @@ real_knife.gd::GDScript::-1::1684803210::0::1::::RealKnife<>Weapon<>::
 ::res://scenes/::1686123479
 display_manager.tscn::PackedScene::4521423694742311124::1686123479::0::1::::<><>::res://scripts/display_manager.gd<>res://scripts/debug.gd<>uid://1tmrx86kyjfv
 game_over.tscn::PackedScene::3927115081083465751::1685805666::0::1::::<><>::res://scripts/battle/game_over.gd<>uid://b5j3kxbhl6cb<>uid://ctn35e0d21yea
-::res://scenes/battles/::1686123479
-battle_example.tscn::PackedScene::1354385688232653199::1686123479::0::1::::<><>::uid://b7ny54ocom6f5<>uid://c0fk22bwsicj2<>uid://cdhye7ndiak02<>res://objects/battle/battle_box.tscn<>uid://ds6wqfq03pwda<>uid://frb40ffyat0v<>res://objects/battle/attack_manager.tscn
+::res://scenes/battles/::1686194168
+battle_example.tscn::PackedScene::1354385688232653199::1686194168::0::1::::<><>::uid://b7ny54ocom6f5<>uid://c0fk22bwsicj2<>uid://cdhye7ndiak02<>res://objects/battle/battle_box.tscn<>uid://ds6wqfq03pwda<>uid://frb40ffyat0v<>res://objects/battle/attack_manager.tscn
 ::res://scripts/::1686084044
 debug.gd::GDScript::-1::1686084044::0::1::::<>Node2D<>::
 display_manager.gd::GDScript::-1::1685983645::0::1::::<>Node2D<>::
@@ -178,11 +178,11 @@ bone.gd::GDScript::-1::1686082477::0::1::::Bone<>Bullet<>::
 bone_stab.gd::GDScript::-1::1685977202::0::1::::BoneStab<>Bullet<>::
 gaster_blaster.gd::GDScript::-1::1685886896::0::1::::<>Bullet<>::
 platform.gd::GDScript::-1::1685978481::0::1::::Platform<>Bullet<>::
-::res://scripts/global/::1686123475
+::res://scripts/global/::1686194168
 armor.gd::GDScript::-1::1684831346::0::1::::Armor<>Item<>::
 attack_eye.gd::GDScript::-1::1684965531::0::1::::AttackEye<>Node2D<>::
 healable.gd::GDScript::-1::1684972347::0::1::::Healable<>Item<>::
 item.gd::GDScript::-1::1685883979::0::1::::Item<>Node<>::
 player_save.gd::GDScript::-1::1684970585::0::1::::PlayerSave<>Resource<>::
 weapon.gd::GDScript::-1::1684831346::0::1::::Weapon<>Item<>::
-writer.gd::GDScript::-1::1686123475::0::1::::Writer<>RichTextLabel<>::
+writer.gd::GDScript::-1::1686194168::0::1::::Writer<>RichTextLabel<>::
