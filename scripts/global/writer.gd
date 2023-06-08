@@ -112,6 +112,7 @@ func parse():
 			if(property in ["clear", "pc"]):
 				break
 	order_changed = false
+	print(order)
 
 func write():
 	can_write = false
@@ -158,7 +159,7 @@ func writer_event(index):
 				current_sound = i[1].to_lower()
 			elif(i[0] == "clear"):
 				if(text.find("(clear)") != -1):
-					var str = text.substr(index + 1,text.find("(pc)"))
+					var str = text.substr(text.find(get_parsed_text().substr(index + 1,text.find("(clear)"))),text.find("(clear)"))
 					writer_text = str
 				else:
 					writer_text = ""
@@ -167,7 +168,8 @@ func writer_event(index):
 				paused = true
 				await unpaused
 				if(text.find("(pc)") != -1):
-					var str = text.substr(index + 1,text.find("(pc)"))
+					var str = text.substr(text.find(get_parsed_text().substr(index + 1,text.find("(pc)"))),text.find("(pc)"))
+					print(str)
 					writer_text = str
 				else:
 					writer_text = ""
