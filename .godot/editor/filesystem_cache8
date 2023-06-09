@@ -1,5 +1,5 @@
 2a60927148abd1d33b818b535e306557
-::res://::1686344666
+::res://::1686349647
 credits.txt::TextFile::-1::1685797316::0::1::::<><>::
 README.md::TextFile::-1::1686339776::0::1::::<><>::
 ::res://assets/::1686121916
@@ -121,8 +121,8 @@ ut sample.PNG::CompressedTexture2D::5890757653355295373::1681247891::1685983610:
 utfightref.PNG::CompressedTexture2D::4009066301131047665::1681249119::1685983610::1::::<><>::
 utitemref.PNG::CompressedTexture2D::976464821957209088::1684868581::1685983610::1::::<><>::
 ::res://objects/::1686338405
-::res://objects/battle/::1686344522
-attack_manager.tscn::PackedScene::7656138562328642268::1686344363::0::1::::<><>::res://scripts/battle/buffer.gd<>res://assets/effects/mask.gdshader<>uid://cn080tr3k362p
+::res://objects/battle/::1686345290
+attack_manager.tscn::PackedScene::7656138562328642268::1686345290::0::1::::<><>::res://scripts/battle/buffer.gd<>res://assets/effects/mask.gdshader<>uid://cn080tr3k362p
 battle_box.tscn::PackedScene::-1::1686121916::0::1::::<><>::res://assets/effects/battle_box.gdshader<>uid://c0pijlyibwwdh<>uid://dg4h38ef6rcd
 dusted_enemy.tscn::PackedScene::-1::1686121916::0::1::::<><>::res://assets/effects/dissapear.gdshader<>res://scripts/battle/dusted_enemy.gd<>res://assets/effects/dust.gdshader
 hud_manager.tscn::PackedScene::4999324594557403829::1686344522::0::1::::<><>::uid://1tmrx86kyjfv<>uid://ch4lp3qjrxfou<>uid://b7ny54ocom6f5<>uid://ci6jiouof0oif<>uid://dsikgyt414x2p<>uid://b4yqkljk01m1o<>uid://ccqx1bgwif064<>uid://dsx65q8ooo1nd<>uid://giolyh7g56fi<>uid://c8yr4lt58ogs1
@@ -142,8 +142,8 @@ scene_cam.tscn::PackedScene::84350590888018941::1681545821::0::1::::<><>::
 ::res://scenes/::1686334979
 display_manager.tscn::PackedScene::4521423694742311124::1686334979::0::1::::<><>::res://scripts/display_manager.gd<>res://scripts/debug.gd<>uid://1tmrx86kyjfv
 game_over.tscn::PackedScene::3927115081083465751::1685805666::0::1::::<><>::res://scripts/battle/game_over.gd<>uid://b5j3kxbhl6cb<>uid://ctn35e0d21yea
-::res://scenes/battles/::1686344530
-battle_example.tscn::PackedScene::1354385688232653199::1686344530::0::1::::<><>::uid://b7ny54ocom6f5<>uid://c0fk22bwsicj2<>uid://cdhye7ndiak02<>res://objects/battle/battle_box.tscn<>uid://ds6wqfq03pwda<>uid://frb40ffyat0v<>uid://dhcxqo8jsl3pw
+::res://scenes/battles/::1686345238
+battle_example.tscn::PackedScene::1354385688232653199::1686345238::0::1::::<><>::uid://b7ny54ocom6f5<>uid://c0fk22bwsicj2<>uid://cdhye7ndiak02<>res://objects/battle/battle_box.tscn<>uid://ds6wqfq03pwda<>uid://frb40ffyat0v<>uid://dhcxqo8jsl3pw
 ::res://scripts/::1686338435
 debug.gd::GDScript::-1::1686332938::0::1::::<>Node2D<>::
 display_manager.gd::GDScript::-1::1685983645::0::1::::<>Node2D<>::
@@ -174,14 +174,14 @@ bone.gd::GDScript::-1::1686304649::0::1::::Bone<>Bullet<>::
 bone_stab.gd::GDScript::-1::1685977202::0::1::::BoneStab<>Bullet<>::
 gaster_blaster.gd::GDScript::-1::1685886896::0::1::::<>Bullet<>::
 platform.gd::GDScript::-1::1686344358::0::1::::Platform<>Bullet<>::
-::res://scripts/global/::1686341231
+::res://scripts/global/::1686345290
 armor.gd::GDScript::-1::1686340778::0::1::::Armor<>Item<>::
 attack_eye.gd::GDScript::-1::1684965531::0::1::::AttackEye<>Node2D<>::
 healable.gd::GDScript::-1::1686338964::0::1::::Healable<>Item<>::
 item.gd::GDScript::-1::1685883979::0::1::::Item<>Node<>::
 player_save.gd::GDScript::-1::1686340844::0::1::::PlayerSave<>Resource<>::
 weapon.gd::GDScript::-1::1686340778::0::1::::Weapon<>Item<>::
-writer.gd::GDScript::-1::1686341231::0::1::::Writer<>RichTextLabel<>::
+writer.gd::GDScript::-1::1686345290::0::1::::Writer<>RichTextLabel<>::
 ::res://scripts/items/::1686338435
 ::res://scripts/items/armor/::1686339172
 heart_locket.gd::GDScript::-1::1686339172::0::1::::HeartLocket<>Armor<>::

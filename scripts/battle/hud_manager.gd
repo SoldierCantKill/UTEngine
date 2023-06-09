@@ -125,18 +125,19 @@ func hud_mode_update():
 		1:
 			for i in range(vars.enemies.get_children().size()):
 				display.item_texts[i * 2].text = "* " + vars.enemies.get_child(i).enemy_name
-				var bar_max : ColorRect = ColorRect.new()
-				var bar : ColorRect = ColorRect.new()
-				var bar_size := 101
-				bar_max.color = Color.RED
-				bar_max.size = Vector2(bar_size, 20)
-				bar.color = Color(.1,1,.1,1)
-				bar.size = Vector2((float(vars.enemies.get_child(i).current_hp) / vars.enemies.get_child(i).max_hp) * bar_size, 20)
-				bar_max.add_child(bar)
-				add_child(bar_max)
-				bar_max.global_position = display.item_texts[i * 2].global_position + Vector2(187,8)
-				bar_max.z_index = 1
-				enemy_health_bars.append(bar_max)
+				if(vars.enemies.get_child(i).show_health_bar):
+					var bar_max : ColorRect = ColorRect.new()
+					var bar : ColorRect = ColorRect.new()
+					var bar_size := 101
+					bar_max.color = Color.RED
+					bar_max.size = Vector2(bar_size, 20)
+					bar.color = Color(.1,1,.1,1)
+					bar.size = Vector2((float(vars.enemies.get_child(i).current_hp) / vars.enemies.get_child(i).max_hp) * bar_size, 20)
+					bar_max.add_child(bar)
+					add_child(bar_max)
+					bar_max.global_position = display.item_texts[i * 2].global_position + Vector2(187,8)
+					bar_max.z_index = 1
+					enemy_health_bars.append(bar_max)
 				
 		2:
 			match(button_index):
