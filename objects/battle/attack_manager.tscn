@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://dhcxqo8jsl3pw"]
 
 [ext_resource type="Script" path="res://scripts/battle/buffer.gd" id="1_1hsqs"]
 [ext_resource type="Shader" path="res://assets/effects/mask.gdshader" id="1_8casw"]
@@ -7,17 +7,11 @@
 [sub_resource type="GDScript" id="GDScript_q37hg"]
 script/source = "extends AttackManager
 
+func _init():
+	attacks = [preload(\"res://scripts/battle/attacks/test_attack.gd\")]
+
 func set_writer_text():
 	vars.main_writer.writer_text = \"(disable:z)(sound:mono2)*(color=red) THIS(delay:.7)(sound:sans)(font:sans)(color:white)(size:24) is some real text.\"
-
-func pre_attack():
-	current_attack = Attack.new()
-	current_attack.set_script(preload(\"res://scripts/battle/attacks/test_attack.gd\"))
-	add_child(current_attack)
-	current_attack.pre_attack()
-	current_attack.attack_finished.connect(func(): attack_done.emit())
-	return current_attack
-
 
 "
 

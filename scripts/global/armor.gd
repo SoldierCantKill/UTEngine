@@ -1,7 +1,8 @@
 extends Item
 class_name Armor
 
-var defense : float = 1
+var attack : float = 0
+var defense : float = 0
 
 func use(inventory_slot : int):
 	if(vars.scene is BattleRoom):

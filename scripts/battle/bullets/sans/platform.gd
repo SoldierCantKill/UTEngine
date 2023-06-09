@@ -21,8 +21,6 @@ var platform_type : e_platform_type = e_platform_type.stick :
 
 
 func _physics_process(delta):
-	#print("TYPE: ", type," || ", stick_collision.disabled," || ", slide_collision.disabled)
-	print(color.modulate)
 	position += Vector2(x,y) * speed * delta
 	color.size.x = platform.size.x
 	var collision_size: Vector2 = platform.size * 0.5

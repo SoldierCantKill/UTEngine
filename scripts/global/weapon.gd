@@ -2,7 +2,8 @@ extends Item
 class_name Weapon
 
 var attack_eye = null
-var attack : float = 1
+var attack : float = 0
+var defense : float = 0
 
 func use(inventory_slot : int):
 	if(vars.scene is BattleRoom):

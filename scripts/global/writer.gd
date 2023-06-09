@@ -1,7 +1,7 @@
 extends RichTextLabel
 class_name Writer
 
-var order = {}
+var order := {}
 
 #--------- PROPERTIES ----------
 var writer_text = "" :
@@ -16,7 +16,7 @@ var writer_text = "" :
 var caller = functions #Incase you want to call any functions from the writer.
 var optional_references = [] #Incase you need to reference objects in the writer.
 
-var writing = false
+var writing := false
 
 var timeout := 0.0
 var can_write := false
@@ -24,13 +24,15 @@ var can_write := false
 var current_sound := "none"
 var order_changed := false
 var sound_index := 0
-var speed = 0.03333333
-var paused = false
+var speed := 0.03333333
+var paused := false
+var delaying : = false
+signal delay_done
 signal unpaused
 signal done
 signal type
-var z_enabled = true
-var x_enabled = true
+var z_enabled := true
+var x_enabled := true
 
 #Just here so Devs can know the options they have, you can use either : or =
 const choice_properties = ["delay:time", "speed:time", "font:name", "audio:audio_to_play","music:music_to_play", "size:num","sound:name", "bb:bbcode", "func_funcname:[array of params]", "enable:z or x", "disable:z or x"]
@@ -54,6 +56,7 @@ func _ready():
 	custom_effects.append(load("res://assets/effects/tremble.tres"))
 
 func parse():
+	delaying = false
 	var removed_chars = 0
 	var added_bb_code = 0
 	order_changed = true
@@ -136,7 +139,6 @@ func write():
 
 func writer_event(index):
 	var remove = []
-	var wait_for_speed := true
 	if(order.has(str(index))):
 		for i in order[str(index)]:
 			if(!str(index) in order):
@@ -145,11 +147,15 @@ func writer_event(index):
 				break
 			remove.append(i)
 			if(i[0] == "delay"):
-				wait_for_speed = false
-				var temp = x_enabled
-				x_enabled = false
-				await get_tree().create_timer(i[1]).timeout
-				x_enabled = temp
+				delaying = true
+				var delay_func = func():
+					var t = 0.0
+					while(true):
+						t += get_process_delta_time()
+						if(!delaying || t >= i[1]): delay_done.emit(); return
+						await get_tree().process_frame
+				delay_func.call_deferred()
+				await delay_done
 			elif(i[0] == "speed"):
 				speed = i[1]
 			elif(i[0] == "pause"):
@@ -188,7 +194,7 @@ func writer_event(index):
 					Callable(caller,i[0].split("func_")[1]).bind(str_to_var(i[1])).call()
 	for i in remove:
 		order.erase(i)
-	if(wait_for_speed): await get_tree().create_timer(speed).timeout
+	timeout = 0
 	return
 
 func _process(delta):
@@ -204,10 +210,12 @@ func _process(delta):
 						if(j[0] in ["pause", "pc"]):
 							found = true
 							visible_characters = int(i)
+							
 							#writer_event(max(visible_characters - 1,0))
 							break
 				if(!found):
 					visible_characters = len(text)
+				delaying = false
 					#writer_event(max(len(text) - 1,0))
 	
 	timeout += delta

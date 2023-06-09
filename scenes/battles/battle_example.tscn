@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" path="res://objects/battle/battle_box.tscn" id="4_4yajr"]
 [ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="5_wlkg8"]
 [ext_resource type="PackedScene" uid="uid://frb40ffyat0v" path="res://objects/battle/player_heart.tscn" id="7_1vkjp"]
-[ext_resource type="PackedScene" path="res://objects/battle/attack_manager.tscn" id="7_2tvut"]
+[ext_resource type="PackedScene" uid="uid://dhcxqo8jsl3pw" path="res://objects/battle/attack_manager.tscn" id="7_2tvut"]
 
 [sub_resource type="GDScript" id="GDScript_60in0"]
 script/source = "extends BattleRoom

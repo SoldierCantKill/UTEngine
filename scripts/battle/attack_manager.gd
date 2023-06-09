@@ -3,6 +3,7 @@ class_name AttackManager
 
 var turn_num = 0
 var attacks = [load("res://scripts/battle/attacks/attack_base.gd")]
+var heal_attacks = [load("res://scripts/battle/attacks/attack_base.gd")]
 
 var current_attack : Attack = null
 signal delete_bullets
@@ -16,7 +17,20 @@ func set_writer_text():
 	pass
 
 func pre_attack() -> Attack:
-	return null
+	current_attack = Attack.new()
+	current_attack.set_script(attacks[wrapi(turn_num,0,len(attacks))])
+	add_child(current_attack)
+	current_attack.pre_attack()
+	current_attack.attack_finished.connect(func(): attack_done.emit())
+	return current_attack
+
+func pre_heal_attack() -> Attack:
+	current_attack = Attack.new()
+	current_attack.set_script(heal_attacks.pick_random())
+	add_child(current_attack)
+	current_attack.pre_attack()
+	current_attack.attack_finished.connect(func(): attack_done.emit())
+	return current_attack
 
 func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, speed : float, rotation_speed : float, masked = true, duration : float = -1) -> Bullet:
 	var bullet = bullet_path.instantiate()

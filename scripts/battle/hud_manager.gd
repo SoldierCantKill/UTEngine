@@ -1,15 +1,17 @@
 extends Node2D
 class_name HudManager
 
-var mode : int = 0
-var button_index : int = 0
-var enemy_index : int = 0
-var item_index : int = 0
-var item_page : int = 1
+var mode := 0
+var button_index := 0
+var enemy_index := 0
+var item_index := 0
+var last_item_index := 0 #Used for checking if you didn't attack the enemy or something
+var item_page := 1
 
-var show_kr_text : bool = true #only 
-var serious_mode : bool = true
+var show_kr_text := true #only 
+var serious_mode := true
 
+var enemy_health_bars := []
 var eye = null #Attack eye
 
 @onready var display : Dictionary = {
@@ -107,6 +109,9 @@ func hud_mode_update():
 		i.text = ""
 	display.page_text.text = ""
 	display.page_text.visible = false
+	for i in enemy_health_bars:
+		if(is_instance_valid(i)):
+			i.queue_free()
 	match(mode):
 		-1:
 			for i in display.buttons:
@@ -120,6 +125,19 @@ func hud_mode_update():
 		1:
 			for i in range(vars.enemies.get_children().size()):
 				display.item_texts[i * 2].text = "* " + vars.enemies.get_child(i).enemy_name
+				var bar_max : ColorRect = ColorRect.new()
+				var bar : ColorRect = ColorRect.new()
+				var bar_size := 101
+				bar_max.color = Color.RED
+				bar_max.size = Vector2(bar_size, 20)
+				bar.color = Color(.1,1,.1,1)
+				bar.size = Vector2((float(vars.enemies.get_child(i).current_hp) / vars.enemies.get_child(i).max_hp) * bar_size, 20)
+				bar_max.add_child(bar)
+				add_child(bar_max)
+				bar_max.global_position = display.item_texts[i * 2].global_position + Vector2(187,8)
+				bar_max.z_index = 1
+				enemy_health_bars.append(bar_max)
+				
 		2:
 			match(button_index):
 				1:
@@ -137,7 +155,6 @@ func hud_mode_update():
 						display.page_text.visible = false
 				3:
 					display.item_texts[0].text = "* Spare"
-					display.item_texts[2].text = "* Flee"
 
 func heart_update() -> void:
 	match(mode):
@@ -291,14 +308,6 @@ func inputs():
 			if(Input.is_action_just_pressed("exit")):
 				reset()
 		3:
-			if(Input.is_action_just_pressed("up")):
-				audio.play("menu/menu_move")
-				item_index = wrapi(item_index + 2,0,4)
-			
-			if(Input.is_action_just_pressed("down")):
-				audio.play("menu/menu_move")
-				item_index = wrapi(item_index - 2,0,4)
-				
 			if(Input.is_action_just_pressed("confirm")):
 				mercy()
 				
@@ -323,6 +332,7 @@ func reset():
 
 func disable():
 	mode = -1
+	last_item_index = item_index
 	item_index = 0
 	vars.player_heart.visible = false
 	vars.player_heart.global_position = display.buttons[button_index].global_position + Vector2(-39, 0)
@@ -348,7 +358,9 @@ func use():
 	disable()
 	item.use(item_index + (item_page - 1) * 4)
 	await item.done
-	reset()
+	vars.attack_manager.pre_heal_attack().start_attack()
 
 func mercy():
 	audio.play("menu/menu_select")
+	disable()
+	vars.attack_manager.pre_heal_attack().start_attack()

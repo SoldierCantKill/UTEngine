@@ -17,8 +17,9 @@ var current_hp : int
 var max_hp : int
 var def : float
 var dodge : e_dodge
-var border_stick : bool = true
-var offset : int = 0 #Offset for border stick
+var border_stick := true
+var offset := 0.0 #Offset for border stick
+var damage_siner := 0.0
 
 var show_health_bar : bool = true
 
@@ -65,10 +66,16 @@ func attack_normal(damage : float):
 	bar_max.visible = show_health_bar
 	var damage_text : RichTextLabel = create_text("[center]"+ str(int(damage)))
 	damage_text.self_modulate = Color(1, 0, 0, 1)
-	damage_text.global_position = bar_max.global_position - Vector2(0,60)
-	var damage_move = get_tree().create_tween()
-	damage_move.tween_property(damage_text, "global_position", damage_text.global_position - Vector2(0,30),.45).set_trans(Tween.TRANS_LINEAR)
-	damage_move.tween_property(damage_text, "global_position", damage_text.global_position,.45).set_trans(Tween.TRANS_LINEAR)
+	damage_text.global_position = bar_max.global_position - Vector2(0,45)
+	var damage_move = func():
+		var sprite_vel = -2
+		for i in range(40):
+			if(is_instance_valid(damage_text)):
+				sprite_vel += get_process_delta_time() * 6.0
+				damage_text.position.y += sprite_vel
+			else: return
+			await get_tree().process_frame
+	damage_move.call()
 	var pos : Vector2 = position
 	var shake_intensity = 15
 	for i in range(shake_intensity):
@@ -97,7 +104,7 @@ func attack_dodge(damage : float):
 	bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
 	var damage_text : RichTextLabel = create_text("[center]MISS")
 	damage_text.self_modulate = Color(.7, .7, .7, 1)
-	damage_text.global_position = bar_max.global_position - Vector2(0,60)
+	damage_text.global_position = bar_max.global_position - Vector2(0,45)
 	bar_max.visible = false
 	damage_text.visible = false
 	var tween = get_tree().create_tween()
@@ -105,9 +112,15 @@ func attack_dodge(damage : float):
 	await vars.hud_manager.eye.knife.animation_finished
 	bar_max.visible = show_health_bar
 	damage_text.visible = true
-	var damage_move = get_tree().create_tween()
-	damage_move.tween_property(damage_text, "global_position", damage_text.global_position - Vector2(0,30),.45).set_trans(Tween.TRANS_SINE)
-	damage_move.tween_property(damage_text, "global_position", damage_text.global_position,.45).set_trans(Tween.TRANS_SINE)
+	var damage_move = func():
+		var sprite_vel = -2
+		for i in range(40):
+			if(is_instance_valid(damage_text)):
+				sprite_vel += get_process_delta_time() * 6.0
+				damage_text.position.y += sprite_vel
+			else: return
+			await get_tree().process_frame
+	damage_move.call()
 	await get_tree().create_timer(.9).timeout
 	tween = get_tree().create_tween()
 	tween.tween_property(self,"global_position",global_position + Vector2(100,0), .4).set_trans(Tween.TRANS_SINE)
@@ -151,9 +164,9 @@ func post_attack(damage : float):
 			vars.dialouge_manager.start()
 			await vars.dialouge_manager.done
 			vars.attack_manager.current_attack.start_attack()
+			vars.attack_manager.turn_num += 1
 		else:
-			vars.attack_manager.current_attack.start_attack()
-			vars.attack_manager.pre_attack()
+			vars.attack_manager.pre_heal_attack().start_attack()
 
 func death():
 	var dust_enemy = load("res://objects/battle/dusted_enemy.tscn").instantiate()

@@ -32,7 +32,7 @@ func get_weapon() -> Weapon:
 	return ut_items.items[player.weapon]
 	
 func get_armor() -> Armor:
-	return ut_items.items[player.weapon]
+	return ut_items.items[player.armor]
 
 func get_item(index : int) -> Item:
 	return ut_items.items[inventory[index]]
