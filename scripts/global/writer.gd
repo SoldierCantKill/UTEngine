@@ -113,7 +113,6 @@ func parse():
 			if(property in ["clear", "pc"]):
 				break
 	order_changed = false
-	print(order)
 
 func write():
 	can_write = false
@@ -131,7 +130,6 @@ func write():
 		type.emit()
 	if(order.has(str(visible_characters))):
 		if(order[str(visible_characters)] not in ["pause", "pc"]):
-			print("PAUSED")
 			can_write = true
 	else:
 		can_write = true
@@ -171,7 +169,6 @@ func writer_event(index):
 				await unpaused
 				if(text.find("(pc)") != -1):
 					var str = text.substr(text.find(get_parsed_text().substr(index + 1,text.find("(pc)"))),text.find("(pc)"))
-					print(str)
 					writer_text = str
 				else:
 					writer_text = ""
