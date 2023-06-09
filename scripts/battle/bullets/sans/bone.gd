@@ -34,3 +34,4 @@ func _process(delta):
 func _physics_process(delta):
 	global_position += Vector2(x,y) * speed * delta
 	sprite.rotation_degrees += rotation_speed * delta
+	duration_tick(delta)

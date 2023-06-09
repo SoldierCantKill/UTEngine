@@ -86,3 +86,10 @@ func can_get_hit():
 func _physics_process(delta):
 	global_position += Vector2(x,y) * speed * delta
 	rotation_degrees += rotation_speed * delta
+	duration_tick(delta)
+
+func duration_tick(delta):
+	if(duration != -1):
+		duration -= delta
+		if(duration <= 0):
+			queue_free()
