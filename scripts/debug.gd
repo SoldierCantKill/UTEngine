@@ -12,6 +12,14 @@ func _process(delta):
 		enabled = !enabled
 		visible = enabled
 	if(visible):
-		var string = "[rainbow]Debug\n"
-		string += "FPS : " + str(Engine.get_frames_per_second())
-		text.text = string
+		if(Input.is_action_pressed("turn_changer")):
+			if(Input.is_action_just_pressed("right")):
+				if(is_instance_valid(vars.attack_manager)):
+					vars.attack_manager.turn_num += 1
+			if(Input.is_action_just_pressed("left")):
+					vars.attack_manager.turn_num -= 1
+		var string = "[rainbow]Debug"
+		string += "\nFPS : " + str(Engine.get_frames_per_second())
+		if(is_instance_valid(vars.attack_manager)):
+			string += "\nTurn : " + str(vars.attack_manager.turn_num)
+			text.text = string

@@ -1,5 +1,5 @@
 2a60927148abd1d33b818b535e306557
-::res://::1686330475
+::res://::1686332449
 credits.txt::TextFile::-1::1685797316::0::1::::<><>::
 ::res://assets/::1686121916
 ::res://assets/audio/::1684805278
@@ -126,8 +126,8 @@ battle_box.tscn::PackedScene::-1::1686121916::0::1::::<><>::res://assets/effects
 dusted_enemy.tscn::PackedScene::-1::1686121916::0::1::::<><>::res://assets/effects/dissapear.gdshader<>res://scripts/battle/dusted_enemy.gd<>res://assets/effects/dust.gdshader
 hud_manager.tscn::PackedScene::4999324594557403829::1685983888::0::1::::<><>::uid://1tmrx86kyjfv<>uid://ch4lp3qjrxfou<>uid://b7ny54ocom6f5<>uid://ci6jiouof0oif<>uid://dsikgyt414x2p<>uid://b4yqkljk01m1o<>uid://ccqx1bgwif064<>uid://dsx65q8ooo1nd<>uid://giolyh7g56fi<>uid://c8yr4lt58ogs1
 player_heart.tscn::PackedScene::386152466092234259::1686228978::0::1::::<><>::uid://b5j3kxbhl6cb
-::res://objects/battle/attack_eye/::1685847376
-true_knife_attack_eye.tscn::PackedScene::4667834708613402238::1685847376::0::1::::<><>::uid://devh3bhee8g5l<>uid://h7yqmmfeyxhu<>uid://cldjlvu68haxi<>uid://mfo4i33u5oo7<>uid://kmfj3g0w60st<>uid://ycdcyu7qcoix<>uid://blul6udrho1yg<>uid://rmhduuclbu64<>uid://cq3jwyffqw6mu
+::res://objects/battle/attack_eye/::1686330607
+true_knife_attack_eye.tscn::PackedScene::4667834708613402238::1686330607::0::1::::<><>::uid://devh3bhee8g5l<>uid://h7yqmmfeyxhu<>uid://cldjlvu68haxi<>uid://mfo4i33u5oo7<>uid://kmfj3g0w60st<>uid://ycdcyu7qcoix<>uid://blul6udrho1yg<>uid://rmhduuclbu64<>uid://cq3jwyffqw6mu
 ::res://objects/battle/bullets/::1685794981
 test_bullet.tscn::PackedScene::7046087896896883734::1684970911::0::1::::<><>::
 test_bullet_kr.tscn::PackedScene::6879766380485515551::1684970911::0::1::::<><>::
@@ -146,8 +146,8 @@ real_knife.gd::GDScript::-1::1684803210::0::1::::RealKnife<>Weapon<>::
 ::res://scenes/::1686304650
 display_manager.tscn::PackedScene::4521423694742311124::1686304650::0::1::::<><>::res://scripts/display_manager.gd<>res://scripts/debug.gd<>uid://1tmrx86kyjfv
 game_over.tscn::PackedScene::3927115081083465751::1685805666::0::1::::<><>::res://scripts/battle/game_over.gd<>uid://b5j3kxbhl6cb<>uid://ctn35e0d21yea
-::res://scenes/battles/::1686228977
-battle_example.tscn::PackedScene::1354385688232653199::1686228977::0::1::::<><>::uid://b7ny54ocom6f5<>uid://c0fk22bwsicj2<>uid://cdhye7ndiak02<>res://objects/battle/battle_box.tscn<>uid://ds6wqfq03pwda<>uid://frb40ffyat0v<>res://objects/battle/attack_manager.tscn
+::res://scenes/battles/::1686330569
+battle_example.tscn::PackedScene::1354385688232653199::1686330569::0::1::::<><>::uid://b7ny54ocom6f5<>uid://c0fk22bwsicj2<>uid://cdhye7ndiak02<>res://objects/battle/battle_box.tscn<>uid://ds6wqfq03pwda<>uid://frb40ffyat0v<>res://objects/battle/attack_manager.tscn
 ::res://scripts/::1686084044
 debug.gd::GDScript::-1::1686084044::0::1::::<>Node2D<>::
 display_manager.gd::GDScript::-1::1685983645::0::1::::<>Node2D<>::
@@ -157,7 +157,7 @@ functions.gd::GDScript::-1::1684727044::0::1::::<>Node<>::
 settings.gd::GDScript::-1::1685974134::0::1::::<>Node<>::
 ut_items.gd::GDScript::-1::1685883947::0::1::::<>Node<>::
 vars.gd::GDScript::-1::1686085701::0::1::::<>Node<>::
-::res://scripts/battle/::1686304649
+::res://scripts/battle/::1686330539
 attack_manager.gd::GDScript::-1::1685983887::0::1::::AttackManager<>Node<>::
 battle_box.gd::GDScript::-1::1685977738::0::1::::BattleBox<>NinePatchRect<>::
 battle_manager.gd::GDScript::-1::1685856885::0::1::::BattleRoom<>Node<>::
@@ -165,7 +165,7 @@ buffer.gd::GDScript::-1::1684834600::0::1::::<>BackBufferCopy<>::
 bullet.gd::GDScript::-1::1686304649::0::1::::Bullet<>Node2D<>::
 dialouge_manager.gd::GDScript::-1::1685883748::0::1::::DialougeManager<>Node<>::
 dusted_enemy.gd::GDScript::-1::1685884782::0::1::::DustedEnemy<>Sprite2D<>::
-enemy.gd::GDScript::-1::1686220842::0::1::::Enemy<>Node2D<>::
+enemy.gd::GDScript::-1::1686330539::0::1::::Enemy<>Node2D<>::
 game_over.gd::GDScript::-1::1685856713::0::1::::<>Node2D<>::
 hud_manager.gd::GDScript::-1::1685983872::0::1::::HudManager<>Node2D<>::
 player_heart.gd::GDScript::-1::1686084384::0::1::::PlayerHeart<>CharacterBody2D<>::

@@ -79,7 +79,7 @@ func attack_normal(damage : float):
 	bar_max.queue_free()
 	bar.queue_free()
 	damage_text.queue_free()
-	post_attack()
+	post_attack(damage)
 
 func attack_dodge(damage : float):
 	var bar_max : ColorRect = ColorRect.new()
@@ -115,7 +115,7 @@ func attack_dodge(damage : float):
 	bar_max.queue_free()
 	bar.queue_free()
 	damage_text.queue_free()
-	post_attack()
+	post_attack(damage)
 
 func attack_no_damage(damage : float):
 	var bar_max : ColorRect = ColorRect.new()
@@ -139,17 +139,21 @@ func attack_no_damage(damage : float):
 	bar_max.queue_free()
 	bar.queue_free()
 	damage_text.queue_free()
-	post_attack()
+	post_attack(-1)
 
-func post_attack():
+func post_attack(damage : float):
 	done_being_attacked.emit()
 	if(current_hp <= 0):
 		death()
 	else:
-		vars.attack_manager.pre_attack()
-		vars.dialouge_manager.start()
-		await vars.dialouge_manager.done
-		vars.attack_manager.current_attack.start_attack()
+		if(damage != -1):
+			vars.attack_manager.pre_attack()
+			vars.dialouge_manager.start()
+			await vars.dialouge_manager.done
+			vars.attack_manager.current_attack.start_attack()
+		else:
+			vars.attack_manager.current_attack.start_attack()
+			vars.attack_manager.pre_attack()
 
 func death():
 	var dust_enemy = load("res://objects/battle/dusted_enemy.tscn").instantiate()

@@ -28,6 +28,7 @@ var speed = 0.03333333
 var paused = false
 signal unpaused
 signal done
+signal type
 var z_enabled = true
 var x_enabled = true
 
@@ -127,6 +128,7 @@ func write():
 				audio.play(sounds[current_sound][sound_index])
 		sound_index = wrapi(sound_index+1,0,sounds[current_sound].size())
 		visible_characters += 1
+		type.emit()
 	if(order.has(str(visible_characters))):
 		if(order[str(visible_characters)] not in ["pause", "pc"]):
 			print("PAUSED")
