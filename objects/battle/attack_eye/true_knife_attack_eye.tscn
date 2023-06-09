@@ -28,7 +28,7 @@ func _process(delta):
 	if(bar_moving):
 		bar.position.x += 360 * delta
 		if(bar.position.x > 280):
-			attack(0)
+			attack(-1)
 		elif(Input.is_action_just_pressed(\"confirm\")):
 			var rng = RandomNumberGenerator.new()
 			var amount = roundi((settings.player_save.get_weapon().attack * + settings.player_save.player.atk - enemy.def + rng.randf_range(0,1)) * (2.2 if bar.position.distance_to(eye.position) <= 5 else 2 - (bar.position.distance_to(eye.position) / 546 * 2)))

@@ -1,3 +1,3 @@
-res://scenes/display_manager.tscn
-res://scripts/battle/bullets/sans/bone.gd
-res://scripts/battle/bullet.gd
+res://scenes/battles/battle_example.tscn
+res://scripts/battle/enemy.gd
+res://objects/battle/attack_eye/true_knife_attack_eye.tscn

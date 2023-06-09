@@ -35,7 +35,7 @@ func _init(enemy_name : String, hp : int, df : float):
 	self.def = def
 
 func attack(damage : float):
-	if(damage > 0):
+	if(damage >= 0):
 		match(dodge):
 			e_dodge.none:
 				attack_normal(damage)

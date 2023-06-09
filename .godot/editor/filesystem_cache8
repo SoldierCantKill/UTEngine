@@ -1,5 +1,5 @@
 2a60927148abd1d33b818b535e306557
-::res://::1686304141
+::res://::1686330475
 credits.txt::TextFile::-1::1685797316::0::1::::<><>::
 ::res://assets/::1686121916
 ::res://assets/audio/::1684805278
@@ -143,8 +143,8 @@ pie.gd::GDScript::-1::1684800622::0::1::::Pie<>Healable<>::
 snowman_piece.gd::GDScript::-1::1684800311::0::1::::SnowmanPiece<>Healable<>::
 ::res://objects/weapons/::1684803210
 real_knife.gd::GDScript::-1::1684803210::0::1::::RealKnife<>Weapon<>::
-::res://scenes/::1686228978
-display_manager.tscn::PackedScene::4521423694742311124::1686228978::0::1::::<><>::res://scripts/display_manager.gd<>res://scripts/debug.gd<>uid://1tmrx86kyjfv
+::res://scenes/::1686304650
+display_manager.tscn::PackedScene::4521423694742311124::1686304650::0::1::::<><>::res://scripts/display_manager.gd<>res://scripts/debug.gd<>uid://1tmrx86kyjfv
 game_over.tscn::PackedScene::3927115081083465751::1685805666::0::1::::<><>::res://scripts/battle/game_over.gd<>uid://b5j3kxbhl6cb<>uid://ctn35e0d21yea
 ::res://scenes/battles/::1686228977
 battle_example.tscn::PackedScene::1354385688232653199::1686228977::0::1::::<><>::uid://b7ny54ocom6f5<>uid://c0fk22bwsicj2<>uid://cdhye7ndiak02<>res://objects/battle/battle_box.tscn<>uid://ds6wqfq03pwda<>uid://frb40ffyat0v<>res://objects/battle/attack_manager.tscn
@@ -157,12 +157,12 @@ functions.gd::GDScript::-1::1684727044::0::1::::<>Node<>::
 settings.gd::GDScript::-1::1685974134::0::1::::<>Node<>::
 ut_items.gd::GDScript::-1::1685883947::0::1::::<>Node<>::
 vars.gd::GDScript::-1::1686085701::0::1::::<>Node<>::
-::res://scripts/battle/::1686220842
+::res://scripts/battle/::1686304649
 attack_manager.gd::GDScript::-1::1685983887::0::1::::AttackManager<>Node<>::
 battle_box.gd::GDScript::-1::1685977738::0::1::::BattleBox<>NinePatchRect<>::
 battle_manager.gd::GDScript::-1::1685856885::0::1::::BattleRoom<>Node<>::
 buffer.gd::GDScript::-1::1684834600::0::1::::<>BackBufferCopy<>::
-bullet.gd::GDScript::-1::1686082776::0::1::::Bullet<>Node2D<>::
+bullet.gd::GDScript::-1::1686304649::0::1::::Bullet<>Node2D<>::
 dialouge_manager.gd::GDScript::-1::1685883748::0::1::::DialougeManager<>Node<>::
 dusted_enemy.gd::GDScript::-1::1685884782::0::1::::DustedEnemy<>Sprite2D<>::
 enemy.gd::GDScript::-1::1686220842::0::1::::Enemy<>Node2D<>::
@@ -173,8 +173,8 @@ player_heart.gd::GDScript::-1::1686084384::0::1::::PlayerHeart<>CharacterBody2D<
 attack_base.gd::GDScript::-1::1685977211::0::1::::Attack<>Node<>::
 test_attack.gd::GDScript::-1::1685974017::0::1::::<>Attack<>::
 ::res://scripts/battle/bullets/::1685884550
-::res://scripts/battle/bullets/sans/::1686082477
-bone.gd::GDScript::-1::1686082477::0::1::::Bone<>Bullet<>::
+::res://scripts/battle/bullets/sans/::1686304649
+bone.gd::GDScript::-1::1686304649::0::1::::Bone<>Bullet<>::
 bone_stab.gd::GDScript::-1::1685977202::0::1::::BoneStab<>Bullet<>::
 gaster_blaster.gd::GDScript::-1::1685886896::0::1::::<>Bullet<>::
 platform.gd::GDScript::-1::1685978481::0::1::::Platform<>Bullet<>::
