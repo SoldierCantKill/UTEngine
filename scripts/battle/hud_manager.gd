@@ -334,7 +334,7 @@ func disable():
 func fight():
 	audio.play("menu/menu_select")
 	disable()
-	eye = ut_items.weapons[settings.player_save.player.weapon].attack_eye.instantiate()
+	eye = ut_items.items[settings.player_save.player.weapon].attack_eye.instantiate()
 	eye.enemy = vars.enemies.get_child(enemy_index)
 	add_child(eye)
 
@@ -344,8 +344,8 @@ func check():
 
 func use():
 	audio.play("menu/menu_select")
+	var item = settings.player_save.get_item(item_index + (item_page - 1) * 4)
 	disable()
-	var item = ut_items.items[settings.player_save.inventory[item_index + (item_page - 1) * 4]]
 	item.use(item_index + (item_page - 1) * 4)
 	await item.done
 	reset()

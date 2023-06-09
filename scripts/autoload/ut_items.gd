@@ -5,10 +5,12 @@ extends Node
 	#HEAL ITEMS
 	"butterscotch_pie" : Pie.new(),
 	"snowman_piece" : SnowmanPiece.new(),
-	}
-
-@onready var weapons : Dictionary = {
-	"real_knife" : RealKnife.new()
+	
+	#WEAPONS
+	"real_knife" : RealKnife.new(),
+	
+	#ARMOR
+	"heart_locket" : HeartLocket.new(),
 }
 
 func sort_inventory():

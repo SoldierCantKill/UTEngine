@@ -10,7 +10,7 @@ var player = {
 	atk = 10,
 	def = 10,
 	weapon = "real_knife",
-	armor = "",
+	armor = "heart_locket",
 	}
 
 var inventory : Array = [ #Don't erase indexes from this Array!!!!
@@ -28,5 +28,11 @@ var data = {
 	
 	}
 
-func get_weapon():
-	return ut_items.weapons[player.weapon]
+func get_weapon() -> Weapon:
+	return ut_items.items[player.weapon]
+	
+func get_armor() -> Armor:
+	return ut_items.items[player.weapon]
+
+func get_item(index : int) -> Item:
+	return ut_items.items[inventory[index]]
