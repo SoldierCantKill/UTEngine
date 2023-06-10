@@ -16,6 +16,7 @@ func _ready():
 
 func _process(delta : float) -> void:
 	outline.size = size + Vector2(10,10)
+	outline.self_modulate.a = material.get_shader_parameter("fgopacity")
 	margin = [offset_left, offset_top, offset_right, offset_bottom]
 	var spd = resize_spd * delta
 

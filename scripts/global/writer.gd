@@ -27,9 +27,12 @@ var sound_index := 0
 var speed := 0.03333333
 var paused := false
 var delaying : = false
+var can_emit_type_done := true
 signal delay_done
 signal unpaused
 signal done
+signal line_start
+signal type_done
 signal type
 var z_enabled := true
 var x_enabled := true
@@ -98,7 +101,7 @@ func parse():
 				var start_index = i.get_start() - 1 - removed_chars + added_bb_code
 				var bb_code_add = ""
 				var temp_string = text.substr(start_index + 3 + len(i.get_string(1)),len(text))
-				bb_code_add = value
+				bb_code_add = "[" + value + "]"
 				removed_chars += len(i.get_string(0))
 				added_bb_code += len(bb_code_add)
 				text = text.substr(0,start_index + 1) + bb_code_add + temp_string
@@ -115,7 +118,11 @@ func parse():
 			order[str(max(start_index - added_bb_code,0))].append([property, value])
 			if(property in ["clear", "pc"]):
 				break
+		line_start.emit()
 	order_changed = false
+	can_emit_type_done = true
+	print(text)
+
 
 func write():
 	can_write = false
@@ -173,8 +180,12 @@ func writer_event(index):
 			elif(i[0] == "pc"):
 				paused = true
 				await unpaused
+				type_done.emit()
+				print(text.find("(pc)"))
 				if(text.find("(pc)") != -1):
 					var str = text.substr(text.find(get_parsed_text().substr(index + 1,text.find("(pc)"))),text.find("(pc)"))
+					print(get_parsed_text().substr(index + 1,text.find("(pc)")))
+					print("string is ",str)
 					writer_text = str
 				else:
 					writer_text = ""

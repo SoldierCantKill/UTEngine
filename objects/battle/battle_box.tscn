@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://budogvo5p1iw6"]
 
 [ext_resource type="Shader" path="res://assets/effects/battle_box.gdshader" id="1_hmeu5"]
 [ext_resource type="Texture2D" uid="uid://c0pijlyibwwdh" path="res://assets/sprites/battle/border.png" id="2_wvotm"]

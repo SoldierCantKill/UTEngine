@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b7ny54ocom6f5" path="res://assets/sprites/battle/hud/buttons/fight/0.png" id="2_6f77y"]
 [ext_resource type="Texture2D" uid="uid://c0fk22bwsicj2" path="res://assets/sprites/speech_bubble.png" id="2_gywuk"]
 [ext_resource type="PackedScene" uid="uid://cdhye7ndiak02" path="res://objects/battle/hud_manager.tscn" id="3_5e3ix"]
-[ext_resource type="PackedScene" path="res://objects/battle/battle_box.tscn" id="4_4yajr"]
+[ext_resource type="PackedScene" uid="uid://budogvo5p1iw6" path="res://objects/battle/battle_box.tscn" id="4_4yajr"]
 [ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="5_wlkg8"]
 [ext_resource type="PackedScene" uid="uid://frb40ffyat0v" path="res://objects/battle/player_heart.tscn" id="7_1vkjp"]
 [ext_resource type="PackedScene" uid="uid://dhcxqo8jsl3pw" path="res://objects/battle/attack_manager.tscn" id="7_2tvut"]
