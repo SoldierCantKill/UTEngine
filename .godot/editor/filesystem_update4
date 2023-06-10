@@ -1,3 +1,5 @@
 res://scenes/battles/battle_example.tscn
-res://objects/battle/hud_manager.tscn
+res://scripts/global/player_save.gd
+res://scripts/global/healable.gd
 res://scripts/battle/hud_manager.gd
+res://objects/battle/hud_manager.tscn

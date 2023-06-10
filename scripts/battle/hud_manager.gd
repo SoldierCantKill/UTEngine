@@ -8,7 +8,7 @@ var item_index := 0
 var last_item_index := 0 #Used for checking if you didn't attack the enemy or something
 var item_page := 1
 
-var show_kr_text := true #only 
+var show_kr_text := true
 var serious_mode := true
 
 var enemy_health_bars := []
@@ -65,27 +65,12 @@ func setup_hud():
 		display.lv_text.position = display.name_text.position + Vector2(len(display.name_text.get_parsed_text()) * 22.5,0)
 		display.hp.position = display.lv_text.position + Vector2(124,5)
 		display.max_health_bar.position = display.hp.position + Vector2(31, -5)
-		#display.current_health_bar.position = display.hp.position + Vector2(31, -5)
-		if(show_kr_text):
-			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x - 26,5) + Vector2(len(display.kr.get_parsed_text()) * 17.5,0)
-			display.kr.visible = true
-		else:
-			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x - 26,5)
-			display.kr.visible = false
-		display.health_text.position = display.kr.position + Vector2(len(display.kr.get_parsed_text()) * 20, -5)
 	else:
 		display.name_text.position = Vector2(30,400)
 		display.lv_text.position = display.name_text.position + Vector2(len(display.name_text.get_parsed_text()) * 21.75,0)
 		display.hp.position = display.lv_text.position + Vector2(107,5)
 		display.max_health_bar.position = display.hp.position + Vector2(31, -5)
-		#display.current_health_bar.position = display.hp.position + Vector2(31, -5)
-		if(show_kr_text):
-			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x - 26,5) + Vector2(len(display.kr.get_parsed_text()) * 17.5,0)
-			display.kr.visible = true
-		else:
-			display.kr.position = display.max_health_bar.position + Vector2(display.max_health_bar.size.x - 26,5)
-			display.kr.visible = false
-		display.health_text.position = display.kr.position + Vector2(len(display.kr.get_parsed_text()) * 20, -5)
+	display.kr.visible = show_kr_text
 
 func _process(delta):
 	inputs()
@@ -101,8 +86,15 @@ func display_update():
 	display.max_health_bar.size = Vector2(settings.player_save.player.max_hp * 1.2,21)
 	display.current_health_bar.size = Vector2(settings.player_save.player.current_hp * 1.2,21)
 	display.karma_health_bar.size = Vector2((settings.player_save.player.current_hp + settings.player_save.player.current_kr) * 1.2,21)
-	display.outline_health_bar.position = display.max_health_bar.position - Vector2(2,2)
-	display.outline_health_bar.size = display.max_health_bar.size + Vector2(4,4)
+	
+	var bar = display.max_health_bar if(settings.player_save.player.max_hp >= settings.player_save.player.current_hp) else display.current_health_bar
+	display.outline_health_bar.global_position = bar.global_position - Vector2(2,2)
+	display.outline_health_bar.size = bar.size + Vector2(4,4)
+	if(show_kr_text):
+		display.kr.position = bar.global_position + Vector2(bar.size.x - 26,5) + Vector2(len(display.kr.get_parsed_text()) * 17.5,0)
+	else:
+		display.kr.position = bar.global_position + Vector2(bar.size.x - 26,5)
+	display.health_text.position = display.kr.position + Vector2(len(display.kr.get_parsed_text()) * 20, -5)
 
 func hud_mode_update():
 	for i in display.item_texts:
