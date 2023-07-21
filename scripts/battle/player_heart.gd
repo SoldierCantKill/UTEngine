@@ -66,7 +66,7 @@ func tick(delta):
 	karma_i_timer -= delta * 60
 	karma_tick_timer += delta * 60
 	if karma_tick_timer > 1:
-		if settings.player_save.player.current_kr == 40:
+		if settings.player_save.player.current_kr >= 40:
 			settings.player_save.player.current_kr -= 1
 			karma_tick_timer = 0
 	if karma_tick_timer > 2:

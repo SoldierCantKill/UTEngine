@@ -34,6 +34,7 @@ signal done
 signal line_start
 signal type_done
 signal type
+signal event
 var z_enabled := true
 var x_enabled := true
 
@@ -95,7 +96,6 @@ func parse():
 				removed_chars += len(i.get_string(0))
 				added_bb_code += len(bb_code_add)
 				text = text.substr(0,start_index + 1) + bb_code_add + temp_string
-				start_index = clampi(start_index, 0, 9999999)
 				continue
 			elif(property in ["bb"]):
 				var start_index = i.get_start() - 1 - removed_chars + added_bb_code
@@ -105,31 +105,30 @@ func parse():
 				removed_chars += len(i.get_string(0))
 				added_bb_code += len(bb_code_add)
 				text = text.substr(0,start_index + 1) + bb_code_add + temp_string
-				start_index = clampi(start_index, 0, 9999999)
 				continue
 				
-				
+			
 			var start_index = i.get_start() - 1 - removed_chars + added_bb_code
 			removed_chars += len(i.get_string(0))
 			text = text.substr(0,start_index + 1) + text.substr(start_index + 3 + len(i.get_string(1)),len(text))
-			start_index = clampi(start_index, 0, 9999999)
-			if(!order.has(str(max(start_index - added_bb_code,0)))):
-				order[str(max(start_index - added_bb_code,0))] = []
-			order[str(max(start_index - added_bb_code,0))].append([property, value])
+			if(!order.has(str(max(start_index - added_bb_code,-99)))):
+				order[str(max(start_index - added_bb_code,-99))] = []
+			order[str(max(start_index - added_bb_code,-99))].append([property, value])
 			if(property in ["clear", "pc"]):
 				break
 		line_start.emit()
 	order_changed = false
 	can_emit_type_done = true
-	print(text)
-
+	timeout = speed
 
 func write():
 	can_write = false
 	if(text.is_empty() && order.is_empty()):
 		done.emit()
 		return
-	await writer_event(max(visible_characters - 1,0))
+	await writer_event(max(visible_characters - 1,-1))
+	if(order_changed):
+		return
 	if(visible_characters < len(get_parsed_text())):
 		sound_index = wrapi(sound_index,0,sounds[current_sound].size())
 		if(get_parsed_text()[visible_characters] not in silent_chars):
@@ -165,15 +164,26 @@ func writer_event(index):
 				await delay_done
 			elif(i[0] == "speed"):
 				speed = i[1]
+				delaying = true
+				var delay_func = func():
+					var t = 0.0
+					while(true):
+						t += get_process_delta_time()
+						if(!delaying || t >= i[1]): delay_done.emit(); return
+						await get_tree().process_frame
+				delay_func.call_deferred()
+				await delay_done
 			elif(i[0] == "pause"):
 				paused = true
 				await unpaused
 			elif(i[0] == "sound"):
 				current_sound = i[1].to_lower()
 			elif(i[0] == "clear"):
+				type_done.emit()
 				if(text.find("(clear)") != -1):
 					var str = text.substr(text.find(get_parsed_text().substr(index + 1,text.find("(clear)"))),text.find("(clear)"))
 					writer_text = str
+					await line_start
 				else:
 					writer_text = ""
 				visible_characters = 0
@@ -181,15 +191,17 @@ func writer_event(index):
 				paused = true
 				await unpaused
 				type_done.emit()
-				print(text.find("(pc)"))
 				if(text.find("(pc)") != -1):
 					var str = text.substr(text.find(get_parsed_text().substr(index + 1,text.find("(pc)"))),text.find("(pc)"))
-					print(get_parsed_text().substr(index + 1,text.find("(pc)")))
-					print("string is ",str)
 					writer_text = str
+					await line_start
 				else:
 					writer_text = ""
 				visible_characters = 0
+			elif(i[0] == "event"):
+				event.emit()
+				for connection in event.get_connections():
+					event.disconnect(connection["callable"])
 			elif(i[0] == "audio"):
 				audio.play(i[1])
 			elif(i[0] == "music"):
@@ -220,14 +232,11 @@ func _process(delta):
 					for j in order[i]:
 						if(j[0] in ["pause", "pc"]):
 							found = true
-							visible_characters = int(i)
-							
-							#writer_event(max(visible_characters - 1,0))
+							visible_characters = int(i) + 1
 							break
 				if(!found):
 					visible_characters = len(text)
 				delaying = false
-					#writer_event(max(len(text) - 1,0))
 	
 	timeout += delta
 	if(timeout >= speed && !paused && can_write):
