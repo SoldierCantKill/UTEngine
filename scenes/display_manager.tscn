@@ -23,15 +23,21 @@ offset_bottom = 480.0
 color = Color(0, 0, 0, 0)
 
 [node name="debug" type="Node2D" parent="."]
+modulate = Color(1, 0, 0, 1)
 script = ExtResource("2_hsb8s")
 
 [node name="text" type="RichTextLabel" parent="debug"]
 clip_contents = false
-offset_right = 198.0
-offset_bottom = 162.0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 272.0
+offset_bottom = 154.0
 theme_override_fonts/normal_font = ExtResource("3_gofok")
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "[rainbow]Debug
-"
+theme_override_font_sizes/normal_font_size = 19
+text = "Engine by Soldier
+HP = INFINITE
+FPS = 0
+Timer = 0
+Status : Not Attacking
+Attack Counter = 0"
 scroll_active = false

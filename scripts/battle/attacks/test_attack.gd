@@ -88,6 +88,7 @@ func bones_part_one():
 	await vars.attack_manager.black_screen(1)
 
 func gb_part_one():
+#	vars.attack_manager.gaster_blaster(Vector2(-100,-100),Vector2(150,100),20,Vector2(.8,1),false)
 	for i in range(18):
 		vars.attack_manager.gaster_blaster(Vector2(-100,-100),Vector2(150,100),-i * 20,Vector2(.8,1),false)
 		await get_tree().create_timer(.05).timeout

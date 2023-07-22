@@ -74,6 +74,8 @@ func gaster_blaster(start_position : Vector2, end_position : Vector2, end_rotati
 	var gaster_blaster = preload("res://objects/battle/bullets/sans/gaster_blaster.tscn").instantiate()
 	gaster_blaster.masked = false
 	gaster_blaster.scale = scale
+	#gaster_blaster.blast_time = 60
+	#gaster_blaster.blast_timer = 60
 	gaster_blaster.end_position = end_position
 	gaster_blaster.end_rotation = end_rotation
 	gaster_blaster.global_position = start_position

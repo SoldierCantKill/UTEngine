@@ -1,2 +1,11 @@
 res://scenes/battles/battle_example.tscn
-res://scripts/global/writer.gd
+res://objects/battle/player_heart.tscn
+res://objects/battle/attack_eye/true_knife_attack_eye.tscn
+res://objects/battle/hud_manager.tscn
+res://scenes/display_manager.tscn
+res://scripts/debug.gd
+res://objects/battle/attack_manager.tscn
+res://objects/battle/bullets/sans/gaster_blaster.tscn
+res://scripts/battle/bullets/sans/gaster_blaster.gd
+res://scripts/battle/attack_manager.gd
+res://scripts/battle/attacks/test_attack.gd
