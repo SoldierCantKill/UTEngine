@@ -69,10 +69,10 @@ func attack_normal(damage : float):
 	damage_text.global_position = bar_max.global_position - Vector2(0,45)
 	var damage_move = func():
 		var sprite_vel = -2
-		for i in range(40):
+		while(damage_text.position.y < 139.5):
 			if(is_instance_valid(damage_text)):
 				sprite_vel += get_process_delta_time() * 6.0
-				damage_text.position.y += sprite_vel
+				damage_text.position.y += sprite_vel * get_process_delta_time() * 60
 			else: return
 			await get_tree().process_frame
 	damage_move.call()
@@ -114,10 +114,10 @@ func attack_dodge(damage : float):
 	damage_text.visible = true
 	var damage_move = func():
 		var sprite_vel = -2
-		for i in range(40):
+		while(damage_text.position.y < 139.5):
 			if(is_instance_valid(damage_text)):
 				sprite_vel += get_process_delta_time() * 6.0
-				damage_text.position.y += sprite_vel
+				damage_text.position.y += sprite_vel * get_process_delta_time() * 60
 			else: return
 			await get_tree().process_frame
 	damage_move.call()

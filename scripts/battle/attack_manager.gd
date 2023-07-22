@@ -32,6 +32,14 @@ func pre_heal_attack() -> Attack:
 	current_attack.attack_finished.connect(func(): attack_done.emit())
 	return current_attack
 
+func pre_custom_attack(attack_script) -> Attack:
+	current_attack = Attack.new()
+	current_attack.set_script(attack_script)
+	add_child(current_attack)
+	current_attack.pre_attack()
+	current_attack.attack_finished.connect(func(): attack_done.emit())
+	return current_attack
+
 func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, speed : float, rotation_speed : float, masked = true, duration : float = -1) -> Bullet:
 	var bullet = bullet_path.instantiate()
 	bullet.masked = masked

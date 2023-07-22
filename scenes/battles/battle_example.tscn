@@ -146,7 +146,13 @@ script = SubResource("GDScript_vt12r")
 
 [node name="black_screen" type="ColorRect" parent="."]
 visible = false
-top_level = true
+z_index = 255
 offset_right = 640.0
 offset_bottom = 480.0
 color = Color(0, 0, 0, 1)
+
+[node name="white_screen" type="ColorRect" parent="."]
+visible = false
+z_index = 255
+offset_right = 640.0
+offset_bottom = 480.0

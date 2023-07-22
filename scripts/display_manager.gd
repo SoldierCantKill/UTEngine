@@ -38,11 +38,10 @@ func screen_shake(amount : float) -> void:
 func _process(delta):
 	if(is_instance_valid(vars.scene_cam)):
 		if camera_intensity > 0:
-			camera_shake_t += 30 * delta
+			camera_shake_t += 60 * delta
 		else:
 			pass
-			#vars.scene_cam.offset = Vector2.ZERO
 		if camera_shake_t >= 1:
-			camera_shake_t -= 1
-			camera_intensity -= 1
+			camera_shake_t -= delta * 60
+			camera_intensity -= delta * 60
 			vars.scene_cam.offset = Vector2(camera_intensity * [1, -1].pick_random(), camera_intensity * [1, -1].pick_random()) + Vector2(320,240)

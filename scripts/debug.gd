@@ -35,4 +35,5 @@ func debug():
 			else:
 				string += "Status : Attacking\n"
 				string += "Attack Counter : " + str(int(vars.attack_manager.current_attack.current_frames)) + "\n"
+			string += "Current Turn : " + str(vars.attack_manager.turn_num) + "\n"
 		text.text = string

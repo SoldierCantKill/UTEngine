@@ -1,4 +1,4 @@
-#CREDIT TO SCARM FOR ORIGINAL GB CODE
+#CREDIT TO SCARM FOR ORIGINAL GB CODE (Modified)
 extends Bullet
 
 signal done
@@ -37,7 +37,6 @@ func _process(delta):
 			position.x += (end_position.x - position.x) / 6.0 * (delta * 60)
 			position.y += (end_position.y - position.y) / 6.0 * (delta * 60)
 			rotation_degrees += (end_rotation - rotation_degrees) / 6.0 * (delta * 60)
-			print(abs(position.x - end_position.x), " | ", abs(position.y - end_position.y), " | ", abs(end_rotation - rotation_degrees), " | ")
 			if(
 			abs(position.x - end_position.x) < 5 &&
 			abs(position.y - end_position.y) < 5 &&
@@ -45,7 +44,6 @@ func _process(delta):
 				):
 					state = 1
 		1:
-			print("HI")
 			if(wait_time <= 0):
 				spr.play()
 				for i in range(3):
@@ -69,7 +67,7 @@ func _process(delta):
 				blast_size *= pow(0.8, delta * 30)
 				laser.modulate.a -= 3 * delta
 				if laser.modulate.a <= 0.8: laser_hitbox_col.disabled = true
-			blast_timer += 30 * delta
+			blast_timer += 60 * delta
 			
 			position -= Vector2(0, leaving_speed).rotated(rotation) * delta * 30
 			
