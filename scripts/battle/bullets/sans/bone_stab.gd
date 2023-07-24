@@ -37,6 +37,15 @@ func _ready():
 		collision.shape.size = Vector2(6,bones.size.y)
 		collision.position.x = 6 + i * 12
 
+func change_color():
+	match(type):
+		e_type.blue:
+			bones.modulate = Color(.26,.89,1,modulate.a)
+		e_type.orange:
+			bones.modulate = Color(1,.63,.25,modulate.a)
+		_:
+			bones.modulate = Color.WHITE
+
 func _process(delta: float) -> void:
 	pivot_offset.pivot_offset = warning.size / 2
 	for i in area2d.get_children():

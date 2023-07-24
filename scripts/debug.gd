@@ -20,9 +20,15 @@ func debug():
 		if(Input.is_action_pressed("turn_changer")):
 			if(Input.is_action_just_pressed("right")):
 				if(is_instance_valid(vars.attack_manager)):
-					vars.attack_manager.turn_num += 1
+					(vars as vars).attack_manager.turn_num += 1
 			if(Input.is_action_just_pressed("left")):
-					vars.attack_manager.turn_num -= 1
+					(vars as vars).attack_manager.turn_num -= 1
+		if(Input.is_action_just_pressed("reset_attack")):
+			if(is_instance_valid(vars.attack_manager)):
+				(vars as vars).attack_manager.reset_attack()
+		if(Input.is_action_just_pressed("end_attack")):
+			(vars as vars).attack_manager.current_attack.end_attack()
+			(vars as vars).attack_manager.delete_bullets.emit()
 		text.visible = true
 		var string = "Engine By Soldier\n"
 		string += "HP = Infinite\n"
@@ -34,6 +40,7 @@ func debug():
 				string += "Attack Counter : 0\n"
 			else:
 				string += "Status : Attacking\n"
-				string += "Attack Counter : " + str(int(vars.attack_manager.current_attack.current_frames)) + "\n"
-			string += "Current Turn : " + str(vars.attack_manager.turn_num) + "\n"
+				string += "Attack Counter : " + str(int((vars as vars).attack_manager.current_attack.current_frames)) + "\n"
+			string += "Current Turn : " + str((vars as vars).attack_manager.turn_num) + "\n"
 		text.text = string
+		

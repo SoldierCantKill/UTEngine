@@ -8,7 +8,7 @@ enum e_dodge {
 
 
 @onready var sprite = null
-@onready var damage_anchor : Node = null
+@onready var damage_anchor : Node = self
 @onready var speech_bubble = $speech_bubble
 @onready var speech_writer = $speech_bubble/speech_writer
 
@@ -67,9 +67,11 @@ func attack_normal(damage : float):
 	var damage_text : RichTextLabel = create_text("[center]"+ str(int(damage)))
 	damage_text.self_modulate = Color(1, 0, 0, 1)
 	damage_text.global_position = bar_max.global_position - Vector2(0,45)
+	
 	var damage_move = func():
+		var drop_value = damage_anchor.global_position.y - 50.5
 		var sprite_vel = -2
-		while(damage_text.position.y < 139.5):
+		while(damage_text.position.y < drop_value):
 			if(is_instance_valid(damage_text)):
 				sprite_vel += get_process_delta_time() * 6.0
 				damage_text.position.y += sprite_vel * get_process_delta_time() * 60
@@ -113,8 +115,9 @@ func attack_dodge(damage : float):
 	bar_max.visible = show_health_bar
 	damage_text.visible = true
 	var damage_move = func():
+		var drop_value = damage_anchor.global_position.y - 50.5
 		var sprite_vel = -2
-		while(damage_text.position.y < 139.5):
+		while(damage_text.position.y < drop_value):
 			if(is_instance_valid(damage_text)):
 				sprite_vel += get_process_delta_time() * 6.0
 				damage_text.position.y += sprite_vel * get_process_delta_time() * 60

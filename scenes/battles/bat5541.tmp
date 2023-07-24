@@ -44,7 +44,6 @@ func _init():
 func _ready():
 	sprite = $sprite
 	damage_anchor = self
-	dodge = e_dodge.dodge
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a4c2p"]

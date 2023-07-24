@@ -6,15 +6,19 @@ class_name Bone
 
 @onready var offset_left = sprite.offset_left :
 	set(value):
+		offset_left = value
 		sprite.offset_left = value
 @onready var offset_top = sprite.offset_top :
 	set(value):
+		offset_top = value
 		sprite.offset_top = value
 @onready var offset_right = sprite.offset_right :
 	set(value):
+		offset_right = value
 		sprite.offset_right = value
 @onready var offset_bottom = sprite.offset_bottom :
 	set(value):
+		offset_bottom = value
 		sprite.offset_bottom = value
 
 func _init():

@@ -34,13 +34,22 @@ func _ready():
 func _process(delta):
 	match(state):
 		0:
-			position.x += (end_position.x - position.x) / 6.0 * (delta * 60)
-			position.y += (end_position.y - position.y) / 6.0 * (delta * 60)
-			rotation_degrees += (end_rotation - rotation_degrees) / 6.0 * (delta * 60)
+			position.x += floor((end_position.x - position.x) / 3.0) * (delta * 30)
+			position.y += floor((end_position.y - position.y) / 3.0) * (delta * 30)
+			if(position.x < end_position.x): position.x += 60 * delta
+			if(position.y < end_position.y): position.y += 60 * delta
+			if(position.x > end_position.x): position.x -= 60 * delta
+			if(position.y > end_position.y): position.y -= 60 * delta
+			if(abs(position.x - end_position.x)) < 3.0: position.x = end_position.x
+			if(abs(position.y - end_position.y)) < 3.0: position.y = end_position.y
+			rotation_degrees += floor((end_rotation - rotation_degrees) / 3.0) * (delta * 30)
+			if(rotation_degrees < end_rotation): rotation_degrees += 60 * delta
+			if(rotation_degrees > end_rotation): rotation_degrees -= 60 * delta
+			if abs(rotation_degrees - end_rotation) < 3.0: rotation_degrees = end_rotation
 			if(
-			abs(position.x - end_position.x) < 5 &&
-			abs(position.y - end_position.y) < 5 &&
-			abs(end_rotation - rotation_degrees) < 1
+			abs(position.x - end_position.x) < 0.1 &&
+			abs(position.y - end_position.y) < 0.1 &&
+			abs(end_rotation - rotation_degrees) < 0.01
 				):
 					state = 1
 		1:

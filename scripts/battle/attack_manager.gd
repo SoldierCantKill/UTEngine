@@ -1,14 +1,16 @@
 extends Node
 class_name AttackManager
 
+signal heart_thrown
+signal delete_bullets
+signal attack_done
+
+@onready var masks = get_node("buffer/masks")
+
 var turn_num = 0
 var attacks = [load("res://scripts/battle/attacks/attack_base.gd")]
 var heal_attacks = [load("res://scripts/battle/attacks/attack_base.gd")]
-
 var current_attack : Attack = null
-signal delete_bullets
-signal attack_done
-@onready var masks = get_node("buffer/masks")
 
 func _ready():
 	attack_done.connect(func(): delete_bullets.emit())
@@ -52,7 +54,7 @@ func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, spe
 	masks.add_child(bullet)
 	return bullet
 
-func bone(position : Vector2, x : float, y : float, speed : float, offset_top: float, offset_bottom : float, rotation_speed : float, masked = true, duration : float = -1) -> Bullet:
+func bone(type : Bullet.e_type, position : Vector2, x : float, y : float, speed : float, offset_top: float, offset_bottom : float, rotation_speed : float, masked = true, duration : float = -1) -> Bullet:
 	var bone = preload("res://objects/battle/bullets/sans/bone.tscn").instantiate()
 	bone.masked = masked
 	bone.duration = duration
@@ -62,11 +64,12 @@ func bone(position : Vector2, x : float, y : float, speed : float, offset_top: f
 	bone.rotation_speed = rotation_speed
 	bone.global_position = position
 	masks.add_child(bone)
+	bone.type = type
 	bone.offset_top = offset_top
 	bone.offset_bottom = offset_bottom
 	return bone
 
-func platform(position : Vector2, x : float, y : float, speed : float, platform_type = Platform.e_platform_type.stick, masked = false, duration : float = -1) -> Bullet:
+func platform(platform_type : Platform.e_platform_type, position : Vector2, x : float, y : float, speed : float, masked = false, duration : float = -1) -> Bullet:
 	var platform = preload("res://objects/battle/bullets/sans/platform.tscn").instantiate()
 	platform.masked = masked
 	platform.duration = duration
@@ -78,19 +81,20 @@ func platform(position : Vector2, x : float, y : float, speed : float, platform_
 	platform.platform_type = platform_type
 	return platform
 
-func gaster_blaster(start_position : Vector2, end_position : Vector2, end_rotation : float, scale : Vector2, masked = false) -> Bullet:
+func gaster_blaster(type : Bullet.e_type, start_position : Vector2, end_position : Vector2, end_rotation : float, scale : Vector2, wait_time : float = 0, blast_time : float = 10, masked = false) -> Bullet:
 	var gaster_blaster = preload("res://objects/battle/bullets/sans/gaster_blaster.tscn").instantiate()
 	gaster_blaster.masked = false
 	gaster_blaster.scale = scale
-	#gaster_blaster.blast_time = 60
-	#gaster_blaster.blast_timer = 60
+	gaster_blaster.wait_time = wait_time
+	gaster_blaster.blast_time = blast_time
 	gaster_blaster.end_position = end_position
 	gaster_blaster.end_rotation = end_rotation
 	gaster_blaster.global_position = start_position
 	masks.add_child(gaster_blaster)
+	gaster_blaster.type = type
 	return gaster_blaster
 
-func bone_stab(position : Vector2, length : float, height : float, wait_time : float, up_time : float, bone_rotation : float, masked = true) -> Bullet:
+func bone_stab(type : Bullet.e_type, position : Vector2, length : float, height : float, wait_time : float, up_time : float, bone_rotation : float, masked = true) -> Bullet:
 	var bone_stab = preload("res://objects/battle/bullets/sans/bone_stab.tscn").instantiate()
 	bone_stab.visible = false
 	bone_stab.length = length
@@ -100,16 +104,19 @@ func bone_stab(position : Vector2, length : float, height : float, wait_time : f
 	bone_stab.masked = masked
 	bone_stab.global_position = position
 	masks.add_child(bone_stab)
+	bone_stab.type = type
 	bone_stab.bone_rotation = bone_rotation
 	await get_tree().process_frame
 	bone_stab.visible = true
 	return bone_stab
 
 func throw(direction : float = 0, fall_speed : float = 500) -> void:
+	heart_thrown.emit(direction)
 	vars.player_heart.heart_mode = PlayerHeart.e_heart_mode.blue
 	await get_tree().process_frame
 	vars.player_heart.sprite.rotation = deg_to_rad(direction)
 	vars.player_heart.fall_speed = fall_speed
+	await get_tree().physics_frame
 	vars.player_heart.thrown = true
 
 func black_screen(time : float) -> void:
@@ -124,3 +131,18 @@ func black_screen(time : float) -> void:
 	audio.play("battle/noise")
 	if(is_instance_valid(audio.music)):
 		audio.music.volume_db = volume
+
+func reset_attack():
+	if(is_instance_valid(current_attack)):
+		var reinstanced_attack = current_attack.duplicate()
+		delete_bullets.emit()
+		current_attack.queue_free()
+		current_attack = reinstanced_attack
+		current_attack.attack_finished.connect(func(): attack_done.emit())
+		vars.battle_box.resize_finished.connect(start_resetted_attack)
+		add_child(current_attack)
+		current_attack.pre_attack()
+
+func start_resetted_attack():
+	if(is_instance_valid(current_attack)):
+		current_attack.start_attack(); vars.battle_box.resize_finished.disconnect(start_resetted_attack)

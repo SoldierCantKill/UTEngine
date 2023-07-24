@@ -27,6 +27,8 @@ func save_game():
 
 func _process(delta):
 	if(Input.is_action_just_pressed("restart")):
+		audio.stop_music()
+		audio.stop_all_sounds()
 		vars.display.change_scene(vars.display.starting_scene)
 		await get_tree().process_frame
 		load_game()
