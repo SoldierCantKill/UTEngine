@@ -1,8 +1,8 @@
 extends Node2D
 class_name Debug
 
-@onready var text = $text
-var enabled = false
+@onready var text := $text
+var enabled := false
 var time_elasped := 0.01
 
 func _ready():
@@ -14,7 +14,7 @@ func _process(delta):
 	debug()
 
 func debug():
-	if(Input.is_action_just_pressed("debug")):
+	if(Input.is_action_just_pressed("debug") && settings.debug_enabled):
 		enabled = !enabled
 		visible = enabled
 	if(visible):

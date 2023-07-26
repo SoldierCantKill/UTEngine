@@ -1,2 +1,3 @@
 res://scenes/battles/battle_example.tscn
-res://scripts/battle/bullets/sans/vector_slash.gd
+res://scripts/debug.gd
+res://scripts/autoload/settings.gd

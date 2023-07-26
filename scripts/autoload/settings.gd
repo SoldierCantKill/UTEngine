@@ -2,6 +2,7 @@ extends Node
 
 var player_save : PlayerSave = null
 var death_position : Vector2 = Vector2.ZERO
+var debug_enabled := true #Disable in public builds
 
 func _ready():
 	start()
