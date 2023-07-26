@@ -158,7 +158,3 @@ visible = false
 z_index = 255
 offset_right = 640.0
 offset_bottom = 480.0
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 21.0
-offset_bottom = 50.0
