@@ -12,6 +12,11 @@ func _init():
 
 func set_writer_text():
 	vars.main_writer.writer_text = \"(disable:z)(sound:mono2)*(color=red) THIS(delay:.7)(sound:sans)(font:sans)(color:white)(size:24) is some real text.\"
+
+func _ready():
+	super._ready()
+	await get_tree().process_frame
+	bone_stab(0,Vector2(0,50),70,50,60,60,0270,false)
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y7b04"]

@@ -1,4 +1,5 @@
 extends Node2D
+class_name DisplayManager
 
 @onready var game : SubViewport = $game/sub_viewport
 var starting_scene = load("res://scenes/battles/battle_example.tscn")

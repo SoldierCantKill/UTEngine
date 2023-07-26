@@ -14,6 +14,7 @@ script/source = "extends BattleRoom
 func _ready():
 	super._ready()
 	vars.hud_manager.reset()
+ 
 "
 
 [sub_resource type="Gradient" id="Gradient_tuxiy"]
@@ -44,7 +45,7 @@ func _init():
 func _ready():
 	sprite = $sprite
 	damage_anchor = self
-	dodge = e_dodge.dodge
+	dodge = e_dodge.none
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a4c2p"]
@@ -157,3 +158,7 @@ visible = false
 z_index = 255
 offset_right = 640.0
 offset_bottom = 480.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 21.0
+offset_bottom = 50.0

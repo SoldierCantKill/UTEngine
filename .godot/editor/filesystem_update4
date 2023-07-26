@@ -1,9 +1,11 @@
+res://objects/battle/bullets/sans/bone_stab.tscn
+res://scripts/battle/bullets/sans/bone_stab.gd
 res://scenes/battles/battle_example.tscn
+res://scenes/display_manager.tscn
 res://objects/battle/attack_manager.tscn
 res://objects/battle/bullets/sans/gaster_blaster.tscn
 res://objects/battle/player_heart.tscn
 res://scripts/battle/attacks/test_attack.gd
-res://scripts/battle/enemy.gd
-res://scripts/battle/bullets/sans/bone.gd
-res://scripts/debug.gd
+res://objects/battle/bullets/sans/bone.tscn
 res://scripts/battle/attack_manager.gd
+res://objects/battle/bullets/sans/test.tscn

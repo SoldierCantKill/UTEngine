@@ -1,10 +1,10 @@
 extends Node
 
 #GLOBAL
-var display = null
+var display : DisplayManager = null
 var scene = null
 var scene_cam = null
-var debug : Node2D = null
+var debug : Debug = null
 
 #BATTLE
 var hud_manager : HudManager = null

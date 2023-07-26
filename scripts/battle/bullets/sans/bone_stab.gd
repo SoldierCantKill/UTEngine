@@ -10,6 +10,7 @@ var length : float = 72
 var wait_time : float = 30
 var up_time : float = 60
 var state := 0
+var racket := 6
 var t : float = 0
 var bone_rotation : float:
 	set(value):
@@ -25,11 +26,14 @@ func _ready():
 	super._ready()
 	area2d = $pivot_offset/area
 	audio.play("battle/warning")
-	warning.size.x = ceil(length) - ceil(fmod(length,12))
+	warning.size.x = length#ceil(length) - ceil(fmod(length,12))
 	warning.offset_top = -bone_height
-	bones.size.x = ceil(length) - ceil(fmod(length,12))
+	bones.size.x = length + fmod(length,12)
+	bones.offset_top = warning.offset_bottom + 2
 	bones.offset_bottom = bone_height + 12
-	for i in range(ceil(length / 12) - ceil(fmod(length,12))):
+	var bone_count = ceil(bones.size.x / 12)
+	print(bone_count)
+	for i in range(bone_count):
 		var collision = CollisionShape2D.new()
 		area2d.add_child(collision)
 		collision.shape = RectangleShape2D.new()
@@ -47,7 +51,17 @@ func change_color():
 			bones.modulate = Color.WHITE
 
 func _process(delta: float) -> void:
-	pivot_offset.pivot_offset = warning.size / 2
+	match(int(bone_rotation)):
+		0:
+			pivot_offset.pivot_offset = Vector2(0,0)
+		90:
+			pivot_offset.pivot_offset = Vector2(warning.size.y,warning.size.y) + Vector2(-bone_height,-bone_height)
+		180:
+			pivot_offset.pivot_offset = warning.size / 2 + Vector2(0,-bone_height)
+			print(warning.size)
+			print(pivot_offset.pivot_offset)
+		270:
+			pivot_offset.pivot_offset = Vector2(warning.size.x,warning.size.x) / 2 + Vector2(0,-bone_height)
 	for i in area2d.get_children():
 		i.position.y = (bones.offset_bottom + bones.offset_top) / 2
 		i.shape.size.y = bones.size.y
@@ -57,16 +71,22 @@ func _process(delta: float) -> void:
 			t = 0
 			state = 1
 			warning.visible = false
-			var tween = get_tree().create_tween()
 			audio.play("battle/bonestab")
-			var distance = bones.global_position.distance_to(bones.global_position - Vector2(0,bone_height)) / 150
-			tween.tween_property(bones,"position:y",-bone_height,distance).set_trans(Tween.TRANS_SINE)
-			tween.finished.connect(func(): state = 2)
+	elif(state == 1):
+		bones.position.y -= (ceil(bone_height / 3.0)) * (delta * 30)
+		if(bones.position.y <= -bone_height):
+			t = 0
+			state = 2
+			bones.position = Vector2(0,-bone_height)
 	elif(state == 2):
 		t += 60 * delta
 		if(t >= up_time):
-			state = 3
-			var tween = get_tree().create_tween()
-			var distance = bones.global_position.distance_to(bones.global_position + Vector2(0,bone_height)) / 150
-			tween.tween_property(bones,"position:y",2,distance).set_trans(Tween.TRANS_SINE)
-			tween.finished.connect(func(): queue_free())
+			bones.position.y += (ceil(bone_height / 4.0)) * (delta * 30)
+		else:
+			if racket > 0: racket -= delta * 30
+			else: racket = 0
+			var rr: = (randf() * racket) - (randf() * racket)
+			var rr2: = (randf() * racket) - (randf() * racket)
+			bones.position = Vector2(rr, -bone_height + rr2)
+		if(bones.position.y >= 2):
+			queue_free()

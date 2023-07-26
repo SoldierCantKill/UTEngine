@@ -1,4 +1,5 @@
 extends Node2D
+class_name Debug
 
 @onready var text = $text
 var enabled = false
