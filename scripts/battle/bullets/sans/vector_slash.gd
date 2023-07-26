@@ -55,7 +55,7 @@ func _process(delta):
 			collision.disabled = false
 			if(stop_rotation_after):
 				rotation_speed = 0
-			audio.play("battle/dusttrust_sword_sound",audio.global_volume,1)
+			audio.play("battle/dt_sword_sound",audio.global_volume,1)
 	elif(state == 1):
 		slash.offset_left -= (slash_size / 6 * delta * 30)
 		slash.offset_right += (slash_size / 6 * delta * 30)

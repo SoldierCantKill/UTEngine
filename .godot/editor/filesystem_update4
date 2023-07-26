@@ -1,14 +1,2 @@
-res://objects/battle/bullets/sans/bone_stab.tscn
-res://scripts/battle/bullets/sans/bone_stab.gd
 res://scenes/battles/battle_example.tscn
-res://objects/battle/bullets/sans/vector_stab.tscn
-res://scripts/battle/bullets/sans/vector_stab.gd
-res://objects/battle/bullets/sans/vector_slash.tscn
 res://scripts/battle/bullets/sans/vector_slash.gd
-res://scripts/battle/bullet.gd
-res://objects/battle/attack_manager.tscn
-res://scripts/battle/attack_manager.gd
-res://scripts/battle/bullets/sans/bone.gd
-res://scripts/battle/bullets/sans/platform.gd
-res://scripts/battle/bullets/sans/gaster_blaster.gd
-res://credits.txt
