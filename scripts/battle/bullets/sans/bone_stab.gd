@@ -1,18 +1,19 @@
 extends Bullet
-class_name BoneStab
+class_name BBoneStab
 
 @onready var pivot_offset = $pivot_offset
 @onready var bones = $pivot_offset/bones
 @onready var warning = $pivot_offset/warning
 
-var bone_height : float = 50
-var length : float = 72
-var wait_time : float = 30
-var up_time : float = 60
+var bone_height := 50.0
+var length := 72.0
+var wait_time := 30.0
+var up_time := 60.0
 var state := 0
 var racket := 6
-var t : float = 0
-var bone_rotation : float:
+var t := 0.0
+var warning_color_t := 0.0
+var bone_rotation := 0:
 	set(value):
 		bone_rotation = value
 		pivot_offset.rotation_degrees = value
@@ -67,6 +68,10 @@ func _process(delta: float) -> void:
 		i.shape.size.y = bones.size.y
 	if(state == 0):
 		t += 60 * delta
+		warning_color_t += 60 * delta
+		if(warning_color_t > 3):
+			warning_color_t = 0
+			warning.self_modulate = Color.YELLOW if(warning.self_modulate == Color.RED) else Color.RED
 		if(t >= wait_time):
 			t = 0
 			state = 1

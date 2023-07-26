@@ -1,5 +1,5 @@
-#CREDIT TO SCARM FOR ORIGINAL GB CODE (Modified)
 extends Bullet
+class_name BGasterBlaster
 
 signal done
 

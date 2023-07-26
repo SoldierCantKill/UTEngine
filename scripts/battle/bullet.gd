@@ -16,9 +16,9 @@ enum e_curse {
 	set(value):
 		area2d = value
 		area2d.area_exited.connect(func(area): if(vars.player_heart not in area2d.get_overlapping_bodies()): was_colliding = false)
-var damage : float = 5
-var karma : float = 1
-var auto_change_color = true :
+var damage := 5.0
+var karma := 1.0
+var auto_change_color := true :
 	set(value):
 		auto_change_color = value
 		if(value):
@@ -30,15 +30,15 @@ var type : e_type = 0 :
 			change_color()
 var curse : e_curse = 0
 var was_colliding
-var x : float = 0
-var y : float = 0
-var speed : float = 0
-var rotation_speed : float = 0
-var masked : bool = true : 
+var x := 0.0
+var y := 0.0
+var speed := 0.0
+var rotation_speed := 0.0
+var masked : = true : 
 	set(value):
 		masked = value
 		show_behind_parent = value
-var duration = -1
+var duration := -1.0
 
 func _ready():
 	vars.attack_manager.delete_bullets.connect(func(): queue_free())
@@ -96,7 +96,7 @@ func _physics_process(delta):
 	duration_tick(delta)
 
 func duration_tick(delta):
-	if(duration != -1):
+	if(int(duration) != -1):
 		duration -= delta
 		if(duration <= 0):
 			queue_free()

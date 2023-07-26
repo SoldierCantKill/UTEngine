@@ -1,5 +1,5 @@
 extends Bullet
-class_name Platform
+class_name BPlatform
 
 enum e_platform_type {
 	stick,

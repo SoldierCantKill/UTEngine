@@ -1,2 +1,2 @@
-Oplexitie - Lots of help with shaders, notably the dusting shader when an enemy dies and the battle box shader
-Scarm - Helped a bit with the writer, wouldn't have had a parsed writer without his help. Also helped me in the past with alot of scripts, some you may "partially" see here
+Oplexitie - Lots of help with shaders, in particular the dusting shader when an enemy dies and the battle box shader
+Scarm - Helped a bit with the writer, also his engine serves as a good reference point in adjusting things for 1-1 accuracy of Undertale

@@ -11,7 +11,7 @@ func _init():
 	attacks = [preload(\"res://scripts/battle/attacks/test_attack.gd\")]
 
 func set_writer_text():
-	vars.main_writer.writer_text = \"(disable:z)(sound:mono2)*(color=red) THIS(delay:.7)(sound:sans)(font:sans)(color:white)(size:24) is some real text.\"
+	vars.main_writer.writer_text = \"(disable:z)(sound:mono2)* Credit to Soldier\"
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y7b04"]

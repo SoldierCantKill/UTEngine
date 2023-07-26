@@ -1,5 +1,5 @@
 extends Bullet
-class_name Bone
+class_name BBone
 
 @onready var sprite := $bone
 @onready var collision := $bone/area/collision
