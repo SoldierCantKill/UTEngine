@@ -88,12 +88,12 @@ func display_update():
 	display.karma_health_bar.size = Vector2((settings.player_save.player.current_hp + settings.player_save.player.current_kr) * 1.2,21)
 	
 	var bar = display.max_health_bar if(settings.player_save.player.max_hp >= settings.player_save.player.current_hp) else display.current_health_bar
-	display.outline_health_bar.global_position = bar.global_position - Vector2(2,2)
+	display.outline_health_bar.position = bar.position - Vector2(2,2)
 	display.outline_health_bar.size = bar.size + Vector2(4,4)
 	if(show_kr_text):
-		display.kr.position = bar.global_position + Vector2(bar.size.x - 26,5) + Vector2(len(display.kr.get_parsed_text()) * 17.5,0)
+		display.kr.position = bar.position + Vector2(bar.size.x - 26,5) + Vector2(len(display.kr.get_parsed_text()) * 17.5,0)
 	else:
-		display.kr.position = bar.global_position + Vector2(bar.size.x - 26,5)
+		display.kr.position = bar.position + Vector2(bar.size.x - 26,5)
 	display.health_text.position = display.kr.position + Vector2(len(display.kr.get_parsed_text()) * 20, -5)
 
 func hud_mode_update():

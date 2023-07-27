@@ -1,3 +1,1 @@
-res://scenes/battles/battle_example.tscn
-res://scripts/debug.gd
-res://scripts/autoload/settings.gd
+res://scripts/battle/hud_manager.gd
