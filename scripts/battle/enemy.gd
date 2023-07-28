@@ -47,6 +47,7 @@ func attack(damage : float):
 
 func attack_normal(damage : float):
 	await vars.hud_manager.eye.knife.animation_finished
+	await get_tree().create_timer(0.0333333).timeout
 	audio.play("battle/hit")
 	var bar_max : ColorRect = ColorRect.new()
 	var bar : ColorRect = ColorRect.new()
@@ -67,7 +68,6 @@ func attack_normal(damage : float):
 	var damage_text : RichTextLabel = create_text("[center]"+ str(int(damage)))
 	damage_text.self_modulate = Color(1, 0, 0, 1)
 	damage_text.global_position = bar_max.global_position - Vector2(0,45)
-	
 	var damage_move = func():
 		var drop_value = damage_anchor.global_position.y - 50.5
 		var sprite_vel = -2
@@ -78,13 +78,8 @@ func attack_normal(damage : float):
 			else: return
 			await get_tree().process_frame
 	damage_move.call()
-	var pos : Vector2 = position
-	var shake_intensity = 15
-	for i in range(shake_intensity):
-		position.x = pos.x + shake_intensity
-		shake_intensity = shake_intensity * -0.8
-		await get_tree().create_timer(.05).timeout
-	position = pos
+	shake(15)
+	await get_tree().create_timer(1.3).timeout
 	bar_max.queue_free()
 	bar.queue_free()
 	damage_text.queue_free()
@@ -156,6 +151,14 @@ func attack_no_damage(damage : float):
 	bar.queue_free()
 	damage_text.queue_free()
 	post_attack(-1)
+
+func shake(shake_intensity : float = 15):
+	var previous_position = position
+	for i in range(shake_intensity):
+		position.x = previous_position.x + shake_intensity
+		shake_intensity = shake_intensity * -0.8
+		await get_tree().create_timer(.05).timeout
+	position = previous_position
 
 func post_attack(damage : float):
 	done_being_attacked.emit()

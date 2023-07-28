@@ -49,9 +49,9 @@ func attack(amount : float):
 	await enemy.done_being_attacked
 	bar.visible = false
 	var tween = get_tree().create_tween()
-	tween.tween_property(eye,\"scale:x\", .3,.5).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(eye,\"scale:x\", 0,.45).set_trans(Tween.TRANS_SINE)
 	var tween2 = get_tree().create_tween()
-	tween2.tween_property(eye,\"self_modulate:a\", 0,.5).set_trans(Tween.TRANS_SINE)
+	tween2.tween_property(eye,\"self_modulate:a\", 0,.4).set_trans(Tween.TRANS_SINE)
 	await tween.finished
 	queue_free()
 "

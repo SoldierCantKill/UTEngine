@@ -14,7 +14,6 @@ script/source = "extends BattleRoom
 func _ready():
 	super._ready()
 	vars.hud_manager.reset()
- 
 "
 
 [sub_resource type="Gradient" id="Gradient_tuxiy"]

@@ -23,7 +23,7 @@ size = Vector2(575, 5)
 size = Vector2(575, 5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f2wsw"]
-size = Vector2(4.975, 140)
+size = Vector2(5, 140)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feo3c"]
 size = Vector2(5, 140)
@@ -55,7 +55,6 @@ patch_margin_right = 6
 patch_margin_bottom = 6
 
 [node name="collisions" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="up" type="CollisionShape2D" parent="collisions"]
 position = Vector2(287.5, 2.5)

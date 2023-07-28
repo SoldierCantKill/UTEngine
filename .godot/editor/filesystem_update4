@@ -1,1 +1,6 @@
-res://scripts/battle/hud_manager.gd
+res://scenes/battles/battle_example.tscn
+res://assets/effects/battle_box.gdshader
+res://objects/battle/battle_box.tscn
+res://scripts/battle/battle_box.gd
+res://scripts/battle/enemy.gd
+res://objects/battle/attack_eye/true_knife_attack_eye.tscn
