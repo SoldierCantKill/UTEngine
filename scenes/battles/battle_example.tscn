@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://tkcsf1ljdqnn"]
+[gd_scene load_steps=34 format=3 uid="uid://tkcsf1ljdqnn"]
 
 [ext_resource type="Texture2D" uid="uid://cbhcc3qrqgn7i" path="res://assets/sprites/battle/enemies/sans_undertale/head/0.png" id="1_2r8j3"]
 [ext_resource type="Texture2D" uid="uid://c0fk22bwsicj2" path="res://assets/sprites/battle/enemies/speech_bubble.png" id="2_51m0u"]
@@ -149,8 +149,34 @@ animations = [{
 script/source = "extends Writer
 "
 
+[sub_resource type="GDScript" id="GDScript_5temn"]
+script/source = "extends HudManager
+
+"
+
+[sub_resource type="GDScript" id="GDScript_yenlp"]
+script/source = "extends BattleBox
+"
+
 [sub_resource type="GDScript" id="GDScript_jri2l"]
 script/source = "extends Writer
+"
+
+[sub_resource type="GDScript" id="GDScript_riu00"]
+script/source = "extends PlayerHeart
+"
+
+[sub_resource type="GDScript" id="GDScript_c0lm0"]
+script/source = "extends AttackManager
+
+func _init():
+	attacks = [preload(\"res://scripts/battle/attacks/test_attack.gd\")]
+
+func _ready():
+	super._ready()
+
+func set_writer_text():
+	vars.main_writer.writer_text = \"(disable:z)(sound:mono2)* Credit to Soldier\"
 "
 
 [sub_resource type="GDScript" id="GDScript_vt12r"]
@@ -227,8 +253,10 @@ visible_characters_behavior = 1
 script = SubResource("GDScript_uiy3g")
 
 [node name="hud_manager" parent="." instance=ExtResource("3_5e3ix")]
+script = SubResource("GDScript_5temn")
 
 [node name="battle_box" parent="." instance=ExtResource("4_4yajr")]
+script = SubResource("GDScript_yenlp")
 
 [node name="battle_writer" type="RichTextLabel" parent="."]
 clip_contents = false
@@ -249,8 +277,10 @@ visible_characters_behavior = 1
 script = SubResource("GDScript_jri2l")
 
 [node name="player_heart" parent="." instance=ExtResource("7_1vkjp")]
+script = SubResource("GDScript_riu00")
 
 [node name="attack_manager" parent="." instance=ExtResource("7_2tvut")]
+script = SubResource("GDScript_c0lm0")
 
 [node name="dialouge_manager" type="Node2D" parent="."]
 script = SubResource("GDScript_vt12r")
