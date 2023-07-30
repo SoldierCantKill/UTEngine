@@ -42,7 +42,8 @@ func pre_custom_attack(attack_script) -> Attack:
 	current_attack.attack_finished.connect(func(): attack_done.emit())
 	return current_attack
 
-func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, speed : float, rotation_speed : float, masked = true, duration : float = -1) -> Bullet:
+func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, speed : float,
+rotation_speed : float, masked = true, duration : float = -1) -> Bullet:
 	var bullet = bullet_path.instantiate()
 	bullet.masked = masked
 	bullet.duration = duration
@@ -54,7 +55,9 @@ func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, spe
 	masks.add_child(bullet)
 	return bullet
 
-func bone(type : Bullet.e_type, position : Vector2, x : float, y : float, speed : float, offset_top: float, offset_bottom : float, rotation_speed : float, masked = true, duration : float = -1) -> BBone:
+func bone(type : Bullet.e_type, position : Vector2, x : float, y : float, speed : float,
+offset_top: float, offset_bottom : float, rotation_speed : float, masked = true,
+duration : float = -1) -> BBone:
 	var bone = preload("res://objects/battle/bullets/sans/bone.tscn").instantiate()
 	bone.masked = masked
 	bone.duration = duration
@@ -69,7 +72,33 @@ func bone(type : Bullet.e_type, position : Vector2, x : float, y : float, speed 
 	bone.offset_bottom = offset_bottom
 	return bone
 
-func platform(platform_type : BPlatform.e_platform_type, position : Vector2, x : float, y : float, speed : float, masked = false, duration : float = -1) -> BPlatform:
+func bone_circle(type : Bullet.e_type, position : Vector2, bone_count : int, radius : float,
+rotation_speed : float, masked : bool = true, duration : float = -1) -> BBoneCircle:
+	var bone_circle = preload("res://objects/battle/bullets/sans/bone_circle.tscn").instantiate()
+	bone_circle.masked = masked
+	bone_circle.bone_count = bone_count
+	bone_circle.radius = radius
+	bone_circle.rotation_speed = rotation_speed
+	bone_circle.global_position = position
+	bone_circle.duration = duration
+	masks.add_child(bone_circle)
+	bone_circle.type = type
+	return bone_circle
+
+func bone_gravity(type : Bullet.e_type, position : Vector2, bone_count : int, offset_bottom : float,
+masked : bool = false, duration : float = -1) -> void:
+	for i in range(bone_count):
+		var bone = preload("res://objects/battle/bullets/sans/bone.tscn").instantiate()
+		bone.duration = duration
+		bone.masked = masked
+		bone.global_position = position
+		masks.add_child(bone)
+		bone.type = type
+		bone.offset_bottom = offset_bottom
+		bone.gravity_enabled = true
+
+func platform(platform_type : BPlatform.e_platform_type, position : Vector2, x : float,
+y : float, speed : float, masked = false, duration : float = -1) -> BPlatform:
 	var platform = preload("res://objects/battle/bullets/sans/platform.tscn").instantiate()
 	platform.masked = masked
 	platform.duration = duration
@@ -81,7 +110,9 @@ func platform(platform_type : BPlatform.e_platform_type, position : Vector2, x :
 	platform.platform_type = platform_type
 	return platform
 
-func gaster_blaster(type : Bullet.e_type, start_position : Vector2, end_position : Vector2, end_rotation : float, scale : Vector2, wait_time : float = 0, blast_time : float = 10, masked = false) -> BGasterBlaster:
+func gaster_blaster(type : Bullet.e_type, start_position : Vector2, end_position : Vector2,
+end_rotation : float, scale : Vector2, wait_time : float = 0, blast_time : float = 10,
+masked = false) -> BGasterBlaster:
 	var gaster_blaster = preload("res://objects/battle/bullets/sans/gaster_blaster.tscn").instantiate()
 	gaster_blaster.masked = false
 	gaster_blaster.scale = scale
@@ -94,7 +125,8 @@ func gaster_blaster(type : Bullet.e_type, start_position : Vector2, end_position
 	gaster_blaster.type = type
 	return gaster_blaster
 
-func bone_stab(type : Bullet.e_type, position : Vector2, length : float, height : float, wait_time : float, up_time : float, bone_rotation : float, masked = true) -> Bullet:
+func bone_stab(type : Bullet.e_type, position : Vector2, length : float, height : float,
+wait_time : float, up_time : float, bone_rotation : float, masked = true) -> Bullet:
 	var bone_stab = preload("res://objects/battle/bullets/sans/bone_stab.tscn").instantiate()
 	bone_stab.visible = false
 	bone_stab.length = length
@@ -109,7 +141,8 @@ func bone_stab(type : Bullet.e_type, position : Vector2, length : float, height 
 	bone_stab.visible = true
 	return bone_stab
 
-func vector_slash(type : Bullet.e_type, position : Vector2, wait_time : float, rotation_speed : float, stop_rotation_after : bool, masked = true) -> BVectorSlash:
+func vector_slash(type : Bullet.e_type, position : Vector2, wait_time : float,
+rotation_speed : float, stop_rotation_after : bool, masked = false) -> BVectorSlash:
 	var vector_slash = preload("res://scripts/battle/bullets/sans/vector_slash.gd").instantiate()
 	vector_slash.global_position = position
 	vector_slash.wait_time = wait_time

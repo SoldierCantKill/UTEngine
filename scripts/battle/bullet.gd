@@ -40,6 +40,9 @@ var masked : = true :
 		show_behind_parent = value
 var duration := -1.0
 
+var gravity_enabled := false
+var gravity_drag := Vector2(randf_range(-120.0,120.0),randf_range(-90.0,50.0))
+
 func _ready():
 	vars.attack_manager.delete_bullets.connect(func(): queue_free())
 
@@ -94,6 +97,11 @@ func _physics_process(delta):
 	global_position += Vector2(x,y) * speed * delta
 	rotation_degrees += rotation_speed * delta
 	duration_tick(delta)
+	if(gravity_enabled):
+		global_position.y += gravity_drag.y * delta
+		gravity_drag.y += max(abs(gravity_drag.y),200) * delta * 2
+		global_position.x += gravity_drag.x * delta
+		rotation_degrees += gravity_drag.x * 2 * delta
 
 func duration_tick(delta):
 	if(int(duration) != -1):

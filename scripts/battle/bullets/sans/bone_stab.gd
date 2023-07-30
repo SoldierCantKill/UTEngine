@@ -33,7 +33,6 @@ func _ready():
 	bones.offset_top = warning.offset_bottom + 2
 	bones.offset_bottom = bone_height + 12
 	var bone_count = ceil(bones.size.x / 12)
-	print(bone_count)
 	for i in range(bone_count):
 		var collision = CollisionShape2D.new()
 		area2d.add_child(collision)
@@ -59,8 +58,6 @@ func _process(delta: float) -> void:
 			pivot_offset.pivot_offset = Vector2(warning.size.y,warning.size.y) + Vector2(-bone_height,-bone_height)
 		180:
 			pivot_offset.pivot_offset = warning.size / 2 + Vector2(0,-bone_height)
-			print(warning.size)
-			print(pivot_offset.pivot_offset)
 		270:
 			pivot_offset.pivot_offset = Vector2(warning.size.x,warning.size.x) / 2 + Vector2(0,-bone_height)
 	for i in area2d.get_children():

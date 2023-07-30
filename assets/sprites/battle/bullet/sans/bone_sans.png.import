@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dnc08xx2i78ug"
-path="res://.godot/imported/bone_sans.png-2d256fa7d15b9274bb09f6baadd9b5af.ctex"
+path="res://.godot/imported/bone_sans.png-42dc6300e5ea63c95d6f984110225a50.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/battle/bullet/bone_sans.png"
-dest_files=["res://.godot/imported/bone_sans.png-2d256fa7d15b9274bb09f6baadd9b5af.ctex"]
+source_file="res://assets/sprites/battle/bullet/sans/bone_sans.png"
+dest_files=["res://.godot/imported/bone_sans.png-42dc6300e5ea63c95d6f984110225a50.ctex"]
 
 [params]
 

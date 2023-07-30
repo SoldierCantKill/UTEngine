@@ -12,8 +12,8 @@ func _init():
 
 func _ready():
 	super._ready()
-	await get_tree().process_frame
-	bone_circle(0,Vector2.ZERO,50,25,50)
+	for i in range(5):
+		bone_gravity(Vector2(320,240),10)
 
 func set_writer_text():
 	vars.main_writer.writer_text = \"(disable:z)(sound:mono2)* Credit to Soldier\"

@@ -1,0 +1,159 @@
+[gd_scene load_steps=17 format=3 uid="uid://tkcsf1ljdqnn"]
+
+[ext_resource type="Texture2D" uid="uid://b7ny54ocom6f5" path="res://assets/sprites/battle/hud/buttons/fight/0.png" id="2_6f77y"]
+[ext_resource type="Texture2D" uid="uid://c0fk22bwsicj2" path="res://assets/sprites/speech_bubble.png" id="2_gywuk"]
+[ext_resource type="PackedScene" uid="uid://cdhye7ndiak02" path="res://objects/battle/hud_manager.tscn" id="3_5e3ix"]
+[ext_resource type="PackedScene" uid="uid://budogvo5p1iw6" path="res://objects/battle/battle_box.tscn" id="4_4yajr"]
+[ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="5_wlkg8"]
+[ext_resource type="PackedScene" uid="uid://frb40ffyat0v" path="res://objects/battle/player_heart.tscn" id="7_1vkjp"]
+[ext_resource type="PackedScene" uid="uid://dhcxqo8jsl3pw" path="res://objects/battle/attack_manager.tscn" id="7_2tvut"]
+
+[sub_resource type="GDScript" id="GDScript_60in0"]
+script/source = "extends BattleRoom
+
+func _ready():
+	super._ready()
+	vars.hud_manager.reset()
+"
+
+[sub_resource type="Gradient" id="Gradient_tuxiy"]
+offsets = PackedFloat32Array(0, 0.05, 0.9, 1)
+colors = PackedColorArray(0.0235294, 0.490196, 0.741176, 1, 0.141176, 0.333333, 0.572549, 1, 0.0117647, 0.00392157, 0.0196078, 1, 0.0196078, 0.00784314, 0.0313726, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fkand"]
+gradient = SubResource("Gradient_tuxiy")
+fill_from = Vector2(0.478632, 1)
+fill_to = Vector2(0.508547, 0.0299145)
+
+[sub_resource type="GDScript" id="GDScript_wftwh"]
+script/source = "extends TextureRect
+
+var t = 0.0
+
+func _process(delta):
+	t += delta
+	texture.gradient.offsets[1] = max(sin(t) / 2 + .3, 0)
+"
+
+[sub_resource type="GDScript" id="GDScript_ohi4s"]
+script/source = "extends Enemy
+
+func _init():
+	super._init(\"Fight\",5000,1)
+	
+func _ready():
+	sprite = $sprite
+	damage_anchor = self
+	dodge = e_dodge.none
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a4c2p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6f77y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_uiy3g"]
+script/source = "extends Writer
+"
+
+[sub_resource type="GDScript" id="GDScript_jri2l"]
+script/source = "extends Writer
+"
+
+[sub_resource type="GDScript" id="GDScript_vt12r"]
+script/source = "extends DialougeManager
+"
+
+[node name="battle_example" type="Node2D"]
+script = SubResource("GDScript_60in0")
+
+[node name="camera" type="Camera2D" parent="."]
+offset = Vector2(320, 240)
+ignore_rotation = false
+
+[node name="gradient" type="TextureRect" parent="."]
+offset_left = -1.0
+offset_top = 328.0
+offset_right = 640.0
+offset_bottom = 481.0
+texture = SubResource("GradientTexture2D_fkand")
+script = SubResource("GDScript_wftwh")
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="example_enemy" type="Node2D" parent="enemies"]
+position = Vector2(318, 173)
+script = SubResource("GDScript_ohi4s")
+
+[node name="sprite" type="AnimatedSprite2D" parent="enemies/example_enemy"]
+sprite_frames = SubResource("SpriteFrames_a4c2p")
+
+[node name="speech_bubble" type="NinePatchRect" parent="enemies/example_enemy"]
+visible = false
+offset_left = 59.0
+offset_top = -35.0
+offset_right = 223.0
+offset_bottom = 56.0
+texture = ExtResource("2_gywuk")
+patch_margin_left = 31
+patch_margin_top = 44
+patch_margin_right = 22
+
+[node name="speech_writer" type="RichTextLabel" parent="enemies/example_enemy/speech_bubble"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 3.0
+offset_right = 158.0
+offset_bottom = 85.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+visible_characters_behavior = 1
+script = SubResource("GDScript_uiy3g")
+
+[node name="hud_manager" parent="." instance=ExtResource("3_5e3ix")]
+
+[node name="battle_box" parent="." instance=ExtResource("4_4yajr")]
+
+[node name="battle_writer" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = 52.0
+offset_top = 270.0
+offset_right = 601.0
+offset_bottom = 384.0
+theme_override_colors/font_shadow_color = Color(0.11, 0.11, 0.39, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/normal_font = ExtResource("5_wlkg8")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+scroll_active = false
+autowrap_mode = 0
+visible_characters_behavior = 1
+script = SubResource("GDScript_jri2l")
+
+[node name="player_heart" parent="." instance=ExtResource("7_1vkjp")]
+
+[node name="attack_manager" parent="." instance=ExtResource("7_2tvut")]
+
+[node name="dialouge_manager" type="Node2D" parent="."]
+script = SubResource("GDScript_vt12r")
+
+[node name="black_screen" type="ColorRect" parent="."]
+visible = false
+z_index = 255
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 1)
+
+[node name="white_screen" type="ColorRect" parent="."]
+visible = false
+z_index = 255
+offset_right = 640.0
+offset_bottom = 480.0
