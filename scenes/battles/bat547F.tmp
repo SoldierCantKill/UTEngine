@@ -11,7 +11,7 @@
 [ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="5_wlkg8"]
 [ext_resource type="Texture2D" uid="uid://cxbk0on8j1d3x" path="res://assets/sprites/battle/enemies/sans_undertale/head/5.png" id="6_tk6b8"]
 [ext_resource type="PackedScene" uid="uid://frb40ffyat0v" path="res://objects/battle/player_heart.tscn" id="7_1vkjp"]
-[ext_resource type="PackedScene" uid="uid://dccycw0oi0itb" path="res://objects/battle/attack_manager.tscn" id="7_2tvut"]
+[ext_resource type="PackedScene" uid="uid://dhcxqo8jsl3pw" path="res://objects/battle/attack_manager.tscn" id="7_2tvut"]
 [ext_resource type="Texture2D" uid="uid://dwwni3sm5c01o" path="res://assets/sprites/battle/enemies/sans_undertale/head/6.png" id="7_uuvf4"]
 [ext_resource type="Texture2D" uid="uid://tkfrn6c4jswe" path="res://assets/sprites/battle/enemies/sans_undertale/head/eye/0.png" id="8_wmrrv"]
 [ext_resource type="Texture2D" uid="uid://bbap5sf6pf88g" path="res://assets/sprites/battle/enemies/sans_undertale/head/eye/1.png" id="9_r6cby"]
@@ -56,7 +56,7 @@ var torso_offset := Vector2.ZERO
 var head_offset := Vector2.ZERO
 var siner := 0.0
 
-var animation_mode := 1
+var animation_mode := 0
 
 func _init():
 	super._init(\"Sans\",1,1)
@@ -68,16 +68,14 @@ func _ready():
 	dodge = e_dodge.dodge
 
 func _process(delta):
-	siner += 30 * delta
 	match(animation_mode):
 		0: torso_offset = Vector2(0, 0)
-		1: torso_offset = Vector2(cos(siner / 5), sin(siner / 2.5))
+		1: torso_offset = Vector2(cos(siner / 6), sin(siner / 3))
 		2: torso_offset.y = sin(siner / 15) * 4
 		3: torso_offset.y = sin(siner / 18) * 2
 	
 	$torso.position = torso_position + Vector2(torso_offset.x, torso_offset.y / 1.5)
 	$head.position = head_position + (torso_offset + head_offset)
-
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u1rbl"]
@@ -155,14 +153,6 @@ script/source = "extends Writer
 
 [sub_resource type="GDScript" id="GDScript_vt12r"]
 script/source = "extends DialougeManager
-
-func start():
-	var enemy = vars.enemies.get_child(0)
-	enemy.speech_bubble.visible = true
-	enemy.speech_writer.writer_text = \"(font:mono)(sound:sans)how are you?(pc)\"
-	await enemy.speech_writer.done
-	enemy.speech_bubble.visible = false
-	done.emit()
 "
 
 [node name="battle_example" type="Node2D"]
@@ -183,7 +173,7 @@ script = SubResource("GDScript_wftwh")
 [node name="enemies" type="Node2D" parent="."]
 
 [node name="example_enemy" type="Node2D" parent="enemies"]
-position = Vector2(324, 186)
+position = Vector2(334, 185)
 script = SubResource("GDScript_ohi4s")
 
 [node name="damage_anchor" type="Node2D" parent="enemies/example_enemy"]
@@ -206,10 +196,10 @@ sprite_frames = SubResource("SpriteFrames_sw7ow")
 
 [node name="speech_bubble" type="NinePatchRect" parent="enemies/example_enemy"]
 visible = false
-offset_left = 76.0
-offset_top = -83.0
-offset_right = 240.0
-offset_bottom = 8.0
+offset_left = 59.0
+offset_top = -35.0
+offset_right = 223.0
+offset_bottom = 56.0
 texture = ExtResource("2_51m0u")
 patch_margin_left = 31
 patch_margin_top = 44
