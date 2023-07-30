@@ -1,5 +1,3 @@
 res://scenes/battles/battle_example.tscn
 res://assets/effects/battle_box.gdshader
-res://scripts/battle/attack_manager.gd
 res://objects/battle/attack_manager.tscn
-res://scripts/battle/bullets/sans/bone_stab.gd
