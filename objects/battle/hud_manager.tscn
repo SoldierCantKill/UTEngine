@@ -153,10 +153,10 @@ autowrap_mode = 0
 visible_characters_behavior = 1
 
 [node name="hp_bar_outline" type="ColorRect" parent="display"]
-offset_left = 253.0
-offset_top = 398.0
-offset_right = 368.0
-offset_bottom = 423.0
+offset_left = 252.0
+offset_top = 397.0
+offset_right = 369.0
+offset_bottom = 424.0
 color = Color(0, 0, 0, 1)
 
 [node name="hp_bar_max" type="ColorRect" parent="display"]
