@@ -2,7 +2,12 @@ extends Node
 
 var player_save : PlayerSave = null
 var death_position : Vector2 = Vector2.ZERO
+var zoomed_in := true :
+	set(value):
+		zoomed_in = value
+		change_zoom()
 var debug_enabled := true #Disable in public builds
+
 
 func _ready():
 	start()
@@ -35,6 +40,8 @@ func _process(delta):
 		load_game()
 	if Input.is_action_just_pressed("fullscreen") && !Input.is_action_pressed("alt"):
 		toggle_resolution()
+	if Input.is_action_just_pressed("zoom"):
+		zoomed_in = !zoomed_in
 
 func toggle_resolution():
 	match(DisplayServer.window_get_mode()):
@@ -46,3 +53,22 @@ func toggle_resolution():
 			DisplayServer.window_set_mode(3)
 			DisplayServer.window_set_mode(0)
 			get_viewport().size = Vector2(640,480)
+	change_zoom()
+
+func change_zoom():
+	if(zoomed_in):
+		vars.display.border.visible = false
+		match(DisplayServer.window_get_mode()):
+			0:
+				vars.display.camera.zoom = Vector2(1,1)
+				get_viewport().size = Vector2(640,480)
+			4:
+				vars.display.camera.zoom = Vector2(2.25,2.25)
+	else:
+		vars.display.border.visible = true
+		match(DisplayServer.window_get_mode()):
+			0:
+				vars.display.camera.zoom = Vector2(1,1)
+				get_viewport().size = Vector2(960,540)
+			4:
+				vars.display.camera.zoom = Vector2(2,2)

@@ -183,14 +183,46 @@ color = Color(1, 1, 0, 1)
 position = Vector2(87, 453)
 sprite_frames = SubResource("SpriteFrames_0rflg")
 
+[node name="outline" type="ColorRect" parent="buttons/fight"]
+show_behind_parent = true
+offset_left = -57.0
+offset_top = -23.0
+offset_right = 57.0
+offset_bottom = 23.0
+color = Color(0, 0, 0, 1)
+
 [node name="act" type="AnimatedSprite2D" parent="buttons"]
 position = Vector2(240, 453)
 sprite_frames = SubResource("SpriteFrames_m1fy0")
+
+[node name="outline2" type="ColorRect" parent="buttons/act"]
+show_behind_parent = true
+offset_left = -57.0
+offset_top = -23.0
+offset_right = 57.0
+offset_bottom = 23.0
+color = Color(0, 0, 0, 1)
 
 [node name="item" type="AnimatedSprite2D" parent="buttons"]
 position = Vector2(400, 453)
 sprite_frames = SubResource("SpriteFrames_hl06y")
 
+[node name="outline3" type="ColorRect" parent="buttons/item"]
+show_behind_parent = true
+offset_left = -57.0
+offset_top = -23.0
+offset_right = 57.0
+offset_bottom = 23.0
+color = Color(0, 0, 0, 1)
+
 [node name="mercy" type="AnimatedSprite2D" parent="buttons"]
 position = Vector2(555, 453)
 sprite_frames = SubResource("SpriteFrames_ujgel")
+
+[node name="outline4" type="ColorRect" parent="buttons/mercy"]
+show_behind_parent = true
+offset_left = -57.0
+offset_top = -23.0
+offset_right = 57.0
+offset_bottom = 23.0
+color = Color(0, 0, 0, 1)

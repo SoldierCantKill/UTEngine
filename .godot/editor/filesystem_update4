@@ -1,7 +1,3 @@
 res://scenes/battles/battle_example.tscn
 res://assets/effects/battle_box.gdshader
-res://scripts/battle/battle_box.gd
-res://objects/battle/battle_box.tscn
-res://objects/battle/bullets/sans/gaster_blaster.tscn
-res://scripts/battle/bullets/sans/gaster_blaster.gd
-res://scripts/battle/attacks/test_attack.gd
+res://assets/effects/blur.gdshader

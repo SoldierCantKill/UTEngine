@@ -1,10 +1,15 @@
 extends Node2D
 class_name DisplayManager
 
-@onready var game : SubViewport = $game/sub_viewport
+@onready var border = $border
+@onready var game = $game
+@onready var game_viewport := $game/container/sub_viewport
+@onready var border_viewport := $border/container/sub_viewport
+@onready var camera := $camera
+
 var starting_scene = load("res://scenes/battles/battle_example.tscn")
-var camera_intensity : float = 0
-var camera_shake_t : float = 0
+var camera_intensity := 0.0
+var camera_shake_t := 0.0
 signal fade_done
 
 func _ready() -> void:
@@ -12,13 +17,14 @@ func _ready() -> void:
 	change_scene(starting_scene, false)
 
 func change_scene(path : Variant, fadeout = true) -> void:
-	for i in game.get_children():
+	for i in game_viewport.get_children():
 		i.queue_free()
 	var scene = path.instantiate()
-	game.add_child(scene)
+	game_viewport.add_child(scene)
 	vars.scene = scene
 	if(fadeout):
 		fade_out(.3)
+	border_viewport.world_2d = game_viewport.world_2d
 
 func fade_out(time : float):
 	$fade_overlay.color = Color(0,0,0,1)

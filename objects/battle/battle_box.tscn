@@ -43,11 +43,12 @@ script = SubResource("GDScript_3vp8p")
 
 [node name="outline" type="NinePatchRect" parent="."]
 self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
 layout_mode = 0
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 580.0
-offset_bottom = 145.0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 578.0
+offset_bottom = 143.0
 texture = ExtResource("3_bn1g4")
 patch_margin_left = 6
 patch_margin_top = 6
