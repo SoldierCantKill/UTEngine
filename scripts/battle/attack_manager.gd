@@ -42,7 +42,7 @@ func pre_custom_attack(attack_script) -> Attack:
 	current_attack.attack_finished.connect(func(): attack_done.emit())
 	return current_attack
 
-func bullet(bullet_path : Variant, position : Vector2, x : float, y : float, speed : float,
+func bullet(bullet_path : Variant, type : Bullet.e_type, position : Vector2, x : float, y : float, speed : float,
 rotation_speed : float, masked = true, duration : float = -1) -> Bullet:
 	var bullet = bullet_path.instantiate()
 	bullet.masked = masked
@@ -142,10 +142,11 @@ wait_time : float, up_time : float, bone_rotation : float, masked = true) -> Bul
 	return bone_stab
 
 func vector_slash(type : Bullet.e_type, position : Vector2, wait_time : float,
-rotation_speed : float, stop_rotation_after : bool, masked = false) -> BVectorSlash:
-	var vector_slash = preload("res://scripts/battle/bullets/sans/vector_slash.gd").instantiate()
+starting_rotation : float, rotation_speed : float, stop_rotation_after : bool, masked = false) -> BVectorSlash:
+	var vector_slash = preload("res://objects/battle/bullets/sans/vector_slash.tscn").instantiate()
 	vector_slash.global_position = position
 	vector_slash.wait_time = wait_time
+	vector_slash.rotation_degrees = starting_rotation
 	vector_slash.stop_rotation_after = stop_rotation_after
 	vector_slash.rotation_speed = rotation_speed
 	vector_slash.masked = stop_rotation_after

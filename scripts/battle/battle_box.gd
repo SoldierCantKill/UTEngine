@@ -15,7 +15,6 @@ func _ready():
 	pass
 
 func _process(delta : float) -> void:
-	#rotation += 2 * delta
 	outline.size = size + Vector2(10,10)
 	outline.self_modulate.a = material.get_shader_parameter("fgopacity")
 	margin = [offset_left, offset_top, offset_right, offset_bottom]

@@ -25,6 +25,7 @@ script/source = "extends BattleRoom
 func _ready():
 	super._ready()
 	vars.hud_manager.reset()
+	audio.play_music(\"music/harderlovania\")
 "
 
 [sub_resource type="Gradient" id="Gradient_tuxiy"]

@@ -1,5 +1,4 @@
 res://scenes/battles/battle_example.tscn
 res://assets/effects/battle_box.gdshader
-res://objects/battle/attack_manager.tscn
-res://scripts/battle/dialouge_manager.gd
+res://scripts/battle/battle_box.gd
 res://objects/battle/battle_box.tscn
