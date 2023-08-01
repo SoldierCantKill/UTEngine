@@ -67,7 +67,7 @@ func _process(delta):
 					laser_hitbox_col.disabled = false
 					audio.stop_sound("battle/gaster_blast")
 					audio.play("battle/gaster_blast",audio.global_volume,1.2)
-					if spr.scale.x >= 1: vars.display.screen_shake(5)
+					if scale.x >= 1: vars.display.screen_shake(5)
 			else:
 				leaving_speed += 120 * delta
 			if(blast_timer < 5):

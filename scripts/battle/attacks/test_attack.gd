@@ -89,14 +89,14 @@ func bones_part_one():
 func gb_part_one():
 #	vars.attack_manager.gaster_blaster(Vector2(-100,-100),Vector2(150,100),20,Vector2(.8,1),false)
 	for i in range(18):
-		a_vars.attack_manager.gaster_blaster(0,Vector2(-100,-100),Vector2(150,100),-i * 20,Vector2(.8,1),false)
+		a_vars.attack_manager.gaster_blaster(0,Vector2(-100,-100),Vector2(150,100),-i * 20,Vector2(1,1),false)
 		await get_tree().create_timer(.05).timeout
 	await get_tree().create_timer(.3).timeout
 	for i in range(18):
-		a_vars.attack_manager.gaster_blaster(0,Vector2(500,-100),Vector2(380,100),-i * 20,Vector2(.8,1),false)
+		a_vars.attack_manager.gaster_blaster(0,Vector2(500,-100),Vector2(380,100),-i * 20,Vector2(1,1),false)
 		await get_tree().create_timer(.05).timeout
 	await get_tree().create_timer(.3).timeout
 	for i in range(5):
-		a_vars.attack_manager.gaster_blaster(0,Vector2(200,-100),Vector2(280,100),30 - i * 20,Vector2(.8,1),false)
+		a_vars.attack_manager.gaster_blaster(0,Vector2(200,-100),Vector2(280,100),30 - i * 20,Vector2(1,1),false)
 		await get_tree().create_timer(.1).timeout
 
