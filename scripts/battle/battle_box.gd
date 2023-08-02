@@ -75,3 +75,18 @@ func insta_box_size(target : Array) -> void:
 	offset_right = target[2]
 	offset_bottom = target[3]
 	resize_finished.emit()
+
+func get_top_left() -> Vector2:
+	return global_position
+
+func get_top_right() -> Vector2:
+	return global_position + Vector2(size.x,0)
+
+func get_bottom_left() -> Vector2:
+	return global_position + Vector2(0,size.y)
+
+func get_bottom_right() -> Vector2:
+	return global_position + size
+
+func get_center() -> Vector2:
+	return global_position + size / 2
