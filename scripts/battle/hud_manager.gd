@@ -66,8 +66,8 @@ func setup_hud():
 		display.hp.position = display.lv_text.position + Vector2(124,5)
 		display.max_health_bar.position = display.hp.position + Vector2(31, -5)
 	else:
-		display.name_text.position = Vector2(30,400)
-		display.lv_text.position = display.name_text.position + Vector2(len(display.name_text.get_parsed_text()) * 21.75,0)
+		display.name_text.position = Vector2(30,400)# 87.0 
+		display.lv_text.position = display.name_text.position + Vector2((len(display.name_text.get_parsed_text()) * 14.25) + 30,0)
 		display.hp.position = display.lv_text.position + Vector2(107,5)
 		display.max_health_bar.position = display.hp.position + Vector2(31, -5)
 	display.kr.visible = show_kr_text

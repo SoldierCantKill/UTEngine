@@ -2,7 +2,7 @@ extends Resource
 class_name PlayerSave
 
 var player = {
-	name = "chara",
+	name = "rose",
 	lv = 19,
 	current_hp = 92,
 	current_kr = 0,

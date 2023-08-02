@@ -1,4 +1,7 @@
-res://objects/battle/hud_manager.tscn
+res://scenes/battles/battle_example.tscn
 res://assets/effects/battle_box.gdshader
 res://assets/effects/blur.gdshader
-res://scenes/battles/battle_example.tscn
+res://objects/battle/hud_manager.tscn
+res://scripts/global/player_save.gd
+res://scripts/battle/battle_box.gd
+res://scripts/battle/hud_manager.gd

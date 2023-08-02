@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1690921505
+::res://::1690951150
 credits.txt::TextFile::-1::1690395929::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1690397855::0::1::::<><>::
 ::res://assets/::1686121916
@@ -47,9 +47,9 @@ mus_sfx_gunshot.wav::AudioStreamWAV::8707978164272898028::1684805517::1685983610
 snd_victor.wav::AudioStreamWAV::3138597518644787850::1684805517::1685983610::1::::<><>::
 strike.wav::AudioStreamWAV::6290889083631094129::1684805517::1685983610::1::::<><>::
 sword_strike.wav::AudioStreamWAV::2684357388243735968::1684805517::1685983610::1::::<><>::
-::res://assets/effects/::1690921300
-battle_box.gdshader::Shader::-1::1690921300::0::1::::<><>::
-blur.gdshader::Shader::-1::1690921300::0::1::::<><>::
+::res://assets/effects/::1690921566
+battle_box.gdshader::Shader::-1::1690921566::0::1::::<><>::
+blur.gdshader::Shader::-1::1690921566::0::1::::<><>::
 dissapear.gdshader::Shader::-1::1684827404::0::1::::<><>::
 dust.gdshader::Shader::-1::1684832838::0::1::::<><>::
 mask.gdshader::Shader::-1::1684833143::0::1::::<><>::
@@ -155,7 +155,8 @@ eye.png::CompressedTexture2D::7483844443170763431::1689955623::1689955523::1::::
 3.png::CompressedTexture2D::3200509821207889502::1684801999::1685983610::1::::<><>::
 4.png::CompressedTexture2D::1218414332695073027::1684801999::1685983610::1::::<><>::
 5.png::CompressedTexture2D::5954252451643084856::1684801999::1685983610::1::::<><>::
-::res://assets/sprites/reference_images/::1685983610
+::res://assets/sprites/reference_images/::1690951165
+back.png::CompressedTexture2D::5977119955219461455::1690951165::1690951165::1::::<><>::
 image-5.png::CompressedTexture2D::7432017362176671370::1681372761::1685983610::1::::<><>::
 lput0378.png::CompressedTexture2D::9032373508490741524::1681372866::1685983610::1::::<><>::
 outline thing.png::CompressedTexture2D::4988746664102081281::1681591011::1685983610::1::::<><>::
@@ -163,11 +164,11 @@ ut sample.PNG::CompressedTexture2D::5890757653355295373::1681247891::1685983610:
 utfightref.PNG::CompressedTexture2D::4009066301131047665::1681249119::1685983610::1::::<><>::
 utitemref.PNG::CompressedTexture2D::976464821957209088::1684868581::1685983610::1::::<><>::
 ::res://objects/::1686338405
-::res://objects/battle/::1690920519
+::res://objects/battle/::1690921537
 attack_manager.tscn::PackedScene::7305230468059285103::1690701146::0::1::::<><>::res://scripts/battle/buffer.gd<>res://assets/effects/mask.gdshader<>uid://cn080tr3k362p
 battle_box.tscn::PackedScene::3797252568379842475::1690920519::0::1::::<><>::res://assets/effects/battle_box.gdshader<>uid://c0pijlyibwwdh
 dusted_enemy.tscn::PackedScene::7661888549226555063::1690433171::0::1::::<><>::res://assets/effects/dissapear.gdshader<>res://scripts/battle/dusted_enemy.gd<>res://assets/effects/dust.gdshader
-hud_manager.tscn::PackedScene::4999324594557403829::1690920519::0::1::::<><>::uid://1tmrx86kyjfv
+hud_manager.tscn::PackedScene::4999324594557403829::1690921537::0::1::::<><>::uid://1tmrx86kyjfv::::res://assets/fonts/health.ttf<>uid://ch4lp3qjrxfou::::res://assets/fonts/ut-hp-font.otf<>uid://b7ny54ocom6f5::::res://assets/sprites/battle/hud/buttons/fight/0.png<>uid://ci6jiouof0oif::::res://assets/sprites/battle/hud/buttons/fight/1.png<>uid://dsikgyt414x2p::::res://assets/sprites/battle/hud/buttons/act/0.png<>uid://b4yqkljk01m1o::::res://assets/sprites/battle/hud/buttons/act/1.png<>uid://ccqx1bgwif064::::res://assets/sprites/battle/hud/buttons/item/0.png<>uid://dsx65q8ooo1nd::::res://assets/sprites/battle/hud/buttons/item/1.png<>uid://giolyh7g56fi::::res://assets/sprites/battle/hud/buttons/mercy/0.png<>uid://c8yr4lt58ogs1::::res://assets/sprites/battle/hud/buttons/mercy/1.png
 player_heart.tscn::PackedScene::386152466092234259::1690331142::0::1::::<><>::uid://b5j3kxbhl6cb
 ::res://objects/battle/attack_eye/::1690681464
 true_knife_attack_eye.tscn::PackedScene::4667834708613402238::1690681464::0::1::::<><>::uid://devh3bhee8g5l
@@ -186,8 +187,8 @@ scene_cam.tscn::PackedScene::84350590888018941::1681545821::0::1::::<><>::
 ::res://scenes/::1690920519
 display_manager.tscn::PackedScene::4521423694742311124::1690920519::0::1::::<><>::res://scripts/display_manager.gd<>res://scripts/debug.gd<>res://assets/effects/blur.gdshader<>uid://1tmrx86kyjfv
 game_over.tscn::PackedScene::3927115081083465751::1685805666::0::1::::<><>::res://scripts/battle/game_over.gd<>uid://b5j3kxbhl6cb<>uid://ctn35e0d21yea
-::res://scenes/battles/::1690921265
-battle_example.tscn::PackedScene::1354385688232653199::1690921265::0::1::::<><>::uid://cbhcc3qrqgn7i::::res://assets/sprites/battle/enemies/sans_undertale/head/0.png<>uid://c0fk22bwsicj2::::res://assets/sprites/battle/enemies/speech_bubble.png<>uid://dn4sjhsj23syn::::res://assets/sprites/battle/enemies/sans_undertale/head/1.png<>uid://cdhye7ndiak02::::res://objects/battle/hud_manager.tscn<>uid://ruiirtvcnvwx::::res://assets/sprites/battle/enemies/sans_undertale/head/2.png<>uid://budogvo5p1iw6::::res://objects/battle/battle_box.tscn<>uid://lphq3cfp7j8a::::res://assets/sprites/battle/enemies/sans_undertale/head/3.png<>uid://cpgdbhhqq4ohw::::res://assets/sprites/battle/enemies/sans_undertale/head/4.png<>uid://ds6wqfq03pwda::::res://assets/fonts/main_mono.ttf<>uid://cxbk0on8j1d3x::::res://assets/sprites/battle/enemies/sans_undertale/head/5.png<>uid://frb40ffyat0v::::res://objects/battle/player_heart.tscn<>uid://dccycw0oi0itb::::res://objects/battle/attack_manager.tscn<>uid://dwwni3sm5c01o::::res://assets/sprites/battle/enemies/sans_undertale/head/6.png<>uid://tkfrn6c4jswe::::res://assets/sprites/battle/enemies/sans_undertale/head/eye/0.png<>uid://bbap5sf6pf88g::::res://assets/sprites/battle/enemies/sans_undertale/head/eye/1.png<>uid://binrk8nwkj501::::res://assets/sprites/battle/enemies/sans_undertale/torso.png<>uid://b05o17e400038::::res://assets/sprites/battle/enemies/sans_undertale/torso_shrug.png<>uid://cx7sbjvngblx1::::res://assets/sprites/battle/enemies/sans_undertale/legs.png
+::res://scenes/battles/::1690921537
+battle_example.tscn::PackedScene::1354385688232653199::1690921537::0::1::::<><>::uid://cbhcc3qrqgn7i::::res://assets/sprites/battle/enemies/sans_undertale/head/0.png<>uid://c0fk22bwsicj2::::res://assets/sprites/battle/enemies/speech_bubble.png<>uid://dn4sjhsj23syn::::res://assets/sprites/battle/enemies/sans_undertale/head/1.png<>uid://cdhye7ndiak02::::res://objects/battle/hud_manager.tscn<>uid://ruiirtvcnvwx::::res://assets/sprites/battle/enemies/sans_undertale/head/2.png<>uid://budogvo5p1iw6::::res://objects/battle/battle_box.tscn<>uid://lphq3cfp7j8a::::res://assets/sprites/battle/enemies/sans_undertale/head/3.png<>uid://cpgdbhhqq4ohw::::res://assets/sprites/battle/enemies/sans_undertale/head/4.png<>uid://ds6wqfq03pwda::::res://assets/fonts/main_mono.ttf<>uid://cxbk0on8j1d3x::::res://assets/sprites/battle/enemies/sans_undertale/head/5.png<>uid://frb40ffyat0v::::res://objects/battle/player_heart.tscn<>uid://dccycw0oi0itb::::res://objects/battle/attack_manager.tscn<>uid://dwwni3sm5c01o::::res://assets/sprites/battle/enemies/sans_undertale/head/6.png<>uid://tkfrn6c4jswe::::res://assets/sprites/battle/enemies/sans_undertale/head/eye/0.png<>uid://bbap5sf6pf88g::::res://assets/sprites/battle/enemies/sans_undertale/head/eye/1.png<>uid://binrk8nwkj501::::res://assets/sprites/battle/enemies/sans_undertale/torso.png<>uid://b05o17e400038::::res://assets/sprites/battle/enemies/sans_undertale/torso_shrug.png<>uid://cx7sbjvngblx1::::res://assets/sprites/battle/enemies/sans_undertale/legs.png
 ::res://scripts/::1690919878
 debug.gd::GDScript::-1::1690398075::0::1::::Debug<>Node2D<>::
 display_manager.gd::GDScript::-1::1690919878::0::1::::DisplayManager<>Node2D<>::

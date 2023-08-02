@@ -257,6 +257,10 @@ script = SubResource("GDScript_uiy3g")
 script = SubResource("GDScript_5temn")
 
 [node name="battle_box" parent="." instance=ExtResource("4_4yajr")]
+offset_left = 32.0
+offset_top = 250.0
+offset_right = 607.0
+offset_bottom = 390.0
 script = SubResource("GDScript_yenlp")
 
 [node name="battle_writer" type="RichTextLabel" parent="."]

@@ -6,29 +6,27 @@ class_name BattleBox
 @onready var target : Array = [offset_left, offset_top, offset_right, offset_bottom]
 @onready var outline : NinePatchRect = $outline
 var margin : Array 
-var resize_spd : float = 600
+var resize_speed : float = 600
 var emit_resize = false
 signal resize_finished
 @onready var collisions : Array = [$collisions/left, $collisions/up, $collisions/right, $collisions/down]
 
-func _ready():
-	pass
 
 func _process(delta : float) -> void:
 	outline.size = size + Vector2(6,6)
 	outline.self_modulate.a = material.get_shader_parameter("fgopacity")
 	margin = [offset_left, offset_top, offset_right, offset_bottom]
-	var spd = resize_spd * delta
+	var spd = resize_speed * delta
 
 	for i in 4:
 		if abs(margin[i] - target[i]) <= spd: margin[i] = target[i]
 		elif margin[i] > target[i]: margin[i] -= spd
 		else: margin[i] += spd
 
-	if margin == target and !emit_resize:
-		emit_signal("resize_finished")
+	if margin == target && !emit_resize:
+		resize_finished.emit()
 		emit_resize = true
-	elif margin != target and emit_resize:
+	elif margin != target && emit_resize:
 		emit_resize = false
 
 	offset_left = margin[0]
@@ -60,14 +58,14 @@ func _process(delta : float) -> void:
 #	collisions[2].position = Vector2(size.x + collisions[2].shape.extents.x - 5, collisions[2].shape.extents.y - 480)
 #	collisions[3].position = Vector2(size.x / 2.0, size.y + collisions[1].shape.extents.y - 5)
 
-func set_box_size(target : Array, resize_spd : float = 500) -> void:
-	self.resize_spd = resize_spd
+func set_box_size(target : Array, resize_speed : float = 500) -> void:
+	self.resize_speed = resize_speed
 	self.target = target
 	emit_resize = false
 
-func reset_box_size(resize_spd = 500) -> void:
-	self.resize_spd = resize_spd
-	target = [34, 254, 609, 395]
+func reset_box_size(resize_speed = 500) -> void:
+	self.resize_speed = resize_speed
+	target = [32, 250, 607, 390]
 	emit_resize = false
 
 func insta_box_size(target : Array) -> void:
