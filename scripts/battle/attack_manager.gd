@@ -111,7 +111,7 @@ y : float, speed : float, masked = false, duration : float = -1) -> BPlatform:
 	return platform
 
 func gaster_blaster(type : Bullet.e_type, start_position : Vector2, end_position : Vector2,
-end_rotation : float, scale : Vector2, wait_time : float = 0, blast_time : float = 10,
+end_rotation : float, scale : Vector2, wait_time : float = 0, blast_time : float = 0,
 masked = false) -> BGasterBlaster:
 	var gaster_blaster = preload("res://objects/battle/bullets/sans/gaster_blaster.tscn").instantiate()
 	gaster_blaster.masked = false

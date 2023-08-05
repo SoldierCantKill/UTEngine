@@ -5,7 +5,7 @@ var heals : Array
 
 func use(inventory_slot : int):
 	if(vars.scene is BattleRoom):
-		vars.main_writer.writer_text = (use_text[1] if !vars.hud_manager.serious_mode else use_text[2])
+		vars.main_writer.writer_text = get_use_text()
 		audio.play("menu/heal")
 		settings.player_save.inventory[inventory_slot] = ""
 		var amount_gained = heals[1] if !vars.hud_manager.serious_mode else heals[2]

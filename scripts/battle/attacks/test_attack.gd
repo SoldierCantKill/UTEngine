@@ -17,6 +17,9 @@ func start_attack():
 	attack_started = true
 	bones_part_one()
 	gb_part_one()
+#	for i in range(6):
+#		a_vars.attack_manager.gaster_blaster(0,Vector2(-100 + i * 75,-100),Vector2(150 + i *75,100),0,Vector2(1,1),0,0 + i * 10,false)
+	
 
 func bones_part_one():
 	a_vars.attack_manager.bone(0,Vector2(150,258),2,0,120,0,50,0,true)

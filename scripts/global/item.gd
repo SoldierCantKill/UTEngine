@@ -12,7 +12,6 @@ enum e_type {
 var names : Array
 var description : String
 var type : e_type
-var use_text : Array
 var throw_away_text : String = "" : get = get_throw_away_text
 #You need 3 values in some arrays (See default items)
 #(No, this engine doesn't have OW by default)
@@ -34,6 +33,9 @@ func get_throw_away_text() -> String:
 
 func use(inventory_slot : int):
 	pass
+
+func get_use_text() -> String:
+	return ""
 
 func hp_message(amount_gained : int) -> String:
 	if(settings.player_save.player.current_hp >= settings.player_save.player.max_hp): 

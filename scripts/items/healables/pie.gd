@@ -7,4 +7,9 @@ func _init():
 	description = "* \"Butterscotch Pie\" - All HP\n* Butterscotch-cinnamon\n  pie, one slice."
 	heals = [99,99,99]
 	type = Item.e_type.heal
-	use_text = ["(enable:z)(enable:x)(sound:mono2)* You ate the Pie.(delay:3)\n* Your HP was fully maxed out.(pc)","(enable:z)(enable:x)(sound:mono2)* You ate the Pie.(delay:3)\n* Your HP was fully maxed out.(pc)","(enable:z)(enable:x)(sound:mono2)* You ate the Pie.(delay:3)\n* Your HP was fully maxed out.(pc)"]
+
+func get_use_text() -> String:
+	if(!vars.hud_manager.serious_mode):
+		return "(enable:z)(enable:x)(sound:mono2)* You ate the Pie.(delay:3)\n* Your HP was fully maxed out.(pc)"
+	else:
+		return "(enable:z)(enable:x)(sound:mono2)* You ate the Pie.(delay:3)\n* Your HP was fully maxed out.(pc)"
