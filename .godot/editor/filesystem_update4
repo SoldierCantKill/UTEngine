@@ -1,4 +1,9 @@
 res://scenes/battles/battle_example.tscn
 res://assets/effects/battle_box.gdshader
 res://assets/effects/blur.gdshader
-res://scripts/battle/bullets/sans/gaster_blaster.gd
+res://scripts/battle/enemy.gd
+res://scripts/battle/player_heart.gd
+res://objects/battle/bullets/sans/bone_circle.tscn
+res://scripts/battle/bullets/sans/bone_circle.gd
+res://scripts/battle/bullet.gd
+res://scripts/debug.gd

@@ -5,6 +5,7 @@ signal event_hit
 enum e_type {
 	none,
 	blue,
+	fake_blue,
 	orange,
 	unhittable,
 	}
@@ -50,6 +51,8 @@ func change_color():
 	match(type):
 		e_type.blue:
 			modulate = Color(.26,.89,1,modulate.a)
+		e_type.fake_blue:
+			modulate = Color(.26,.89,1,modulate.a)
 		e_type.orange:
 			modulate = Color(1,.63,.25,modulate.a)
 		_:
@@ -89,6 +92,8 @@ func can_get_hit():
 			return true
 		e_type.blue:
 			if(vars.player_heart.is_moving()): return true
+		e_type.fake_blue:
+			return (Input.is_action_pressed("up") || Input.is_action_pressed("down") || Input.is_action_pressed("left") || Input.is_action_pressed("right"))
 		e_type.orange:
 			if(!vars.player_heart.is_moving()): return true
 	return false

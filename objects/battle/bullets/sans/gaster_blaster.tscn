@@ -32,6 +32,17 @@ animations = [{
 "loop": false,
 "name": &"white",
 "speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_fddxq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_86gxp")
+}],
+"loop": true,
+"name": &"white_loop",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tvk2j"]
@@ -45,7 +56,7 @@ script = ExtResource("1_3crk3")
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_osd6c")
-animation = &"white"
+animation = &"white_loop"
 speed_scale = 0.5
 
 [node name="laser" type="Node2D" parent="."]

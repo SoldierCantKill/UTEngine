@@ -154,13 +154,12 @@ starting_rotation : float, rotation_speed : float, stop_rotation_after : bool, m
 	vector_slash.type = type
 	return vector_slash
 
-func throw(direction : float = 0, fall_speed : float = 500) -> void:
+func throw(direction : float = 0, fall_speed : float = 750) -> void:
 	heart_thrown.emit(direction)
 	vars.player_heart.heart_mode = PlayerHeart.e_heart_mode.blue
-	await get_tree().process_frame
 	vars.player_heart.sprite.rotation = deg_to_rad(direction)
-	vars.player_heart.fall_speed = fall_speed
 	await get_tree().physics_frame
+	vars.player_heart.fall_speed = fall_speed
 	vars.player_heart.thrown = true
 
 func black_screen(time : float) -> void:

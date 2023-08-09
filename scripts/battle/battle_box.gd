@@ -8,6 +8,7 @@ class_name BattleBox
 var margin : Array 
 var resize_speed : float = 600
 var emit_resize = false
+var auto := true
 signal resize_finished
 @onready var collisions : Array = [$collisions/left, $collisions/up, $collisions/right, $collisions/down]
 
@@ -15,24 +16,25 @@ signal resize_finished
 func _process(delta : float) -> void:
 	outline.size = size + Vector2(6,6)
 	outline.self_modulate.a = material.get_shader_parameter("fgopacity")
-	margin = [offset_left, offset_top, offset_right, offset_bottom]
-	var spd = resize_speed * delta
+	if(auto):
+		margin = [offset_left, offset_top, offset_right, offset_bottom]
+		var spd = resize_speed * delta
 
-	for i in 4:
-		if abs(margin[i] - target[i]) <= spd: margin[i] = target[i]
-		elif margin[i] > target[i]: margin[i] -= spd
-		else: margin[i] += spd
+		for i in 4:
+			if abs(margin[i] - target[i]) <= spd: margin[i] = target[i]
+			elif margin[i] > target[i]: margin[i] -= spd
+			else: margin[i] += spd
 
-	if margin == target && !emit_resize:
-		resize_finished.emit()
-		emit_resize = true
-	elif margin != target && emit_resize:
-		emit_resize = false
+		if margin == target && !emit_resize:
+			resize_finished.emit()
+			emit_resize = true
+		elif margin != target && emit_resize:
+			emit_resize = false
 
-	offset_left = margin[0]
-	offset_top = margin[1]
-	offset_right = margin[2]
-	offset_bottom = margin[3]
+		offset_left = margin[0]
+		offset_top = margin[1]
+		offset_right = margin[2]
+		offset_bottom = margin[3]
 
 
 	pivot_offset = size / 2.0

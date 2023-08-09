@@ -43,5 +43,6 @@ func debug():
 				string += "Status : Attacking\n"
 				string += "Attack Counter : " + str(int((vars as vars).attack_manager.current_attack.current_frames)) + "\n"
 			string += "Current Turn : " + str((vars as vars).attack_manager.turn_num) + "\n"
+			string += "Bullet Instances: " + str((vars as vars).attack_manager.masks.get_child_count() - 2) + "\n"
 		text.text = string
 		

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://d2gibnhl2a30e"
-path="res://.godot/imported/papyrus-font-undertale.ttf-c01334649f98f1d921ffc57a75217521.fontdata"
+path="res://.godot/imported/papyrus.ttf-df95b876c8984ae7b7994d301d40b87b.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/papyrus-font-undertale.ttf"
-dest_files=["res://.godot/imported/papyrus-font-undertale.ttf-c01334649f98f1d921ffc57a75217521.fontdata"]
+source_file="res://assets/fonts/papyrus.ttf"
+dest_files=["res://.godot/imported/papyrus.ttf-df95b876c8984ae7b7994d301d40b87b.fontdata"]
 
 [params]
 

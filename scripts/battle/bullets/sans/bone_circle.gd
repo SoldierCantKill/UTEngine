@@ -7,13 +7,20 @@ const bone_offset_top = -500
 var bone_count = 15
 var radius := 100
 
+func _init():
+	curse = e_curse.karma
+	damage = 5
+	karma = 1
+
 func _ready():
-	await get_tree().process_frame
 	for i in range(bone_count):
 		var bone = BONE_PATH.instantiate()
 		add_child(bone)
 		bones.append(bone)
 		bone.type = type
+		bone.curse = curse
+		bone.damage = damage
+		bone.karma = karma
 		var angle = i * (2 * PI / bone_count)
 		bone.position.x = radius * cos(angle)
 		bone.position.y = radius * sin(angle)

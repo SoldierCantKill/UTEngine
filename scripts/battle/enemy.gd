@@ -4,6 +4,7 @@ class_name Enemy
 enum e_dodge {
 	none,
 	dodge,
+	grav,
 }
 
 
@@ -169,6 +170,8 @@ func post_attack(damage : float):
 			vars.attack_manager.pre_attack()
 			vars.dialouge_manager.start()
 			await vars.dialouge_manager.done
+			if vars.battle_box.margin != vars.battle_box.target:
+				await vars.battle_box.resize_finished
 			vars.attack_manager.current_attack.start_attack()
 			vars.attack_manager.turn_num += 1
 		else:

@@ -8,31 +8,33 @@ enum e_heart_mode {
 
 signal thrown_impact
 
-var input_enabled = false
+var input_enabled := false
 var heart_mode : e_heart_mode = e_heart_mode.red :
 	set(value):
 		heart_mode = value
+		fall_speed = 0.0
+		fall_gravity = 0.0
 		change_heart_color()
 @onready var sprite = $sprite
 @onready var animation_player = $animation_player
 @onready var hitbox = $hitbox
-var speed : float = 2
-const static_speed : float = 60.0 #Used to multiply with speed
-var i_frames : int = 60 #Invincibility frames
-var i_timer : float = 0
-var karma_i_frames : float = 2
-var karma_i_timer : float = 0
-var karma_tick_timer : float = 0 #Ticks karma away depending on how much karma you have.
-var move_input : Vector2 = Vector2.ZERO
-var jump_direction : Vector2 = Vector2.ZERO
-var jump_input : bool = false
-var thrown = false
-var throw_dmg : bool = false
-var floor_snap : bool = false
-var fall_speed : float = 0
-var fall_gravity : float = 0
-var angle : int = 0
-var auto_color : bool = true
+var speed := 2.0
+const static_speed := 60.0 #Used to multiply with speed
+var i_frames := 60.0 #Invincibility frames
+var i_timer := 0.0
+var karma_i_frames := 2.0
+var karma_i_timer := 0.0
+var karma_tick_timer := 0.0 #Ticks karma away depending on how much karma you have.
+var move_input := Vector2.ZERO
+var jump_direction := Vector2.ZERO
+var jump_input := false
+var thrown := false
+var throw_dmg := false
+var floor_snap := false
+var fall_speed := 0.0
+var fall_gravity := 0.0
+var angle := 0
+var auto_color := true
 
 func hurt(damage : float):
 	animation_player.play("hurt")
@@ -121,6 +123,7 @@ func inputs(delta):
 			move_and_slide()
 			move_input = velocity
 		e_heart_mode.blue:
+			#print(fall_gravity)
 			var angle = round(rad_to_deg($sprite.rotation))
 		
 			if fall_speed < 240.0 and fall_speed > 15.0: fall_gravity = 540.0
@@ -144,12 +147,12 @@ func inputs(delta):
 			
 			if !is_on_floor(): floor_snap = false
 			if(is_on_floor() || (is_on_ceiling() && fall_speed <= 0.0)):
-				fall_speed = 0
+				#fall_speed = 0
 				if is_on_floor() and jump_input:
 					floor_snap = false
 					fall_speed = -180.0
 			elif !jump_input and fall_speed <= -30.0: fall_speed = -30.0
-				
+			
 			velocity = move_input
 			up_direction = jump_direction
 			set_floor_stop_on_slope_enabled(true)

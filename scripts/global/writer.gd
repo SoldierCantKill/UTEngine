@@ -46,6 +46,7 @@ const silent_chars  = [' ']
 var fonts = {
 	"mono" : "res://assets/fonts/main_mono.ttf",
 	"sans" : "res://assets/fonts/sans.ttf",
+	"papyrus" : "res://assets/fonts/papyrus.ttf",
 	}
 var sounds = {
 	"mono1" : ["characters/SND_TXT1"],
