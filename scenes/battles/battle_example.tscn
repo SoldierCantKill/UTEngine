@@ -189,6 +189,7 @@ func start():
 	enemy.speech_writer.writer_text = \"(font:mono)(sound:sans)how are you?(pc)\"
 	await enemy.speech_writer.done
 	enemy.speech_bubble.visible = false
+	await get_tree().process_frame
 	done.emit()
 "
 

@@ -34,6 +34,7 @@ patch_margin_right = 1
 patch_margin_bottom = 1
 
 [node name="stick" type="CharacterBody2D" parent="platform"]
+slide_on_ceiling = false
 
 [node name="collision" type="CollisionShape2D" parent="platform/stick"]
 position = Vector2(40, 4.5)
