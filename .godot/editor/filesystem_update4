@@ -1,6 +1,5 @@
 res://scenes/battles/battle_example.tscn
 res://assets/effects/battle_box.gdshader
 res://assets/effects/blur.gdshader
-res://scripts/battle/player_heart.gd
 res://objects/battle/bullets/sans/platform.tscn
-res://scripts/battle/attacks/test_attack.gd
+res://scripts/battle/attacks/attack_base.gd
