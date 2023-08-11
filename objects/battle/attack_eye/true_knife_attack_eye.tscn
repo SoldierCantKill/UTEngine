@@ -99,7 +99,11 @@ animations = [{
 [node name="true_knife_attack_eye" type="Node2D"]
 script = SubResource("GDScript_0627q")
 
-[node name="eye" type="Sprite2D" parent="."]
+[node name="eye" type="TextureRect" parent="."]
+offset_left = -273.0
+offset_top = -57.0
+offset_right = 273.0
+offset_bottom = 58.0
 texture = ExtResource("1_n5wai")
 
 [node name="bar" type="AnimatedSprite2D" parent="."]

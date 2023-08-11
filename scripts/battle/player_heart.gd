@@ -110,7 +110,6 @@ func change_heart_color():
 			sprite.self_modulate = Color(0,0,1,sprite.self_modulate.a)
 
 func inputs(delta):
-	print(fall_speed, " | ", fall_gravity)
 	var temp_speed = speed
 	var move_input = Vector2.ZERO
 	var move_x = 0.0

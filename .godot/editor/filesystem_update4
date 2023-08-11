@@ -1,5 +1,8 @@
-res://scenes/battles/battle_example.tscn
+res://objects/battle/attack_eye/true_knife_attack_eye.tscn
 res://assets/effects/battle_box.gdshader
 res://assets/effects/blur.gdshader
+res://scenes/battles/battle_example.tscn
 res://objects/battle/bullets/sans/platform.tscn
-res://scripts/battle/attacks/attack_base.gd
+res://scripts/battle/attacks/test_attack.gd
+res://scripts/battle/bullets/sans/gaster_blaster.gd
+res://objects/battle/bullets/sans/gaster_blaster.tscn

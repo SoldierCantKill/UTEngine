@@ -56,7 +56,7 @@ script = ExtResource("1_3crk3")
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_osd6c")
-animation = &"white_loop"
+animation = &"white"
 speed_scale = 0.5
 
 [node name="laser" type="Node2D" parent="."]
