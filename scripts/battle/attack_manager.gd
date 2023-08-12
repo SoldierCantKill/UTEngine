@@ -158,7 +158,7 @@ func throw(direction : float = 0, fall_speed : float = 750) -> void:
 	heart_thrown.emit(direction)
 	vars.player_heart.heart_mode = PlayerHeart.e_heart_mode.blue
 	vars.player_heart.sprite.rotation = deg_to_rad(direction)
-	await get_tree().physics_frame
+	#await get_tree().physics_frame
 	vars.player_heart.fall_speed = fall_speed
 	vars.player_heart.thrown = true
 

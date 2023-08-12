@@ -14,6 +14,7 @@ var heart_mode : e_heart_mode = e_heart_mode.red :
 		heart_mode = value
 		fall_speed = 0.0
 		fall_gravity = 0.0
+		jump_input = false
 		change_heart_color()
 @onready var sprite = $sprite
 @onready var animation_player = $animation_player
@@ -49,14 +50,14 @@ func hurt(damage : float):
 func hurt_kr(damage):
 	audio.play("battle/hurt")
 	karma_i_timer = karma_i_frames
-	if settings.player_save.player.current_hp > 1:
-		if settings.player_save.player.current_kr <= 40:
+	if(settings.player_save.player.current_hp > 1):
+		if(settings.player_save.player.current_kr <= 40):
 			settings.player_save.player.current_kr = clampi(settings.player_save.player.current_kr + damage, 0, 9999)
 			settings.player_save.player.current_hp = clampi(settings.player_save.player.current_hp - (damage + 1), 1, 9999)
 		else:
 			settings.player_save.player.current_hp = clampi(settings.player_save.player.current_hp - 1, 0, 9999)
 	else:
-		if settings.player_save.player.current_kr > 0:
+		if(settings.player_save.player.current_kr > 0):
 			settings.player_save.player.current_kr = clampi(settings.player_save.player.current_kr - 1, 0, 9999)
 		else:
 			settings.player_save.player.current_hp = 0
@@ -73,24 +74,24 @@ func tick(delta):
 		modulate.a = 1
 	karma_i_timer -= delta * 60
 	karma_tick_timer += delta * 60
-	if karma_tick_timer > 1:
-		if settings.player_save.player.current_kr >= 40:
+	if(karma_tick_timer > 1):
+		if(settings.player_save.player.current_kr >= 40):
 			settings.player_save.player.current_kr -= 1
 			karma_tick_timer = 0
-	if karma_tick_timer > 2:
-		if settings.player_save.player.current_kr >= 30 && settings.player_save.player.current_kr <= 39:
+	if(karma_tick_timer > 2):
+		if(settings.player_save.player.current_kr >= 30 && settings.player_save.player.current_kr <= 39):
 			settings.player_save.player.current_kr -= 1
 			karma_tick_timer = 0
-	if karma_tick_timer > 5:
-		if settings.player_save.player.current_kr >= 20 && settings.player_save.player.current_kr <= 29:
+	if(karma_tick_timer > 5):
+		if(settings.player_save.player.current_kr >= 20 && settings.player_save.player.current_kr <= 29):
 			settings.player_save.player.current_kr -= 1
 			karma_tick_timer = 0
-	if karma_tick_timer > 15:
-		if settings.player_save.player.current_kr >= 10 && settings.player_save.player.current_kr <= 19:
+	if(karma_tick_timer > 15):
+		if(settings.player_save.player.current_kr >= 10 && settings.player_save.player.current_kr <= 19):
 			settings.player_save.player.current_kr -= 1
 			karma_tick_timer = 0
-	if karma_tick_timer > 30:	
-		if settings.player_save.player.current_kr>= 1 && settings.player_save.player.current_kr <= 9:
+	if(karma_tick_timer > 30):
+		if(settings.player_save.player.current_kr>= 1 && settings.player_save.player.current_kr <= 9):
 			settings.player_save.player.current_kr -= 1
 			karma_tick_timer = 0
 
@@ -117,7 +118,7 @@ func inputs(delta):
 	if(input_enabled):
 		move_x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
 		move_y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
-		if Input.is_action_pressed("exit"):
+		if(Input.is_action_pressed("exit")):
 			temp_speed /= 2
 	match(heart_mode):
 		e_heart_mode.red:
@@ -127,43 +128,45 @@ func inputs(delta):
 			move_input = velocity
 		e_heart_mode.blue:
 			var angle = round(rad_to_deg($sprite.rotation))
-			if fall_speed < 240.0 and fall_speed > 15.0: fall_gravity = 540.0
-			if fall_speed <= 15.0 and fall_speed > -30.0: fall_gravity = 180.0
-			if fall_speed <= -30.0 and fall_speed > -120: fall_gravity = 450.0
-			if fall_speed <= -120.0: fall_gravity = 180.0
+			if(fall_speed < 240.0 && fall_speed > 15.0): fall_gravity = 540.0
+			if(fall_speed <= 15.0 && fall_speed > -30.0): fall_gravity = 180.0
+			if(fall_speed <= -30.0 && fall_speed > -120): fall_gravity = 450.0
+			if(fall_speed <= -120.0): fall_gravity = 180.0
 			
 			if(!is_on_floor()):
 				fall_speed += fall_gravity * delta
 			else:
-				if(!jump_input):
+				if(!jump_input && !thrown):
 					fall_speed = 0.0
-			
-			if angle == 0 or angle == 180:
+				
+			if(angle == 0 || angle == 180):
 				if(input_enabled):
-					jump_input = Input.is_action_pressed("up") if angle == 0 else Input.is_action_pressed("down")
-				move_input = Vector2(move_x * temp_speed * static_speed, fall_speed * (-1 if angle == 180 else 1))
-				jump_direction = Vector2.UP if angle == 0 else Vector2.DOWN
-			
-			if angle == 90 or angle == 270:
+					jump_input = Input.is_action_pressed("up") if(angle == 0) else Input.is_action_pressed("down")
+				move_input = Vector2(move_x * temp_speed * static_speed, fall_speed * (-1 if(angle == 180) else 1))
+				jump_direction = Vector2.UP if(angle == 0) else Vector2.DOWN
+				
+			if(angle == 90 || angle == 270):
 				if(input_enabled):
-					jump_input = Input.is_action_pressed("left") if angle == 270 else Input.is_action_pressed("right")
-				move_input = Vector2(fall_speed * (-1 if angle == 90 else 1), move_y * (temp_speed * static_speed))
-				jump_direction = Vector2.LEFT if angle == 270 else Vector2.RIGHT
-			
+					jump_input = Input.is_action_pressed("left") if(angle == 270) else Input.is_action_pressed("right")
+				move_input = Vector2(fall_speed * (-1 if(angle == 90) else 1), move_y * (temp_speed * static_speed))
+				jump_direction = Vector2.LEFT if(angle == 270) else Vector2.RIGHT
+				
 			floor_snap = is_on_floor()
 			if(!is_on_ceiling()):
-				if floor_snap and jump_input:
+				if(floor_snap && jump_input && !thrown):
 					floor_snap = false
 					fall_speed = -180.0
-				elif !jump_input and fall_speed <= -30.0: fall_speed = -30.0
+				elif(!jump_input && fall_speed <= -30.0):
+					fall_speed = -30.0
 			else:
-				fall_speed = 0.0
-			
+				if(!thrown):
+					fall_speed = 0.0
+				
 			velocity = move_input
 			up_direction = jump_direction
 			move_and_slide()
-			if(is_on_floor() || (is_on_ceiling() && fall_speed <= 0.0)):
-				if thrown:
+			if(is_on_floor()):
+				if(thrown):
 					thrown = false
 					vars.display.screen_shake(floor(abs(fall_speed / 30.0 / 3.0)))
 					audio.play("battle/impact")
@@ -179,22 +182,22 @@ func is_moving():
 		e_heart_mode.red:
 			var move_x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
 			var move_y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
-			if move_y != 0 || move_x != 0:
+			if(move_y != 0 || move_x != 0):
 				return true
 		e_heart_mode.blue:
 			var move_x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
 			var angle = round(rad_to_deg(sprite.rotation))
-			if fall_speed < 240.0 and fall_speed > 15.0: fall_gravity = 540.0
-			if fall_speed <= 15.0 and fall_speed > -30.0: fall_gravity = 180.0
-			if fall_speed <= -30.0 and fall_speed > -120: fall_gravity = 450.0
-			if fall_speed <= -120.0: fall_gravity = 180.0
-	
-			if angle == 0 or angle == 180:
-				jump_input = Input.is_action_pressed("up") if angle == 0 else Input.is_action_pressed("down")
-			if angle == 90 or angle == 270:
-				jump_input = Input.is_action_pressed("left") if angle == 270 else Input.is_action_pressed("right")
-				
-			if jump_input != false || move_x != 0 || fall_speed > 1:
+			if(fall_speed < 240.0 && fall_speed > 15.0): fall_gravity = 540.0
+			if(fall_speed <= 15.0 && fall_speed > -30.0): fall_gravity = 180.0
+			if(fall_speed <= -30.0 && fall_speed > -120): fall_gravity = 450.0
+			if(fall_speed <= -120.0): fall_gravity = 180.0
+			
+			if(angle == 0 || angle == 180):
+				jump_input = Input.is_action_pressed("up") if(angle == 0) else Input.is_action_pressed("down")
+			if(angle == 90 || angle == 270):
+				jump_input = Input.is_action_pressed("left") if(angle == 270) else Input.is_action_pressed("right")
+			
+			if(jump_input != false || move_x != 0 || fall_speed > 1):
 				return true
 			return false
 	return false
