@@ -9,7 +9,6 @@ func _ready():
 	text.visible = true
 
 func _process(delta):
-	if(text.visible):
-		if(Input.is_action_just_pressed("confirm")):
-			#vars.display.change_scene(next_scene,true)
-			vars.display.change_room(settings.player_save.data.player_room,-1,false)
+	if(Input.is_action_just_pressed("confirm")):
+		#vars.display.change_scene(next_scene,true)
+		vars.display.change_room(settings.player_save.data.player_room,-1,false)

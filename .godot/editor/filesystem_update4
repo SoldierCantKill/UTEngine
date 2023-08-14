@@ -1,15 +1,2 @@
-res://objects/overworld/save_point.tscn
-res://scripts/global/player_save.gd
-res://scripts/autoload/settings.gd
-res://scripts/overworld/save_point.gd
-res://scenes/rooms/example_rooms/room_0.tscn
-res://scenes/display_manager.tscn
-res://scenes/rooms/example_rooms/judgement_hall.tscn
-res://objects/overworld/overworld_hud.tscn
-res://scripts/overworld/character.gd
-res://scripts/autoload/audio.gd
-res://scripts/overworld/overworld_hud.gd
-res://scripts/display_manager.gd
-res://scripts/overworld/overworld_room.gd
 res://scenes/main_menu.tscn
 res://scripts/main_menu.gd
