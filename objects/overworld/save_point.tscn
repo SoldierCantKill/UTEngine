@@ -1,0 +1,171 @@
+[gd_scene load_steps=12 format=3 uid="uid://bb2gb3gs40lfr"]
+
+[ext_resource type="Texture2D" uid="uid://hngwwl7pte36" path="res://assets/sprites/overworld/save_point.png" id="1_juuqp"]
+[ext_resource type="Script" path="res://scripts/overworld/save_point.gd" id="1_rcif2"]
+[ext_resource type="Texture2D" uid="uid://c0pijlyibwwdh" path="res://assets/sprites/battle/border.png" id="5_g2nn4"]
+[ext_resource type="FontFile" uid="uid://w8mnhdxac4io" path="res://assets/fonts/main.ttf" id="6_5nan0"]
+[ext_resource type="Texture2D" uid="uid://dwkhqcmnbbm0s" path="res://assets/sprites/battle/heart/small_heart.png" id="7_lp4vu"]
+
+[sub_resource type="GDScript" id="GDScript_ckbg1"]
+script/source = "extends Interactable
+
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y88ll"]
+size = Vector2(18, 18.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kq130"]
+size = Vector2(16.5, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgng5"]
+atlas = ExtResource("1_juuqp")
+region = Rect2(0, 0, 20, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1nba"]
+atlas = ExtResource("1_juuqp")
+region = Rect2(22, 0, 20, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nxmst"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgng5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1nba")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="save_point" type="Node2D"]
+script = ExtResource("1_rcif2")
+
+[node name="area" type="Area2D" parent="."]
+scale = Vector2(2, 2)
+script = SubResource("GDScript_ckbg1")
+
+[node name="collision" type="CollisionShape2D" parent="area"]
+shape = SubResource("RectangleShape2D_y88ll")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="collision2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.5, 0)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_kq130")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_nxmst")
+frame_progress = 0.929455
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="selection_border" type="NinePatchRect" parent="CanvasLayer"]
+visible = false
+offset_left = 108.0
+offset_top = 118.0
+offset_right = 532.0
+offset_bottom = 292.0
+texture = ExtResource("5_g2nn4")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="text_container" type="Node2D" parent="CanvasLayer/selection_border"]
+position = Vector2(-108, -118)
+
+[node name="name" type="RichTextLabel" parent="CanvasLayer/selection_border/text_container"]
+clip_contents = false
+offset_left = 140.0
+offset_top = 140.0
+offset_right = 224.0
+offset_bottom = 168.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("6_5nan0")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Rose"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="place" type="RichTextLabel" parent="CanvasLayer/selection_border/text_container"]
+clip_contents = false
+offset_left = 140.0
+offset_top = 180.0
+offset_right = 372.0
+offset_bottom = 208.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("6_5nan0")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Snowdin - Box Road"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="lv" type="RichTextLabel" parent="CanvasLayer/selection_border/text_container"]
+clip_contents = false
+offset_left = 292.0
+offset_top = 140.0
+offset_right = 372.0
+offset_bottom = 168.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("6_5nan0")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "LV 6"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="time" type="RichTextLabel" parent="CanvasLayer/selection_border/text_container"]
+clip_contents = false
+offset_left = 438.0
+offset_top = 140.0
+offset_right = 517.0
+offset_bottom = 168.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("6_5nan0")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "54:25"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="save" type="RichTextLabel" parent="CanvasLayer/selection_border/text_container"]
+clip_contents = false
+offset_left = 170.0
+offset_top = 240.0
+offset_right = 249.0
+offset_bottom = 268.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("6_5nan0")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Save"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="return" type="RichTextLabel" parent="CanvasLayer/selection_border/text_container"]
+clip_contents = false
+offset_left = 350.0
+offset_top = 240.0
+offset_right = 444.0
+offset_bottom = 268.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("6_5nan0")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Return"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="heart" type="TextureRect" parent="CanvasLayer/selection_border"]
+offset_left = 34.0
+offset_top = 128.0
+offset_right = 74.0
+offset_bottom = 167.999
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("7_lp4vu")

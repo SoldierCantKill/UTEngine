@@ -7,7 +7,7 @@ extends Node
 	"snowman_piece" : SnowmanPiece.new(),
 	
 	#WEAPONS
-	"real_knife" : RealKnife.new(),
+	 "real_knife" : RealKnife.new(),
 	
 	#ARMOR
 	"heart_locket" : HeartLocket.new(),

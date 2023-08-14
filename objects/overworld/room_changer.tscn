@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2iugqudyx670"]
+
+[ext_resource type="Script" path="res://scripts/overworld/room_changer.gd" id="1_vmqpd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_it6df"]
+resource_local_to_scene = true
+
+[node name="room_changer" type="Area2D"]
+script = ExtResource("1_vmqpd")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_it6df")
+
+[node name="player_spawn" type="Marker2D" parent="."]

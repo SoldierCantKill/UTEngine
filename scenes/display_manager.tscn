@@ -30,6 +30,9 @@ canvas_item_default_texture_filter = 0
 size = Vector2i(640, 480)
 render_target_update_mode = 4
 
+[node name="camera" type="Camera2D" parent="border/container/sub_viewport"]
+offset = Vector2(320, 240)
+
 [node name="border_overlay" type="ColorRect" parent="border"]
 offset_left = -158.0
 offset_top = -125.0

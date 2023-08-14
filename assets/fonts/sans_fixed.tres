@@ -1,0 +1,10 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://y33hw2wh57nw"]
+
+[ext_resource type="FontFile" uid="uid://dviicdom810ab" path="res://assets/fonts/sans.ttf" id="1_qpacf"]
+
+[resource]
+base_font = ExtResource("1_qpacf")
+spacing_glyph = 1
+spacing_space = 11
+spacing_top = 5
+spacing_bottom = -5

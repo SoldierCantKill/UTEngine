@@ -1,0 +1,145 @@
+[gd_scene load_steps=14 format=3 uid="uid://cuy13ul1spjw2"]
+
+[ext_resource type="Texture2D" uid="uid://cs1ivvpwxh3q" path="res://assets/sprites/overworld/rooms/room0.png" id="1_wamv2"]
+[ext_resource type="PackedScene" uid="uid://bwshu8s0atk5j" path="res://objects/overworld/overworld_hud.tscn" id="2_vqwt6"]
+[ext_resource type="Texture2D" uid="uid://c0pijlyibwwdh" path="res://assets/sprites/battle/border.png" id="3_gkd32"]
+[ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="4_matlr"]
+[ext_resource type="PackedScene" uid="uid://d2iugqudyx670" path="res://objects/overworld/room_changer.tscn" id="5_vv1ln"]
+[ext_resource type="PackedScene" uid="uid://bb2gb3gs40lfr" path="res://objects/overworld/save_point.tscn" id="6_v1pck"]
+
+[sub_resource type="GDScript" id="GDScript_ch82y"]
+script/source = "extends OverworldRoom
+
+func _ready():
+	room_sprite = $room
+	room_changers = [$room_changer]
+	super._ready()
+
+func get_place_text() -> String:
+	return \"Room 0\"
+"
+
+[sub_resource type="GDScript" id="GDScript_7yd8t"]
+script/source = "extends Interactable
+
+func event():
+	super.event()
+	(vars as vars).main_writer.writer_text = \"(sound:mono1)* The flowers...(pc)\"
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrgjn"]
+size = Vector2(120, 80)
+
+[sub_resource type="GDScript" id="GDScript_wuevt"]
+script/source = "extends NinePatchRect
+
+@onready var writer : Writer = $overworld_writer
+
+func _ready():
+	writer.unpaused.connect(func():
+		visible = true
+		if(is_instance_valid(vars.player_character)):
+			if(vars.player_character.get_position_on_screen().y >= 240):
+				position = Vector2(32,10)
+			else:
+				position = Vector2(32,318))
+	writer.done.connect(func(): visible = false)
+"
+
+[sub_resource type="GDScript" id="GDScript_70vne"]
+script/source = "extends AnimatedSprite2D
+
+
+func _ready():
+	await vars.scene.ready
+	vars.main_writer.unpaused.connect(func():if(sprite_frames != null): animation = \"default\")
+	vars.main_writer.done.connect(func(): if(sprite_frames != null): animation = \"idle\")
+"
+
+[sub_resource type="GDScript" id="GDScript_s5v74"]
+script/source = "extends Writer
+
+func _ready():
+	super._ready()
+	await vars.scene.ready
+	player_character = vars.player_character
+	border = $\"..\"
+	face = $\"../face\"
+	#set_font(\"sans\",28)
+	#writer_text = \"(font:mono)(size:32)(sound:none)(disable:x)* Human. (delay:.5)You are a bad guy.(pc)(event)(sound:sans)(face:sans/normal)* just kidding.(pc)* unfortunately i am\\n  gonna need to \\n  fight you.(pc)* apparently we need\\n  to do a showcase.(pc)\"
+	#writer_text = \"(face:sans/normal)* don't you only have\\n  one outfit?\"
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7qiep"]
+resource_local_to_scene = true
+size = Vector2(82, 20)
+
+[node name="test_room" type="Node2D"]
+script = SubResource("GDScript_ch82y")
+
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2(103, 80)
+
+[node name="room" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_wamv2")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = SubResource("GDScript_7yd8t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-380, 20)
+shape = SubResource("RectangleShape2D_nrgjn")
+
+[node name="overworld_canvas" type="CanvasLayer" parent="."]
+
+[node name="overworld_hud" parent="overworld_canvas" instance=ExtResource("2_vqwt6")]
+visible = false
+
+[node name="message_border" type="NinePatchRect" parent="overworld_canvas"]
+visible = false
+offset_left = 32.0
+offset_top = 10.0
+offset_right = 611.0
+offset_bottom = 163.0
+texture = ExtResource("3_gkd32")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = SubResource("GDScript_wuevt")
+
+[node name="face" type="AnimatedSprite2D" parent="overworld_canvas/message_border"]
+position = Vector2(71, 70)
+script = SubResource("GDScript_70vne")
+
+[node name="overworld_writer" type="RichTextLabel" parent="overworld_canvas/message_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 20.0
+offset_right = 458.0
+offset_bottom = 148.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("4_matlr")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+scroll_active = false
+autowrap_mode = 0
+script = SubResource("GDScript_s5v74")
+
+[node name="room_changer" parent="." instance=ExtResource("5_vv1ln")]
+position = Vector2(499, 37)
+to_room = 1
+
+[node name="collision" parent="room_changer" index="0"]
+position = Vector2(56, 0)
+shape = SubResource("RectangleShape2D_7qiep")
+
+[node name="player_spawn" parent="room_changer" index="1"]
+position = Vector2(57, 29)
+
+[node name="save_point" parent="." instance=ExtResource("6_v1pck")]
+position = Vector2(-470, 93)
+
+[editable path="room_changer"]

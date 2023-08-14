@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://68lpd31etht4"]
+
+[ext_resource type="Texture2D" uid="uid://jhcqyxv7xh6a" path="res://assets/sprites/overworld/characters/faces/torielspeak1.png" id="1_ymoyw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxg5v"]
+atlas = ExtResource("1_ymoyw")
+region = Rect2(0, 0, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bj2c"]
+atlas = ExtResource("1_ymoyw")
+region = Rect2(49, 0, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0kgb"]
+atlas = ExtResource("1_ymoyw")
+region = Rect2(98, 0, 49, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uusac"]
+atlas = ExtResource("1_ymoyw")
+region = Rect2(196, 0, 49, 45)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxg5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bj2c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxg5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxg5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0kgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uusac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0kgb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

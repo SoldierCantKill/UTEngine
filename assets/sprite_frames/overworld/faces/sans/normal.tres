@@ -1,0 +1,22 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://dog4yoh2i2sm7"]
+
+[ext_resource type="Texture2D" uid="uid://dlykp3ibbh3i0" path="res://assets/sprites/overworld/characters/faces/sans.png" id="1_513fq"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_513fq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_513fq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

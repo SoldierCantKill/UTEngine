@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dihr6jkp1tdn6"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_kkrbp"]
+[ext_resource type="Texture2D" uid="uid://bxpllarwkwedf" path="res://assets/sprites/global/soldiersundertale.png" id="1_l0qlc"]
+[ext_resource type="FontFile" uid="uid://eqmxyg5q5gqp" path="res://assets/fonts/ow_hud.ttf" id="2_34cla"]
+
+[node name="main_menu" type="Node2D"]
+script = ExtResource("1_kkrbp")
+
+[node name="logo" type="TextureRect" parent="."]
+offset_left = 16.0
+offset_top = 142.0
+offset_right = 616.0
+offset_bottom = 202.0
+texture = ExtResource("1_l0qlc")
+expand_mode = 1
+
+[node name="text" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 233.0
+offset_top = 381.0
+offset_right = 514.0
+offset_bottom = 421.0
+theme_override_fonts/normal_font = ExtResource("2_34cla")
+theme_override_font_sizes/normal_font_size = 10
+text = "[Press Z or enter]"

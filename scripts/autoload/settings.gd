@@ -8,9 +8,9 @@ var zoomed_in := true :
 		change_zoom()
 var debug_enabled := true #Disable in public builds
 
-
 func _ready():
 	start()
+	#load_game()
 	reset_game()
 
 func start() -> void:
@@ -25,7 +25,9 @@ func reset_game():
 func load_game():
 	if(ResourceLoader.exists("user://saved.tres")):
 		player_save = ResourceLoader.load("user://saved.tres").duplicate()
+		print(player_save.data.time)
 	else:
+		print("RESET")
 		reset_game()
 
 func save_game():
@@ -33,15 +35,19 @@ func save_game():
 
 func _process(delta):
 	if(Input.is_action_just_pressed("restart")):
-		audio.stop_music()
-		audio.stop_all_sounds()
-		vars.display.change_scene(vars.display.starting_scene)
-		await get_tree().process_frame
-		load_game()
+		if(vars.scene):
+			audio.stop_music()
+			audio.stop_all_sounds()
+			vars.scene.queue_free()
+			await get_tree().process_frame
+			load_game()
+			vars.display.change_scene(vars.display.starting_scene)
 	if Input.is_action_just_pressed("fullscreen") && !Input.is_action_pressed("alt"):
 		toggle_resolution()
 	if Input.is_action_just_pressed("zoom"):
 		zoomed_in = !zoomed_in
+	if(player_save != null):
+		player_save.data.time += delta
 
 func toggle_resolution():
 	match(DisplayServer.window_get_mode()):

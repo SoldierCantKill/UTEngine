@@ -1,0 +1,71 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://dnqx1lr5j4b2a"]
+
+[ext_resource type="Texture2D" uid="uid://ce15y0og0tn5t" path="res://assets/sprites/overworld/characters/body/frisk/down/0.png" id="1_0uwwg"]
+[ext_resource type="Texture2D" uid="uid://g7oqah0qk2g0" path="res://assets/sprites/overworld/characters/body/frisk/down/1.png" id="2_oujrp"]
+[ext_resource type="Texture2D" uid="uid://b4ov5g3qcmug5" path="res://assets/sprites/overworld/characters/body/frisk/down/2.png" id="3_jfrqc"]
+[ext_resource type="Texture2D" uid="uid://bfhlefiuqltob" path="res://assets/sprites/overworld/characters/body/frisk/left/0.png" id="6_kg62l"]
+[ext_resource type="Texture2D" uid="uid://vohgekwoha5b" path="res://assets/sprites/overworld/characters/body/frisk/right/0.png" id="6_x5c3s"]
+[ext_resource type="Texture2D" uid="uid://dcfvw4lqfsx8s" path="res://assets/sprites/overworld/characters/body/frisk/left/1.png" id="7_ga0qs"]
+[ext_resource type="Texture2D" uid="uid://besn76vtgreo1" path="res://assets/sprites/overworld/characters/body/frisk/right/1.png" id="7_phca8"]
+[ext_resource type="Texture2D" uid="uid://6jvmkffpvcf0" path="res://assets/sprites/overworld/characters/body/frisk/up/0.png" id="8_mymyd"]
+[ext_resource type="Texture2D" uid="uid://cqsxgvxpvemqb" path="res://assets/sprites/overworld/characters/body/frisk/up/1.png" id="9_rels6"]
+[ext_resource type="Texture2D" uid="uid://j13q1gorncwf" path="res://assets/sprites/overworld/characters/body/frisk/up/2.png" id="10_68w50"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0uwwg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oujrp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_0uwwg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jfrqc")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_kg62l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ga0qs")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_x5c3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_phca8")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_mymyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_rels6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mymyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_68w50")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]

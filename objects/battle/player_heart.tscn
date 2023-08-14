@@ -1,10 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://frb40ffyat0v"]
 
+[ext_resource type="Script" path="res://scripts/battle/player_heart.gd" id="1_hpkp1"]
 [ext_resource type="Texture2D" uid="uid://b5j3kxbhl6cb" path="res://assets/sprites/battle/heart/heart_0.png" id="1_kquxx"]
-
-[sub_resource type="GDScript" id="GDScript_qxqqm"]
-script/source = "extends PlayerHeart
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_muyji"]
 size = Vector2(16, 16)
@@ -63,7 +60,7 @@ size = Vector2(6, 6)
 
 [node name="player_heart" type="CharacterBody2D"]
 self_modulate = Color(1, 0, 0, 1)
-script = SubResource("GDScript_qxqqm")
+script = ExtResource("1_hpkp1")
 
 [node name="sprite" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)

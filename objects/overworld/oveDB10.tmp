@@ -1,0 +1,544 @@
+[gd_scene load_steps=11 format=3 uid="uid://bwshu8s0atk5j"]
+
+[ext_resource type="Texture2D" uid="uid://c0pijlyibwwdh" path="res://assets/sprites/battle/border.png" id="1_fr3v8"]
+[ext_resource type="Texture2D" uid="uid://7n1fsepwmvik" path="res://assets/sprites/reference_images/menu.PNG" id="1_j4wrw"]
+[ext_resource type="Script" path="res://scripts/overworld/overworld_hud.gd" id="1_w0po7"]
+[ext_resource type="Texture2D" uid="uid://dnm4s42ru8i14" path="res://assets/sprites/reference_images/stat.PNG" id="2_wtvlg"]
+[ext_resource type="FontFile" uid="uid://w8mnhdxac4io" path="res://assets/fonts/main.ttf" id="3_7mo1y"]
+[ext_resource type="Texture2D" uid="uid://chi7kmjx7kfjc" path="res://assets/sprites/reference_images/item.PNG" id="3_q38i6"]
+[ext_resource type="FontFile" uid="uid://eqmxyg5q5gqp" path="res://assets/fonts/ow_hud.ttf" id="4_2giai"]
+[ext_resource type="Texture2D" uid="uid://ckvjl6wo6vltq" path="res://assets/sprites/reference_images/eat.PNG" id="4_dls30"]
+[ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="8_4y36h"]
+[ext_resource type="Texture2D" uid="uid://dwkhqcmnbbm0s" path="res://assets/sprites/battle/heart/small_heart.png" id="10_7kegg"]
+
+[node name="overworld_hud" type="Node2D"]
+position = Vector2(-1, 0)
+script = ExtResource("1_w0po7")
+
+[node name="Menu" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.270588)
+z_index = 4096
+offset_left = -1.0
+offset_top = -25.0
+offset_right = 642.0
+offset_bottom = 480.0
+texture = ExtResource("1_j4wrw")
+
+[node name="Menu2" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.270588)
+z_index = 4096
+offset_top = -24.0
+offset_right = 643.0
+offset_bottom = 482.0
+texture = ExtResource("2_wtvlg")
+
+[node name="Menu3" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.270588)
+z_index = 4096
+offset_left = -1.0
+offset_top = -25.0
+offset_right = 642.0
+offset_bottom = 481.0
+texture = ExtResource("3_q38i6")
+
+[node name="Menu4" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.270588)
+z_index = 4096
+offset_top = -26.0
+offset_right = 643.0
+offset_bottom = 480.0
+texture = ExtResource("4_dls30")
+
+[node name="selection_border" type="NinePatchRect" parent="."]
+offset_left = 32.0
+offset_top = 168.0
+offset_right = 173.0
+offset_bottom = 316.0
+texture = ExtResource("1_fr3v8")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="item" type="RichTextLabel" parent="selection_border"]
+clip_contents = false
+offset_left = 52.0
+offset_top = 20.0
+offset_right = 136.0
+offset_bottom = 48.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "ITEM"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="stat" type="RichTextLabel" parent="selection_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 52.0
+offset_top = 57.0
+offset_right = 136.0
+offset_bottom = 85.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "STAT"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="short_stat_border" type="NinePatchRect" parent="."]
+offset_left = 32.0
+offset_top = 322.0
+offset_right = 174.0
+offset_bottom = 432.0
+texture = ExtResource("1_fr3v8")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="name" type="RichTextLabel" parent="short_stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 14.0
+offset_top = 8.0
+offset_right = 90.0
+offset_bottom = 37.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Chara"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="short_names" type="RichTextLabel" parent="short_stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 14.0
+offset_top = 48.0
+offset_right = 110.0
+offset_bottom = 100.0
+theme_override_constants/line_separation = 6
+theme_override_fonts/normal_font = ExtResource("4_2giai")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "lv
+hp
+g"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="short_values" type="RichTextLabel" parent="short_stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 50.0
+offset_top = 48.0
+offset_right = 106.0
+offset_bottom = 100.0
+theme_override_constants/line_separation = 6
+theme_override_fonts/normal_font = ExtResource("4_2giai")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "1
+20/20
+5219"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="item" type="Node2D" parent="."]
+visible = false
+position = Vector2(33, 168)
+
+[node name="item_border" type="NinePatchRect" parent="item"]
+offset_left = 156.0
+offset_top = -116.0
+offset_right = 501.0
+offset_bottom = 247.0
+texture = ExtResource("1_fr3v8")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="item_0" type="RichTextLabel" parent="item/item_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 43.0
+offset_top = 28.0
+offset_right = 308.0
+offset_bottom = 57.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Butterscotch Pie"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="item_1" type="RichTextLabel" parent="item/item_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 43.0
+offset_top = 60.0
+offset_right = 308.0
+offset_bottom = 89.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Instant Noodles"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="item_2" type="RichTextLabel" parent="item/item_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 43.0
+offset_top = 92.0
+offset_right = 308.0
+offset_bottom = 121.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Snowman Piece
+"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="item_3" type="RichTextLabel" parent="item/item_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 43.0
+offset_top = 124.0
+offset_right = 308.0
+offset_bottom = 153.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Snowman Piece
+"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="item_4" type="RichTextLabel" parent="item/item_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 43.0
+offset_top = 156.0
+offset_right = 308.0
+offset_bottom = 185.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Snowman Piece
+"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="item_5" type="RichTextLabel" parent="item/item_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 43.0
+offset_top = 189.0
+offset_right = 308.0
+offset_bottom = 218.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Fake Steak
+"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="item_6" type="RichTextLabel" parent="item/item_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 43.0
+offset_top = 221.0
+offset_right = 308.0
+offset_bottom = 250.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Legendary Hero"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="item_7" type="RichTextLabel" parent="item/item_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 43.0
+offset_top = 253.0
+offset_right = 308.0
+offset_bottom = 282.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Legendary Hero"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="item_8" type="RichTextLabel" parent="item/item_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 43.0
+offset_top = 309.0
+offset_right = 310.0
+offset_bottom = 338.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "USE         INFO         DROP"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 12
+
+[node name="message_border" type="NinePatchRect" parent="item"]
+offset_left = -1.0
+offset_top = -158.0
+offset_right = 578.0
+offset_bottom = -5.0
+texture = ExtResource("1_fr3v8")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="use_text" type="RichTextLabel" parent="item/message_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 20.0
+offset_right = 574.0
+offset_bottom = 148.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("8_4y36h")
+theme_override_font_sizes/normal_font_size = 32
+text = "* You ate the Butterscotch Pie.
+* Your HP was maxed out."
+scroll_active = false
+autowrap_mode = 0
+
+[node name="stat" type="Node2D" parent="."]
+visible = false
+position = Vector2(33, 168)
+
+[node name="stat_border" type="NinePatchRect" parent="stat"]
+offset_left = 156.0
+offset_top = -116.0
+offset_right = 503.0
+offset_bottom = 302.0
+texture = ExtResource("1_fr3v8")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="name" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 32.0
+offset_right = 122.0
+offset_bottom = 61.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "\"Chara\""
+scroll_active = false
+autowrap_mode = 0
+
+[node name="level" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 92.0
+offset_right = 82.0
+offset_bottom = 121.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "LV  1"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="hp" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 124.0
+offset_right = 150.0
+offset_bottom = 153.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "HP  20 / 20"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="hp2" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 252.0
+offset_top = 495.0
+offset_right = 374.0
+offset_bottom = 524.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "USE	
+HUH	"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="attack" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 188.0
+offset_right = 150.0
+offset_bottom = 217.0
+theme_override_constants/line_separation = 4
+theme_override_constants/table_h_separation = 0
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "AT  36 (99)"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="defense" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 220.0
+offset_right = 150.0
+offset_bottom = 249.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "DF  4 (99)"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="exp" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 197.0
+offset_top = 188.0
+offset_right = 319.0
+offset_bottom = 217.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "EXP: 50000"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="next" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 197.0
+offset_top = 220.0
+offset_right = 346.0
+offset_bottom = 249.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "NEXT: -49990"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="weapon" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 280.0
+offset_right = 258.0
+offset_bottom = 309.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "WEAPON: Real Knife"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="armor" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 312.0
+offset_right = 258.0
+offset_bottom = 341.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "ARMOR: The Locket"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="gold" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 352.0
+offset_right = 154.0
+offset_bottom = 381.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "GOLD: 5219"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="kills" type="RichTextLabel" parent="stat/stat_border"]
+clip_contents = false
+layout_mode = 0
+offset_left = 197.0
+offset_top = 352.0
+offset_right = 323.0
+offset_bottom = 381.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_7mo1y")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "KILLS: 113"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="cell" type="Node2D" parent="."]
+visible = false
+position = Vector2(33, 168)
+
+[node name="heart" type="TextureRect" parent="."]
+offset_left = 56.0
+offset_top = 196.0
+offset_right = 96.0
+offset_bottom = 236.0
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("10_7kegg")

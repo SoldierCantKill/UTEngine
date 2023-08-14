@@ -1,5 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://cdhye7ndiak02"]
 
+[ext_resource type="Script" path="res://scripts/battle/hud_manager.gd" id="1_7w3su"]
 [ext_resource type="FontFile" uid="uid://1tmrx86kyjfv" path="res://assets/fonts/health.ttf" id="6_1ye0q"]
 [ext_resource type="FontFile" uid="uid://ch4lp3qjrxfou" path="res://assets/fonts/ut-hp-font.otf" id="7_cm6b2"]
 [ext_resource type="Texture2D" uid="uid://b7ny54ocom6f5" path="res://assets/sprites/battle/hud/buttons/fight/0.png" id="8_7kvfb"]
@@ -10,11 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://dsx65q8ooo1nd" path="res://assets/sprites/battle/hud/buttons/item/1.png" id="13_fjl78"]
 [ext_resource type="Texture2D" uid="uid://giolyh7g56fi" path="res://assets/sprites/battle/hud/buttons/mercy/0.png" id="14_bws02"]
 [ext_resource type="Texture2D" uid="uid://c8yr4lt58ogs1" path="res://assets/sprites/battle/hud/buttons/mercy/1.png" id="15_gqxil"]
-
-[sub_resource type="GDScript" id="GDScript_b3mfk"]
-script/source = "extends HudManager
-
-"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0rflg"]
 animations = [{
@@ -73,7 +69,7 @@ animations = [{
 }]
 
 [node name="hud_manager" type="Node2D"]
-script = SubResource("GDScript_b3mfk")
+script = ExtResource("1_7w3su")
 
 [node name="display" type="Node2D" parent="."]
 

@@ -33,10 +33,15 @@ signal unpaused
 signal done
 signal line_start
 signal type_done
+signal cleared
 signal type
 signal event
 var z_enabled := true
 var x_enabled := true
+
+var player_character : Character
+var border
+var face : AnimatedSprite2D
 
 #Just here so Devs can know the options they have, you can use either : or =
 const choice_properties = ["delay:time", "speed:time", "font:name", "audio:audio_to_play","music:music_to_play", "size:num","sound:name", "bb:bbcode", "func_funcname:[array of params]", "enable:z or x", "disable:z or x"]
@@ -45,7 +50,7 @@ const silent_chars  = [' ']
 
 var fonts = {
 	"mono" : "res://assets/fonts/main_mono.ttf",
-	"sans" : "res://assets/fonts/sans.ttf",
+	"sans" : "res://assets/fonts/sans_fixed.tres",
 	"papyrus" : "res://assets/fonts/papyrus.ttf",
 	}
 var sounds = {
@@ -55,10 +60,32 @@ var sounds = {
 	"sans" : ["characters/sans"],
 	"none" : [],
 	}
+
+var faces = {
+	"none" : null,
+	"toriel" : {"glad" : [load("res://assets/sprite_frames/overworld/faces/toriel/glad.tres"), Vector2(2,2)]},
+	"sans" : {"normal" : [load("res://assets/sprite_frames/overworld/faces/sans/normal.tres"),Vector2(.2,.2)]}
+}
 #--------- PROPERTIES ----------
 func _ready():
 	done.connect(func(): writing = false)
 	custom_effects.append(load("res://assets/effects/tremble.tres"))
+
+func adjust_border_position():
+	if(is_instance_valid(face)):
+		match(face.sprite_frames == null):
+			false:
+				global_position = face.global_position + Vector2(73,-50)
+			true:
+				global_position = face.global_position - Vector2(43,50) 
+		print(global_position)
+
+func set_font(new_font : String, new_font_size : int):
+	add_theme_font_override("normal_font", load(fonts[new_font]))
+	add_theme_font_size_override("normal_font_size", new_font_size)
+
+func get_font_size() -> int:
+	return get_theme_font_size("custom_fonts/normal_font")
 
 func parse():
 	delaying = false
@@ -80,7 +107,11 @@ func parse():
 			var property = temp[0]
 			var value = temp[1]
 			if(property in ["delay", "speed"]): value = float(value)
-			elif(property in ["face"]): value = value.split("/"); value[1] = int(value[1])
+			elif(property in ["face"]): 
+				if(value == "none"):
+					value = String(value)
+				else:
+					value = value.split("/");
 			elif(property in ["enable", "disable","sound","audio","music"]): value = String(value)
 			elif(property in ["func"]): value = StringName(value)
 			elif(property in ["font","size","color"]):
@@ -89,6 +120,7 @@ func parse():
 				var temp_string = text.substr(start_index + 3 + len(i.get_string(1)),len(text))
 				match(property):
 					"font":
+						#print(value)
 						bb_code_add = "[font=" + str(fonts[String(value)]) + "]"
 					"size":
 						bb_code_add = "[font_size=" + str(value) + "]"
@@ -118,6 +150,7 @@ func parse():
 			if(property in ["clear", "pc"]):
 				break
 		line_start.emit()
+		unpaused.emit()
 	order_changed = false
 	can_emit_type_done = true
 	timeout = speed
@@ -175,25 +208,28 @@ func writer_event(index):
 				delay_func.call_deferred()
 				await delay_done
 			elif(i[0] == "pause"):
+				type_done.emit()
 				paused = true
 				await unpaused
 			elif(i[0] == "sound"):
 				current_sound = i[1].to_lower()
 			elif(i[0] == "clear"):
-				type_done.emit()
+				cleared.emit()
 				if(text.find("(clear)") != -1):
-					var str = text.substr(text.find(get_parsed_text().substr(index + 1,text.find("(clear)"))),text.find("(clear)"))
+					var str = text.substr(text.find(get_parsed_text().substr(index + 1,text.find("(pc)"))),len(text))
 					writer_text = str
 					await line_start
 				else:
 					writer_text = ""
 				visible_characters = 0
 			elif(i[0] == "pc"):
+				type_done.emit()
 				paused = true
 				await unpaused
-				type_done.emit()
+				cleared.emit()
 				if(text.find("(pc)") != -1):
-					var str = text.substr(text.find(get_parsed_text().substr(index + 1,text.find("(pc)"))),text.find("(pc)"))
+					var str = text.substr(text.find(get_parsed_text().substr(index + 1,text.find("(pc)"))),len(text))
+					print(str)
 					writer_text = str
 					await line_start
 				else:
@@ -211,18 +247,29 @@ func writer_event(index):
 				set(i[1].to_lower() + "_enabled", true)
 			elif(i[0] == "disable"):
 				set(i[1].to_lower() + "_enabled", false)
-			elif(caller.has_method(i[0].split("func_")[1])):
-				if(i[1].is_empty()):
-					Callable(caller,i[0].split("func_")[1]).call()
-				else:
-					Callable(caller,i[0].split("func_")[1]).bind(str_to_var(i[1])).call()
+			elif(i[0] == "face"):
+				if(is_instance_valid(face)):
+					if(i[1] is String):
+						if(i[1] == "none"):
+							face.set_sprite_frames(null)
+					else:
+						face.set_sprite_frames(faces[i[1][0]][i[1][1]][0])
+						face.scale = faces[i[1][0]][i[1][1]][1]
+					adjust_border_position()
+					face.play()
+			elif(i[0].contains("func_")):
+				if(caller.has_method(i[0].split("func_")[1])):
+					if(i[1].is_empty()):
+						Callable(caller,i[0].split("func_")[1]).call()
+					else:
+						Callable(caller,i[0].split("func_")[1]).bind(str_to_var(i[1])).call()
 	for i in remove:
 		order.erase(i)
 	timeout = 0
 	return
 
 func _process(delta):
-	if(Input.is_action_just_pressed("confirm") && z_enabled):
+	if(Input.is_action_just_pressed("confirm") && z_enabled && paused):
 		paused = false
 		unpaused.emit()
 	if(Input.is_action_just_pressed("exit") && x_enabled):

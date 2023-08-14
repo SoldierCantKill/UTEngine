@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://dwas3lfu8j5ii"]
+
+[ext_resource type="Texture2D" uid="uid://c5rpelk0yuq42" path="res://assets/sprites/overworld/characters/character_alert.png" id="1_1yahk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl85e"]
+atlas = ExtResource("1_1yahk")
+region = Rect2(0, 0, 10, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqobo"]
+atlas = ExtResource("1_1yahk")
+region = Rect2(10, 0, 10, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h57kv"]
+atlas = ExtResource("1_1yahk")
+region = Rect2(20, 0, 10, 11)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl85e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqobo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h57kv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

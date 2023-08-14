@@ -3,7 +3,7 @@ extends Node
 #GLOBAL
 var display : DisplayManager = null
 var scene = null
-var scene_cam = null
+var scene_cam : Camera2D = null
 var debug : Debug = null
 
 #BATTLE
@@ -15,3 +15,7 @@ var main_writer : Writer = null
 var attack_manager : AttackManager = null
 var enemies : Node2D = null
 var black_screen : ColorRect = null
+
+#OVERWORLD
+var player_character : Character = null
+var overworld_hud : OverworldHud = null
