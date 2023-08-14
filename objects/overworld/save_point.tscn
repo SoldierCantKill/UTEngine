@@ -163,6 +163,7 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="heart" type="TextureRect" parent="CanvasLayer/selection_border"]
+layout_mode = 0
 offset_left = 34.0
 offset_top = 128.0
 offset_right = 74.0

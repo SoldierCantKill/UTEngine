@@ -16,7 +16,7 @@ enum e_curse {
 @onready var area2d : Area2D :
 	set(value):
 		area2d = value
-		area2d.area_exited.connect(func(area): if(vars.player_heart not in area2d.get_overlapping_bodies()): was_colliding = false)
+		area2d.area_exited.connect(func(area): if(vars.player_heart.hitbox not in area2d.get_overlapping_areas()): was_colliding = false)
 var damage := 5.0
 var karma := 1.0
 var auto_change_color := true :
@@ -30,7 +30,7 @@ var type : e_type = 0 :
 		if(auto_change_color):
 			change_color()
 var curse : e_curse = 0
-var was_colliding
+var was_colliding := false
 var x := 0.0
 var y := 0.0
 var speed := 0.0
@@ -71,13 +71,8 @@ func hit():
 					if(!was_colliding):
 						was_colliding = true
 						vars.player_heart.hurt_kr(damage) #takes 5 damage gains 6 kr
-						vars.player_heart.hurt_kr(karma)  #takes 1 damage gains 2 kr
 					else:
 						vars.player_heart.hurt_kr(karma) #takes 1 damage gains 2 kr
-				else:
-					if(!was_colliding):
-						was_colliding = true
-						vars.player_heart.hurt_kr(damage) #takes 5 damage gains 6 kr
 	else:
 		event_hit.emit(false)
 

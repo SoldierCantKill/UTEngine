@@ -25,9 +25,7 @@ func reset_game():
 func load_game():
 	if(ResourceLoader.exists("user://saved.tres")):
 		player_save = ResourceLoader.load("user://saved.tres").duplicate()
-		print(player_save.data.time)
 	else:
-		print("RESET")
 		reset_game()
 
 func save_game():

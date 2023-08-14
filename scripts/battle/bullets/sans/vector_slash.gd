@@ -16,7 +16,7 @@ var warning_color_t := 0.0
 func _init():
 	curse = e_curse.karma
 	damage = 5
-	karma = 1
+	karma = 2
 
 func _ready():
 	area2d = $slash/area_2d

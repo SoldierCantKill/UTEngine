@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5au0nxujpkff"]
+[gd_scene load_steps=3 format=3 uid="uid://bjxwsdmse37dn"]
 
 [sub_resource type="GDScript" id="GDScript_hnosq"]
 script/source = "extends Bullet

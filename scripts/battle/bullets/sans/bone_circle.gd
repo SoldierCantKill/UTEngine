@@ -10,7 +10,7 @@ var radius := 100
 func _init():
 	curse = e_curse.karma
 	damage = 5
-	karma = 1
+	karma = 2
 
 func _ready():
 	for i in range(bone_count):

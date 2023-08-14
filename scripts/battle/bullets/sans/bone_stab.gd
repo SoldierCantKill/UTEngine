@@ -21,7 +21,7 @@ var bone_rotation := 0:
 func _init():
 	curse = e_curse.karma
 	damage = 5
-	karma = 1
+	karma = 2
 
 func _ready():
 	super._ready()

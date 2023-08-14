@@ -78,7 +78,6 @@ func adjust_border_position():
 				global_position = face.global_position + Vector2(73,-50)
 			true:
 				global_position = face.global_position - Vector2(43,50) 
-		print(global_position)
 
 func set_font(new_font : String, new_font_size : int):
 	add_theme_font_override("normal_font", load(fonts[new_font]))
@@ -120,7 +119,6 @@ func parse():
 				var temp_string = text.substr(start_index + 3 + len(i.get_string(1)),len(text))
 				match(property):
 					"font":
-						#print(value)
 						bb_code_add = "[font=" + str(fonts[String(value)]) + "]"
 					"size":
 						bb_code_add = "[font_size=" + str(value) + "]"
@@ -229,7 +227,6 @@ func writer_event(index):
 				cleared.emit()
 				if(text.find("(pc)") != -1):
 					var str = text.substr(text.find(get_parsed_text().substr(index + 1,text.find("(pc)"))),len(text))
-					print(str)
 					writer_text = str
 					await line_start
 				else:

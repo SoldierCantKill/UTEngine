@@ -12,8 +12,6 @@ var room_sprite
 var room_changers : Array[RoomChanger] = []
 
 func _ready():
-	print("HIIIIII")
-	print(get_node("overworld_canvas/message_border/overworld_writer"))
 	vars.main_writer = get_node("overworld_canvas/message_border/overworld_writer")
 	vars.overworld_hud = get_node("overworld_canvas/overworld_hud")
 	vars.scene_cam = get_node("camera")

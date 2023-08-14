@@ -24,7 +24,7 @@ var blast_timer := 0.0
 func _init():
 	curse = e_curse.karma
 	damage = 10
-	karma = 1
+	karma = 2
 
 func _ready():
 	super._ready()

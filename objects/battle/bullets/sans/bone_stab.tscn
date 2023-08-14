@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://crpb05ousrgxu" path="res://assets/sprites/battle/square.png" id="1_d5ybn"]
 [ext_resource type="Script" path="res://scripts/battle/bullets/sans/bone_stab.gd" id="1_j8xyt"]
-[ext_resource type="Texture2D" uid="uid://dnc08xx2i78ug" path="res://assets/sprites/battle/bullet/bone_sans.png" id="2_1m1xy"]
+[ext_resource type="Texture2D" uid="uid://dnc08xx2i78ug" path="res://assets/sprites/battle/bullet/sans/bone_sans.png" id="2_1m1xy"]
 
 [node name="bone_stab" type="Node2D"]
 script = ExtResource("1_j8xyt")

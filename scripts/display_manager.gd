@@ -53,7 +53,6 @@ func change_room(to_room : int, to_changer : int, fades : bool = true):
 	if(to_changer != -1):
 		for i in room.room_changers:
 			if(i.to_changer == to_changer):
-				print(i)
 				settings.player_save.data.position = i.player_spawn.global_position
 	start_room.emit()
 	return room
