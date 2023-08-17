@@ -26,6 +26,8 @@ scale = Vector2(1.5, 1.5)
 
 [node name="sub_viewport" type="SubViewport" parent="border/container"]
 handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
 size = Vector2i(640, 480)
 render_target_update_mode = 4
@@ -61,7 +63,10 @@ offset_bottom = 480.0
 
 [node name="sub_viewport" type="SubViewport" parent="game/container"]
 handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
+canvas_item_default_texture_repeat = 1
 size = Vector2i(640, 480)
 render_target_update_mode = 4
 

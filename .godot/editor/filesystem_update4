@@ -1,2 +1,5 @@
+res://scenes/display_manager.tscn
 res://scenes/main_menu.tscn
-res://scripts/display_manager.gd
+res://scenes/battles/example_battles/battle_example.tscn
+res://objects/battle/attack_eye/true_knife_attack_eye.tscn
+res://scripts/main_menu.gd

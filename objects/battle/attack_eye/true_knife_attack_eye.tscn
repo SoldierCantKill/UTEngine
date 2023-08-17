@@ -48,13 +48,15 @@ func attack(amount : float):
 	eye_hit.emit()
 	await enemy.done_being_attacked
 	bar.visible = false
-	var offset_left_tween = get_tree().create_tween()
-	offset_left_tween.tween_property(eye,\"offset_left\", 0,.45).set_trans(Tween.TRANS_SINE)
-	var offset_right_tween = get_tree().create_tween()
-	offset_right_tween.tween_property(eye,\"offset_right\", 0,.45).set_trans(Tween.TRANS_SINE)
+#	var offset_left_tween = get_tree().create_tween()
+#	offset_left_tween.tween_property(eye,\"offset_left\", 0,.45).set_trans(Tween.TRANS_SINE)
+#	var offset_right_tween = get_tree().create_tween()
+#	offset_right_tween.tween_property(eye,\"offset_right\", 0,.45).set_trans(Tween.TRANS_SINE)
+	var tween1 = get_tree().create_tween()
+	tween1.tween_property(eye,\"scale:x\",0.0,.45).set_trans(Tween.TRANS_SINE)
 	var tween2 = get_tree().create_tween()
 	tween2.tween_property(eye,\"self_modulate:a\", 0,.4).set_trans(Tween.TRANS_SINE)
-	await offset_left_tween.finished
+	await get_tree().create_timer(.45).timeout
 	queue_free()
 "
 
@@ -101,14 +103,8 @@ animations = [{
 [node name="true_knife_attack_eye" type="Node2D"]
 script = SubResource("GDScript_0627q")
 
-[node name="eye" type="TextureRect" parent="."]
-anchors_preset = -1
-offset_left = -273.0
-offset_top = -57.0
-offset_right = 273.0
-offset_bottom = 58.0
+[node name="eye" type="Sprite2D" parent="."]
 texture = ExtResource("1_n5wai")
-expand_mode = 1
 
 [node name="bar" type="AnimatedSprite2D" parent="."]
 position = Vector2(-310, 0)

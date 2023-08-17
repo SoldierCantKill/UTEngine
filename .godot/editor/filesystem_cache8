@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1692269659
+::res://::1692270309
 credits.txt::TextFile::-1::1690395929::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1690397855::0::1::::<><>::
 ::res://assets/::1691906998
@@ -249,10 +249,10 @@ scene_cam.tscn::PackedScene::84350590888018941::1681545821::0::1::::<><>::
 overworld_hud.tscn::PackedScene::3968196540344031845::1692016301::0::1::::<><>::uid://c0pijlyibwwdh
 room_changer.tscn::PackedScene::9072101777396424301::1691962288::0::1::::<><>::res://scripts/overworld/room_changer.gd
 save_point.tscn::PackedScene::2512715295221468479::1692016301::0::1::::<><>::uid://hngwwl7pte36
-::res://scenes/::1692213386
+::res://scenes/::1692269693
 display_manager.tscn::PackedScene::4521423694742311124::1692137059::0::1::::<><>::res://scripts/display_manager.gd<>res://scripts/debug.gd<>res://assets/effects/blur.gdshader<>uid://1tmrx86kyjfv
 game_over.tscn::PackedScene::3927115081083465751::1685805666::0::1::::<><>::res://scripts/battle/game_over.gd<>uid://b5j3kxbhl6cb
-main_menu.tscn::PackedScene::7736311481825284605::1692213386::0::1::::<><>::res://scripts/main_menu.gd<>uid://bxpllarwkwedf::::res://assets/sprites/global/soldiersundertale.png<>uid://eqmxyg5q5gqp::::res://assets/fonts/ow_hud.ttf
+main_menu.tscn::PackedScene::7736311481825284605::1692269693::0::1::::<><>::res://scripts/main_menu.gd<>uid://bxpllarwkwedf::::res://assets/sprites/global/soldiersundertale.png<>uid://eqmxyg5q5gqp::::res://assets/fonts/ow_hud.ttf
 ::res://scenes/battles/::1691981147
 ::res://scenes/battles/example_battles/::1692035872
 battle_example.tscn::PackedScene::1354385688232653199::1692035872::0::1::::<><>::uid://cbhcc3qrqgn7i
@@ -260,9 +260,9 @@ battle_example.tscn::PackedScene::1354385688232653199::1692035872::0::1::::<><>:
 ::res://scenes/rooms/example_rooms/::1692016301
 judgement_hall.tscn::PackedScene::6861104026530866160::1692016301::0::1::::<><>::uid://dxl3sgh05os21
 room_0.tscn::PackedScene::6227793018951376835::1692016301::0::1::::<><>::uid://cs1ivvpwxh3q
-::res://scripts/::1692213386
+::res://scripts/::1692269693
 debug.gd::GDScript::-1::1691557261::0::1::::Debug<>Node2D<>::
-display_manager.gd::GDScript::-1::1692213386::0::1::::DisplayManager<>Node2D<>::
+display_manager.gd::GDScript::-1::1692269693::0::1::::DisplayManager<>Node2D<>::
 main_menu.gd::GDScript::-1::1692039290::0::1::::<>Node2D<>::
 ::res://scripts/autoload/::1692035959
 audio.gd::GDScript::-1::1691980278::0::1::::<>Node<>::
