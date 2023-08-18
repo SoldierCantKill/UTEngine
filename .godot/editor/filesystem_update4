@@ -9,3 +9,4 @@ res://assets/fonts/main_mono_gameover.tres
 res://scripts/global/writer.gd
 res://objects/overworld/overworld_hud.tscn
 res://scripts/debug.gd
+res://scripts/display_manager.gd

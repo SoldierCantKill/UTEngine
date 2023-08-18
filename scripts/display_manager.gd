@@ -84,8 +84,6 @@ func _process(delta):
 		border_camera.zoom = vars.scene_cam.zoom
 		if camera_intensity > 0:
 			camera_shake_t += 60 * delta
-		else:
-			pass
 		if camera_shake_t >= 1:
 			camera_shake_t -= delta * 60
 			camera_intensity -= delta * 60
