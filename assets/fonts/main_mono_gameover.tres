@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://b33vk35w50275"]
+
+[ext_resource type="FontFile" uid="uid://ds6wqfq03pwda" path="res://assets/fonts/main_mono.ttf" id="1_kfbin"]
+
+[resource]
+base_font = ExtResource("1_kfbin")
+spacing_glyph = 4
+spacing_bottom = 3

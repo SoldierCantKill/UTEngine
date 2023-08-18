@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1692374479
+::res://::1692382808
 credits.txt::TextFile::-1::1690395929::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1690397855::0::1::::<><>::
 ::res://assets/::1691906998
@@ -19,12 +19,13 @@ mus_sfx_a_pullback.wav::AudioStreamWAV::6734187617289778761::1681547361::1691962
 noise.wav::AudioStreamWAV::3867485605509439159::1681547361::1691962321::1::::<><>::
 snd_vaporized.wav::AudioStreamWAV::5727141007932229622::1681547361::1691962321::1::::<><>::
 warning.wav::AudioStreamWAV::4560734027732362666::1681547361::1691962321::1::::<><>::
-::res://assets/audio/characters/::1691962322
+::res://assets/audio/characters/::1692382808
+asgore.wav::AudioStreamWAV::7953013815514386530::1692382415::1692382418::1::::<><>::
+flowey.wav::AudioStreamWAV::6614349094450042110::1681547370::1692382763::1::::<><>::
+mono1.wav::AudioStreamWAV::5135374036476428134::1681547370::1692382806::1::::<><>::
+mono2.wav::AudioStreamWAV::8238506211950297773::1681547370::1692382808::1::::<><>::
 papyrus.wav::AudioStreamWAV::4403554021181768068::1691557608::1691962321::1::::<><>::
 sans.wav::AudioStreamWAV::8365830798021195031::1681547370::1691962321::1::::<><>::
-snd_floweytalk2.wav::AudioStreamWAV::6614349094450042110::1681547370::1691962321::1::::<><>::
-SND_TXT1.wav::AudioStreamWAV::5135374036476428134::1681547370::1691962321::1::::<><>::
-SND_TXT2.wav::AudioStreamWAV::8238506211950297773::1681547370::1691962321::1::::<><>::
 toriel.wav::AudioStreamWAV::1944024268014289926::1681547370::1691962322::1::::<><>::
 ::res://assets/audio/menu/::1691983661
 buy_item.wav::AudioStreamWAV::8156608995598745183::1681548674::1691962322::1::::<><>::
@@ -37,8 +38,9 @@ snd_escaped.wav::AudioStreamWAV::1143532094953092184::1681548674::1691962322::1:
 snd_levelup.wav::AudioStreamWAV::278139555504209650::1681548674::1691962322::1::::<><>::
 snd_logo.wav::AudioStreamWAV::4879515882782456154::1691983639::1691983661::1::::<><>::
 snd_swallow.wav::AudioStreamWAV::1137196002299506724::1681548674::1691962322::1::::<><>::
-::res://assets/audio/music/::1691965468
+::res://assets/audio/music/::1692381871
 harderlovania.ogg::AudioStreamOggVorbis::8826359317676995081::1690906416::1691962321::1::::<><>::
+mus_gameover.ogg::AudioStreamOggVorbis::7325036355813930393::1692381871::1692381871::1::::<><>::
 sans.mp3::AudioStreamMP3::2790456139154315497::1691965466::1691965468::1::::<><>::
 ::res://assets/audio/overworld/::1691962322
 snd_battlefall.wav::AudioStreamWAV::1222575434797779665::1691925617::1691962322::1::::<><>::
@@ -60,11 +62,12 @@ dust.gdshader::Shader::-1::1684832838::0::1::::<><>::
 mask.gdshader::Shader::-1::1684833143::0::1::::<><>::
 tremble.gd::GDScript::-1::1681504769::0::1::::<>RichTextEffect<>::
 tremble.tres::RichTextEffect::9025111154029336490::1686402718::0::1::::<><>::res://assets/effects/tremble.gd
-::res://assets/fonts/::1691962321
+::res://assets/fonts/::1692381063
 damage.ttf::FontFile::5890768189748867777::1684826959::1691962321::1::::<><>::
 health.ttf::FontFile::1864893334763972963::1677001341::1691962321::1::::<><>::
 main.ttf::FontFile::1613031218497637698::1681248473::1691962321::1::::<><>::
 main_mono.ttf::FontFile::8488021581990619158::1681248473::1691962321::1::::<><>::
+main_mono_gameover.tres::FontVariation::4410805315497447090::1692381063::0::1::::<><>::uid://ds6wqfq03pwda::::res://assets/fonts/main_mono.ttf
 ow_hud.ttf::FontFile::314556367004956791::1681248473::1691962321::1::::<><>::
 papyrus.ttf::FontFile::9067235311719659542::1681547342::1691962321::1::::<><>::
 sans.ttf::FontFile::8650232276828090181::1691901311::1691962321::1::::<><>::
@@ -162,7 +165,8 @@ eye.png::CompressedTexture2D::7483844443170763431::1689955623::1691962321::1::::
 3.png::CompressedTexture2D::3200509821207889502::1684801999::1691962321::1::::<><>::
 4.png::CompressedTexture2D::1218414332695073027::1684801999::1691962321::1::::<><>::
 5.png::CompressedTexture2D::5954252451643084856::1684801999::1691962321::1::::<><>::
-::res://assets/sprites/global/::1691982677
+::res://assets/sprites/global/::1692379671
+gameover.png::CompressedTexture2D::8424821735477237737::1692379671::1692379671::1::::<><>::
 soldiersundertale.png::CompressedTexture2D::4032417311607614667::1691982676::1691982677::1::::<><>::
 ::res://assets/sprites/overworld/::1691962321
 save_point.png::CompressedTexture2D::518563579672793007::1691926932::1691962321::1::::<><>::
@@ -193,7 +197,7 @@ torielspeak1.png::CompressedTexture2D::646301540797445970::1691891063::169196232
 judgement_hall.png::CompressedTexture2D::8798046157266734120::1691926012::1691962321::1::::<><>::
 pillar.png::CompressedTexture2D::6539855590551935153::1691963606::1691963609::1::::<><>::
 room0.png::CompressedTexture2D::179130551155397532::1691913293::1691962321::1::::<><>::
-::res://assets/sprites/reference_images/::1691983054
+::res://assets/sprites/reference_images/::1692379974
 back.png::CompressedTexture2D::5977119955219461455::1690951165::1691962321::1::::<><>::
 eat.PNG::CompressedTexture2D::5518649496157546010::1691815940::1691962321::1::::<><>::
 image (4).png::CompressedTexture2D::5491115455575653379::1691846372::1691962321::1::::<><>::
@@ -204,6 +208,7 @@ image (8).png::CompressedTexture2D::1955684035310872777::1691917571::1691962321:
 image (9).png::CompressedTexture2D::9054174398650048470::1691970707::1691970707::1::::<><>::
 image (10).png::CompressedTexture2D::1726953867973854827::1691970690::1691970690::1::::<><>::
 image (11).png::CompressedTexture2D::3472271997632963264::1691983054::1691983054::1::::<><>::
+image (15).png::CompressedTexture2D::2984320023632102666::1692379974::1692379974::1::::<><>::
 image-5.png::CompressedTexture2D::7432017362176671370::1681372761::1691962321::1::::<><>::
 item.PNG::CompressedTexture2D::5282639741864100920::1691815930::1691962321::1::::<><>::
 lput0378.png::CompressedTexture2D::9032373508490741524::1681372866::1691962321::1::::<><>::
@@ -231,8 +236,8 @@ battle_box.tscn::PackedScene::3797252568379842475::1691839363::0::1::::<><>::res
 dusted_enemy.tscn::PackedScene::7661888549226555063::1690433171::0::1::::<><>::res://assets/effects/dissapear.gdshader<>res://scripts/battle/dusted_enemy.gd<>res://assets/effects/dust.gdshader
 hud_manager.tscn::PackedScene::4999324594557403829::1691839363::0::1::::<><>::res://scripts/battle/hud_manager.gd<>uid://1tmrx86kyjfv
 player_heart.tscn::PackedScene::386152466092234259::1692039111::0::1::::<><>::res://scripts/battle/player_heart.gd<>uid://b5j3kxbhl6cb
-::res://objects/battle/attack_eye/::1692270732
-true_knife_attack_eye.tscn::PackedScene::4667834708613402238::1692270732::0::1::::<><>::uid://devh3bhee8g5l
+::res://objects/battle/attack_eye/::1692382639
+true_knife_attack_eye.tscn::PackedScene::4667834708613402238::1692382639::0::1::::<><>::uid://devh3bhee8g5l::::res://assets/sprites/battle/hud/weapons/attack_eye/eye.png<>uid://h7yqmmfeyxhu::::res://assets/sprites/battle/hud/weapons/attack_eye/0.png<>uid://cldjlvu68haxi::::res://assets/sprites/battle/hud/weapons/attack_eye/1.png<>uid://mfo4i33u5oo7::::res://assets/sprites/battle/hud/weapons/true_knife/0.png<>uid://kmfj3g0w60st::::res://assets/sprites/battle/hud/weapons/true_knife/1.png<>uid://ycdcyu7qcoix::::res://assets/sprites/battle/hud/weapons/true_knife/2.png<>uid://blul6udrho1yg::::res://assets/sprites/battle/hud/weapons/true_knife/3.png<>uid://rmhduuclbu64::::res://assets/sprites/battle/hud/weapons/true_knife/4.png<>uid://cq3jwyffqw6mu::::res://assets/sprites/battle/hud/weapons/true_knife/5.png
 ::res://objects/battle/bullets/::1692035920
 test_bullet.tscn::PackedScene::2594807438386468414::1692035919::0::1::::<><>::
 test_bullet_kr.tscn::PackedScene::3066969059841941715::1692035920::0::1::::<><>::
@@ -249,28 +254,28 @@ scene_cam.tscn::PackedScene::84350590888018941::1681545821::0::1::::<><>::
 overworld_hud.tscn::PackedScene::3968196540344031845::1692016301::0::1::::<><>::uid://c0pijlyibwwdh
 room_changer.tscn::PackedScene::9072101777396424301::1691962288::0::1::::<><>::res://scripts/overworld/room_changer.gd
 save_point.tscn::PackedScene::2512715295221468479::1692016301::0::1::::<><>::uid://hngwwl7pte36
-::res://scenes/::1692304998
-display_manager.tscn::PackedScene::4521423694742311124::1692270732::0::1::::<><>::res://scripts/display_manager.gd<>res://scripts/debug.gd<>res://assets/effects/blur.gdshader<>uid://1tmrx86kyjfv
-game_over.tscn::PackedScene::3927115081083465751::1685805666::0::1::::<><>::res://scripts/battle/game_over.gd<>uid://b5j3kxbhl6cb
-main_menu.tscn::PackedScene::7736311481825284605::1692304998::0::1::::<><>::res://scripts/main_menu.gd<>uid://bxpllarwkwedf::::res://assets/sprites/global/soldiersundertale.png<>uid://eqmxyg5q5gqp::::res://assets/fonts/ow_hud.ttf
+::res://scenes/::1692382785
+display_manager.tscn::PackedScene::4521423694742311124::1692382639::0::1::::<><>::res://scripts/display_manager.gd<>res://scripts/debug.gd<>res://assets/effects/blur.gdshader<>uid://1tmrx86kyjfv::::res://assets/fonts/health.ttf
+game_over.tscn::PackedScene::3927115081083465751::1692382785::0::1::::<><>::res://scripts/battle/game_over.gd<>uid://b5j3kxbhl6cb::::res://assets/sprites/battle/heart/heart_0.png<>uid://ctn35e0d21yea::::res://assets/sprites/battle/heart/heart_break.png<>uid://birvkx45v2lqw::::res://assets/sprites/reference_images/image (15).png<>uid://dsbbt3chpva8p::::res://assets/sprites/global/gameover.png<>uid://b33vk35w50275::::res://assets/fonts/main_mono_gameover.tres
+main_menu.tscn::PackedScene::7736311481825284605::1692382639::0::1::::<><>::res://scripts/main_menu.gd<>uid://bxpllarwkwedf::::res://assets/sprites/global/soldiersundertale.png<>uid://eqmxyg5q5gqp::::res://assets/fonts/ow_hud.ttf
 ::res://scenes/battles/::1691981147
-::res://scenes/battles/example_battles/::1692270732
-battle_example.tscn::PackedScene::1354385688232653199::1692270732::0::1::::<><>::uid://cbhcc3qrqgn7i
+::res://scenes/battles/example_battles/::1692382639
+battle_example.tscn::PackedScene::1354385688232653199::1692382639::0::1::::<><>::uid://cbhcc3qrqgn7i::::res://assets/sprites/battle/enemies/sans_undertale/head/0.png<>uid://c0fk22bwsicj2::::res://assets/sprites/battle/enemies/speech_bubble.png<>uid://dn4sjhsj23syn::::res://assets/sprites/battle/enemies/sans_undertale/head/1.png<>uid://cdhye7ndiak02::::res://objects/battle/hud_manager.tscn<>uid://ruiirtvcnvwx::::res://assets/sprites/battle/enemies/sans_undertale/head/2.png<>uid://budogvo5p1iw6::::res://objects/battle/battle_box.tscn<>uid://lphq3cfp7j8a::::res://assets/sprites/battle/enemies/sans_undertale/head/3.png<>uid://cpgdbhhqq4ohw::::res://assets/sprites/battle/enemies/sans_undertale/head/4.png<>uid://ds6wqfq03pwda::::res://assets/fonts/main_mono.ttf<>uid://cxbk0on8j1d3x::::res://assets/sprites/battle/enemies/sans_undertale/head/5.png<>uid://frb40ffyat0v::::res://objects/battle/player_heart.tscn<>uid://dccycw0oi0itb::::res://objects/battle/attack_manager.tscn<>uid://dwwni3sm5c01o::::res://assets/sprites/battle/enemies/sans_undertale/head/6.png<>uid://tkfrn6c4jswe::::res://assets/sprites/battle/enemies/sans_undertale/head/eye/0.png<>uid://bbap5sf6pf88g::::res://assets/sprites/battle/enemies/sans_undertale/head/eye/1.png<>uid://binrk8nwkj501::::res://assets/sprites/battle/enemies/sans_undertale/torso.png<>uid://b05o17e400038::::res://assets/sprites/battle/enemies/sans_undertale/torso_shrug.png<>uid://cx7sbjvngblx1::::res://assets/sprites/battle/enemies/sans_undertale/legs.png
 ::res://scenes/rooms/::1691965848
 ::res://scenes/rooms/example_rooms/::1692016301
 judgement_hall.tscn::PackedScene::6861104026530866160::1692016301::0::1::::<><>::uid://dxl3sgh05os21
 room_0.tscn::PackedScene::6227793018951376835::1692016301::0::1::::<><>::uid://cs1ivvpwxh3q
-::res://scripts/::1692270732
+::res://scripts/::1692380781
 debug.gd::GDScript::-1::1691557261::0::1::::Debug<>Node2D<>::
 display_manager.gd::GDScript::-1::1692269693::0::1::::DisplayManager<>Node2D<>::
-main_menu.gd::GDScript::-1::1692270732::0::1::::<>Node2D<>::
-::res://scripts/autoload/::1692035959
-audio.gd::GDScript::-1::1691980278::0::1::::<>Node<>::
+main_menu.gd::GDScript::-1::1692380781::0::1::::<>Node2D<>::
+::res://scripts/autoload/::1692377953
+audio.gd::GDScript::-1::1692377953::0::1::::<>Node<>::
 functions.gd::GDScript::-1::1691968510::0::1::::<>Node<>::
 settings.gd::GDScript::-1::1692035959::0::1::::<>Node<>::
 ut_items.gd::GDScript::-1::1691962868::0::1::::<>Node<>::
 vars.gd::GDScript::-1::1691911895::0::1::::<>Node<>::
-::res://scripts/battle/::1692036291
+::res://scripts/battle/::1692382639
 attack_manager.gd::GDScript::-1::1691783322::0::1::::AttackManager<>Node<>::
 battle_box.gd::GDScript::-1::1691543742::0::1::::BattleBox<>NinePatchRect<>::
 battle_room.gd::GDScript::-1::1690664388::0::1::::BattleRoom<>Node2D<>::
@@ -278,8 +283,8 @@ buffer.gd::GDScript::-1::1684834600::0::1::::<>BackBufferCopy<>::
 bullet.gd::GDScript::-1::1692035959::0::1::::Bullet<>Node2D<>::
 dialouge_manager.gd::GDScript::-1::1690700771::0::1::::DialougeManager<>Node<>::
 dusted_enemy.gd::GDScript::-1::1685884782::0::1::::DustedEnemy<>Sprite2D<>::
-enemy.gd::GDScript::-1::1691914332::0::1::::Enemy<>Node2D<>::
-game_over.gd::GDScript::-1::1685856713::0::1::::<>Node2D<>::
+enemy.gd::GDScript::-1::1692377550::0::1::::Enemy<>Node2D<>::
+game_over.gd::GDScript::-1::1692382639::0::1::::<>Node2D<>::
 hud_manager.gd::GDScript::-1::1690953922::0::1::::HudManager<>Node2D<>::
 player_heart.gd::GDScript::-1::1692036291::0::1::::PlayerHeart<>CharacterBody2D<>::
 ::res://scripts/battle/attacks/::1692035872
@@ -293,14 +298,14 @@ bone_stab.gd::GDScript::-1::1692035912::0::1::::BBoneStab<>Bullet<>::
 gaster_blaster.gd::GDScript::-1::1692035912::0::1::::BGasterBlaster<>Bullet<>::
 platform.gd::GDScript::-1::1690394596::0::1::::BPlatform<>Bullet<>::
 vector_slash.gd::GDScript::-1::1692035912::0::1::::BVectorSlash<>Bullet<>::
-::res://scripts/global/::1692035991
+::res://scripts/global/::1692382785
 armor.gd::GDScript::-1::1691965045::0::1::::Armor<>Item<>::
 attack_eye.gd::GDScript::-1::1684965531::0::1::::AttackEye<>Node2D<>::
 healable.gd::GDScript::-1::1691965036::0::1::::Healable<>Item<>::
 item.gd::GDScript::-1::1691965217::0::1::::Item<>Node<>::
 player_save.gd::GDScript::-1::1691980490::0::1::::PlayerSave<>Resource<>::
 weapon.gd::GDScript::-1::1691965056::0::1::::Weapon<>Item<>::
-writer.gd::GDScript::-1::1692035991::0::1::::Writer<>RichTextLabel<>::
+writer.gd::GDScript::-1::1692382785::0::1::::Writer<>RichTextLabel<>::
 ::res://scripts/items/::1686338435
 ::res://scripts/items/armor/::1691964921
 heart_locket.gd::GDScript::-1::1691964921::0::1::::HeartLocket<>Armor<>::

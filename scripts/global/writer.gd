@@ -54,11 +54,14 @@ var fonts = {
 	"papyrus" : "res://assets/fonts/papyrus.ttf",
 	}
 var sounds = {
-	"mono1" : ["characters/SND_TXT1"],
-	"mono2" : ["characters/SND_TXT2"],
-	"papyrus" : ["characters/papyrus"],
-	"sans" : ["characters/sans"],
 	"none" : [],
+	"mono1" : ["characters/mono1"],
+	"mono2" : ["characters/mono2"],
+	"sans" : ["characters/sans"],
+	"papyrus" : ["characters/papyrus"],
+	"toriel" : ["characters/asgore"],
+	"asgore" : ["characters/asgore"],
+	"flowey" : ["characters/asgore"],
 	}
 
 var faces = {

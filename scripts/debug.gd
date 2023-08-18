@@ -26,10 +26,12 @@ func debug():
 					(vars as vars).attack_manager.turn_num -= 1
 		if(Input.is_action_just_pressed("reset_attack")):
 			if(is_instance_valid(vars.attack_manager)):
-				(vars as vars).attack_manager.reset_attack()
+				if(is_instance_valid((vars as vars).attack_manager.current_attack)):
+					(vars as vars).attack_manager.reset_attack()
 		if(Input.is_action_just_pressed("end_attack")):
-			(vars as vars).attack_manager.current_attack.end_attack()
-			(vars as vars).attack_manager.delete_bullets.emit()
+			if(is_instance_valid((vars as vars).attack_manager.current_attack)):
+				(vars as vars).attack_manager.current_attack.end_attack()
+				(vars as vars).attack_manager.delete_bullets.emit()
 		text.visible = true
 		var string = "Engine By Soldier\n"
 		string += "HP = Infinite\n"

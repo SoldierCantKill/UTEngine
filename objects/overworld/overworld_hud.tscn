@@ -1,66 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwshu8s0atk5j"]
+[gd_scene load_steps=6 format=3 uid="uid://bwshu8s0atk5j"]
 
 [ext_resource type="Texture2D" uid="uid://c0pijlyibwwdh" path="res://assets/sprites/battle/border.png" id="1_fr3v8"]
-[ext_resource type="Texture2D" uid="uid://7n1fsepwmvik" path="res://assets/sprites/reference_images/menu.PNG" id="1_j4wrw"]
 [ext_resource type="Script" path="res://scripts/overworld/overworld_hud.gd" id="1_w0po7"]
-[ext_resource type="Texture2D" uid="uid://dnm4s42ru8i14" path="res://assets/sprites/reference_images/stat.PNG" id="2_wtvlg"]
 [ext_resource type="FontFile" uid="uid://w8mnhdxac4io" path="res://assets/fonts/main.ttf" id="3_7mo1y"]
-[ext_resource type="Texture2D" uid="uid://chi7kmjx7kfjc" path="res://assets/sprites/reference_images/item.PNG" id="3_q38i6"]
 [ext_resource type="FontFile" uid="uid://eqmxyg5q5gqp" path="res://assets/fonts/ow_hud.ttf" id="4_2giai"]
-[ext_resource type="Texture2D" uid="uid://ckvjl6wo6vltq" path="res://assets/sprites/reference_images/eat.PNG" id="4_dls30"]
-[ext_resource type="Texture2D" uid="uid://24l3h4nj1hdh" path="res://assets/sprites/reference_images/image (8).png" id="6_tl4ce"]
 [ext_resource type="Texture2D" uid="uid://dwkhqcmnbbm0s" path="res://assets/sprites/battle/heart/small_heart.png" id="10_7kegg"]
 
 [node name="overworld_hud" type="Node2D"]
 script = ExtResource("1_w0po7")
-
-[node name="Menu" type="TextureRect" parent="."]
-visible = false
-self_modulate = Color(1, 1, 1, 0.270588)
-z_index = 4096
-offset_left = -1.0
-offset_top = -25.0
-offset_right = 642.0
-offset_bottom = 480.0
-texture = ExtResource("1_j4wrw")
-
-[node name="Menu2" type="TextureRect" parent="."]
-visible = false
-self_modulate = Color(1, 1, 1, 0.270588)
-z_index = 4096
-offset_top = -24.0
-offset_right = 643.0
-offset_bottom = 482.0
-texture = ExtResource("2_wtvlg")
-
-[node name="Menu3" type="TextureRect" parent="."]
-visible = false
-self_modulate = Color(1, 1, 1, 0.270588)
-z_index = 4096
-offset_left = -1.0
-offset_top = -25.0
-offset_right = 642.0
-offset_bottom = 481.0
-texture = ExtResource("3_q38i6")
-
-[node name="Menu4" type="TextureRect" parent="."]
-visible = false
-self_modulate = Color(1, 1, 1, 0.270588)
-z_index = 4096
-offset_top = -26.0
-offset_right = 643.0
-offset_bottom = 480.0
-texture = ExtResource("4_dls30")
-
-[node name="Image(8)" type="TextureRect" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.627451)
-z_index = 4096
-offset_left = -1.0
-offset_top = -25.5
-offset_right = 641.0
-offset_bottom = 481.5
-texture = ExtResource("6_tl4ce")
 
 [node name="selection_border" type="NinePatchRect" parent="."]
 offset_left = 32.0

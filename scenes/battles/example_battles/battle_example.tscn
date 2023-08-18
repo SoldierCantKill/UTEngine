@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://tkcsf1ljdqnn"]
+[gd_scene load_steps=35 format=3 uid="uid://tkcsf1ljdqnn"]
 
 [ext_resource type="Texture2D" uid="uid://cbhcc3qrqgn7i" path="res://assets/sprites/battle/enemies/sans_undertale/head/0.png" id="1_2r8j3"]
 [ext_resource type="Texture2D" uid="uid://c0fk22bwsicj2" path="res://assets/sprites/battle/enemies/speech_bubble.png" id="2_51m0u"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://binrk8nwkj501" path="res://assets/sprites/battle/enemies/sans_undertale/torso.png" id="10_peh6k"]
 [ext_resource type="Texture2D" uid="uid://b05o17e400038" path="res://assets/sprites/battle/enemies/sans_undertale/torso_shrug.png" id="11_5tt4b"]
 [ext_resource type="Texture2D" uid="uid://cx7sbjvngblx1" path="res://assets/sprites/battle/enemies/sans_undertale/legs.png" id="12_rt360"]
+[ext_resource type="FontVariation" uid="uid://y33hw2wh57nw" path="res://assets/fonts/sans_fixed.tres" id="14_77rv7"]
 
 [sub_resource type="GDScript" id="GDScript_60in0"]
 script/source = "extends BattleRoom
@@ -191,7 +192,7 @@ script/source = "extends DialougeManager
 func start():
 	var enemy = vars.enemies.get_child(0)
 	enemy.speech_bubble.visible = true
-	enemy.speech_writer.writer_text = \"(font:mono)(sound:sans)how are you?(pc)\"
+	enemy.speech_writer.writer_text = \"(font:sans)(sound:sans)how are you?(pc)\"
 	await enemy.speech_writer.done
 	enemy.speech_bubble.visible = false
 	await get_tree().process_frame
@@ -255,6 +256,8 @@ offset_top = 3.0
 offset_right = 158.0
 offset_bottom = 85.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("14_77rv7")
+theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 visible_characters_behavior = 1
 script = SubResource("GDScript_uiy3g")
