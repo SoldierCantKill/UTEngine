@@ -21,6 +21,7 @@ func _ready() -> void:
 	change_scene(starting_scene, false)
 
 func change_scene(path : Variant, fadeout = true) -> Node:
+	camera_intensity = 0.0
 	for i in game_viewport.get_children():
 		i.queue_free()
 	var scene = path.instantiate()
@@ -29,15 +30,16 @@ func change_scene(path : Variant, fadeout = true) -> Node:
 	if(fadeout):
 		fade_out(.3)
 	border_viewport.world_2d = game_viewport.world_2d
-	if(vars.scene is BattleRoom):
-		border_camera.offset = Vector2(320,240)
-	else:
+	if(vars.scene is OverworldRoom):
 		border_camera.offset = Vector2(0,0)
+	else:
+		border_camera.offset = Vector2(320,240)
 	await get_tree().process_frame
 	start_room.emit()
 	return scene
 
 func change_room(to_room : int, to_changer : int, fades : bool = true):
+	camera_intensity = 0.0
 	if(fades):
 		await fade_in(.3)
 	for i in game_viewport.get_children():
@@ -73,6 +75,7 @@ func fade_in(time : float):
 
 func screen_shake(amount : float) -> void:
 	camera_intensity = amount
+	camera_shake_t = 0.0
 
 func _process(delta):
 	if(is_instance_valid(vars.scene_cam)):
@@ -84,7 +87,12 @@ func _process(delta):
 		border_camera.zoom = vars.scene_cam.zoom
 		if camera_intensity > 0:
 			camera_shake_t += 60 * delta
+		else:
+			camera_shake_t = 0.0
 		if camera_shake_t >= 1:
 			camera_shake_t -= delta * 60
 			camera_intensity -= delta * 60
-			vars.scene_cam.offset = Vector2(camera_intensity * [1, -1].pick_random(), camera_intensity * [1, -1].pick_random()) + Vector2(320,240)
+			if(vars.scene is BattleRoom):
+				vars.scene_cam.offset = Vector2(camera_intensity * [1, -1].pick_random(), camera_intensity * [1, -1].pick_random()) + Vector2(320,240)
+			else:
+				vars.scene_cam.offset = Vector2(camera_intensity * [1, -1].pick_random(), camera_intensity * [1, -1].pick_random()) + Vector2(0,0)

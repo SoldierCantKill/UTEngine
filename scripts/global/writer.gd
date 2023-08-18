@@ -59,9 +59,9 @@ var sounds = {
 	"mono2" : ["characters/mono2"],
 	"sans" : ["characters/sans"],
 	"papyrus" : ["characters/papyrus"],
-	"toriel" : ["characters/asgore"],
+	"toriel" : ["characters/toriel"],
 	"asgore" : ["characters/asgore"],
-	"flowey" : ["characters/asgore"],
+	"flowey" : ["characters/flowey"],
 	}
 
 var faces = {

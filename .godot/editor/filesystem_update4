@@ -1,12 +1,4 @@
-res://scenes/game_over.tscn
-res://scripts/battle/game_over.gd
 res://scenes/display_manager.tscn
-res://scripts/main_menu.gd
-res://scenes/main_menu.tscn
-res://scenes/battles/example_battles/battle_example.tscn
-res://objects/battle/attack_eye/true_knife_attack_eye.tscn
-res://assets/fonts/main_mono_gameover.tres
-res://scripts/global/writer.gd
-res://objects/overworld/overworld_hud.tscn
-res://scripts/debug.gd
 res://scripts/display_manager.gd
+res://scripts/global/writer.gd
+res://scenes/main_menu.tscn
