@@ -205,6 +205,6 @@ func create_text(text : String):
 func check():
 	vars.hud_manager.mode = -1
 	vars.player_heart.visible = false
-	vars.main_writer.writer_text = "(enable:z)(sound:mono2)* Enemy 1 ATK 1 DEF\n  Example Text.(pc)"
+	vars.main_writer.writer_text = "(enable:z)(sound:mono2)* Enemy 1 ATK 1 DEF\n* Example Text.(pc)"
 	await vars.main_writer.done
 	vars.hud_manager.reset()

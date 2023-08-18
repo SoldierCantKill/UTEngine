@@ -78,6 +78,12 @@ func _process(delta):
 	$torso.position = torso_position + Vector2(torso_offset.x, torso_offset.y / 1.5)
 	$head.position = head_position + (torso_offset + head_offset)
 
+func check():
+	vars.hud_manager.mode = -1
+	vars.player_heart.visible = false
+	vars.main_writer.writer_text = \"(enable:z)(sound:mono2)* Sans 1 ATK 1 DEF\\n* Test!(pc)\"
+	await vars.main_writer.done
+	vars.hud_manager.reset()
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u1rbl"]

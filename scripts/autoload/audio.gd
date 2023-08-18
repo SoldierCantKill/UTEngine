@@ -4,7 +4,7 @@ extends Node
 
 var AUDIO_PATH: String = "res://assets/audio/" #CANNOT USE UIDS FOR THIS!!!!
 var references = {}
-var global_volume = 0.05
+var global_volume = 1
 var volume_store = global_volume
 var music : Node = null
 var current_sounds = []
