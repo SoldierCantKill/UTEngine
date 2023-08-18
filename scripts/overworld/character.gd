@@ -15,6 +15,7 @@ var y := 0.0
 var speed := 210.0
 var ray_cast_range := 15.0
 var auto_sprite_update := true
+var snap_camera := true
 var input_enabled := true :
 	set(value):
 		input_enabled = value
@@ -31,6 +32,7 @@ func _init(sprite_frames):
 	add_sprite_frames.call()
 
 func _ready():
+	platform_floor_layers = 0
 	add_child(sprite)
 	collision.shape = RectangleShape2D.new()
 	collision.shape.size = Vector2(21,10)
@@ -59,7 +61,8 @@ func set_warning_position():
 func _process(delta):
 	if(vars.player_character == self):
 		settings.player_save.data.position = global_position
-		camera_movement()
+		if(snap_camera):
+			camera_movement()
 	if(auto_sprite_update):
 		sprite_update()
 
