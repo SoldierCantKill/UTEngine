@@ -57,7 +57,7 @@ func _process(delta):
 				spr.play()
 				for i in range(2):
 					await spr.frame_changed
-				spr.animation_finished.connect(func(): spr.play(spr.animation + "_loop"))
+				spr.animation_finished.connect(func(): if(!spr.animation.contains("_loop")): spr.play(spr.animation + "_loop"))
 				state = 2
 			else:
 				wait_time -= 60 * delta

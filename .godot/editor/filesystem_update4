@@ -1,4 +1,5 @@
 res://scenes/display_manager.tscn
-res://scripts/display_manager.gd
-res://scripts/global/writer.gd
 res://scenes/main_menu.tscn
+res://objects/battle/hud_manager.tscn
+res://scenes/rooms/example_rooms/room_0.tscn
+res://scenes/rooms/example_rooms/judgement_hall.tscn

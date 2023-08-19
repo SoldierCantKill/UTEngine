@@ -78,7 +78,7 @@ size = Vector2(82, 20)
 script = SubResource("GDScript_ch82y")
 
 [node name="camera" type="Camera2D" parent="."]
-position = Vector2(103, 80)
+position = Vector2(9999, 9999)
 
 [node name="room" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
