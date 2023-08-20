@@ -21,7 +21,6 @@ func _ready() -> void:
 	change_scene(starting_scene, false)
 
 func change_scene(path : Variant, fadeout = true) -> Node:
-	camera_intensity = 0.0
 	for i in game_viewport.get_children():
 		i.queue_free()
 	var scene = path.instantiate()
@@ -30,16 +29,11 @@ func change_scene(path : Variant, fadeout = true) -> Node:
 	if(fadeout):
 		fade_out(.3)
 	border_viewport.world_2d = game_viewport.world_2d
-	if(vars.scene is OverworldRoom):
-		border_camera.offset = Vector2(0,0)
-	else:
-		border_camera.offset = Vector2(320,240)
 	await get_tree().process_frame
 	start_room.emit()
 	return scene
 
 func change_room(to_room : int, to_changer : int, fades : bool = true):
-	camera_intensity = 0.0
 	if(fades):
 		await fade_in(.3)
 	for i in game_viewport.get_children():
@@ -51,10 +45,10 @@ func change_room(to_room : int, to_changer : int, fades : bool = true):
 	if(fades):
 		fade_out(.3)
 	border_viewport.world_2d = game_viewport.world_2d
-	border_camera.offset = Vector2(0,0)
 	if(to_changer != -1):
 		for i in room.room_changers:
 			if(i.to_changer == to_changer):
+				print(i)
 				settings.player_save.data.position = i.player_spawn.global_position
 	start_room.emit()
 	return room
@@ -75,11 +69,11 @@ func fade_in(time : float):
 
 func screen_shake(amount : float) -> void:
 	camera_intensity = amount
-	camera_shake_t = 0.0
 
 func _process(delta):
 	if(is_instance_valid(vars.scene_cam)):
 		border_camera.global_position = vars.scene_cam.global_position
+		border_camera.offset = vars.scene_cam.offset
 		border_camera.limit_top = vars.scene_cam.limit_top
 		border_camera.limit_bottom = vars.scene_cam.limit_bottom
 		border_camera.limit_left = vars.scene_cam.limit_left
@@ -88,11 +82,8 @@ func _process(delta):
 		if camera_intensity > 0:
 			camera_shake_t += 60 * delta
 		else:
-			camera_shake_t = 0.0
+			pass
 		if camera_shake_t >= 1:
 			camera_shake_t -= delta * 60
 			camera_intensity -= delta * 60
-			if(vars.scene is BattleRoom):
-				vars.scene_cam.offset = Vector2(camera_intensity * [1, -1].pick_random(), camera_intensity * [1, -1].pick_random()) + Vector2(320,240)
-			else:
-				vars.scene_cam.offset = Vector2(camera_intensity * [1, -1].pick_random(), camera_intensity * [1, -1].pick_random()) + Vector2(0,0)
+			vars.scene_cam.offset = Vector2(camera_intensity * [1, -1].pick_random(), camera_intensity * [1, -1].pick_random()) + Vector2(320,240)
