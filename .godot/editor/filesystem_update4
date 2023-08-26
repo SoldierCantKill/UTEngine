@@ -1,3 +1,6 @@
 res://scenes/display_manager.tscn
 res://scenes/main_menu.tscn
 res://objects/battle/hud_manager.tscn
+res://scenes/battles/example_battles/battle_example.tscn
+res://objects/battle/attack_eye/true_knife_attack_eye.tscn
+res://scripts/autoload/settings.gd

@@ -189,11 +189,11 @@ func inputs():
 			var enemy_array : Array = vars.enemies.get_children()
 			if(Input.is_action_just_pressed("up")):
 				audio.play("menu/menu_move")
-				enemy_index = wrapi(enemy_index + 2,0,enemy_array.size())
+				enemy_index = wrapi(enemy_index + 3,0,enemy_array.size())
 			
 			if(Input.is_action_just_pressed("down")):
 				audio.play("menu/menu_move")
-				enemy_index = wrapi(enemy_index - 2,0,enemy_array.size())
+				enemy_index = wrapi(enemy_index - 3,0,enemy_array.size())
 			if(Input.is_action_just_pressed("confirm")):
 				fight()
 			if(Input.is_action_just_pressed("exit")):
@@ -204,11 +204,12 @@ func inputs():
 					var enemy_array : Array = vars.enemies.get_children()
 					if(Input.is_action_just_pressed("up")):
 						audio.play("menu/menu_move")
-						enemy_index = wrapi(enemy_index + 2,0,enemy_array.size())
+						enemy_index = wrapi(enemy_index + 3,0,enemy_array.size())
 					
 					if(Input.is_action_just_pressed("down")):
 						audio.play("menu/menu_move")
-						enemy_index = wrapi(enemy_index - 2,0,enemy_array.size())
+						enemy_index = wrapi(enemy_index - 3,0,enemy_array.size())
+						print(enemy_index)
 					if(Input.is_action_just_pressed("confirm")):
 						audio.play("menu/menu_select")
 						mode = 2
