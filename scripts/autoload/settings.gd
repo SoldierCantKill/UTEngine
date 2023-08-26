@@ -50,11 +50,10 @@ func _process(delta):
 func toggle_resolution():
 	match(DisplayServer.window_get_mode()):
 		0:
-			DisplayServer.window_set_mode(4)
+			DisplayServer.window_set_mode(3)
 			get_viewport().size = Vector2(1920,1080)
 			DisplayServer.window_set_position(Vector2(Vector2(DisplayServer.screen_get_size() / 2) - Vector2(get_viewport().size / 2)))
-		4:
-			DisplayServer.window_set_mode(3)
+		3:
 			DisplayServer.window_set_mode(0)
 			get_viewport().size = Vector2(640,480)
 	change_zoom()
@@ -66,7 +65,7 @@ func change_zoom():
 			0:
 				vars.display.camera.zoom = Vector2(1,1)
 				get_viewport().size = Vector2(640,480)
-			4:
+			3:
 				vars.display.camera.zoom = Vector2(2.25,2.25)
 	else:
 		vars.display.border.visible = true
@@ -74,5 +73,5 @@ func change_zoom():
 			0:
 				vars.display.camera.zoom = Vector2(1,1)
 				get_viewport().size = Vector2(960,540)
-			4:
+			3:
 				vars.display.camera.zoom = Vector2(2,2)

@@ -63,7 +63,7 @@ func setup_hud():
 	if(settings.player_save.player.max_hp < 92): #Display hud is formatted a little different when in sans battle.
 		display.name_text.position = Vector2(30,400)
 		display.lv_text.position = display.name_text.position + Vector2(len(display.name_text.get_parsed_text()) * 22.5,0)
-		display.hp.position = display.lv_text.position + Vector2(124,5)
+		display.hp.position = display.lv_text.position + Vector2(107,5)
 		display.max_health_bar.position = display.hp.position + Vector2(31, -5)
 	else:
 		display.name_text.position = Vector2(30,400)# 87.0 
@@ -188,11 +188,13 @@ func inputs():
 		0:
 			var enemy_array : Array = vars.enemies.get_children()
 			if(Input.is_action_just_pressed("up")):
-				audio.play("menu/menu_move")
+				if(enemy_array.size() > 1):
+					audio.play("menu/menu_move")
 				enemy_index = wrapi(enemy_index + 3,0,enemy_array.size())
 			
 			if(Input.is_action_just_pressed("down")):
-				audio.play("menu/menu_move")
+				if(enemy_array.size() > 1):
+					audio.play("menu/menu_move")
 				enemy_index = wrapi(enemy_index - 3,0,enemy_array.size())
 			if(Input.is_action_just_pressed("confirm")):
 				fight()
@@ -203,13 +205,14 @@ func inputs():
 				1:
 					var enemy_array : Array = vars.enemies.get_children()
 					if(Input.is_action_just_pressed("up")):
-						audio.play("menu/menu_move")
+						if(enemy_array.size() > 1):
+							audio.play("menu/menu_move")
 						enemy_index = wrapi(enemy_index + 3,0,enemy_array.size())
 					
 					if(Input.is_action_just_pressed("down")):
-						audio.play("menu/menu_move")
+						if(enemy_array.size() > 1):
+							audio.play("menu/menu_move")
 						enemy_index = wrapi(enemy_index - 3,0,enemy_array.size())
-						print(enemy_index)
 					if(Input.is_action_just_pressed("confirm")):
 						audio.play("menu/menu_select")
 						mode = 2
