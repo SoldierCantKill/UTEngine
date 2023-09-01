@@ -132,22 +132,22 @@ func hud_mode_update():
 					enemy_health_bars.append(bar_max)
 				
 		2:
-			match(button_index):
-				1:
-					for i in range(vars.enemies.get_child(enemy_index).act_options.keys().size()):
-						display.item_texts[i].text = "* " + vars.enemies.get_child(enemy_index).act_options.keys()[i]
-				2:
-					for i in range(4):
-						if(settings.player_save.inventory[i + (item_page - 1) * 4] != ""):
-							var item = ut_items.items[settings.player_save.inventory[i + (item_page - 1) * 4]]
-							display.item_texts[i].text = "* " + item.names[1] if !serious_mode else "* " + item.names[2]
-					if(settings.player_save.inventory[4] != ""):
-						display.page_text.visible = true
-						display.page_text.text = "PAGE " + str(item_page)
-					else:
-						display.page_text.visible = false
-				3:
-					display.item_texts[0].text = "* Spare"
+			var button_ref = display.buttons[button_index]
+			if(button_ref == $buttons/act):
+				for i in range(vars.enemies.get_child(enemy_index).act_options.keys().size()):
+					display.item_texts[i].text = "* " + vars.enemies.get_child(enemy_index).act_options.keys()[i]
+			if(button_ref == $buttons/item):
+				for i in range(4):
+					if(settings.player_save.inventory[i + (item_page - 1) * 4] != ""):
+						var item = ut_items.items[settings.player_save.inventory[i + (item_page - 1) * 4]]
+						display.item_texts[i].text = "* " + item.names[1] if !serious_mode else "* " + item.names[2]
+				if(settings.player_save.inventory[4] != ""):
+					display.page_text.visible = true
+					display.page_text.text = "PAGE " + str(item_page)
+				else:
+					display.page_text.visible = false
+			if(button_ref == $buttons/mercy):
+				display.item_texts[0].text = "* Spare"
 
 func heart_update() -> void:
 	match(mode):
@@ -159,10 +159,12 @@ func heart_update() -> void:
 			vars.player_heart.global_position = display.item_texts[item_index].global_position + Vector2(-28, 17)
 
 func inputs():
+	
 	match(mode):
 		-1:
 			return
 		0:
+			var button_ref = display.buttons[button_index]
 			if(Input.is_action_just_pressed("right")):
 				audio.play("menu/menu_move")
 				button_index = wrapi(button_index + 1, 0, display.buttons.size())
@@ -171,145 +173,145 @@ func inputs():
 				button_index = wrapi(button_index - 1, 0, display.buttons.size())
 			if (Input.is_action_just_pressed("confirm")):
 				audio.play("menu/menu_select")
-				if(button_index != 2):
+				if(button_ref != $buttons/item):
 					vars.main_writer.writer_text = ""
 					enemy_index = 0
-					mode = 1 if(button_index == 0 || button_index == 1) else 2
+					mode = 1 if(button_ref in [$buttons/fight,$buttons/act]) else 2
 				else:
 					if(settings.player_save.inventory[0] != ""):
 						vars.main_writer.writer_text = ""
 						enemy_index = 0
-						mode = 1 if(button_index == 0 || button_index == 1) else 2
+						mode = 1 if(button_ref in [$buttons/fight,$buttons/act]) else 2
 				item_index = 0
 				item_page = 1
 			return
 				
-	match(button_index):
-		0:
-			var enemy_array : Array = vars.enemies.get_children()
-			if(Input.is_action_just_pressed("up")):
-				if(enemy_array.size() > 1):
-					audio.play("menu/menu_move")
-				enemy_index = wrapi(enemy_index + 3,0,enemy_array.size())
-			
-			if(Input.is_action_just_pressed("down")):
-				if(enemy_array.size() > 1):
-					audio.play("menu/menu_move")
-				enemy_index = wrapi(enemy_index - 3,0,enemy_array.size())
-			if(Input.is_action_just_pressed("confirm")):
-				fight()
-			if(Input.is_action_just_pressed("exit")):
-				reset()
-		1:
-			match(mode):
-				1:
-					var enemy_array : Array = vars.enemies.get_children()
-					if(Input.is_action_just_pressed("up")):
-						if(enemy_array.size() > 1):
-							audio.play("menu/menu_move")
-						enemy_index = wrapi(enemy_index + 3,0,enemy_array.size())
-					
-					if(Input.is_action_just_pressed("down")):
-						if(enemy_array.size() > 1):
-							audio.play("menu/menu_move")
-						enemy_index = wrapi(enemy_index - 3,0,enemy_array.size())
-					if(Input.is_action_just_pressed("confirm")):
-						audio.play("menu/menu_select")
-						mode = 2
-					if(Input.is_action_just_pressed("exit")):
-						reset()
-				2:
-					var last_string_index = func() -> int:
-						for i in range(display.item_texts.size()):
-							if(display.item_texts[i].text == ""):
-								return i
-						return display.item_texts.size()
-					if(Input.is_action_just_pressed("right")):
-						audio.play("menu/menu_move")
-						if((item_index + 1) % 2 != 0):
-							if(item_index + 1 < last_string_index.call()):
-								item_index += 1
-						else:
-							item_index -= 1
-					if(Input.is_action_just_pressed("left")):
-						audio.play("menu/menu_move")
-						if((item_index + 1) % 2 == 0):
-							if(item_index - 1 < last_string_index.call()):
-								item_index -= 1
-						elif(item_index + 1 < last_string_index.call()):
-							item_index += 1
-					if(Input.is_action_just_pressed("up")):
-						audio.play("menu/menu_move")
-						if(item_index - 2 < 0):
-							if(5 - (item_index + 1) % 2 < last_string_index.call()):
-								item_index = 5 - (item_index + 1) % 2
-						else:
-							item_index -= 2
-					if(Input.is_action_just_pressed("down")):
-						audio.play("menu/menu_move")
-						if(item_index + 2 >= last_string_index.call()):
-							item_index = -1 - (item_index + 1) % 2
-						item_index += 2
-					if(Input.is_action_just_pressed("confirm")):
-						check()
-					if(Input.is_action_just_pressed("exit")):
-						mode = 1
-		2:
-			var new_x : int = 0
-			var last_string_index = func() -> int:
-				for i in range(display.item_texts.size()):
-					if(display.item_texts[i].text == ""):
-						return i
-				return display.item_texts.size() - 1
-			if(Input.is_action_just_pressed("right")):
+	var button_ref = display.buttons[button_index]
+	if(button_ref == $buttons/fight):
+		var enemy_array : Array = vars.enemies.get_children()
+		if(Input.is_action_just_pressed("up")):
+			if(enemy_array.size() > 1):
 				audio.play("menu/menu_move")
-				if((item_index + 1) % 2 != 0):
-					if(item_index + 1 < last_string_index.call()):
-						item_index += 1
-				else:
-					if(settings.player_save.inventory[4] != "" && item_page == 1):
-						item_index -= 1
-						item_page = 2
-						if(settings.player_save.inventory[6] == "" && item_index == 2):
-							item_index = 0
-					else:
-						item_index -= 1
-			if(Input.is_action_just_pressed("left")):
+			enemy_index = wrapi(enemy_index + 3,0,enemy_array.size())
+		
+		if(Input.is_action_just_pressed("down")):
+			if(enemy_array.size() > 1):
 				audio.play("menu/menu_move")
-				if((item_index + 1) % 2 == 0):
-					if(item_index - 1 < last_string_index.call()):
-						item_index -= 1
-				else:
-					if(settings.player_save.inventory[4] != "" && item_page == 2):
-						item_index += 1
-						item_page = 1
-					else:
+			enemy_index = wrapi(enemy_index - 3,0,enemy_array.size())
+		if(Input.is_action_just_pressed("confirm")):
+			fight()
+		if(Input.is_action_just_pressed("exit")):
+			reset()
+	if(button_ref == $buttons/act):
+		match(mode):
+			1:
+				var enemy_array : Array = vars.enemies.get_children()
+				if(Input.is_action_just_pressed("up")):
+					if(enemy_array.size() > 1):
+						audio.play("menu/menu_move")
+					enemy_index = wrapi(enemy_index + 3,0,enemy_array.size())
+				
+				if(Input.is_action_just_pressed("down")):
+					if(enemy_array.size() > 1):
+						audio.play("menu/menu_move")
+					enemy_index = wrapi(enemy_index - 3,0,enemy_array.size())
+				if(Input.is_action_just_pressed("confirm")):
+					audio.play("menu/menu_select")
+					mode = 2
+				if(Input.is_action_just_pressed("exit")):
+					reset()
+			2:
+				var last_string_index = func() -> int:
+					for i in range(display.item_texts.size()):
+						if(display.item_texts[i].text == ""):
+							return i
+					return display.item_texts.size()
+				if(Input.is_action_just_pressed("right")):
+					audio.play("menu/menu_move")
+					if((item_index + 1) % 2 != 0):
 						if(item_index + 1 < last_string_index.call()):
 							item_index += 1
-							
-			if(Input.is_action_just_pressed("up")):
-				audio.play("menu/menu_move")
-				if(item_index - 2 < 0):
-					if(3 - (item_index + 1) % 2 < last_string_index.call()):
-						item_index = 3 - (item_index + 1) % 2
+					else:
+						item_index -= 1
+				if(Input.is_action_just_pressed("left")):
+					audio.play("menu/menu_move")
+					if((item_index + 1) % 2 == 0):
+						if(item_index - 1 < last_string_index.call()):
+							item_index -= 1
+					elif(item_index + 1 < last_string_index.call()):
+						item_index += 1
+				if(Input.is_action_just_pressed("up")):
+					audio.play("menu/menu_move")
+					if(item_index - 2 < 0):
+						if(5 - (item_index + 1) % 2 < last_string_index.call()):
+							item_index = 5 - (item_index + 1) % 2
+					else:
+						item_index -= 2
+				if(Input.is_action_just_pressed("down")):
+					audio.play("menu/menu_move")
+					if(item_index + 2 >= last_string_index.call()):
+						item_index = -1 - (item_index + 1) % 2
+					item_index += 2
+				if(Input.is_action_just_pressed("confirm")):
+					check()
+				if(Input.is_action_just_pressed("exit")):
+					mode = 1
+	if(button_ref == $buttons/item):
+		var new_x : int = 0
+		var last_string_index = func() -> int:
+			for i in range(display.item_texts.size()):
+				if(display.item_texts[i].text == ""):
+					return i
+			return display.item_texts.size() - 1
+		if(Input.is_action_just_pressed("right")):
+			audio.play("menu/menu_move")
+			if((item_index + 1) % 2 != 0):
+				if(item_index + 1 < last_string_index.call()):
+					item_index += 1
+			else:
+				if(settings.player_save.inventory[4] != "" && item_page == 1):
+					item_index -= 1
+					item_page = 2
+					if(settings.player_save.inventory[6] == "" && item_index == 2):
+						item_index = 0
 				else:
-					item_index -= 2
-			if(Input.is_action_just_pressed("down")):
-				audio.play("menu/menu_move")
-				if(item_index + 2 >= last_string_index.call()):
-					item_index = -1 - (item_index + 1) % 2
-				item_index += 2
-					
-			if(Input.is_action_just_pressed("confirm")):
-				use()
-			if(Input.is_action_just_pressed("exit")):
-				reset()
-		3:
-			if(Input.is_action_just_pressed("confirm")):
-				mercy()
+					item_index -= 1
+		if(Input.is_action_just_pressed("left")):
+			audio.play("menu/menu_move")
+			if((item_index + 1) % 2 == 0):
+				if(item_index - 1 < last_string_index.call()):
+					item_index -= 1
+			else:
+				if(settings.player_save.inventory[4] != "" && item_page == 2):
+					item_index += 1
+					item_page = 1
+				else:
+					if(item_index + 1 < last_string_index.call()):
+						item_index += 1
+						
+		if(Input.is_action_just_pressed("up")):
+			audio.play("menu/menu_move")
+			if(item_index - 2 < 0):
+				if(3 - (item_index + 1) % 2 < last_string_index.call()):
+					item_index = 3 - (item_index + 1) % 2
+			else:
+				item_index -= 2
+		if(Input.is_action_just_pressed("down")):
+			audio.play("menu/menu_move")
+			if(item_index + 2 >= last_string_index.call()):
+				item_index = -1 - (item_index + 1) % 2
+			item_index += 2
 				
-			if(Input.is_action_just_pressed("exit")):
-				reset()
+		if(Input.is_action_just_pressed("confirm")):
+			use()
+		if(Input.is_action_just_pressed("exit")):
+			reset()
+	if(button_ref == $buttons/mercy):
+		if(Input.is_action_just_pressed("confirm")):
+			mercy()
+			
+		if(Input.is_action_just_pressed("exit")):
+			reset()
 
 func reset():
 	vars.player_heart.heart_mode = 0

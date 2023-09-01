@@ -1,8 +1,10 @@
-res://scenes/main_menu.tscn
+res://scripts/battle/player_heart.gd
+res://objects/battle/player_heart.tscn
 res://scripts/battle/hud_manager.gd
-res://scripts/autoload/settings.gd
-res://scenes/display_manager.tscn
 res://objects/battle/hud_manager.tscn
-res://scenes/battles/example_battles/battle_example.tscn
-res://objects/battle/attack_eye/true_knife_attack_eye.tscn
+res://scenes/display_manager.tscn
+res://scenes/main_menu.tscn
+res://objects/overworld/overworld_hud.tscn
+res://scenes/rooms/example_rooms/judgement_hall.tscn
+res://scenes/rooms/example_rooms/room_0.tscn
 res://scripts/main_menu.gd

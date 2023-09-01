@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://frb40ffyat0v"]
+[gd_scene load_steps=5 format=3 uid="uid://frb40ffyat0v"]
 
 [ext_resource type="Script" path="res://scripts/battle/player_heart.gd" id="1_hpkp1"]
 [ext_resource type="Texture2D" uid="uid://b5j3kxbhl6cb" path="res://assets/sprites/battle/heart/heart_0.png" id="1_kquxx"]
@@ -6,60 +6,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_muyji"]
 size = Vector2(16, 16)
 
-[sub_resource type="Animation" id="Animation_c2wc3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_ydyif"]
-resource_name = "hurt"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.0980392), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xkwbj"]
-_data = {
-"RESET": SubResource("Animation_c2wc3"),
-"hurt": SubResource("Animation_ydyif")
-}
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2x2a2"]
 size = Vector2(6, 6)
 
 [node name="player_heart" type="CharacterBody2D"]
-self_modulate = Color(1, 0, 0, 1)
 script = ExtResource("1_hpkp1")
 
 [node name="sprite" type="Sprite2D" parent="."]
@@ -68,11 +18,6 @@ texture = ExtResource("1_kquxx")
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_muyji")
-
-[node name="animation_player" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_xkwbj")
-}
 
 [node name="hitbox" type="Area2D" parent="."]
 

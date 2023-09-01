@@ -8,6 +8,7 @@ enum e_heart_mode {
 
 signal thrown_impact
 
+var auto_change_color := true
 var input_enabled := false
 var heart_mode : e_heart_mode = e_heart_mode.red :
 	set(value):
@@ -15,7 +16,8 @@ var heart_mode : e_heart_mode = e_heart_mode.red :
 		fall_speed = 0.0
 		fall_gravity = 0.0
 		jump_input = false
-		change_heart_color()
+		if(auto_change_color):
+			change_heart_color()
 @onready var sprite = $sprite
 @onready var animation_player = $animation_player
 @onready var hitbox = $hitbox
@@ -41,7 +43,6 @@ func _ready():
 	floor_stop_on_slope = true
 
 func hurt(damage : float):
-	animation_player.play("hurt")
 	audio.play("battle/hurt")
 	settings.player_save.player.current_hp = max(settings.player_save.player.current_hp - damage, 0)
 	i_timer = i_frames
@@ -70,8 +71,9 @@ func _process(delta : float):
 func tick(delta):
 	i_timer -= delta * 60
 	if(i_timer <= 0):
-		animation_player.stop()
 		modulate.a = 1
+	else:
+		modulate.a = wrapf(modulate.a + delta * 2,0,1)
 	karma_i_timer -= delta * 60
 	karma_tick_timer += delta * 60
 	if(karma_tick_timer > 1):
@@ -201,3 +203,4 @@ func is_moving():
 				return true
 			return false
 	return false
+ 
