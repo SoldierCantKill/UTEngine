@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cuy13ul1spjw2"]
+[gd_scene load_steps=28 format=3 uid="uid://cuy13ul1spjw2"]
 
 [ext_resource type="Texture2D" uid="uid://cs1ivvpwxh3q" path="res://assets/sprites/overworld/rooms/room0.png" id="1_wamv2"]
 [ext_resource type="PackedScene" uid="uid://bwshu8s0atk5j" path="res://objects/overworld/overworld_hud.tscn" id="2_vqwt6"]
@@ -18,6 +18,48 @@ func _ready():
 func get_place_text() -> String:
 	return \"Room 0\"
 "
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ikbe"]
+size = Vector2(363, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c42wb"]
+size = Vector2(33, 126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tn62h"]
+size = Vector2(113.75, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1f6ui"]
+size = Vector2(79.75, 72.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3x0o"]
+size = Vector2(634, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtl4q"]
+size = Vector2(887, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6o3n"]
+size = Vector2(280, 32.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01w51"]
+size = Vector2(71, 39.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ves61"]
+size = Vector2(58.5, 39.625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j0tt6"]
+size = Vector2(58.5, 39.8125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_waj7w"]
+size = Vector2(31.25, 200.906)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_co2sx"]
+size = Vector2(108, 71.7266)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aht7v"]
+size = Vector2(45, 81.125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gh1lw"]
+size = Vector2(89, 33)
 
 [sub_resource type="GDScript" id="GDScript_7yd8t"]
 script/source = "extends Interactable
@@ -65,9 +107,6 @@ func _ready():
 	player_character = vars.player_character
 	border = $\"..\"
 	face = $\"../face\"
-	#set_font(\"sans\",28)
-	#writer_text = \"(font:mono)(size:32)(sound:none)(disable:x)* Human. (delay:.5)You are a bad guy.(pc)(event)(sound:sans)(face:sans/normal)* just kidding.(pc)* unfortunately i am\\n  gonna need to \\n  fight you.(pc)* apparently we need\\n  to do a showcase.(pc)\"
-	#writer_text = \"(face:sans/normal)* don't you only have\\n  one outfit?\"
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7qiep"]
@@ -84,10 +123,68 @@ position = Vector2(9999, 9999)
 scale = Vector2(2, 2)
 texture = ExtResource("1_wamv2")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="collisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-381.5, -156)
+shape = SubResource("RectangleShape2D_6ikbe")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-103.5, -37)
+shape = SubResource("RectangleShape2D_c42wb")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-142.875, -136)
+shape = SubResource("RectangleShape2D_tn62h")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-200, 215.75)
+shape = SubResource("RectangleShape2D_1f6ui")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="collisions"]
+position = Vector2(197, 43.5)
+shape = SubResource("RectangleShape2D_v3x0o")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="collisions"]
+position = Vector2(243.5, 159.5)
+shape = SubResource("RectangleShape2D_dtl4q")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-380, 236)
+shape = SubResource("RectangleShape2D_e6o3n")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-555.5, 199.625)
+shape = SubResource("RectangleShape2D_01w51")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-588.75, 159.813)
+shape = SubResource("RectangleShape2D_ves61")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-628, 119.906)
+shape = SubResource("RectangleShape2D_j0tt6")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-655.375, -0.546875)
+shape = SubResource("RectangleShape2D_waj7w")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-617, -136.137)
+shape = SubResource("RectangleShape2D_co2sx")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="collisions"]
+position = Vector2(662.5, 100.125)
+shape = SubResource("RectangleShape2D_aht7v")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="collisions"]
+position = Vector2(640.5, 43.5)
+shape = SubResource("RectangleShape2D_gh1lw")
+
+[node name="flower_interact" type="Area2D" parent="."]
 script = SubResource("GDScript_7yd8t")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flower_interact"]
 position = Vector2(-380, 20)
 shape = SubResource("RectangleShape2D_nrgjn")
 

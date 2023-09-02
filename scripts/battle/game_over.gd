@@ -17,15 +17,15 @@ func _ready() -> void:
 		if(Input.is_action_just_pressed("confirm")):
 			break
 		await get_tree().process_frame
-	create_tween().tween_property(audio.music,"volume_db",-30.0,1.5)
-	create_tween().tween_property($game_over,"self_modulate:a",0.0,1.5).set_trans(Tween.TRANS_SINE)
+	create_tween().tween_property(audio.music,"volume_db",-60.0,3)
+	create_tween().tween_property(self,"modulate:a",0.0,1.5).set_trans(Tween.TRANS_SINE)
 	await get_tree().create_timer(2.5).timeout
 	audio.stop_music()
 	settings.load_game()
 	vars.display.change_scene(vars.display.starting_scene, true)
 
 func heart_shatter():
-	$heart.position = settings.death_position
+	$heart.global_position = settings.death_position
 	await get_tree().create_timer(0.666667).timeout
 	$heart.frame = 1
 	audio.play("battle/break")

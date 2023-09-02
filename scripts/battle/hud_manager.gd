@@ -14,6 +14,8 @@ var serious_mode := true
 var enemy_health_bars := []
 var eye = null #Attack eye
 
+signal eye_created
+
 @onready var display : Dictionary = {
 	name_text = $display/name,
 	lv_text = $display/lv,
@@ -346,6 +348,8 @@ func fight():
 	eye = ut_items.items[settings.player_save.player.weapon].attack_eye.instantiate()
 	eye.enemy = vars.enemies.get_child(enemy_index)
 	add_child(eye)
+	await get_tree().process_frame
+	eye_created.emit()
 
 func check():
 	audio.play("menu/menu_select")

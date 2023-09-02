@@ -48,7 +48,6 @@ func change_room(to_room : int, to_changer : int, fades : bool = true):
 	if(to_changer != -1):
 		for i in room.room_changers:
 			if(i.to_changer == to_changer):
-				print(i)
 				settings.player_save.data.position = i.player_spawn.global_position
 	start_room.emit()
 	return room
@@ -80,10 +79,8 @@ func _process(delta):
 		border_camera.limit_right = vars.scene_cam.limit_right
 		border_camera.zoom = vars.scene_cam.zoom
 		if camera_intensity > 0:
-			camera_shake_t += 60 * delta
-		else:
-			pass
+			camera_shake_t += 30 * delta
 		if camera_shake_t >= 1:
-			camera_shake_t -= delta * 60
-			camera_intensity -= delta * 60
+			camera_shake_t = 0
+			camera_intensity -= 1
 			vars.scene_cam.offset = Vector2(camera_intensity * [1, -1].pick_random(), camera_intensity * [1, -1].pick_random()) + Vector2(320,240)

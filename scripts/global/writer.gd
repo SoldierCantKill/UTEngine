@@ -50,7 +50,8 @@ const silent_chars  = [' ']
 
 var fonts = {
 	"mono" : "res://assets/fonts/main_mono.ttf",
-	"sans" : "res://assets/fonts/sans_fixed.tres",
+	"sans" : "res://assets/fonts/sans.ttf",
+	"sans_ow" : "res://assets/fonts/sans_fixed.tres",
 	"papyrus" : "res://assets/fonts/papyrus.ttf",
 	}
 var sounds = {
@@ -294,4 +295,3 @@ func _process(delta):
 func clear_text():
 	writer_text = ""
 	visible_characters = 0
-

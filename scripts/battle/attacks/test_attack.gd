@@ -15,6 +15,9 @@ func pre_attack():
 func start_attack():
 	vars.player_heart.input_enabled = true
 	attack_started = true
+#	a_vars.attack_manager.gaster_blaster(0,Vector2(-100,-100),Vector2(150,100),0,Vector2(1,1),0,0,false)
+#	a_vars.attack_manager.gaster_blaster(0,Vector2(-100,-100),Vector2(180,100),0,Vector2(1,1),0,0,false)
+#	a_vars.attack_manager.gaster_blaster(0,Vector2(-100,-100),Vector2(210,100),0,Vector2(1,1),0,0,false)
 	bones_part_one()
 	gb_part_one()
 

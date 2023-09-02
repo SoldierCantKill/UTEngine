@@ -33,7 +33,11 @@ func inputs():
 				match(selection_index):
 					0:
 						audio.play("menu/save")
+						text_container.get_node("save").visible = false
+						text_container.get_node("return").visible = false
+						text_container.get_node("file_saved").visible = true
 						mode = 1
+						settings.player_save.data.place_name = vars.scene.get_place_text()
 						settings.save_game()
 						refresh()
 					1:
@@ -56,6 +60,7 @@ func hud_update():
 		1:
 			heart.visible = false
 			text_container.modulate = Color.YELLOW
+			
 
 func on_event():
 	audio.play("menu/heal")
@@ -63,6 +68,9 @@ func on_event():
 	open()
 
 func open():
+	text_container.get_node("save").visible = true
+	text_container.get_node("return").visible = true
+	text_container.get_node("file_saved").visible = false
 	selection_index = 0
 	mode = 0
 	refresh()
@@ -80,12 +88,12 @@ func refresh():
 	var old_player_save = ResourceLoader.load("user://saved.tres").duplicate()
 	text_container.get_node("name").text = str(old_player_save.player.name)
 	text_container.get_node("lv").text = "LV %d" %[old_player_save.player.lv]
-	text_container.get_node("place").text = (vars.scene as OverworldRoom).get_place_text()
+	text_container.get_node("place").text = old_player_save.data.place_name
 	var minutes = floorf(old_player_save.data.time / 60)
 	if(minutes >= 10):
 		minutes = str(minutes)
 	else:
-		minutes = "0" + str(minutes)
+		minutes = str(minutes)
 	var seconds = floorf(fmod(old_player_save.data.time,60))
 	if(seconds >= 10):
 		seconds = str(seconds)

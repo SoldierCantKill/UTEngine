@@ -48,10 +48,6 @@ func attack(amount : float):
 	eye_hit.emit()
 	await enemy.done_being_attacked
 	bar.visible = false
-#	var offset_left_tween = get_tree().create_tween()
-#	offset_left_tween.tween_property(eye,\"offset_left\", 0,.45).set_trans(Tween.TRANS_SINE)
-#	var offset_right_tween = get_tree().create_tween()
-#	offset_right_tween.tween_property(eye,\"offset_right\", 0,.45).set_trans(Tween.TRANS_SINE)
 	var tween1 = get_tree().create_tween()
 	tween1.tween_property(eye,\"scale:x\",0.0,.45).set_trans(Tween.TRANS_SINE)
 	var tween2 = get_tree().create_tween()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://tkcsf1ljdqnn"]
+[gd_scene load_steps=37 format=3 uid="uid://tkcsf1ljdqnn"]
 
 [ext_resource type="Texture2D" uid="uid://cbhcc3qrqgn7i" path="res://assets/sprites/battle/enemies/sans_undertale/head/0.png" id="1_2r8j3"]
 [ext_resource type="Texture2D" uid="uid://c0fk22bwsicj2" path="res://assets/sprites/battle/enemies/speech_bubble.png" id="2_51m0u"]
@@ -18,7 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://binrk8nwkj501" path="res://assets/sprites/battle/enemies/sans_undertale/torso.png" id="10_peh6k"]
 [ext_resource type="Texture2D" uid="uid://b05o17e400038" path="res://assets/sprites/battle/enemies/sans_undertale/torso_shrug.png" id="11_5tt4b"]
 [ext_resource type="Texture2D" uid="uid://cx7sbjvngblx1" path="res://assets/sprites/battle/enemies/sans_undertale/legs.png" id="12_rt360"]
-[ext_resource type="FontVariation" uid="uid://y33hw2wh57nw" path="res://assets/fonts/sans_fixed.tres" id="14_77rv7"]
+[ext_resource type="Shader" path="res://assets/effects/battle_box.gdshader" id="13_b1tlx"]
+[ext_resource type="FontFile" uid="uid://dviicdom810ab" path="res://assets/fonts/sans.ttf" id="15_01c4w"]
 
 [sub_resource type="GDScript" id="GDScript_60in0"]
 script/source = "extends BattleRoom
@@ -152,6 +153,13 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y80lc"]
+shader = ExtResource("13_b1tlx")
+shader_parameter/fgcolor = Vector3(1, 1, 1)
+shader_parameter/fgopacity = 1.0
+shader_parameter/bgcolor = Vector3(0, 0, 0)
+shader_parameter/bgopacity = 1.0
+
 [sub_resource type="GDScript" id="GDScript_uiy3g"]
 script/source = "extends Writer
 "
@@ -192,7 +200,7 @@ script/source = "extends DialougeManager
 func start():
 	var enemy = vars.enemies.get_child(0)
 	enemy.speech_bubble.visible = true
-	enemy.speech_writer.writer_text = \"(font:sans)(sound:sans)how are you?(pc)\"
+	enemy.speech_writer.writer_text = \"(sound:sans)how are you?(pc)\"
 	await enemy.speech_writer.done
 	enemy.speech_bubble.visible = false
 	await get_tree().process_frame
@@ -217,7 +225,7 @@ script = SubResource("GDScript_wftwh")
 [node name="enemies" type="Node2D" parent="."]
 
 [node name="example_enemy" type="Node2D" parent="enemies"]
-position = Vector2(324, 186)
+position = Vector2(324, 183)
 script = SubResource("GDScript_ohi4s")
 
 [node name="damage_anchor" type="Node2D" parent="enemies/example_enemy"]
@@ -240,23 +248,25 @@ sprite_frames = SubResource("SpriteFrames_sw7ow")
 
 [node name="speech_bubble" type="NinePatchRect" parent="enemies/example_enemy"]
 visible = false
-offset_left = 76.0
-offset_top = -83.0
+material = SubResource("ShaderMaterial_y80lc")
+offset_left = 60.0
+offset_top = -84.0
 offset_right = 240.0
 offset_bottom = 8.0
 texture = ExtResource("2_51m0u")
 patch_margin_left = 31
 patch_margin_top = 44
 patch_margin_right = 22
+patch_margin_bottom = 10
 
 [node name="speech_writer" type="RichTextLabel" parent="enemies/example_enemy/speech_bubble"]
 layout_mode = 0
-offset_left = 33.0
-offset_top = 3.0
-offset_right = 158.0
+offset_left = 37.0
+offset_top = 7.0
+offset_right = 169.0
 offset_bottom = 85.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("14_77rv7")
+theme_override_fonts/normal_font = ExtResource("15_01c4w")
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 visible_characters_behavior = 1

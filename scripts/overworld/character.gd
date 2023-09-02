@@ -16,6 +16,12 @@ var speed := 210.0
 var ray_cast_range := 15.0
 var auto_sprite_update := true
 var snap_camera := true
+var cutscene := false :
+	set(value):
+		cutscene = value
+		if(value):
+			x = 0.0
+			y = 0.0
 var input_enabled := true :
 	set(value):
 		input_enabled = value
@@ -67,7 +73,7 @@ func _process(delta):
 		sprite_update()
 
 func _physics_process(delta):
-	if(vars.player_character == self && input_enabled):
+	if(vars.player_character == self && input_enabled && !cutscene):
 		inputs()
 	velocity = Vector2(x,y) * speed
 	move_and_slide()

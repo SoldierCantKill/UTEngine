@@ -32,6 +32,7 @@ class_name PlayerSave
 @export var data = {
 	genocide = false,
 	player_room = 0,
+	place_name = "--",
 	animation = "down",
 	position = Vector2(-380,20),
 	time = 0.0,

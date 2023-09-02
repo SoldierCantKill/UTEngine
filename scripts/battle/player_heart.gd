@@ -203,4 +203,3 @@ func is_moving():
 				return true
 			return false
 	return false
- 

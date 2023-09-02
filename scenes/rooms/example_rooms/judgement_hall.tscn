@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c40tm7k1seyei"]
+[gd_scene load_steps=30 format=3 uid="uid://c40tm7k1seyei"]
 
 [ext_resource type="Texture2D" uid="uid://dxl3sgh05os21" path="res://assets/sprites/overworld/rooms/judgement_hall.png" id="1_7dgdr"]
 [ext_resource type="PackedScene" uid="uid://bwshu8s0atk5j" path="res://objects/overworld/overworld_hud.tscn" id="2_u7amp"]
@@ -11,7 +11,7 @@
 [sub_resource type="GDScript" id="GDScript_ch82y"]
 script/source = "extends OverworldRoom
 
-var sans
+@onready var pillar_container := $pillar_container
 
 func _ready():
 	room_sprite = $room
@@ -19,13 +19,20 @@ func _ready():
 	super._ready()
 
 func start_cutscene():
-	vars.main_writer.set_font(\"sans\",28)
+	vars.player_character.cutscene = true
+	vars.player_character.snap_camera = false
+	$sans.global_position.y = vars.player_character.global_position.y
+	await get_tree().create_timer(1).timeout
+	for i in pillar_container.get_children():
+		create_tween().tween_property(i,\"global_position\",i.global_position - Vector2(125,0),1.5).set_trans(Tween.TRANS_QUART)
+	create_tween().tween_property(vars.scene_cam,\"global_position\",vars.scene_cam.global_position + Vector2(125,0),1.5).set_trans(Tween.TRANS_QUART)
+	await get_tree().create_timer(2).timeout
+	vars.main_writer.set_font(\"sans_ow\",28)
 	vars.main_writer.writer_text = \"(font:mono)(size:32)(sound:none)(disable:x)* Human. (delay:.5)You are a bad guy.(pc)(event)(sound:sans)(face:sans/normal)(event)* just kidding.(pc)* unfortunately i am\\n  gonna need to \\n  fight you though.(pc)* apparently we need\\n  to do a showcase.(pc)\"
 	vars.main_writer.event.connect(func(): audio.play_music(\"music/sans\"))
 	await (vars as vars).main_writer.done
 	await (vars.scene as OverworldRoom).go_to_battle_anim(Vector2(-270,217))
 	(vars as vars).display.change_scene(load(\"res://scenes/battles/example_battles/battle_example.tscn\"),true)
-	#writer_text = \"(face:sans/normal)* don't you only have\\n  one outfit?\"
 
 func get_place_text() -> String:
 	return \"Judgement Hall\"
@@ -34,14 +41,38 @@ func get_place_text() -> String:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nrgjn"]
 size = Vector2(2080, 80)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_311cq"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r5mw"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_al5kh"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5j56j"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2buf"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ntiss"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3lji"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ko2u"]
+size = Vector2(120, 80)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_17utc"]
 size = Vector2(80, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1v5y"]
-size = Vector2(80, 161)
+size = Vector2(80, 321)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1jsy"]
-size = Vector2(80, 160)
+size = Vector2(80, 321)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4c2o"]
 size = Vector2(80, 79.5)
@@ -91,7 +122,7 @@ func _ready():
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7qiep"]
 resource_local_to_scene = true
-size = Vector2(80, 20)
+size = Vector2(80, 15)
 
 [sub_resource type="GDScript" id="GDScript_vrsuc"]
 script/source = "extends Character
@@ -119,9 +150,9 @@ func on_body_entered(body):
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yvn2b"]
-size = Vector2(122, 160)
+size = Vector2(121, 160)
 
-[node name="test_room" type="Node2D"]
+[node name="judgement_hall" type="Node2D"]
 script = SubResource("GDScript_ch82y")
 
 [node name="camera" type="Camera2D" parent="."]
@@ -137,6 +168,38 @@ texture = ExtResource("1_7dgdr")
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_nrgjn")
 
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-860, 40)
+shape = SubResource("RectangleShape2D_311cq")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-620, 40)
+shape = SubResource("RectangleShape2D_0r5mw")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-380, 40)
+shape = SubResource("RectangleShape2D_al5kh")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-140, 40)
+shape = SubResource("RectangleShape2D_5j56j")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="collisions"]
+position = Vector2(100, 40)
+shape = SubResource("RectangleShape2D_t2buf")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="collisions"]
+position = Vector2(340, 40)
+shape = SubResource("RectangleShape2D_ntiss")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="collisions"]
+position = Vector2(580, 40)
+shape = SubResource("RectangleShape2D_v3lji")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="collisions"]
+position = Vector2(820, 40)
+shape = SubResource("RectangleShape2D_4ko2u")
+
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="collisions"]
 position = Vector2(-1160, -1)
 shape = SubResource("RectangleShape2D_17utc")
@@ -146,7 +209,7 @@ position = Vector2(-1240, 119.5)
 shape = SubResource("RectangleShape2D_c1v5y")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="collisions"]
-position = Vector2(1240, 120)
+position = Vector2(1240, 119.5)
 shape = SubResource("RectangleShape2D_d1jsy")
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="collisions"]
@@ -198,7 +261,7 @@ script = SubResource("GDScript_s5v74")
 position = Vector2(-1136, 29)
 
 [node name="collision" parent="room_changer" index="0"]
-position = Vector2(56, 0)
+position = Vector2(56, -7.5)
 shape = SubResource("RectangleShape2D_7qiep")
 
 [node name="player_spawn" parent="room_changer" index="1"]
@@ -207,27 +270,45 @@ position = Vector2(57, 29)
 [node name="save_point" parent="." instance=ExtResource("6_sywcr")]
 position = Vector2(-1113, 169)
 
-[node name="pillar" type="TextureRect" parent="."]
+[node name="pillar_container" type="Node2D" parent="."]
+position = Vector2(-586, -200)
+
+[node name="pillar" type="TextureRect" parent="pillar_container"]
 z_index = 5
-offset_left = -586.0
-offset_top = -200.0
-offset_right = -519.0
+offset_right = 67.0
+offset_bottom = 200.0
 scale = Vector2(2, 2)
 texture = ExtResource("7_e876u")
 
-[node name="pillar2" type="TextureRect" parent="."]
+[node name="pillar2" type="TextureRect" parent="pillar_container"]
 z_index = 5
-offset_left = -283.0
-offset_top = -200.0
-offset_right = -216.0
+offset_left = 264.0
+offset_right = 331.0
+offset_bottom = 200.0
 scale = Vector2(2, 2)
 texture = ExtResource("7_e876u")
 
-[node name="pillar3" type="TextureRect" parent="."]
+[node name="pillar3" type="TextureRect" parent="pillar_container"]
 z_index = 5
-offset_left = -46.0
-offset_top = -200.0
-offset_right = 21.0
+offset_left = 464.0
+offset_right = 531.0
+offset_bottom = 200.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_e876u")
+
+[node name="pillar4" type="TextureRect" parent="pillar_container"]
+z_index = 5
+offset_left = 671.0
+offset_right = 738.0
+offset_bottom = 200.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_e876u")
+
+[node name="pillar5" type="TextureRect" parent="pillar_container"]
+z_index = 5
+offset_left = 848.0
+offset_right = 915.0
+offset_bottom = 200.0
 scale = Vector2(2, 2)
 texture = ExtResource("7_e876u")
 
@@ -240,7 +321,7 @@ position = Vector2(219, 138)
 script = SubResource("GDScript_twp2t")
 
 [node name="collision" type="CollisionShape2D" parent="trigger_cutscene"]
-position = Vector2(0, -18)
+position = Vector2(0.5, -18)
 shape = SubResource("RectangleShape2D_yvn2b")
 
 [editable path="room_changer"]

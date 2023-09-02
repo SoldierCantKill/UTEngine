@@ -162,6 +162,22 @@ text = "Return"
 scroll_active = false
 autowrap_mode = 0
 
+[node name="file_saved" type="RichTextLabel" parent="CanvasLayer/selection_border/text_container"]
+visible = false
+self_modulate = Color(1, 1, 0, 1)
+clip_contents = false
+offset_left = 170.0
+offset_top = 240.0
+offset_right = 264.0
+offset_bottom = 268.0
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("6_5nan0")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "File saved."
+scroll_active = false
+autowrap_mode = 0
+
 [node name="heart" type="TextureRect" parent="CanvasLayer/selection_border"]
 layout_mode = 0
 offset_left = 34.0
