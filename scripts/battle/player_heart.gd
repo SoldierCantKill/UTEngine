@@ -152,10 +152,13 @@ func inputs(delta):
 					jump_input = Input.is_action_pressed("left") if(angle == 270) else Input.is_action_pressed("right")
 				move_input = Vector2(fall_speed * (-1 if(angle == 90) else 1), move_y * (temp_speed * static_speed))
 				jump_direction = Vector2.LEFT if(angle == 270) else Vector2.RIGHT
-				
-			floor_snap = is_on_floor()
+			
+			up_direction = jump_direction
+			velocity = move_input
+			move_and_slide()
+			
 			if(!is_on_ceiling()):
-				if(floor_snap && jump_input && !thrown):
+				if(is_on_floor() && jump_input && !thrown):
 					floor_snap = false
 					fall_speed = -180.0
 				elif(!jump_input && fall_speed <= -30.0):
@@ -163,10 +166,10 @@ func inputs(delta):
 			else:
 				if(!thrown):
 					fall_speed = 0.0
-				
-			velocity = move_input
-			up_direction = jump_direction
+			
+			velocity = Vector2.ZERO
 			move_and_slide()
+			
 			if(is_on_floor()):
 				if(thrown):
 					thrown = false

@@ -30,6 +30,7 @@ func change_scene(path : Variant, fadeout = true) -> Node:
 		fade_out(.3)
 	border_viewport.world_2d = game_viewport.world_2d
 	await get_tree().process_frame
+	camera_intensity = 0.0
 	start_room.emit()
 	return scene
 
@@ -49,6 +50,7 @@ func change_room(to_room : int, to_changer : int, fades : bool = true):
 		for i in room.room_changers:
 			if(i.to_changer == to_changer):
 				settings.player_save.data.position = i.player_spawn.global_position
+	camera_intensity = 0.0
 	start_room.emit()
 	return room
 
