@@ -1,11 +1,4 @@
-res://scenes/battles/example_battles/battle_example.tscn
+res://scenes/rooms/example_rooms/judgement_hall.tscn
 res://assets/effects/battle_box.gdshader
-res://scripts/display_manager.gd
-res://scripts/battle/player_heart.gd
 res://scenes/display_manager.tscn
 res://scenes/main_menu.tscn
-res://scenes/rooms/example_rooms/room_0.tscn
-res://scenes/rooms/example_rooms/judgement_hall.tscn
-res://objects/overworld/save_point.tscn
-res://objects/battle/player_heart.tscn
-res://objects/battle/attack_eye/true_knife_attack_eye.tscn
