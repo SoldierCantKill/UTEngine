@@ -53,7 +53,7 @@ func go_to_battle_anim(end_location : Vector2):
 	audio.play("battle/noise")
 	await get_tree().create_timer(.05).timeout
 	heart_sprite.visible = true
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property(heart_sprite, "global_position", vars.scene_cam.get_screen_center_position() + end_location, .7)
 	audio.play("overworld/snd_battlefall")
 	await tween.finished

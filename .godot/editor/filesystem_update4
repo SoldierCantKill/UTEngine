@@ -1,4 +1,4 @@
-res://scenes/rooms/example_rooms/judgement_hall.tscn
+res://objects/battle/hud_manager.tscn
 res://assets/effects/battle_box.gdshader
+res://scripts/battle/hud_manager.gd
 res://scenes/display_manager.tscn
-res://scenes/main_menu.tscn

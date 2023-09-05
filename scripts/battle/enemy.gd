@@ -64,7 +64,7 @@ func attack_normal(damage : float):
 	vars.scene.add_child(bar_max)
 	bar_max.global_position = damage_anchor.global_position - bar_max.size / 2
 	current_hp = clampf(current_hp - damage,0,max_hp)
-	get_tree().create_tween().tween_property(bar, "size", Vector2((float(current_hp) / max_hp) * texture.get_size().x * sprite.scale.x, 15), .25)
+	create_tween().tween_property(bar, "size", Vector2((float(current_hp) / max_hp) * texture.get_size().x * sprite.scale.x, 15), .25)
 	bar_max.visible = show_health_bar
 	var damage_text : RichTextLabel = create_text("[center]"+ str(int(damage)))
 	damage_text.self_modulate = Color(1, 0, 0, 1)
@@ -105,7 +105,7 @@ func attack_dodge(damage : float):
 	damage_text.global_position = bar_max.global_position - Vector2(0,45)
 	bar_max.visible = false
 	damage_text.visible = false
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property(self,"global_position",global_position - Vector2(100,0), .4).set_trans(Tween.TRANS_SINE)
 	await vars.hud_manager.eye.knife.animation_finished
 	bar_max.visible = show_health_bar
@@ -121,7 +121,7 @@ func attack_dodge(damage : float):
 			await get_tree().process_frame
 	damage_move.call()
 	await get_tree().create_timer(.9).timeout
-	tween = get_tree().create_tween()
+	tween = create_tween()
 	tween.tween_property(self,"global_position",global_position + Vector2(100,0), .4).set_trans(Tween.TRANS_SINE)
 	await tween.finished
 	bar_max.queue_free()

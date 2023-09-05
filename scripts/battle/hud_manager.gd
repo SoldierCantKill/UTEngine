@@ -361,9 +361,15 @@ func use():
 	disable()
 	item.use(item_index + (item_page - 1) * 4)
 	await item.done
-	vars.attack_manager.pre_heal_attack().start_attack()
+	var attack = vars.attack_manager.pre_heal_attack()
+	if vars.battle_box.margin != vars.battle_box.target:
+		await vars.battle_box.resize_finished
+	attack.start_attack()
 
 func mercy():
 	audio.play("menu/menu_select")
 	disable()
-	vars.attack_manager.pre_heal_attack().start_attack()
+	var attack = vars.attack_manager.pre_heal_attack()
+	if vars.battle_box.margin != vars.battle_box.target:
+		await vars.battle_box.resize_finished
+	attack.start_attack()

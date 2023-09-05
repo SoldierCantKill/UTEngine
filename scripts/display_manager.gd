@@ -56,14 +56,14 @@ func change_room(to_room : int, to_changer : int, fades : bool = true):
 
 func fade_out(time : float):
 	$fade_overlay.color = Color(0,0,0,1)
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property($fade_overlay, "color", Color(0,0,0,0), time)
 	await tween.finished
 	fade_done.emit()
 
 func fade_in(time : float):
 	$fade_overlay.color = Color(0,0,0,0)
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property($fade_overlay, "color", Color(0,0,0,1), time)
 	await tween.finished
 	fade_done.emit()

@@ -69,21 +69,21 @@ func bones_part_one():
 	a_vars.player_heart.heart_mode = PlayerHeart.e_heart_mode.red
 	for i in range(11):
 		var bone = a_vars.attack_manager.bone(0,Vector2(244 + i * 14,396),0,0,0,0,0,0,true)
-		var tween = get_tree().create_tween()
+		var tween = create_tween()
 		tween.tween_property(bone, "offset_top",-65,2.5)
 	for i in range(11):
 		var bone = a_vars.attack_manager.bone(0,Vector2(244 + i * 14,244),0,0,0,0,0,0,true)
-		var tween = get_tree().create_tween()
+		var tween = create_tween()
 		tween.tween_property(bone, "offset_bottom",65,2.5)
 	for i in range(11):
 		var bone = a_vars.attack_manager.bone(0,Vector2(238,256 + i * 14),0,0,0,0,0,0,true)
 		bone.rotation_degrees = -90
-		var tween = get_tree().create_tween()
+		var tween = create_tween()
 		tween.tween_property(bone, "offset_bottom",70,2.7)
 	for i in range(11):
 		var bone = a_vars.attack_manager.bone(0,Vector2(405,256 + i * 14),0,0,0,0,0,0,true)
 		bone.rotation_degrees = -90
-		var tween = get_tree().create_tween()
+		var tween = create_tween()
 		tween.tween_property(bone, "offset_top",-70,2.7)
 	await get_tree().create_timer(2.5).timeout
 	a_vars.attack_manager.delete_bullets.emit()
