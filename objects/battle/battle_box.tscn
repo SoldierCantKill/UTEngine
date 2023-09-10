@@ -7,10 +7,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5t44q"]
 shader = ExtResource("1_hmeu5")
-shader_parameter/fgcolor = Vector3(1, 1, 1)
-shader_parameter/fgopacity = 1.0
-shader_parameter/bgcolor = Vector3(0, 0, 0)
-shader_parameter/bgopacity = 1.0
+shader_parameter/fgcolor = Vector4(1, 1, 1, 1)
+shader_parameter/bgcolor = Vector4(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hwg6"]
 size = Vector2(575, 5)

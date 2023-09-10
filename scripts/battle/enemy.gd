@@ -106,7 +106,7 @@ func attack_dodge(damage : float):
 	bar_max.visible = false
 	damage_text.visible = false
 	var tween = create_tween()
-	tween.tween_property(self,"global_position",global_position - Vector2(100,0), .4).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self,"global_position",global_position - Vector2(100,0), .4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await vars.hud_manager.eye.knife.animation_finished
 	bar_max.visible = show_health_bar
 	damage_text.visible = true
@@ -122,7 +122,7 @@ func attack_dodge(damage : float):
 	damage_move.call()
 	await get_tree().create_timer(.9).timeout
 	tween = create_tween()
-	tween.tween_property(self,"global_position",global_position + Vector2(100,0), .4).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self,"global_position",global_position + Vector2(100,0), .4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	await tween.finished
 	bar_max.queue_free()
 	bar.queue_free()

@@ -155,10 +155,8 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y80lc"]
 shader = ExtResource("13_b1tlx")
-shader_parameter/fgcolor = Vector3(1, 1, 1)
-shader_parameter/fgopacity = 1.0
-shader_parameter/bgcolor = Vector3(0, 0, 0)
-shader_parameter/bgopacity = 1.0
+shader_parameter/fgcolor = Vector4(0, 0, 0, 0.5)
+shader_parameter/bgcolor = Vector4(1, 1, 1, 1)
 
 [sub_resource type="GDScript" id="GDScript_uiy3g"]
 script/source = "extends Writer
@@ -200,9 +198,13 @@ script/source = "extends DialougeManager
 func start():
 	var enemy = vars.enemies.get_child(0)
 	enemy.speech_bubble.visible = true
+	enemy.get_node(\"head\").frame = 3
+	enemy.get_node(\"torso\").frame = 1
 	enemy.speech_writer.writer_text = \"(sound:sans)how are you?(pc)\"
 	await enemy.speech_writer.done
 	enemy.speech_bubble.visible = false
+	enemy.get_node(\"head\").frame = 0
+	enemy.get_node(\"torso\").frame = 0
 	await get_tree().process_frame
 	done.emit()
 "
@@ -249,10 +251,10 @@ sprite_frames = SubResource("SpriteFrames_sw7ow")
 [node name="speech_bubble" type="NinePatchRect" parent="enemies/example_enemy"]
 visible = false
 material = SubResource("ShaderMaterial_y80lc")
-offset_left = 60.0
-offset_top = -84.0
-offset_right = 240.0
-offset_bottom = 8.0
+offset_left = 53.0
+offset_top = -72.0
+offset_right = 233.0
+offset_bottom = 20.0
 texture = ExtResource("2_51m0u")
 patch_margin_left = 31
 patch_margin_top = 44
@@ -265,7 +267,7 @@ offset_left = 37.0
 offset_top = 7.0
 offset_right = 169.0
 offset_bottom = 85.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("15_01c4w")
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
