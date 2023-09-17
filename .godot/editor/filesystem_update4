@@ -1,2 +1,4 @@
-res://scenes/display_manager.tscn
+res://scenes/rooms/example_rooms/judgement_hall.tscn
 res://assets/effects/battle_box.gdshader
+res://assets/effects/mask.gdshader
+res://scenes/display_manager.tscn

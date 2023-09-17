@@ -6,7 +6,7 @@ var zoomed_in := true :
 	set(value):
 		zoomed_in = value
 		change_zoom()
-var debug_enabled := true #Disable in public builds
+var debug_enabled := OS.is_debug_build() #Disable in public builds
 
 func _ready():
 	start()

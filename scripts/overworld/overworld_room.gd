@@ -18,8 +18,9 @@ func _ready():
 	await vars.display.start_room
 	player_character = Character.new(load("res://assets/sprite_frames/overworld/characters/frisk.tres"))
 	player_character.scale = Vector2(2,2)
-	player_character.global_position = settings.player_save.data.position
 	add_child(player_character)
+	player_character.global_position = settings.player_save.data.position
+	player_character.sprite.animation = settings.player_save.data.animation
 	player_character.setup_player()
 	vars.player_character = player_character
 

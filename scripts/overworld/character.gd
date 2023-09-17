@@ -39,6 +39,8 @@ func _init(sprite_frames):
 
 func _ready():
 	platform_floor_layers = 0
+	sprite.position = Vector2(-10,-15)
+	sprite.set_centered(false)
 	add_child(sprite)
 	collision.shape = RectangleShape2D.new()
 	collision.shape.size = Vector2(21,10)

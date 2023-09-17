@@ -39,48 +39,6 @@ func get_place_text() -> String:
 	return \"Judgement Hall\"
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrgjn"]
-size = Vector2(2080, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_311cq"]
-size = Vector2(120, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r5mw"]
-size = Vector2(120, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_al5kh"]
-size = Vector2(120, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5j56j"]
-size = Vector2(120, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2buf"]
-size = Vector2(120, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ntiss"]
-size = Vector2(120, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3lji"]
-size = Vector2(120, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ko2u"]
-size = Vector2(120, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_17utc"]
-size = Vector2(80, 80)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1v5y"]
-size = Vector2(80, 321)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1jsy"]
-size = Vector2(80, 321)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4c2o"]
-size = Vector2(80, 79.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u01hq"]
-size = Vector2(2400, 80)
-
 [sub_resource type="GDScript" id="GDScript_wuevt"]
 script/source = "extends NinePatchRect
 
@@ -153,6 +111,48 @@ func on_body_entered(body):
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yvn2b"]
 size = Vector2(121, 160)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrgjn"]
+size = Vector2(2080, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_311cq"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r5mw"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_al5kh"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5j56j"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2buf"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ntiss"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3lji"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ko2u"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_17utc"]
+size = Vector2(80, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1v5y"]
+size = Vector2(80, 321)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1jsy"]
+size = Vector2(80, 321)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4c2o"]
+size = Vector2(80, 79.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u01hq"]
+size = Vector2(2400, 80)
+
 [node name="judgement_hall" type="Node2D"]
 script = SubResource("GDScript_ch82y")
 
@@ -162,64 +162,6 @@ position = Vector2(9999, 9999)
 [node name="room" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 texture = ExtResource("1_7dgdr")
-
-[node name="collisions" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="collisions"]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_nrgjn")
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="collisions"]
-position = Vector2(-860, 40)
-shape = SubResource("RectangleShape2D_311cq")
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="collisions"]
-position = Vector2(-620, 40)
-shape = SubResource("RectangleShape2D_0r5mw")
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="collisions"]
-position = Vector2(-380, 40)
-shape = SubResource("RectangleShape2D_al5kh")
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="collisions"]
-position = Vector2(-140, 40)
-shape = SubResource("RectangleShape2D_5j56j")
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="collisions"]
-position = Vector2(100, 40)
-shape = SubResource("RectangleShape2D_t2buf")
-
-[node name="CollisionShape2D12" type="CollisionShape2D" parent="collisions"]
-position = Vector2(340, 40)
-shape = SubResource("RectangleShape2D_ntiss")
-
-[node name="CollisionShape2D13" type="CollisionShape2D" parent="collisions"]
-position = Vector2(580, 40)
-shape = SubResource("RectangleShape2D_v3lji")
-
-[node name="CollisionShape2D14" type="CollisionShape2D" parent="collisions"]
-position = Vector2(820, 40)
-shape = SubResource("RectangleShape2D_4ko2u")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="collisions"]
-position = Vector2(-1160, -1)
-shape = SubResource("RectangleShape2D_17utc")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="collisions"]
-position = Vector2(-1240, 119.5)
-shape = SubResource("RectangleShape2D_c1v5y")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="collisions"]
-position = Vector2(1240, 119.5)
-shape = SubResource("RectangleShape2D_d1jsy")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="collisions"]
-position = Vector2(1160, -1.25)
-shape = SubResource("RectangleShape2D_j4c2o")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="collisions"]
-position = Vector2(0, 240)
-shape = SubResource("RectangleShape2D_u01hq")
 
 [node name="overworld_canvas" type="CanvasLayer" parent="."]
 
@@ -324,5 +266,63 @@ script = SubResource("GDScript_twp2t")
 [node name="collision" type="CollisionShape2D" parent="trigger_cutscene"]
 position = Vector2(0.5, -18)
 shape = SubResource("RectangleShape2D_yvn2b")
+
+[node name="collisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collisions"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_nrgjn")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-860, 40)
+shape = SubResource("RectangleShape2D_311cq")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-620, 40)
+shape = SubResource("RectangleShape2D_0r5mw")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-380, 40)
+shape = SubResource("RectangleShape2D_al5kh")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-140, 40)
+shape = SubResource("RectangleShape2D_5j56j")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="collisions"]
+position = Vector2(100, 40)
+shape = SubResource("RectangleShape2D_t2buf")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="collisions"]
+position = Vector2(340, 40)
+shape = SubResource("RectangleShape2D_ntiss")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="collisions"]
+position = Vector2(580, 40)
+shape = SubResource("RectangleShape2D_v3lji")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="collisions"]
+position = Vector2(820, 40)
+shape = SubResource("RectangleShape2D_4ko2u")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-1160, -1)
+shape = SubResource("RectangleShape2D_17utc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="collisions"]
+position = Vector2(-1240, 119.5)
+shape = SubResource("RectangleShape2D_c1v5y")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="collisions"]
+position = Vector2(1240, 119.5)
+shape = SubResource("RectangleShape2D_d1jsy")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="collisions"]
+position = Vector2(1160, -1.25)
+shape = SubResource("RectangleShape2D_j4c2o")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="collisions"]
+position = Vector2(0, 240)
+shape = SubResource("RectangleShape2D_u01hq")
 
 [editable path="room_changer"]

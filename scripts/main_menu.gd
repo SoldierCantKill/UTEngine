@@ -4,6 +4,7 @@ extends Node2D
 var next_scene = load("res://scenes/battles/example_battles/battle_example.tscn")
 
 func _ready():
+	vars.scene_cam = get_node("camera")
 	audio.play("menu/snd_logo")
 	await get_tree().create_timer(3).timeout
 	text.visible = true

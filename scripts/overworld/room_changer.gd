@@ -1,10 +1,14 @@
 extends Area2D
 class_name RoomChanger
 
+enum e_tp_animation {up,down,left,right}
+
 @onready var player_spawn := $player_spawn
 
+@export var changer := 0
 @export var to_room := 0
 @export var to_changer := 0
+@export var animation_when_tp_here : e_tp_animation = e_tp_animation.down
 
 
 func _ready():

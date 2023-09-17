@@ -48,8 +48,9 @@ func change_room(to_room : int, to_changer : int, fades : bool = true):
 	border_viewport.world_2d = game_viewport.world_2d
 	if(to_changer != -1):
 		for i in room.room_changers:
-			if(i.to_changer == to_changer):
+			if(i.changer == to_changer):
 				settings.player_save.data.position = i.player_spawn.global_position
+				settings.player_save.data.animation = str(RoomChanger.e_tp_animation.keys()[i.animation_when_tp_here])
 	camera_intensity = 0.0
 	start_room.emit()
 	return room
@@ -85,4 +86,4 @@ func _process(delta):
 		if camera_shake_t >= 1:
 			camera_shake_t = 0
 			camera_intensity -= 1
-			vars.scene_cam.offset = Vector2(camera_intensity * [1, -1].pick_random(), camera_intensity * [1, -1].pick_random()) + Vector2(320,240)
+			vars.scene_cam.offset = Vector2(camera_intensity * [1, -1].pick_random(), camera_intensity * [1, -1].pick_random())# + Vector2(320,240)

@@ -47,8 +47,8 @@ func attack(amount : float):
 	eye_hit.emit()
 	await enemy.done_being_attacked
 	bar.visible = false
-	var tween1 = get_tree().create_tween()
-	tween1.tween_property(eye,\"scale:x\",0.0,.45).set_trans(Tween.TRANS_SINE)
+	get_tree().create_tween().tween_property(eye,\"offset_left\",0.0,.45).set_trans(Tween.TRANS_SINE)
+	get_tree().create_tween().tween_property(eye,\"offset_right\",0.0,.45).set_trans(Tween.TRANS_SINE)
 	var tween2 = get_tree().create_tween()
 	tween2.tween_property(eye,\"self_modulate:a\", 0,.4).set_trans(Tween.TRANS_SINE)
 	await get_tree().create_timer(.45).timeout
@@ -98,12 +98,20 @@ animations = [{
 [node name="true_knife_attack_eye" type="Node2D"]
 script = SubResource("GDScript_0627q")
 
-[node name="eye" type="Sprite2D" parent="."]
+[node name="eye" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = -273.0
+offset_top = -58.0
+offset_right = 273.0
+offset_bottom = 57.0
 texture = ExtResource("1_n5wai")
+expand_mode = 1
 
 [node name="bar" type="AnimatedSprite2D" parent="."]
-position = Vector2(-310, 0)
+position = Vector2(-317, -64)
 sprite_frames = SubResource("SpriteFrames_3w4x8")
+centered = false
 
 [node name="knife" type="AnimatedSprite2D" parent="."]
 visible = false

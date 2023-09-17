@@ -187,6 +187,8 @@ func _init():
 
 func _ready():
 	super._ready()
+	await get_tree().process_frame
+	warning(Vector2(0,0),Vector2(50,50),1,false)
 
 func set_writer_text():
 	vars.main_writer.writer_text = \"(disable:z)(sound:mono2)* Credit to Soldier\"
@@ -213,7 +215,7 @@ func start():
 script = SubResource("GDScript_60in0")
 
 [node name="camera" type="Camera2D" parent="."]
-position = Vector2(320, 240)
+offset = Vector2(320, 240)
 ignore_rotation = false
 
 [node name="gradient" type="TextureRect" parent="."]
@@ -244,7 +246,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_eyef1")
 
 [node name="head" type="AnimatedSprite2D" parent="enemies/example_enemy"]
-position = Vector2(-2, -45)
+position = Vector2(-2, -46)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_sw7ow")
 

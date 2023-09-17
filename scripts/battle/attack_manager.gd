@@ -154,6 +154,26 @@ starting_rotation : float, rotation_speed : float, stop_rotation_after : bool, m
 	vector_slash.type = type
 	return vector_slash
 
+func warning(position : Vector2, size : Vector2, duration : float, masked = true) -> NinePatchRect:
+	audio.play("battle/warning")
+	var warning = NinePatchRect.new()
+	warning.texture = preload("res://assets/sprites/battle/square.png")
+	warning.patch_margin_left = 1
+	warning.patch_margin_top = 1
+	warning.patch_margin_right = 1
+	warning.patch_margin_bottom = 1
+	warning.modulate = Color.RED
+	warning.size = size
+	warning.global_position = position
+	warning.show_behind_parent = masked
+	masks.add_child(warning)
+	var kill_warning = func():
+		if(is_instance_valid(warning)):
+			warning.queue_free()
+	get_tree().create_timer(duration).timeout.connect(kill_warning)
+	attack_done.connect(kill_warning)
+	return warning
+
 func throw(direction : float = 0, fall_speed : float = 750) -> void:
 	heart_thrown.emit(direction)
 	vars.player_heart.heart_mode = PlayerHeart.e_heart_mode.blue

@@ -4,6 +4,7 @@ var heart_shards: Array[Node] = []
 var heart_shard_anim: AnimatedTexture = load("res://assets/sprites/battle/heart/heart_shard.tres")
 
 func _ready() -> void:
+	vars.scene_cam = get_node("camera")
 	audio.stop_music()
 	audio.stop_all_sounds()
 	heart_shatter()

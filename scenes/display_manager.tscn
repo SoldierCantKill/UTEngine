@@ -13,7 +13,7 @@ shader_parameter/lod = 1.0
 script = ExtResource("1_hd0aj")
 
 [node name="camera" type="Camera2D" parent="."]
-offset = Vector2(320, 240)
+position = Vector2(320, 240)
 
 [node name="border" type="Node2D" parent="."]
 
@@ -32,7 +32,7 @@ size = Vector2i(640, 480)
 render_target_update_mode = 4
 
 [node name="camera" type="Camera2D" parent="border/container/sub_viewport"]
-offset = Vector2(320, 240)
+position = Vector2(320, 240)
 
 [node name="border_overlay" type="ColorRect" parent="border"]
 offset_left = -158.0
@@ -62,7 +62,6 @@ offset_bottom = 480.0
 
 [node name="sub_viewport" type="SubViewport" parent="game/container"]
 handle_input_locally = false
-snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
 canvas_item_default_texture_repeat = 1
 size = Vector2i(640, 480)
