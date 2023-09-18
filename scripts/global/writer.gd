@@ -238,8 +238,6 @@ func writer_event(index):
 				visible_characters = 0
 			elif(i[0] == "event"):
 				event.emit()
-				for connection in event.get_connections():
-					event.disconnect(connection["callable"])
 			elif(i[0] == "audio"):
 				audio.play(i[1])
 			elif(i[0] == "music"):
