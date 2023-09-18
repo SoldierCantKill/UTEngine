@@ -29,8 +29,9 @@ func start_cutscene():
 	create_tween().tween_property(vars.scene_cam,\"global_position\",vars.scene_cam.global_position + Vector2(100,0),1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(2).timeout
 	vars.main_writer.set_font(\"sans_ow\",28)
-	vars.main_writer.writer_text = \"(font:mono)(size:32)(sound:none)(disable:x)* Human. (delay:.5)You are a bad guy.(pc)(event)(sound:sans)(face:sans/normal)(event)* just kidding.(pc)* unfortunately i am\\n  gonna need to \\n  fight you though.(pc)* apparently we need\\n  to do a showcase.(pc)\"
 	vars.main_writer.event.connect(func(): audio.play_music(\"music/sans\"))
+	vars.main_writer.writer_text = \"(font:mono)(size:32)(sound:none)(disable:x)* Human. (delay:.5)You are a bad guy.(pc)(event)(sound:sans)(face:sans/normal)(enable:x)* just kidding.(pc)* unfortunately i am\\n  gonna need to \\n  fight you though.(pc)* apparently we need\\n  to do a showcase.(pc)\"
+	
 	await (vars as vars).main_writer.done
 	await (vars.scene as OverworldRoom).go_to_battle_anim(Vector2(-270,217))
 	(vars as vars).display.change_scene(load(\"res://scenes/battles/example_battles/battle_example.tscn\"),true)

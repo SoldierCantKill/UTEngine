@@ -1,5 +1,7 @@
 extends Node2D
 
+signal event_called
+
 @onready var sprite := $sprite
 @onready var area : Interactable = $area
 @onready var selection_border := $CanvasLayer/selection_border
@@ -12,7 +14,7 @@ var selection_index := 0
 
 func _ready():
 	sprite.play()
-	area.event_called.connect(on_event)
+	area.event_called.connect(event)
 
 func _process(delta):
 	hud_update()
@@ -62,7 +64,8 @@ func hud_update():
 			text_container.modulate = Color.YELLOW
 			
 
-func on_event():
+func event():
+	event_called.emit()
 	audio.play("menu/heal")
 	player_save.player.current_hp = max(player_save.player.current_hp,player_save.player.max_hp)
 	open()

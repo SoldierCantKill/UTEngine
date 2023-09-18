@@ -50,7 +50,7 @@ func change_room(to_room : int, to_changer : int, fades : bool = true):
 		for i in room.room_changers:
 			if(i.changer == to_changer):
 				settings.player_save.data.position = i.player_spawn.global_position
-				settings.player_save.data.animation = str(RoomChanger.e_tp_animation.keys()[i.animation_when_tp_here])
+				settings.player_save.data.animation = i.animation_when_tp_here
 	camera_intensity = 0.0
 	start_room.emit()
 	return room

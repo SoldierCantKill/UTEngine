@@ -8,7 +8,7 @@ enum e_tp_animation {up,down,left,right}
 @export var changer := 0
 @export var to_room := 0
 @export var to_changer := 0
-@export var animation_when_tp_here : e_tp_animation = e_tp_animation.down
+@export_enum("up","down","left","right") var animation_when_tp_here = "down"
 
 
 func _ready():

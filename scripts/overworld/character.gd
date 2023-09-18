@@ -1,9 +1,13 @@
 extends CharacterBody2D
 class_name Character
 
+signal event_called
+
 @onready var sprite := AnimatedSprite2D.new()
 @onready var warning_sprite := AnimatedSprite2D.new()
 @onready var collision := CollisionShape2D.new()
+@onready var interactable := Interactable.new()
+@onready var interactable_hitbox := CollisionShape2D.new()
 @onready var ray_cast
 
 var sprite_frames : SpriteFrames :
@@ -46,9 +50,16 @@ func _ready():
 	collision.shape.size = Vector2(21,10)
 	collision.position = Vector2(.5,10)
 	add_child(collision)
+	interactable.event_called.connect(event)
+	add_child(interactable)
+	interactable_hitbox.shape = RectangleShape2D.new()
+	interactable_hitbox.shape.size = Vector2(21,10)
+	interactable_hitbox.position = Vector2(.5,10)
+	interactable.add_child(interactable_hitbox)
 	warning_sprite.visible = false
 	warning_sprite.set_sprite_frames(load("res://assets/sprite_frames/overworld/characters/character_alert.tres"))
 	add_child(warning_sprite)
+
 
 func setup_player():
 	ray_cast = RayCast2D.new()
@@ -58,6 +69,7 @@ func setup_player():
 	ray_cast.collide_with_areas = true
 	ray_cast.collide_with_bodies = false
 	ray_cast.hit_from_inside = true
+	ray_cast.add_exception(interactable)
 	add_child(ray_cast)
 	vars.main_writer.unpaused.connect(func(): input_enabled = false)
 	vars.main_writer.done.connect(func(): input_enabled = true)
@@ -66,9 +78,13 @@ func set_warning_position():
 	var texture := sprite.get_sprite_frames().get_frame_texture(sprite.animation,sprite.get_frame())
 	warning_sprite.position = Vector2(texture.get_size().x - 10,-15)
 
+func event():
+	event_called.emit()
+
 func _process(delta):
 	if(vars.player_character == self):
 		settings.player_save.data.position = global_position
+		settings.player_save.data.animation = sprite.animation
 		if(snap_camera):
 			camera_movement()
 	if(auto_sprite_update):
