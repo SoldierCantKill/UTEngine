@@ -19,7 +19,6 @@ var heart_mode : e_heart_mode = e_heart_mode.red :
 		if(auto_change_color):
 			change_heart_color()
 @onready var sprite = $sprite
-@onready var animation_player = $animation_player
 @onready var hitbox = $hitbox
 var speed := 2.0
 const static_speed := 60.0 #Used to multiply with speed
