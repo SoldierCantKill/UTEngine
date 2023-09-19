@@ -30,7 +30,7 @@ func start_cutscene():
 	await get_tree().create_timer(2).timeout
 	vars.main_writer.set_font(\"sans_ow\",28)
 	vars.main_writer.event.connect((func(): audio.play_music(\"music/sans\")),4)
-	vars.main_writer.writer_text = \"(font:mono)(size:32)(sound:none)(disable:x)(event)* Human. (delay:.5)You are a bad guy.(pc)(event)(sound:sans)(face:sans/normal)(enable:x)* just kidding.(pc)* unfortunately i am\\n  gonna need to \\n  fight you though.(pc)* apparently we need\\n  to do a showcase.(pc)\"
+	vars.main_writer.writer_text = \"(font:mono)(size:32)(sound:none)(disable:x)* Human. (delay:.5)You are a bad guy.(pc)(event)(sound:sans)(face:sans/normal)(enable:x)* just kidding.(pc)* unfortunately i am\\n  gonna need to \\n  fight you though.(pc)* apparently we need\\n  to do a showcase.(pc)\"
 	
 	await (vars as vars).main_writer.done
 	await (vars.scene as OverworldRoom).go_to_battle_anim(Vector2(-270,217))
@@ -93,6 +93,7 @@ func _init():
 func _ready():
 	super._ready()
 	scale = Vector2(2,2)
+	await sprite.sprite_frames_changed
 	sprite.animation = \"left\"
 
 "

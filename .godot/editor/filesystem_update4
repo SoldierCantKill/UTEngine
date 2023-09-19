@@ -5,3 +5,5 @@ res://scenes/main_menu.tscn
 res://scenes/battles/example_battles/battle_example.tscn
 res://scenes/rooms/example_rooms/room_0.tscn
 res://scenes/rooms/example_rooms/judgement_hall.tscn
+res://scripts/main_menu.gd
+res://assets/sprite_frames/overworld/characters/sans_shadow.tres
